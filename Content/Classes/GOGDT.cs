@@ -41,7 +41,7 @@ namespace GloryofGuardian.Content.Class
 
                         //特判占用更多栏位的炮台
                         if (proj.type == ModContent.ProjectileType<ShurikenDT>()) MaxIndex += 1;
-                        if (proj.type == ModContent.ProjectileType<SRMeteorProj>()) MaxIndex += 2;
+                        if (proj.type == ModContent.ProjectileType<SRMeteorDT>()) MaxIndex += 2;
                         //特判不占用栏位的炮台
                         if (proj.type == ModContent.ProjectileType<SlimeProj0>()) MaxIndex -= 1;
 

@@ -51,6 +51,8 @@ namespace GloryofGuardian.Content.Projectiles
         public override void AI() {
             count++;
 
+            if (Projectile.ai[0] == 1 && count == 2) Projectile.penetrate = 3;
+
             if (count % 1 == 0) {
                 for (int i = 0; i < 4; i++) {
                     int num = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
@@ -65,44 +67,67 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            target.AddBuff(BuffID.OnFire, 180);
-
-            //普通
-            if (Projectile.ai[0] == 0 || Projectile.ai[0] == -1) {
-                if (target.HasBuff(BuffID.OnFire3)) {
+            if (target.HasBuff(BuffID.OnFire3)) {
+                //常态
+                if (Projectile.ai[0] == 0) {
                     Projectile.damage /= 2;
                     Projectile.ai[0] = -1;
                 }
+                //强化
+                if (Projectile.ai[0] == 1) {
+                    Projectile.ai[0] = -2;
+                    Projectile.Kill();
+                }
+            }
+
+            //常态
+            if (Projectile.ai[0] == 0) {
+                target.AddBuff(BuffID.OnFire, 30);
             }
             //强化
             if (Projectile.ai[0] == 1) {
-                Projectile.damage /= 2;
-                Projectile.ai[0] = -1;
-            }
-            //超强化
-            if (Projectile.ai[0] == 2) {
-                Projectile.ai[0] = -1;
+                target.AddBuff(BuffID.OnFire, 180);
             }
             base.OnHitNPC(target, hit, damageDone);
         }
 
         public override void OnKill(int timeLeft) {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
-            //普通
+            //
             if (Projectile.ai[0] == 0) {
 
             }
-            //强化
+            //常态
             if (Projectile.ai[0] == -1) {
                 //爆炸
                 for (int j = 0; j < 52; j++) {
                     int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 1f);
                     Main.dust[num2].noGravity = true;
-                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(3.5f, 4f);
+                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(6f, 7f);
                 }
                 SoundEngine.PlaySound(in SoundID.NPCHit3, Projectile.Center);
                 Projectile.position = Projectile.Center;
-                Projectile.width = Projectile.height = 120;
+                Projectile.width = Projectile.height = 80;
+                Projectile.position.X = Projectile.position.X - Projectile.width / 2;
+                Projectile.position.Y = Projectile.position.Y - Projectile.height / 2;
+                Projectile.maxPenetrate = -1;
+                Projectile.penetrate = -1;
+                Projectile.usesLocalNPCImmunity = false;
+                Projectile.usesIDStaticNPCImmunity = true;
+                Projectile.idStaticNPCHitCooldown = 0;
+                Projectile.Damage();
+            }
+            //强化
+            if (Projectile.ai[0] == -2) {
+                //爆炸
+                for (int j = 0; j < 52; j++) {
+                    int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 1f);
+                    Main.dust[num2].noGravity = true;
+                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(8f, 9f);
+                }
+                SoundEngine.PlaySound(in SoundID.NPCHit3, Projectile.Center);
+                Projectile.position = Projectile.Center;
+                Projectile.width = Projectile.height = 160;
                 Projectile.position.X = Projectile.position.X - Projectile.width / 2;
                 Projectile.position.Y = Projectile.position.Y - Projectile.height / 2;
                 Projectile.maxPenetrate = -1;

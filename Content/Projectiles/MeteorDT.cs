@@ -1,7 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -142,8 +141,9 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20);
+                        int crit = (Main.rand.Next(100) >= (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1])) ? 0 : 1;
 
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<MeteorProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<MeteorProj>(), lastdamage, 1, Owner.whoAmI, crit);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

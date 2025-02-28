@@ -35,6 +35,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.light = 1f;
 
             Projectile.scale *= 0.6f;
+
+            Projectile.extraUpdates += 0;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -140,8 +142,8 @@ namespace GloryofGuardian.Content.Projectiles
 
             Texture2D texture = texture1;
             int type = Main.rand.Next(3);
-            if (type == 0) 
-            if (Projectile.ai[0] == 0) texture = texture1;
+            if (type == 0)
+                if (Projectile.ai[0] == 0) texture = texture1;
             if (Projectile.ai[0] == 1) texture = texture2;
             if (Projectile.ai[0] == 2) texture = texture3;
 

@@ -1,5 +1,4 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -57,7 +56,10 @@ namespace GloryofGuardian.Content.Projectiles
         //攻击
         List<int> ignore = new List<int>();
         List<int> whoistar = new List<int>();
+        int num = 0;
+        int num0 = 0;
         public override void AI() {
+
             countfire++;
             countdust++;
 
@@ -87,34 +89,57 @@ namespace GloryofGuardian.Content.Projectiles
             }
 
             if (count >= Gcount) {
+                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) num0 = 2;
+                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) num0 = 4;
                 //索敌与行动
                 ignore.Clear();
                 NPC target1 = null;
 
-                //流星检索
+                //攻击人数预定
                 ignore.Clear();
                 for (int index = 0; index < Main.npc.Length; index++) {
-                    target1 = Projectile.Center.InPosClosestNPC(3800, true, true, ignore);
+                    target1 = Projectile.Center.InPosClosestNPC(800, true, true, ignore);
                     if (target1 != null && target1.active) {
-                        if (target1.HasBuff(BuffID.OnFire) || target1.HasBuff(BuffID.OnFire3) || target1.HasBuff(ModContent.BuffType<OnfireMalice>())) {
-                            whoistar.Add(target1.whoAmI);
+
+                        if (num == num0) {
+                            break;
                         }
-                        ignore.Add(target1.whoAmI);
+
+                        ignore.Add(target1.whoAmI);//加入检索忽略目标
+
+                        if (target1.HasBuff(BuffID.OnFire3)) {
+                            //有狱火则再次攻击
+                            num += 1;
+                        }
+                    }
+                }
+
+                ignore.Clear();
+                for (int index = 0; index < Main.npc.Length; index++) {
+                    target1 = Projectile.Center.InPosClosestNPC(800, true, true, ignore);
+                    if (target1 != null && target1.active) {
+
+                        whoistar.Add(target1.whoAmI);//加入待打击目标
+                        ignore.Add(target1.whoAmI);//加入检索忽略目标
+
+                        num -= 1;
+                        if (num == -1) {
+                            break;
+                        }
                     }
                 }
 
                 if (whoistar.Count > 0) {
                     foreach (int npc in whoistar) {
-                        if (Main.rand.NextBool(1)) {
-                            Attack(Main.npc[npc]);
-                            if (Main.rand.NextBool(4)) break;
-                        }
+                        Attack(Main.npc[npc]);
                     }
 
                     //计时重置
                     count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
                     //攻击对象重置
                     whoistar.Clear();
+                    //攻击计数重置
+                    num = 0;
                 }
             }
 
@@ -178,7 +203,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //对速度进行一些观赏度调整
                 //vx *=
                 //vy *=
-                vy *= (dy >= 0 ? 0.75f : 1.2f);
+                vy *= (dy >= 0 ? 0.75f : 0.85f);
 
                 float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
 
