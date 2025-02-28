@@ -1,8 +1,6 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 

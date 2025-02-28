@@ -1,15 +1,11 @@
 ﻿using GloryofGuardian.Content.Projectiles;
+using InnoVault.GameContent.BaseEntity;
 using Terraria.DataStructures;
 
 namespace GloryofGuardian.Content.Class
 {
-    public abstract class GOGDT : ModProjectile
+    public abstract class GOGDT : BaseHeldProj
     {
-        //炮塔本体所属的类
-
-        //常规
-        Player Owner => Main.player[Projectile.owner];
-
         //绝对时间
         public int globalcount = 0;
         //最早召唤物的标记
