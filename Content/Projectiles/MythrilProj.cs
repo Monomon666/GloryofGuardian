@@ -1,10 +1,9 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class MythrilProj : GOGProj
     {

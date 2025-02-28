@@ -1,8 +1,6 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -120,7 +118,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             if (!target.boss && target.knockBackResist != 0) {
-              target.velocity *= 0.05f;
+                target.velocity *= 0.05f;
             }
         }
 

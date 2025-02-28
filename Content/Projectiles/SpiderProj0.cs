@@ -1,11 +1,8 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.Utilities;
 
 namespace GloryofGuardian.Content.Projectiles
 {
@@ -110,7 +107,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = count0;//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = 1;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -132,11 +129,11 @@ namespace GloryofGuardian.Content.Projectiles
                 Main.NewText(atknum);
                 for (int i = -firenum; i <= firenum; i++) {
                     Vector2 vel = (target1.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * 12f;
-                
+
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39);
-                
+
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel.RotatedBy(i * fireveltor), ModContent.ProjectileType<SpiderProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
-                    
+
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;

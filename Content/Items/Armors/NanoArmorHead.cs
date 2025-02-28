@@ -1,5 +1,5 @@
-﻿using DreamJourney.Content.Items.Armor;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Items.Armor;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Armors

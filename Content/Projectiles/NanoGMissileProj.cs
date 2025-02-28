@@ -7,7 +7,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class NanoGMissileProj : GOGProj
     {

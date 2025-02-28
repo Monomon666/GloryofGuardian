@@ -1,37 +1,34 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
-using Terraria.Chat;
-using Terraria.GameContent.Prefixes;
 using Terraria.GameInput;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.Utilities;
 
 namespace GloryofGuardian.Common
 {
-    //ÕâÊÇÒ»¸ö·½·¨¿â,ÓÃÓÚ´æ·ÅºÜ¶à³£ÓÃµÄ·½·¨
+    //è¿™æ˜¯ä¸€ä¸ªæ–¹æ³•åº“,ç”¨äºå­˜æ”¾å¾ˆå¤šå¸¸ç”¨çš„æ–¹æ³•
     public static class GOGUtils
     {
         #region System
 
         #endregion
 
-        #region »æÖÆ
+        #region ç»˜åˆ¶
 
         #endregion
 
-        #region ·½·¨
+        #region æ–¹æ³•
         /// <summary>
-        /// ¼ì²âÍæ¼ÒÊÇ·ñÓĞĞ§ÇÒÕı³£´æ»î
+        /// æ£€æµ‹ç©å®¶æ˜¯å¦æœ‰æ•ˆä¸”æ­£å¸¸å­˜æ´»
         /// </summary>
-        /// <returns>·µ»Ø true ±íÊ¾»îÔ¾£¬·µ»Ø false ±íÊ¾Îª¿Õ»òÕßÒÑ¾­ËÀÍöµÄ·Ç»îÔ¾×´Ì¬</returns>
+        /// <returns>è¿”å› true è¡¨ç¤ºæ´»è·ƒï¼Œè¿”å› false è¡¨ç¤ºä¸ºç©ºæˆ–è€…å·²ç»æ­»äº¡çš„éæ´»è·ƒçŠ¶æ€</returns>
         public static bool Alives(this Player player) {
             if (player == null) return false;
             return player.active && !player.dead;
         }
 
         /// <summary>
-        /// ¸üË³Ó¦·½Ïò¸ĞµÄÁ½µãÖ®¼äÏòÁ¿
+        /// æ›´é¡ºåº”æ–¹å‘æ„Ÿçš„ä¸¤ç‚¹ä¹‹é—´å‘é‡
         /// </summary>
         /// <param name="vr1"></param>
         /// <param name="vr2"></param>
@@ -41,7 +38,7 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// Á½µãÖ®¼äµÄµ¥Î»ÏòÁ¿
+        /// ä¸¤ç‚¹ä¹‹é—´çš„å•ä½å‘é‡
         /// </summary>
         /// <param name="vr1"></param>
         /// <param name="vr2"></param>
@@ -52,20 +49,20 @@ namespace GloryofGuardian.Common
 
         #endregion
 
-        #region ÅĞ¶¨
+        #region åˆ¤å®š
         /// <summary>
-        /// ¼ì²éÖ¸¶¨Íæ¼ÒÊÇ·ñ°´ÏÂÁËÊó±ê¼ü,true×ó¼üfalseÓÒ¼ü
+        /// æ£€æŸ¥æŒ‡å®šç©å®¶æ˜¯å¦æŒ‰ä¸‹äº†é¼ æ ‡é”®,trueå·¦é”®falseå³é”®
         /// </summary>
-        /// <param name="player">Òª¼ì²éµÄÍæ¼Ò</param>
-        /// <param name="leftCed">ÊÇ·ñ¼ì²é×óÊó±ê¼ü£¬·ñÔò¼ì²âÓÒÊó±ê¼ü</param>
-        /// <param name="netCed">ÊÇ·ñ½øĞĞÍøÂçÍ¬²½¼ì²é</param>
-        /// <returns>Èç¹û°´ÏÂÁËÖ¸¶¨µÄÊó±ê¼ü£¬Ôò·µ»Øtrue£¬·ñÔò·µ»Øfalse</returns>
+        /// <param name="player">è¦æ£€æŸ¥çš„ç©å®¶</param>
+        /// <param name="leftCed">æ˜¯å¦æ£€æŸ¥å·¦é¼ æ ‡é”®ï¼Œå¦åˆ™æ£€æµ‹å³é¼ æ ‡é”®</param>
+        /// <param name="netCed">æ˜¯å¦è¿›è¡Œç½‘ç»œåŒæ­¥æ£€æŸ¥</param>
+        /// <returns>å¦‚æœæŒ‰ä¸‹äº†æŒ‡å®šçš„é¼ æ ‡é”®ï¼Œåˆ™è¿”å›trueï¼Œå¦åˆ™è¿”å›false</returns>
         public static bool PressKey(this Player player, bool leftCed = true, bool netCed = true) {
             return (!netCed || Main.myPlayer == player.whoAmI) && (leftCed ? PlayerInput.Triggers.Current.MouseLeft : PlayerInput.Triggers.Current.MouseRight);
         }
 
         /// <summary>
-        /// ÅĞ¶¨µ¯Ä»ÊÇ·ñÄÜ±»Îï¿é×èµ²
+        /// åˆ¤å®šå¼¹å¹•æ˜¯å¦èƒ½è¢«ç‰©å—é˜»æŒ¡
         /// </summary>
         /// <param name="projectile"></param>
         /// <param name="ignorePlatforms"></param>
@@ -113,7 +110,7 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// ¸¨Öú·½·¨£ºÊÀ½çÊµÌå×ø±ê×ªÎï¿é×ø±ê
+        /// è¾…åŠ©æ–¹æ³•ï¼šä¸–ç•Œå®ä½“åæ ‡è½¬ç‰©å—åæ ‡
         /// </summary>
         /// <param name="wePos"></param>
         /// <returns></returns>
@@ -126,16 +123,16 @@ namespace GloryofGuardian.Common
         }
         #endregion
 
-        #region Ë÷µĞ
+        #region ç´¢æ•Œ
         /// <summary>
-        /// Ñ°ÕÒ¾àÀëÖ¸¶¨Î»ÖÃ×î½üµÄNPC
+        /// å¯»æ‰¾è·ç¦»æŒ‡å®šä½ç½®æœ€è¿‘çš„NPC
         /// </summary>
-        /// <param name="origin">¿ªÊ¼ËÑË÷µÄÎ»ÖÃ</param>
-        /// <param name="maxDistanceToCheck">ËÑË÷NPCµÄ×î´ó¾àÀë</param>
-        /// <param name="ignoreTiles">ÔÚ¼ì²éÕÏ°­ÎïÊ±ÊÇ·ñºöÂÔÎï¿é</param>
-        /// <param name="bossPriority">ÊÇ·ñÓÅÏÈÑ¡ÔñBoss</param>
-        /// <param name="ignore">ÊÇ·ñºöÂÔ¸ø³öÄ¿±ê</param>//µ¯ÉäÓÃ
-        /// <returns>¾àÀë×î½üµÄNPC¡£</returns>
+        /// <param name="origin">å¼€å§‹æœç´¢çš„ä½ç½®</param>
+        /// <param name="maxDistanceToCheck">æœç´¢NPCçš„æœ€å¤§è·ç¦»</param>
+        /// <param name="ignoreTiles">åœ¨æ£€æŸ¥éšœç¢ç‰©æ—¶æ˜¯å¦å¿½ç•¥ç‰©å—</param>
+        /// <param name="bossPriority">æ˜¯å¦ä¼˜å…ˆé€‰æ‹©Boss</param>
+        /// <param name="ignore">æ˜¯å¦å¿½ç•¥ç»™å‡ºç›®æ ‡</param>//å¼¹å°„ç”¨
+        /// <returns>è·ç¦»æœ€è¿‘çš„NPCã€‚</returns>
         public static NPC InPosClosestNPC(this Vector2 origin, float maxDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, List<int> ignore = null) {
             NPC closestTarget = null;
             float distance = maxDistanceToCheck;
@@ -180,15 +177,15 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// Ñ°ÕÒ¾àÀëÖ¸¶¨Î»ÖÃ£¬ÔÚÖ¸¶¨×óÓÒ·½ÏòÉÏ×î½üµÄNPC
+        /// å¯»æ‰¾è·ç¦»æŒ‡å®šä½ç½®ï¼Œåœ¨æŒ‡å®šå·¦å³æ–¹å‘ä¸Šæœ€è¿‘çš„NPC
         /// </summary>
-        /// <param name="origin">¿ªÊ¼ËÑË÷µÄÎ»ÖÃ</param>
-        /// <param name="maxDistanceToCheck">ËÑË÷NPCµÄ×î´ó¾àÀë</param>
-        /// <param name="ignoreTiles">ÔÚ¼ì²éÕÏ°­ÎïÊ±ÊÇ·ñºöÂÔÎï¿é</param>
-        /// <param name="bossPriority">ÊÇ·ñÓÅÏÈÑ¡ÔñBoss</param>
-        /// <param name="direction">´ÓÄÄ¸ö·½ÏòËÑË÷,-1ÎªÓÒ,1Îª×ó</param>
-        /// <param name="ignore">ÊÇ·ñºöÂÔ¸ø³öÄ¿±ê</param>//µ¯ÉäÓÃ
-        /// <returns>¾àÀë×î½üµÄNPC¡£</returns>
+        /// <param name="origin">å¼€å§‹æœç´¢çš„ä½ç½®</param>
+        /// <param name="maxDistanceToCheck">æœç´¢NPCçš„æœ€å¤§è·ç¦»</param>
+        /// <param name="ignoreTiles">åœ¨æ£€æŸ¥éšœç¢ç‰©æ—¶æ˜¯å¦å¿½ç•¥ç‰©å—</param>
+        /// <param name="bossPriority">æ˜¯å¦ä¼˜å…ˆé€‰æ‹©Boss</param>
+        /// <param name="direction">ä»å“ªä¸ªæ–¹å‘æœç´¢,-1ä¸ºå³,1ä¸ºå·¦</param>
+        /// <param name="ignore">æ˜¯å¦å¿½ç•¥ç»™å‡ºç›®æ ‡</param>//å¼¹å°„ç”¨
+        /// <returns>è·ç¦»æœ€è¿‘çš„NPCã€‚</returns>
         public static NPC InDirClosestNPC(this Vector2 origin, float maxDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, int direction = 0, List<int> ignore = null) {
             NPC closestTarget = null;
             float distance = maxDistanceToCheck;
@@ -237,15 +234,15 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// Ñ°ÕÒ¾àÀëÖ¸¶¨Î»ÖÃ£¬ÔÚÖ¸¶¨ÉÏÏÂ·½ÏòÉÏ×î½üµÄNPC
+        /// å¯»æ‰¾è·ç¦»æŒ‡å®šä½ç½®ï¼Œåœ¨æŒ‡å®šä¸Šä¸‹æ–¹å‘ä¸Šæœ€è¿‘çš„NPC
         /// </summary>
-        /// <param name="origin">¿ªÊ¼ËÑË÷µÄÎ»ÖÃ</param>
-        /// <param name="maxDistanceToCheck">ËÑË÷NPCµÄ×î´ó¾àÀë</param>
-        /// <param name="ignoreTiles">ÔÚ¼ì²éÕÏ°­ÎïÊ±ÊÇ·ñºöÂÔÎï¿é</param>
-        /// <param name="bossPriority">ÊÇ·ñÓÅÏÈÑ¡ÔñBoss</param>
-        /// <param name="direction">´ÓÄÄ¸ö·½ÏòËÑË÷,1ÎªÓÒ,2Îª×ó</param>
-        /// <param name="ignore">ÊÇ·ñºöÂÔ¸ø³öÄ¿±ê</param>//µ¯ÉäÓÃ
-        /// <returns>¾àÀë×î½üµÄNPC¡£</returns>
+        /// <param name="origin">å¼€å§‹æœç´¢çš„ä½ç½®</param>
+        /// <param name="maxDistanceToCheck">æœç´¢NPCçš„æœ€å¤§è·ç¦»</param>
+        /// <param name="ignoreTiles">åœ¨æ£€æŸ¥éšœç¢ç‰©æ—¶æ˜¯å¦å¿½ç•¥ç‰©å—</param>
+        /// <param name="bossPriority">æ˜¯å¦ä¼˜å…ˆé€‰æ‹©Boss</param>
+        /// <param name="direction">ä»å“ªä¸ªæ–¹å‘æœç´¢,1ä¸ºå³,2ä¸ºå·¦</param>
+        /// <param name="ignore">æ˜¯å¦å¿½ç•¥ç»™å‡ºç›®æ ‡</param>//å¼¹å°„ç”¨
+        /// <returns>è·ç¦»æœ€è¿‘çš„NPCã€‚</returns>
         public static NPC InDir2ClosestNPC(this Vector2 origin, float maxDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, int direction = 0, List<int> ignore = null) {
             NPC closestTarget = null;
             float distance = maxDistanceToCheck;
@@ -294,11 +291,11 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// ½øĞĞÔ²ĞÎµÄÅö×²¼ì²â
+        /// è¿›è¡Œåœ†å½¢çš„ç¢°æ’æ£€æµ‹
         /// </summary>
-        /// <param name="centerPosition">ÖĞĞÄµã</param>
-        /// <param name="radius">°ë¾¶</param>
-        /// <param name="targetHitbox">Åö×²¶ÔÏóµÄÏäÌå½á¹¹</param>
+        /// <param name="centerPosition">ä¸­å¿ƒç‚¹</param>
+        /// <param name="radius">åŠå¾„</param>
+        /// <param name="targetHitbox">ç¢°æ’å¯¹è±¡çš„ç®±ä½“ç»“æ„</param>
         /// <returns></returns>
         public static bool CircularHitboxCollision(Vector2 centerPosition, float radius, Rectangle targetHitbox) {
             if (new Rectangle((int)centerPosition.X, (int)centerPosition.Y, 1, 1).Intersects(targetHitbox)) {
@@ -328,15 +325,15 @@ namespace GloryofGuardian.Common
 
         #endregion
 
-        #region ĞĞÎª
+        #region è¡Œä¸º
 
         /// <summary>
-        /// ÆÕÍ¨µÄ×·ÖğĞĞÎª
+        /// æ™®é€šçš„è¿½é€è¡Œä¸º
         /// </summary>
-        /// <param name="entity">ĞèÒª²Ù×İµÄÊµÌå</param>
-        /// <param name="TargetCenter">Ä¿±êµØµã</param>
-        /// <param name="Speed">ËÙ¶È</param>
-        /// <param name="ShutdownDistance">Í£°Ú¾àÀë</param>
+        /// <param name="entity">éœ€è¦æ“çºµçš„å®ä½“</param>
+        /// <param name="TargetCenter">ç›®æ ‡åœ°ç‚¹</param>
+        /// <param name="Speed">é€Ÿåº¦</param>
+        /// <param name="ShutdownDistance">åœæ‘†è·ç¦»</param>
         /// <returns></returns>
         public static Vector2 ChasingBehavior(this Entity entity, Vector2 TargetCenter, float Speed, float ShutdownDistance = 16) {
             if (entity == null) {
@@ -351,12 +348,12 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// ¼ÆËãÒ»¸ö½¥½øËÙ¶ÈÖµ
+        /// è®¡ç®—ä¸€ä¸ªæ¸è¿›é€Ÿåº¦å€¼
         /// </summary>
-        /// <param name="thisCenter">±¾ÌåÎ»ÖÃ</param>
-        /// <param name="targetCenter">Ä¿±êÎ»ÖÃ</param>
-        /// <param name="speed">ËÙ¶È</param>
-        /// <param name="shutdownDistance">Í£°Ú·¶Î§</param>
+        /// <param name="thisCenter">æœ¬ä½“ä½ç½®</param>
+        /// <param name="targetCenter">ç›®æ ‡ä½ç½®</param>
+        /// <param name="speed">é€Ÿåº¦</param>
+        /// <param name="shutdownDistance">åœæ‘†èŒƒå›´</param>
         /// <returns></returns>
         public static float AsymptoticVelocity(Vector2 thisCenter, Vector2 targetCenter, float speed, float shutdownDistance) {
             Vector2 toMou = targetCenter - thisCenter;
@@ -365,11 +362,11 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
-        /// Ê¹µ±Ç°½Ç¶È×ªÏòÄ¿±ê½Ç¶È,Ã¿´Î×ª¶¯²»³¬¹ıÒ»¶¨Öµ
+        /// ä½¿å½“å‰è§’åº¦è½¬å‘ç›®æ ‡è§’åº¦,æ¯æ¬¡è½¬åŠ¨ä¸è¶…è¿‡ä¸€å®šå€¼
         /// </summary>
-        /// <param name="curAngle">ÏÖÔÚ½Ç¶È</param>
-        /// <param name="targetAngle">Ä¿±ê½Ç¶È</param>
-        /// <param name="maxChange">×ª¶¯Öµ</param>
+        /// <param name="curAngle">ç°åœ¨è§’åº¦</param>
+        /// <param name="targetAngle">ç›®æ ‡è§’åº¦</param>
+        /// <param name="maxChange">è½¬åŠ¨å€¼</param>
         /// <returns></returns>
         public static float RotTowards(this float curAngle, float targetAngle, float maxChange) {
             curAngle = MathHelper.WrapAngle(curAngle);
@@ -388,7 +385,7 @@ namespace GloryofGuardian.Common
 
         #endregion
 
-        #region ĞÂµÄÇ°×ºÑ¡È¡Âß¼­
+        #region æ–°çš„å‰ç¼€é€‰å–é€»è¾‘
 
         internal static int GetReworkedReforge(Item item, UnifiedRandom rand, int currentPrefix) {
             GloryofGuardianMod mod = GloryofGuardianMod.Instance;
@@ -397,10 +394,10 @@ namespace GloryofGuardian.Common
                 return found ? ret.Type : 0;
             }
 
-            // Ä¬ÈÏÑ¡Ôñ
+            // é»˜è®¤é€‰æ‹©
             int prefix = -1;
 
-            // ÊÎÆ·
+            // é¥°å“
             if (item.accessory) {
                 int accRerolls = 0;
                 int[][] accessoryReforgeTiers = new int[][]
@@ -411,7 +408,7 @@ namespace GloryofGuardian.Common
             /* 3 */ new int[] { PrefixID.Warding, PrefixID.Menacing, PrefixID.Lucky, PrefixID.Quick2, PrefixID.Violent}, //, GetCalPrefix("Silent") },
                 };
 
-                // ¾¡Á¿±ÜÃâÍæ¼ÒÁ¬ĞøÖØÖıÁ½´ÎÏàÍ¬µÄÇ°×º
+                // å°½é‡é¿å…ç©å®¶è¿ç»­é‡é“¸ä¸¤æ¬¡ç›¸åŒçš„å‰ç¼€
                 do {
                     int newPrefix = IteratePrefix(rand, accessoryReforgeTiers, currentPrefix);
                     if (newPrefix != currentPrefix) {
@@ -422,102 +419,9 @@ namespace GloryofGuardian.Common
                 } while (accRerolls < 20);
             }
 
-            //¶ÔÆäËüÖ°ÒµµÄĞŞ¸ÄÔİ²»ÉúĞ§
+            //å¯¹å…¶å®ƒèŒä¸šçš„ä¿®æ”¹æš‚ä¸ç”Ÿæ•ˆ
 
-            // ½üÕ½ °üÀ¨¹¤¾ßºÍ±Ş×Ó
-            else if (item.CountsAsClass<MeleeDamageClass>() || item.CountsAsClass<SummonMeleeSpeedDamageClass>()) {
-                if (PrefixLegacy.ItemSets.ItemsThatCanHaveLegendary2[item.type]) {
-                    int[][] terrarianReforgeTiers = new int[][]
-                    {
-                /* 0 */ new int[] { PrefixID.Keen, PrefixID.Forceful, PrefixID.Strong },
-                /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous },
-                /* 2 */ new int[] { PrefixID.Superior, PrefixID.Demonic, PrefixID.Godly },
-                /* 3 */ new int[] { PrefixID.Legendary2 },
-                    };
-                    prefix = IteratePrefix(rand, terrarianReforgeTiers, currentPrefix);
-                }
-            
-                // ½££¬±Ş£¬¹¤¾ß£¬Ö§³Ö´«ÆæÇ°×ºµÄ
-                else if (PrefixLegacy.ItemSets.SwordsHammersAxesPicks[item.type] || (item.ModItem != null && item.ModItem.MeleePrefix())) {
-                    int[][] meleeReforgeTiers = new int[][]
-                    {
-                /* 0 */ new int[] { PrefixID.Keen, PrefixID.Nimble, PrefixID.Nasty, PrefixID.Light, PrefixID.Heavy, PrefixID.Light, PrefixID.Forceful, PrefixID.Strong },
-                /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous, PrefixID.Quick, PrefixID.Pointy, PrefixID.Bulky },
-                /* 2 */ new int[] { PrefixID.Murderous, PrefixID.Agile, PrefixID.Large, PrefixID.Dangerous, PrefixID.Sharp },
-                /* 3 */ new int[] { PrefixID.Massive, PrefixID.Unpleasant, PrefixID.Savage, PrefixID.Superior },
-                /* 4 */ new int[] { PrefixID.Demonic, PrefixID.Deadly2, PrefixID.Godly },
-                /* 5 */ new int[] { PrefixID.Legendary } // for non-tools, Light is a mediocre low-tier reforge
-                    };
-                    int[][] toolReforgeTiers = new int[][]
-                    {
-                /* 0 */ new int[] { PrefixID.Keen, PrefixID.Nimble, PrefixID.Nasty, PrefixID.Heavy, PrefixID.Forceful, PrefixID.Strong },
-                /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous, PrefixID.Quick, PrefixID.Pointy, PrefixID.Bulky },
-                /* 2 */ new int[] { PrefixID.Murderous, PrefixID.Agile, PrefixID.Large, PrefixID.Dangerous, PrefixID.Sharp },
-                /* 3 */ new int[] { PrefixID.Massive, PrefixID.Unpleasant, PrefixID.Savage, PrefixID.Superior },
-                /* 4 */ new int[] { PrefixID.Demonic, PrefixID.Deadly2, PrefixID.Godly },
-                /* 5 */ new int[] { PrefixID.Legendary, PrefixID.Light } // for some tools, light is better than legendary. for others, it's equal
-                    };
-            
-                    var tierListToUse = (item.pick > 0 || item.axe > 0 || item.hammer > 0) ? toolReforgeTiers : meleeReforgeTiers;
-                    prefix = IteratePrefix(rand, tierListToUse, currentPrefix);
-                }
-            
-                // ÓÆÓÆÇò£¬Á¬¼Ï£¬³¤Ã¬µÈ
-                else {
-                    int[][] meleeNoSpeedReforgeTiers = new int[][]
-                    {
-                /* 0 */ new int[] { PrefixID.Keen, PrefixID.Forceful, PrefixID.Strong },
-                /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous },
-                /* 2 */ new int[] { PrefixID.Superior, PrefixID.Demonic },
-                /* 3 */ new int[] { PrefixID.Godly }
-                    };
-                    prefix = IteratePrefix(rand, meleeNoSpeedReforgeTiers, currentPrefix);
-                }
-            }
-            
-            // Ô¶³Ì
-            else if (item.CountsAsClass<RangedDamageClass>()) {
-                int[][] rangedReforgeTiers = new int[][]
-                {
-            /* 0 */ new int[] { PrefixID.Keen, PrefixID.Nimble, PrefixID.Nasty, PrefixID.Powerful, PrefixID.Forceful, PrefixID.Strong },
-            /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous, PrefixID.Quick, PrefixID.Intimidating },
-            /* 2 */ new int[] { PrefixID.Murderous, PrefixID.Agile, PrefixID.Hasty, PrefixID.Staunch, PrefixID.Unpleasant },
-            /* 3 */ new int[] { PrefixID.Superior, PrefixID.Demonic, PrefixID.Sighted },
-            /* 4 */ new int[] { PrefixID.Godly, PrefixID.Rapid, /* ranged Deadly */ PrefixID.Deadly, /* universal Deadly */ PrefixID.Deadly2 },
-            /* 5 */ new int[] { PrefixID.Unreal }
-                };
-                prefix = IteratePrefix(rand, rangedReforgeTiers, currentPrefix);
-            }
-            
-            // Ä§·¨
-            else if (item.CountsAsClass<MagicDamageClass>() || item.CountsAsClass<MagicSummonHybridDamageClass>()) {
-                int[][] magicReforgeTiers = new int[][]
-                {
-            /* 0 */ new int[] { PrefixID.Keen, PrefixID.Nimble, PrefixID.Nasty, PrefixID.Furious, PrefixID.Forceful, PrefixID.Strong },
-            /* 1 */ new int[] { PrefixID.Hurtful, PrefixID.Ruthless, PrefixID.Zealous, PrefixID.Quick, PrefixID.Taboo, PrefixID.Manic },
-            /* 2 */ new int[] { PrefixID.Murderous, PrefixID.Agile, PrefixID.Adept, PrefixID.Celestial, PrefixID.Unpleasant },
-            /* 3 */ new int[] { PrefixID.Superior, PrefixID.Demonic, PrefixID.Mystic },
-            /* 4 */ new int[] { PrefixID.Godly, PrefixID.Masterful, PrefixID.Deadly2 },
-            /* 5 */ new int[] { PrefixID.Mythical }
-                };
-                prefix = IteratePrefix(rand, magicReforgeTiers, currentPrefix);
-            }
-            
-            // ÕÙ»½(²»º¬±Ş×Ó)
-            else if (item.CountsAsClass<SummonDamageClass>()) {
-                int[][] summonReforgeTiers = new int[][]
-                {
-            /* 0 */ new int[] { PrefixID.Nimble, PrefixID.Furious },
-            /* 1 */ new int[] { PrefixID.Forceful, PrefixID.Strong, PrefixID.Quick, PrefixID.Taboo, PrefixID.Manic },
-            /* 2 */ new int[] { PrefixID.Hurtful, PrefixID.Adept, PrefixID.Celestial },
-            /* 3 */ new int[] { PrefixID.Superior, PrefixID.Demonic, PrefixID.Mystic, PrefixID.Deadly2 },
-            /* 4 */ new int[] { PrefixID.Masterful, PrefixID.Godly },
-            /* 5 */ new int[] { PrefixID.Mythical, PrefixID.Ruthless }
-                };
-                prefix = IteratePrefix(rand, summonReforgeTiers, currentPrefix);
-            }
-
-            // ÊùÎÀ
+            // æˆå«
             else if (item.CountsAsClass<GuardianDamageClass>()) {
                 int[][] GuardianReforgeTiers = new int[][]
                 {
@@ -549,23 +453,23 @@ namespace GloryofGuardian.Common
                         return checkingTier;
             }
 
-            // ¼ì²âµ½ÎŞĞ§Ç°×ºÔò´ÓÍ·¿ªÊ¼Ñ­»·
+            // æ£€æµ‹åˆ°æ— æ•ˆå‰ç¼€åˆ™ä»å¤´å¼€å§‹å¾ªç¯
             return -1;
         }
 
         private static int IteratePrefix(UnifiedRandom rand, int[][] reforgeTiers, int currentPrefix) {
             int currentTier = GetPrefixTier(reforgeTiers, currentPrefix);
 
-            // ÎÈ²½ÉÏÉıµÄÖØÖı
+            // ç¨³æ­¥ä¸Šå‡çš„é‡é“¸
             int newTier = currentTier == reforgeTiers.Length - 1 ? currentTier : currentTier + 1;
             return rand.Next(reforgeTiers[newTier]);
         }
 
         #endregion
 
-        #region Ç°×º×¢²á
+        #region å‰ç¼€æ³¨å†Œ
 
-        //ÔÚ³öÏÖĞÂµÄĞèÒªÖ®Ç°£¬ÕâÀïÖ»·ÅÖÃÇ°×º
+        //åœ¨å‡ºç°æ–°çš„éœ€è¦ä¹‹å‰ï¼Œè¿™é‡Œåªæ”¾ç½®å‰ç¼€
         public static int RandomGuardianPrefix() {
             Mod mod = ModContent.GetInstance<GloryofGuardianMod>();
             int GuardianPrefix = Utils.SelectRandom(Main.rand, new int[]
@@ -588,7 +492,7 @@ namespace GloryofGuardian.Common
                 mod.Find<ModPrefix>("Damaged").Type,
                 mod.Find<ModPrefix>("ShortCircuited").Type,
 
-                //PrefixID.Annoying,//°üº¬ÁËÉñ¼¶ºÍËéÁÑµÈÒ»ÏµÁĞÔ­°æÍ¨ÓÃ´Ê×º
+                //PrefixID.Annoying,//åŒ…å«äº†ç¥çº§å’Œç¢è£‚ç­‰ä¸€ç³»åˆ—åŸç‰ˆé€šç”¨è¯ç¼€
             });
             return GuardianPrefix;
         }

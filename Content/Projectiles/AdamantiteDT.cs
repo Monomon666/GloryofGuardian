@@ -1,5 +1,4 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
@@ -131,7 +130,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -264,12 +263,12 @@ namespace GloryofGuardian.Content.Projectiles
             if (wrotation2 != tarrot) {
                 if (Math.Abs(wrotation2 - tarrot) % Math.PI <= rspeed) {//如果方向差小于单次转量则本次旋转将超过目标,取余很重要
                     wrotation2 = tarrot;//那么直接让方向与到目标方向防止抖动
-                                       //tarrot = wrotation;
+                                        //tarrot = wrotation;
                     return;
                 } else {
                     Vector2 clockwise = (wrotation2 + rspeed).ToRotationVector2();//这是假设NPC顺时针转动后的单位方向向量
                     Vector2 anticlockwise = (wrotation2 - rspeed).ToRotationVector2();//这是假设NPC逆时针转动后的单位方向向量
-                                                                                     //显然，要比较两个向量哪个与目标夹角更近，就是比较他们与目标向量相减后的长度
+                                                                                      //显然，要比较两个向量哪个与目标夹角更近，就是比较他们与目标向量相减后的长度
                     if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())//如果顺时针的差值更小
                     {
                         wrotation2 += rspeed;
@@ -319,7 +318,7 @@ namespace GloryofGuardian.Content.Projectiles
         int floatscore = 0;
         public override bool PreDraw(ref Color lightColor) {
             if (floatscore > 300) floatcount++;
-            float colorsca = 0.7f ;
+            float colorsca = 0.7f;
             if (floatscore <= 300) colorsca = 0.7f;
             if (floatscore > 300) colorsca = 1f;
             float1 = (float)Math.Sin(floatcount / 48f) + 1;
@@ -337,7 +336,7 @@ namespace GloryofGuardian.Content.Projectiles
             Main.EntitySpriteDraw(texture2, drawPosition2, null, lightColor, wrotation, texture2.Size() * 0.5f + new Vector2(-12, 0), Projectile.scale, SpriteEffects.None, 0);
             //左炮
             Vector2 drawPosition3 = Projectile.Center - Main.screenPosition + new Vector2(-18, -12);
-            
+
             Main.EntitySpriteDraw(texture2, drawPosition3, null, lightColor, wrotation2 + MathHelper.Pi, texture2.Size() * 0.5f + new Vector2(12, 0), Projectile.scale, SpriteEffects.FlipHorizontally, 0);
 
             Main.EntitySpriteDraw(texture3, drawPosition1, null, lightColor, Projectile.rotation, texture3.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);

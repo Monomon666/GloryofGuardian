@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class PinkSlimeProj : GOGProj
     {

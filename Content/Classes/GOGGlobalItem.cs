@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using Terraria.Utilities;
 
 namespace GloryofGuardian.Content.Class
@@ -7,7 +7,7 @@ namespace GloryofGuardian.Content.Class
     {
         public override bool InstancePerEntity => true;
 
-        // TODO //Ã»ÅªÃ÷°×,ÏÈ·ÅÔÚÕâ¶ù
+        // TODO //æ²¡å¼„æ˜ç™½,å…ˆæ”¾åœ¨è¿™å„¿
         internal float GuardianStrikePrefixBonus;
 
         #region Reforge Mechanic Rework
@@ -16,18 +16,19 @@ namespace GloryofGuardian.Content.Class
             storedPrefix = item.prefix;
         }
 
-        // ¶ÔÖØÖı´ÊÌõµÄÖØ×ö
-        // Ê¹ÓÃconfig¾Ü¾øÖØÖı
+        // å¯¹é‡é“¸è¯æ¡çš„é‡åš
+        // ä½¿ç”¨configæ‹’ç»é‡é“¸
         public override int ChoosePrefix(Item item, UnifiedRandom rand) {
             if (storedPrefix == -1 && item.CountsAsClass<GuardianDamageClass>() && (item.maxStack == 1 || item.AllowReforgeForStackableItem)) {
-                // Ô­°æÉè¶¨ÑØÓÃ£ºÖÆ×÷Ê±ÓĞ75%¸ÅÂÊ¸½´ø´ÊÌõ
-                // ¸ºÃæĞŞÊÎ·ûÓĞÈı·ÖÖ®¶şµÄ¸ÅÂÊ±»ÎŞĞ§»¯, ÈÈÄÖµÄĞŞÊÎ·û±»Ô­°æ¹ÊÒâºöÂÔ
+                // åŸç‰ˆè®¾å®šæ²¿ç”¨ï¼šåˆ¶ä½œæ—¶æœ‰75%æ¦‚ç‡é™„å¸¦è¯æ¡
+                // è´Ÿé¢ä¿®é¥°ç¬¦æœ‰ä¸‰åˆ†ä¹‹äºŒçš„æ¦‚ç‡è¢«æ— æ•ˆåŒ–, çƒ­é—¹çš„ä¿®é¥°ç¬¦è¢«åŸç‰ˆæ•…æ„å¿½ç•¥
                 int prefix = GOGUtils.RandomGuardianPrefix();
                 bool keepPrefix = !GOGUtils.NegativeGuardianPrefix(prefix) || Main.rand.NextBool(3);
                 return keepPrefix ? prefix : 0;
             }
 
-            return GOGUtils.GetReworkedReforge(item, rand, storedPrefix);
+            if (item.CountsAsClass<GuardianDamageClass>()) return GOGUtils.GetReworkedReforge(item, rand, storedPrefix);
+            else return -1;
         }
 
         #endregion

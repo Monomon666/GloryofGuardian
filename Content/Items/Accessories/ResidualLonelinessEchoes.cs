@@ -1,8 +1,7 @@
 using GloryofGuardian.Common;
-using GloryofGuardian.Content.Class;
 using Terraria.GameContent.Creative;
 
-namespace DreamJourney.Content.Items.Accessories
+namespace GloryofGuardian.Content.Items.Accessories
 {
     public class ResidualLonelinessEchoes : GOGItem
     {

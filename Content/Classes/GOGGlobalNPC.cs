@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using GloryofGuardian.Content.Projectiles;
 using GloryofGuardian.Content.Projectiles.ProjNPC;
@@ -13,26 +13,26 @@ namespace GloryofGuardian.Content.Class
     {
         public override bool InstancePerEntity => true;
 
-        //±äÁ¿´æ´¢
+        //å˜é‡å­˜å‚¨
         //Todo
-        //¶¤Èëbuff
+        //é’‰å…¥buff
         public bool JavelinDebuffEffect1;
-        //Ó°ÈĞbuff
+        //å½±åˆƒbuff
         public bool ShadowbladeDebuff;
-        //¶ñÑ×buff
+        //æ¶ç‚buff
         public bool OnfireMalice;
-        //ÃØÒøÈı»·
+        //ç§˜é“¶ä¸‰ç¯
         public int MythrilJavelin = 0;
-        //îÜÀ¶ÆÆ¼×
+        //é’´è“ç ´ç”²
         public bool CobaltDebuff;
         public bool CobaltDebuff2;
-        //ÈûÈÉÒıÓÕ
+        //å¡å£¬å¼•è¯±
         public bool SirenDebuff;
-        //ÄÉÃ×±ê¼Ç
+        //çº³ç±³æ ‡è®°
         public bool NanoMarkDebuff1;
         public bool NanoMarkDebuff2;
 
-        //Ã¿Ö¡buffÖØÉè£¬ÓÃÓÚ¶¯Ì¬²»¶¨Ê±µÄbuff
+        //æ¯å¸§buffé‡è®¾ï¼Œç”¨äºåŠ¨æ€ä¸å®šæ—¶çš„buff
         public override void ResetEffects(NPC npc) {
             JavelinDebuffEffect1 = false;
             ShadowbladeDebuff = false;
@@ -45,24 +45,24 @@ namespace GloryofGuardian.Content.Class
         }
 
         public override void SetDefaults(NPC entity) {
-            // Ê¹ÎÒÃÇµÄ³¤Ã¬debuffÉËº¦ÅĞ¶¨ºÍÔ­°æµÄ¹ÇÃ¬Ò»Ñù
+            // ä½¿æˆ‘ä»¬çš„é•¿çŸ›debuffä¼¤å®³åˆ¤å®šå’ŒåŸç‰ˆçš„éª¨çŸ›ä¸€æ ·
             entity.buffImmune[ModContent.BuffType<JavelinDebuff1>()] = entity.buffImmune[BuffID.BoneJavelin];
         }
 
-        int updatecount = 0;//buffÉúĞ§¼ÆÊ±Æ÷
-        int buffcount1 = 0;//ÃØÒøÈı»·ÑÓ³ÙÉúĞ§
+        int updatecount = 0;//buffç”Ÿæ•ˆè®¡æ—¶å™¨
+        int buffcount1 = 0;//ç§˜é“¶ä¸‰ç¯å»¶è¿Ÿç”Ÿæ•ˆ
         int textcount = 0;
         public override void UpdateLifeRegen(NPC npc, ref int damage) {
-            //buff×Ü¼ÆÊ±Æ÷
+            //buffæ€»è®¡æ—¶å™¨
             updatecount++;
-            //Ìø×ÖÓÃ¼ÆÊıÆ÷
+            //è·³å­—ç”¨è®¡æ•°å™¨
             textcount++;
 
             if (JavelinDebuffEffect1) {
                 if (npc.lifeRegen > 0) {
-                    npc.lifeRegen = 0;//½ûÓÃÉúÃü»Ö¸´
+                    npc.lifeRegen = 0;//ç¦ç”¨ç”Ÿå‘½æ¢å¤
                 }
-                // ¶¤ÈëÉËº¦¼ÆËã
+                // é’‰å…¥ä¼¤å®³è®¡ç®—
                 int JavelinCount = 0;
                 for (int i = 0; i < 1000; i++) {
                     Projectile p = Main.projectile[i];
@@ -84,23 +84,23 @@ namespace GloryofGuardian.Content.Class
                     buffcount1 = 0;
                 }
 
-                //ÃØÒøÈı»·
+                //ç§˜é“¶ä¸‰ç¯
                 if (MythrilJavelin >= 3) {
                     buffcount1 ++;
 
                     if (!npc.boss && npc.life <= npc.lifeMax * 0.15f) {
                         npc.life = 1;
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            "9999",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            "9999",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            "±Ğ³ı",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            true,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            "æ¯™é™¤",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            true,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
                         for (int i = 0; i < 1000; i++) {
                             Projectile p = Main.projectile[i];
@@ -115,19 +115,19 @@ namespace GloryofGuardian.Content.Class
 
                     if (npc.boss && npc.life < npc.lifeMax * 0.05f) {
                         npc.life = 1;
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            npc.lifeMax,//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            true,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            npc.lifeMax,//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            true,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            new Color(89, 194, 201),//Ìø×ÖµÄÑÕÉ«
-                            "ÉóÅĞ",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            true,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            new Color(89, 194, 201),//è·³å­—çš„é¢œè‰²
+                            "å®¡åˆ¤",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            true,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
-                        Main.NewText(npc.FullName + "ÒÑ±»Ê¥ÒøÉóÅĞ!", Color.Red);
+                        Main.NewText(npc.FullName + "å·²è¢«åœ£é“¶å®¡åˆ¤!", Color.Red);
                         for (int i = 0; i < 1000; i++) {
                             Projectile p = Main.projectile[i];
                             if (p.active && p.ai[0] == 1f && p.ai[1] == npc.whoAmI) {
@@ -138,21 +138,21 @@ namespace GloryofGuardian.Content.Class
                         }
                     }
                 }
-                //Ò»ÃëºóÑÓ³ÙÉúĞ§
+                //ä¸€ç§’åå»¶è¿Ÿç”Ÿæ•ˆ
                 if (buffcount1 >=  60) {
                     if (npc.boss && npc.life > npc.lifeMax * 0.05f) {
                         npc.life -= Math.Max((int)(npc.life * 0.02f), 100);
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            Math.Max((int)(npc.life * 0.02f), 100),//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            Math.Max((int)(npc.life * 0.02f), 100),//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
-                        CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            "Øà³ı",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            true,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                        CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            "å‰œé™¤",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            true,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
                         for (int i = 0; i < 1000; i++) {
                             Projectile p = Main.projectile[i];
@@ -167,8 +167,8 @@ namespace GloryofGuardian.Content.Class
                     buffcount1 = 0;
                 }
 
-                // ÉúÃüÁ÷ÊÅÓëÉËº¦²»ÏàµÈ£¬ÉúÃüÁ÷ÊÅµÄµ¥Î»ÊÇ2Ãë
-                // ÒÔÔ­°æĞÎÊ½ÏÔÊ¾ÉúÃüÁ÷Ê§
+                // ç”Ÿå‘½æµé€ä¸ä¼¤å®³ä¸ç›¸ç­‰ï¼Œç”Ÿå‘½æµé€çš„å•ä½æ˜¯2ç§’
+                // ä»¥åŸç‰ˆå½¢å¼æ˜¾ç¤ºç”Ÿå‘½æµå¤±
                 npc.lifeRegen -= JavelinCount * 2;
             }
 
@@ -197,7 +197,7 @@ namespace GloryofGuardian.Content.Class
             }
 
             if (NanoMarkDebuff1 || NanoMarkDebuff2) {
-                Lighting.AddLight(npc.Center, 7 * 0.01f, 255 * 0.01f, 255 * 0.01f);//Õ½¶·×´Ì¬·¢ÁÁ
+                Lighting.AddLight(npc.Center, 7 * 0.01f, 255 * 0.01f, 255 * 0.01f);//æˆ˜æ–—çŠ¶æ€å‘äº®
             }
         }
 
@@ -206,17 +206,17 @@ namespace GloryofGuardian.Content.Class
         //}
 
         public override void ModifyHitNPC(NPC npc, NPC target, ref NPC.HitModifiers modifiers) {
-            //Ö©Öë¼ëÊµÏÖ·´ÉË
+            //èœ˜è››èŒ§å®ç°åä¼¤
             if (target.type == ModContent.NPCType<SpiderNPC>()) {
                 int touchdamage = (int)MathHelper.Max(1, target.defense - (int)(npc.defense * 0.5f));
                 if (npc.life <= touchdamage) npc.life = 0;
                 else npc.life -= touchdamage;
 
-                CombatText.NewText(npc.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                                Color.White,//Ìø×ÖµÄÑÕÉ«
-                                touchdamage,//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                                false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                                false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                CombatText.NewText(npc.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                                Color.White,//è·³å­—çš„é¢œè‰²
+                                touchdamage,//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                                false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                                false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                                 );
             }
 
@@ -258,7 +258,7 @@ namespace GloryofGuardian.Content.Class
             if (NanoMarkDebuff1 || NanoMarkDebuff2) nanomarkcount++;
             if (NanoMarkDebuff2) nanomarkcount += 4;
             if (!NanoMarkDebuff1 && !NanoMarkDebuff2) nanomarkcount = 0;
-            //ÃØÒøÈı»·
+            //ç§˜é“¶ä¸‰ç¯
             {
                 Texture2D texturemj = ModContent.Request<Texture2D>(GOGConstant.Buffs + "MJMark").Value;
                 Texture2D texturemj1 = ModContent.Request<Texture2D>(GOGConstant.Buffs + "MJMark1").Value;
@@ -278,9 +278,9 @@ namespace GloryofGuardian.Content.Class
                 if (MythrilJavelin == 1) sca0 = 0.7f;
                 if (MythrilJavelin == 2) sca0 = 0.8f;
                 if (MythrilJavelin >= 3) sca0 = 1.1f;
-                //ºôÎüËõ·Å
+                //å‘¼å¸ç¼©æ”¾
                 float scabreath = (float)Math.Sin(drawcount / 10f) * 0.1f + 1.6f;
-                //ÌåĞÍËõ·Å
+                //ä½“å‹ç¼©æ”¾
                 float sca1 = Math.Max(Math.Min((npc.width / 16f), (npc.height / 48f)) * 0.25f, 1);
 
                 if (MythrilJavelin >= 1) {
@@ -307,7 +307,7 @@ namespace GloryofGuardian.Content.Class
                 }
             }
 
-            //ÄÉÃ×±ê¼Ç
+            //çº³ç±³æ ‡è®°
             {
                 Texture2D texturenm = ModContent.Request<Texture2D>(GOGConstant.Buffs + "NanoMark").Value;
                 Texture2D texturenm0 = ModContent.Request<Texture2D>(GOGConstant.Buffs + "NanoMark0").Value;
@@ -329,7 +329,7 @@ namespace GloryofGuardian.Content.Class
                     npc.Center - Main.screenPosition,
                     null,
                     color0,
-                    nanomarkcount * 0.01f,//Ğı×ª
+                    nanomarkcount * 0.01f,//æ—‹è½¬
                     new Vector2(texturenm.Width, texturenm.Height) / 2,
                     sca0 * 0.8f,
                     SpriteEffects.None

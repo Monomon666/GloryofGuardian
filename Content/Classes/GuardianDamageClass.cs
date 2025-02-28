@@ -1,4 +1,4 @@
-//ÊùÎÀÉËº¦ÀàĞÍµÄ×¢²á
+ï»¿//æˆå«ä¼¤å®³ç±»å‹çš„æ³¨å†Œ
 namespace GloryofGuardian.Content.Class
 {
     public class GuardianDamageClass : DamageClass

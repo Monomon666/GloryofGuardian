@@ -1,5 +1,4 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class AdamantiteProj : GOGProj
     {
@@ -96,11 +95,11 @@ namespace DreamJourney.Content.Projectiles.Ranged
                 reboundcount--;
                 Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
                 SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
-        
+
                 if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon) {
                     Projectile.velocity.X = -oldVelocity.X;
                 }
-        
+
                 if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon) {
                     Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
                 }
@@ -117,7 +116,7 @@ namespace DreamJourney.Content.Projectiles.Ranged
                 if (Main.rand.NextBool(2)) {
                     Main.dust[num].scale = 0.5f;
                     Main.dust[num].noGravity = true;
-                    Main.dust[num].fadeIn = 1f + (float)Main.rand.Next(10) * 0.1f;
+                    Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
                 }
             }
         }

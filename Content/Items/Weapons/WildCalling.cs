@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Projectiles;
 using Terraria;
@@ -8,25 +8,25 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
 {
-    //ÕâÊÇGRmodµÄµÚÒ»¸öÎäÆ÷£¬Ëü½«³ÉÎªĞí¶àÎ´À´ÎäÆ÷µÄÄ£°å£¬¸½´øĞí¶à×¢ÊÍ
-    //Ò²»á¸½´øĞí¶àÉõÖÁÊÇ±»×¢ÊÍµôµÄ¶àÓàµÄ¹¦ÄÜÓÃÓÚ½«À´·¢»Ó×÷ÓÃ
-    //ËüÒª¼Ì³ĞGRCallingÕâ¸öModÌØÓĞµÄÎäÆ÷Àà
+    //è¿™æ˜¯GRmodçš„ç¬¬ä¸€ä¸ªæ­¦å™¨ï¼Œå®ƒå°†æˆä¸ºè®¸å¤šæœªæ¥æ­¦å™¨çš„æ¨¡æ¿ï¼Œé™„å¸¦è®¸å¤šæ³¨é‡Š
+    //ä¹Ÿä¼šé™„å¸¦è®¸å¤šç”šè‡³æ˜¯è¢«æ³¨é‡Šæ‰çš„å¤šä½™çš„åŠŸèƒ½ç”¨äºå°†æ¥å‘æŒ¥ä½œç”¨
+    //å®ƒè¦ç»§æ‰¿GRCallingè¿™ä¸ªModç‰¹æœ‰çš„æ­¦å™¨ç±»
     public class WildCalling : GOGCalling
     {
-        //ÓÃÓÚ¼ÓÔØÔÚAssetsÎÄ¼ş¼ĞÖĞµÄÌùÍ¼
+        //ç”¨äºåŠ è½½åœ¨Assetsæ–‡ä»¶å¤¹ä¸­çš„è´´å›¾
         public override string Texture => GOGConstant.Weapons + Name;
 
-        //SSD,¶ÔÓÚ´ó²¿·Ö²»±äµÄ»ù´¡ÊôĞÔ½øĞĞÉèÖÃ£¬½öÔÚ´ò¿ªÓÎÏ·Ê±¼ÓÔØÒ»´Î
+        //SSD,å¯¹äºå¤§éƒ¨åˆ†ä¸å˜çš„åŸºç¡€å±æ€§è¿›è¡Œè®¾ç½®ï¼Œä»…åœ¨æ‰“å¼€æ¸¸æˆæ—¶åŠ è½½ä¸€æ¬¡
         public override void SetStaticDefaults() {
-            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;//ÂÃĞĞÄ£Ê½ÏÂÑĞ¾¿ÊıÄ¿
-            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;//±Ø´ø
-            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;//¸ôÇ½Ë÷µĞÄÜÁ¦£¬½öÊÊÓÃÓÚÔ­°æ×Ô´øµÄË÷µĞÂß¼­
+            CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;//æ—…è¡Œæ¨¡å¼ä¸‹ç ”ç©¶æ•°ç›®
+            ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;//å¿…å¸¦
+            ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;//éš”å¢™ç´¢æ•Œèƒ½åŠ›ï¼Œä»…é€‚ç”¨äºåŸç‰ˆè‡ªå¸¦çš„ç´¢æ•Œé€»è¾‘
         }
 
-        //SD£¬ÔÚÉú³É¸ÃÎäÆ÷Ê±Éè¶¨ºÍÈ·ÈÏµÄÊıÖµ
+        //SDï¼Œåœ¨ç”Ÿæˆè¯¥æ­¦å™¨æ—¶è®¾å®šå’Œç¡®è®¤çš„æ•°å€¼
         public override void SetDefaults() {
             Item.damage = 50;
-            Item.DamageType = GuardianDamageClass.Instance;//ÊùÎÀÉËº¦
+            Item.DamageType = GuardianDamageClass.Instance;//æˆå«ä¼¤å®³
             Item.width = 56;
             Item.height = 56;
             Item.useTime = 20;
@@ -35,7 +35,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = -13;
-            Item.UseSound = SoundID.DD2_DefenseTowerSpawn;//ÉÚ±øÕÙ»½ÉùÒô
+            Item.UseSound = SoundID.DD2_DefenseTowerSpawn;//å“¨å…µå¬å”¤å£°éŸ³
             Item.autoReuse = false;
 
             Item.shoot = ModContent.ProjectileType<WildDT>();
@@ -47,31 +47,31 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.mana = 0;
             Item.scale = 1f;
 
-            Item.staff[Item.type] = true;//·¨ÕÈÊ½Ğ±45¶È¶ÁÍ¼
+            Item.staff[Item.type] = true;//æ³•æ–å¼æ–œ45åº¦è¯»å›¾
         }
 
-        //Á½ÓÃ¿ª¹Ø£¬´ó²¿·ÖÅÚËşÕÙ»½ÕÈÒªÓĞÓÒ¼üÕÙ»ØÅÚËşµÄÄÜÁ¦
+        //ä¸¤ç”¨å¼€å…³ï¼Œå¤§éƒ¨åˆ†ç‚®å¡”å¬å”¤æ–è¦æœ‰å³é”®å¬å›ç‚®å¡”çš„èƒ½åŠ›
         public override bool AltFunctionUse(Player player) {
             return true;
         }
 
-        //Á½ÓÃÄÚÈİ£¬×ó¼üÅĞ¶¨Êó±êÎ»ÖÃÊÇ·ñÄÜÕÙ»½ÅÚËş£¬ÓÒ¼üÊÕ»Ø
+        //ä¸¤ç”¨å†…å®¹ï¼Œå·¦é”®åˆ¤å®šé¼ æ ‡ä½ç½®æ˜¯å¦èƒ½å¬å”¤ç‚®å¡”ï¼Œå³é”®æ”¶å›
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
                 if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
-                    CombatText.NewText(player.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            "ÊùÎÀÀ¸²»×ã",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            true //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                    CombatText.NewText(player.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            "æˆå«æ ä¸è¶³",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            true //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
                     return false;
                 }
             }
 
-            //ÊôĞÔÖØÖÃ
+            //å±æ€§é‡ç½®
             Item.noUseGraphic = false;
-            //×ó¼ü
+            //å·¦é”®
             if (player.altFunctionUse == 0) {
                 Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
                 int wid = 3;
@@ -87,10 +87,10 @@ namespace GloryofGuardian.Content.Items.Weapon
                     }
                 }
             }
-            //ÓÒ¼ü
+            //å³é”®
             if (player.altFunctionUse == 2) {
                 Item.UseSound = null;
-                Item.noUseGraphic = true;//ÓÒ¼üÊ¹ÓÃÊ±ÊÕ»ØÅÚËş£¬²»ĞèÒªÕ¹ÏÖ·¨ÕÈ
+                Item.noUseGraphic = true;//å³é”®ä½¿ç”¨æ—¶æ”¶å›ç‚®å¡”ï¼Œä¸éœ€è¦å±•ç°æ³•æ–
                 for (int i = 0; i < Main.maxProjectiles; i++) {
                     Projectile proj = Main.projectile[i];
                     if (proj.type == ModContent.ProjectileType<WildDT>() && proj.owner == player.whoAmI) {
@@ -102,7 +102,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             return base.CanUseItem(player);
         }
 
-        //Shootº¯Êı£¬ÕÙ»½ÅÚËş
+        //Shootå‡½æ•°ï¼Œå¬å”¤ç‚®å¡”
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (player.altFunctionUse == 0) {
                 int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(), PrefixCrit());
@@ -114,7 +114,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         /// <summary>
-        /// ÓÃÀ´ÌØÅĞºÍ´«µİÀ´×ÔÎäÆ÷Ç°×ºµÄ¹¥ËÙ¼Ó³É
+        /// ç”¨æ¥ç‰¹åˆ¤å’Œä¼ é€’æ¥è‡ªæ­¦å™¨å‰ç¼€çš„æ”»é€ŸåŠ æˆ
         /// </summary>
         float PrefixCD() {
             if (Item.prefix == ModContent.PrefixType<Stainless0>()
@@ -140,7 +140,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         /// <summary>
-        /// ÓÃÀ´ÌØÅĞºÍ´«µİÀ´×ÔÎäÆ÷Ç°×ºµÄ±©»÷¼Ó³É
+        /// ç”¨æ¥ç‰¹åˆ¤å’Œä¼ é€’æ¥è‡ªæ­¦å™¨å‰ç¼€çš„æš´å‡»åŠ æˆ
         /// </summary>
         float PrefixCrit() {
             if (Item.prefix == ModContent.PrefixType<Excellent0>()
@@ -166,13 +166,13 @@ namespace GloryofGuardian.Content.Items.Weapon
             return 0;
         }
 
-        //ÎäÆ÷µÄ·¢¹âÄÜÁ¦
+        //æ­¦å™¨çš„å‘å…‰èƒ½åŠ›
         public override Color? GetAlpha(Color lightColor) {
-            //return Color.White;·¢¹â
-            return null;//²»·¢¹â
+            //return Color.White;å‘å…‰
+            return null;//ä¸å‘å…‰
         }
 
-        //ÎïÆ·ºÏ³É±í
+        //ç‰©å“åˆæˆè¡¨
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.DirtBlock, 10);

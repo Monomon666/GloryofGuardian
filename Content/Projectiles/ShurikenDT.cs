@@ -1,5 +1,4 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
@@ -106,7 +105,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -117,7 +116,6 @@ namespace GloryofGuardian.Content.Projectiles
         void Attack(NPC target1) {
             Vector2 tarpos = target1.Center;
             Vector2 projcen = Projectile.Center + new Vector2(0, -28);
-            int up = 0;
             //发射
             if (count >= Gcount) {
                 //普通

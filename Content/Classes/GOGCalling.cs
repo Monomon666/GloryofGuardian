@@ -1,9 +1,9 @@
-namespace GloryofGuardian.Content.Class
+ï»¿namespace GloryofGuardian.Content.Class
 
 {
     public abstract class GOGCalling : ModItem
     {
-        //ÔÊÐí½øÐÐµ±Ç°ÉËº¦ÀàÐÍµÄÖØÖý²Ù×÷
+        //å…è®¸è¿›è¡Œå½“å‰ä¼¤å®³ç±»åž‹çš„é‡é“¸æ“ä½œ
         public override bool WeaponPrefix() => true;
 
         //Todo Group

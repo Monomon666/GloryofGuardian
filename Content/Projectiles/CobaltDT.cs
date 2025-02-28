@@ -1,5 +1,4 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -82,7 +81,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (projrotvel >= 0.1) Projectile.localNPCHitCooldown = 36;
                 if (projrotvel >= 0.15) Projectile.localNPCHitCooldown = 26;
                 if (projrotvel >= 0.2) Projectile.localNPCHitCooldown = 14;
-            
+
                 if (modecount >= Gcount) {
                     mode = 1;
                     projrotvel = 0.2f;
@@ -91,7 +90,7 @@ namespace GloryofGuardian.Content.Projectiles
                     Projectile.localNPCHitCooldown = 12;
                 }
             }
-            
+
             //待机状态，该状态下可以攻击
             //该状态下，刃叶旋转速度满速
             if (mode == 1) {
@@ -100,7 +99,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (target1 != null) {
                     Attack(target1);
                 }
-            
+
                 if (target1 == null) {
                     count = 0;
                     firstatk = false;
@@ -151,7 +150,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -228,8 +227,7 @@ namespace GloryofGuardian.Content.Projectiles
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
             if (GOGUtils.CircularHitboxCollision(Projectile.Center + new Vector2(0, -28), 42, targetHitbox) && Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, targetHitbox.TopLeft(), targetHitbox.Width, targetHitbox.Height)) {
                 return true;
-            }
-            else return false;
+            } else return false;
         }
 
         public override void OnKill(int timeLeft) {

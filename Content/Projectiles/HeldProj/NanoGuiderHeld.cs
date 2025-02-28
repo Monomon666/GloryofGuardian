@@ -1,5 +1,4 @@
-﻿using CalamityMod.Projectiles.Magic;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria.DataStructures;
@@ -76,7 +75,7 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
             Owner.itemRotation = ((Projectile.rotation + MathHelper.PiOver2).ToRotationVector2() * -Owner.direction).ToRotation();
 
             //伤害矫正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(DamageClass.Ranged).ApplyTo(100) / 100f;
             int lastdamage = (int)(newDamage * rangedOffset);
             //设置手臂位置

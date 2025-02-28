@@ -1,4 +1,4 @@
-using GloryofGuardian.Content.Projectiles;
+ï»¿using GloryofGuardian.Content.Projectiles;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -10,7 +10,7 @@ namespace GloryofGuardian.Content.Class
             base.OnSpawn(source);
         }
 
-        //É½Í­Ç¿»¯±ê¼Ç
+        //å±±é“œå¼ºåŒ–æ ‡è®°
         public bool OrichalcumMarkProj;
         public int OrichalcumMarkProjcount;
         public override void AI() {
@@ -18,12 +18,12 @@ namespace GloryofGuardian.Content.Class
         }
 
         public override void PostAI() {
-            if (OrichalcumMarkProjcount > 0) OrichalcumMarkProjcount -= 0;//ÎÒÃÇÄ¿Ç°¾ö¶¨²»Çå³ıÇ¿»¯
+            if (OrichalcumMarkProjcount > 0) OrichalcumMarkProjcount -= 0;//æˆ‘ä»¬ç›®å‰å†³å®šä¸æ¸…é™¤å¼ºåŒ–
             if (OrichalcumMarkProjcount == 0) OrichalcumMarkProj = false;
 
-            //É½Í­Ç¿»¯Á£×ÓÌØĞ§
+            //å±±é“œå¼ºåŒ–ç²’å­ç‰¹æ•ˆ
             if (OrichalcumMarkProj
-                //ºÚÃûµ¥£¬¶¤Èëåó¼ı²»ÄÜÏíÊÜ
+                //é»‘åå•ï¼Œé’‰å…¥å¼©ç®­ä¸èƒ½äº«å—
                 && Projectile.type != ModContent.ProjectileType<WildProj>()
                 && Projectile.type != ModContent.ProjectileType<GarrisonProj>()
                 && Projectile.type != ModContent.ProjectileType<MythrilProj2>()
@@ -43,16 +43,16 @@ namespace GloryofGuardian.Content.Class
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            //É½Í­Ç¿»¯×·¼ÓÉËº¦
+            //å±±é“œå¼ºåŒ–è¿½åŠ ä¼¤å®³
             if (OrichalcumMarkProj) {
                 int Oriexdamage = (int)MathHelper.Max(1, ((int)(Projectile.originalDamage) * Main.player[Projectile.owner].GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f * 0.1f));
                 if (target.life >= Oriexdamage) target.life -= Oriexdamage;
                 if (target.life < Oriexdamage) target.life = 1;
-                CombatText.NewText(target.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                                    new Color(239, 113 ,248),//Ìø×ÖµÄÑÕÉ«
-                                    Oriexdamage,//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                                    false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                                    false //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                CombatText.NewText(target.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                                    new Color(239, 113 ,248),//è·³å­—çš„é¢œè‰²
+                                    Oriexdamage,//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                                    false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                                    false //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                                     );
             }
             base.OnHitNPC(target, hit, damageDone);

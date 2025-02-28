@@ -1,11 +1,11 @@
-namespace GloryofGuardian.Common
+ï»¿namespace GloryofGuardian.Common
 {
     /// <summary>
-    /// ÊÕ·ÅÒ»Ğ©³£Á¿Êı¾İ
+    /// æ”¶æ”¾ä¸€äº›å¸¸é‡æ•°æ®
     /// </summary>
     public static class GOGConstant
     {
-        //×ÊÔ´¼ÓÔØ¼ò»¯Â·¾¶
+        //èµ„æºåŠ è½½ç®€åŒ–è·¯å¾„
         public const string Asset = "GloryofGuardian/Assets/";
         public const string Buffs = Asset + "Buffs/";
         public const string Dusts = Asset + "Dusts/";
@@ -19,7 +19,7 @@ namespace GloryofGuardian.Common
         public const string UIs = Asset + "UIs/";
         public const string Effects = Asset + "Effects/";
         /// <summary>
-        /// ¿ÕÌùÍ¼
+        /// ç©ºè´´å›¾
         /// </summary>
         public const string nulls = Asset + "placeholder";
     }

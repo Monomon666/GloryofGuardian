@@ -1,10 +1,9 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class RustyGunProj : GOGProj
     {
@@ -53,7 +52,7 @@ namespace DreamJourney.Content.Projectiles.Ranged
         }
 
         public override void OnKill(int timeLeft) {
-            if(Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig);
+            if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig);
         }
 
         public override bool PreDraw(ref Color lightColor) {

@@ -4,7 +4,7 @@ using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles
+namespace GloryofGuardian.Content.Projectiles
 {
     public class AncientBattleProj2 : GOGProj
     {
@@ -52,7 +52,7 @@ namespace DreamJourney.Content.Projectiles
             count0++;
 
             if (windnum <= 15 && count % 10 == 0) {
-                if(windnum == 15) count = 0;
+                if (windnum == 15) count = 0;
                 windnum += 1;
             }
 

@@ -2,10 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
-using Terraria.GameContent;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles
+namespace GloryofGuardian.Content.Projectiles
 {
     public class AncientBattleProj : GOGProj
     {
@@ -111,9 +110,6 @@ namespace DreamJourney.Content.Projectiles
             if (proj.spriteDirection == -1)
                 spriteEffects = SpriteEffects.FlipHorizontally;
 
-            // If no afterimages are drawn due to an invalid mode being specified, ensure the projectile itself is drawn anyway.
-            bool failedToDrawAfterimages = false;
-
             Vector2 centerOffset = drawCentered ? proj.Size / 2f : Vector2.Zero;
             Color alphaColor = proj.GetAlpha(Color.LightYellow);
             switch (mode) {
@@ -123,10 +119,10 @@ namespace DreamJourney.Content.Projectiles
                     for (int i = 0; i < proj.oldPos.Length; ++i) {
                         Vector2 drawPos = proj.oldPos[i] + centerOffset - Main.screenPosition + new Vector2(0f, proj.gfxOffY);
                         // DO NOT REMOVE THESE "UNNECESSARY" FLOAT CASTS. THIS WILL BREAK THE AFTERIMAGES.
-                        Color color = alphaColor * ((float)(proj.oldPos.Length - i) / (float)proj.oldPos.Length);
+                        Color color = alphaColor * ((proj.oldPos.Length - i) / (float)proj.oldPos.Length);
                         Main.spriteBatch.Draw(texture, drawPos, new Rectangle?(rectangle), color, rotation, origin, scale, spriteEffects, 0f);
                     }
-                break;
+                    break;
 
                 // Paladin's Hammer style afterimages. Can be optionally spaced out further by using the typeOneDistanceMultiplier variable.
                 // Type 1 afterimages linearly scale down from 66% to 0% opacity. They otherwise do not differ from type 0.
@@ -135,19 +131,19 @@ namespace DreamJourney.Content.Projectiles
                     int increment = Math.Max(1, typeOneIncrement);
                     Color drawColor = alphaColor;
                     int afterimageCount = ProjectileID.Sets.TrailCacheLength[proj.type];
-                    float afterimageColorCount = (float)afterimageCount * 1.5f;
+                    float afterimageColorCount = afterimageCount * 1.5f;
                     int k = 0;
                     while (k < afterimageCount) {
                         Vector2 drawPos = proj.oldPos[k] + centerOffset - Main.screenPosition + new Vector2(0f, proj.gfxOffY);
                         // DO NOT REMOVE THESE "UNNECESSARY" FLOAT CASTS EITHER.
                         if (k > 0) {
-                            float colorMult = (float)(afterimageCount - k);
+                            float colorMult = afterimageCount - k;
                             drawColor *= colorMult / afterimageColorCount;
                         }
                         Main.spriteBatch.Draw(texture, drawPos, new Rectangle?(rectangle), drawColor, rotation, origin, scale, spriteEffects, 0f);
                         k += increment;
                     }
-                break;
+                    break;
 
                 // Standard afterimages with rotation. No customizable features other than total afterimage count.
                 // Type 2 afterimages linearly scale down from 100% to 0% opacity. Their color and lighting is equal to the main projectile's.
@@ -158,14 +154,13 @@ namespace DreamJourney.Content.Projectiles
 
                         Vector2 drawPos = proj.oldPos[i] + centerOffset - Main.screenPosition + new Vector2(0f, proj.gfxOffY);
                         // DO NOT REMOVE THESE "UNNECESSARY" FLOAT CASTS. THIS WILL BREAK THE AFTERIMAGES.
-                        Color color = alphaColor * ((float)(proj.oldPos.Length - i) / (float)proj.oldPos.Length);
+                        Color color = alphaColor * ((proj.oldPos.Length - i) / (float)proj.oldPos.Length);
                         Main.spriteBatch.Draw(texture, drawPos, new Rectangle?(rectangle), color, afterimageRot, origin, scale, sfxForThisAfterimage, 0f);
                     }
-                break;
+                    break;
 
                 default:
-                failedToDrawAfterimages = true;
-                break;
+                    break;
             }
         }
     }

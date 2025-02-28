@@ -1,7 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Items.Armor
+namespace GloryofGuardian.Content.Items.Armor
 {
     [AutoloadEquip(EquipType.Body)]
     public class NanoArmorBody : ModItem

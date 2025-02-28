@@ -1,4 +1,4 @@
-using Terraria.DataStructures;
+ï»¿using Terraria.DataStructures;
 
 namespace GloryofGuardian.Content.Class
 {
@@ -6,10 +6,10 @@ namespace GloryofGuardian.Content.Class
     {
         public override bool InstancePerEntity => true;
 
-        //ÊùÎÀÉËº¦±©»÷×ª¹ıÔØ¹¥»÷
+        //æˆå«ä¼¤å®³æš´å‡»è½¬è¿‡è½½æ”»å‡»
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers) {
             if (projectile.DamageType == GuardianDamageClass.Instance) {
-                modifiers.DisableCrit();//¶ÔÖ¸¶¨ÉËº¦ÀàĞÍÈ¡Ïû±©»÷
+                modifiers.DisableCrit();//å¯¹æŒ‡å®šä¼¤å®³ç±»å‹å–æ¶ˆæš´å‡»
             }
         }
 

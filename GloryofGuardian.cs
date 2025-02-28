@@ -1,4 +1,4 @@
-global using GloryofGuardian.Content.Class;
+Ôªøglobal using GloryofGuardian.Content.Class;
 global using Microsoft.Xna.Framework;
 global using Terraria;
 global using Terraria.ModLoader;
@@ -12,7 +12,7 @@ namespace GloryofGuardian
         public override void Load() {
             Instance = this;
 
-            //º”‘ÿÃÏø’
+            //Âä†ËΩΩÂ§©Á©∫
             //Todo
         }
     }

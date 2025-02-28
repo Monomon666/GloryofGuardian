@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
@@ -8,7 +8,7 @@ namespace GloryofGuardian.Content.Projectiles
 {
     public class WildDT : GOGDT
     {
-        //²»Ê¹ÓÃÌùÍ¼,ÖØĞ´»æÖÆ
+        //ä¸ä½¿ç”¨è´´å›¾,é‡å†™ç»˜åˆ¶
         public override string Texture => GOGConstant.nulls;
         public override void SetStaticDefaults() {
         }
@@ -18,9 +18,9 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.height = 26;
             Projectile.tileCollide = true;
 
-            Projectile.sentry = false;//ÉÚ±øÉí·İÖ¤£¬µ«ÊÇÎÒÃÇ½«ĞÂ½¨Ò»¸öÖ°Òµ£¬²¢´´Á¢¶ÀÌØµÄÕÙ»½ÊıÁ¿ÏŞÖÆ»úÖÆ£¬ËùÒÔ²»ÔÙĞèÒªËüÁË
+            Projectile.sentry = false;//å“¨å…µèº«ä»½è¯ï¼Œä½†æ˜¯æˆ‘ä»¬å°†æ–°å»ºä¸€ä¸ªèŒä¸šï¼Œå¹¶åˆ›ç«‹ç‹¬ç‰¹çš„å¬å”¤æ•°é‡é™åˆ¶æœºåˆ¶ï¼Œæ‰€ä»¥ä¸å†éœ€è¦å®ƒäº†
             Projectile.friendly = true;
-            Projectile.minion = true;//ÆÍ´ÓÉí·İÖ¤
+            Projectile.minion = true;//ä»†ä»èº«ä»½è¯
             Projectile.DamageType = GuardianDamageClass.Instance;
             Projectile.penetrate = -1;
             Projectile.scale *= 1f;
@@ -31,35 +31,35 @@ namespace GloryofGuardian.Content.Projectiles
 
         Player Owner => Main.player[Projectile.owner];
 
-        //·ÀÖ¹ÆÆ»µµØÍ¼µÀ¾ß
+        //é˜²æ­¢ç ´ååœ°å›¾é“å…·
         public override bool? CanCutTiles() {
             return false;
         }
 
-        //Éú³ÉÊ±×ÔÓÉÏÂ×¹
+        //ç”Ÿæˆæ—¶è‡ªç”±ä¸‹å 
         public override void OnSpawn(IEntitySource source) {
-            count0 = 120;//Ä¬ÈÏ·¢Éä¼ä¸ô
+            count0 = 120;//é»˜è®¤å‘å°„é—´éš”
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
 
         int count = 0;
         int count0 = 0;
-        //ÖØÁ¦
+        //é‡åŠ›
         bool drop = true;
-        //ÅÚÌ¨×ª¶¯
+        //ç‚®å°è½¬åŠ¨
         float wrotation = 0;
         float projRot = 0;
-        //Êı¾İ¶ÁÈ¡
+        //æ•°æ®è¯»å–
         int Gcount = 0;
         int lastdamage = 0;
         public override void AI() {
             count++;
             Projectile.timeLeft = 2;
-            Projectile.StickToTiles(false, false);//ĞÎ³ÉÅĞ¶¨
+            Projectile.StickToTiles(false, false);//å½¢æˆåˆ¤å®š
             Drop();
             Calculate();
-            //Ë÷µĞÓëĞĞ¶¯
+            //ç´¢æ•Œä¸è¡ŒåŠ¨
             NPC target1 = Projectile.Center.InPosClosestNPC(800, false, true);
             if (target1 != null) {
                 Attack(target1);
@@ -70,7 +70,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         /// <summary>
-        /// ×¹Âä
+        /// å è½
         /// </summary>
         void Drop() {
             Projectile.velocity.Y += 0.2f;
@@ -93,26 +93,26 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         /// <summary>
-        /// ÖØĞÂ¼ÆËãºÍ¸³Öµ²ÎÊı
+        /// é‡æ–°è®¡ç®—å’Œèµ‹å€¼å‚æ•°
         /// </summary>
         void Calculate() {
-            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//¹¥»÷¼ä¸ôÒò×ÓÖØĞÂÌáÈ¡
-            //ÉËº¦ĞŞÕı
+            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//æ”»å‡»é—´éš”å› å­é‡æ–°æå–
+            //ä¼¤å®³ä¿®æ­£
             int newDamage = (int)(Projectile.originalDamage);
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
 
         /// <summary>
-        /// ¼à²âÓë¹¥»÷
+        /// ç›‘æµ‹ä¸æ”»å‡»
         /// </summary>
         void Attack(NPC target1) {
             Vector2 m = target1.Center;
             Vector2 projcen = Projectile.Center + new Vector2(0, -20);
 
-            //·¢Éä
+            //å‘å°„
             if (count >= Gcount) {
-                //ÆÕÍ¨
+                //æ™®é€š
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 16f;
@@ -129,7 +129,7 @@ namespace GloryofGuardian.Content.Projectiles
                     }
                 }
 
-                //¹ıÔØ
+                //è¿‡è½½
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 16f;
@@ -146,13 +146,13 @@ namespace GloryofGuardian.Content.Projectiles
                     }
                 }
 
-                //¼ÆÊ±ÖØÖÃ,Í¨¹ı¸ü¸ÄÕâ¸öÖµÀ´ÖØÖÃ¹¥»÷
+                //è®¡æ—¶é‡ç½®,é€šè¿‡æ›´æ”¹è¿™ä¸ªå€¼æ¥é‡ç½®æ”»å‡»
                 count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
             }
         }
 
         /// <summary>
-        /// ÅÚÌ¨Ğı×ª
+        /// ç‚®å°æ—‹è½¬
         /// </summary>
         void Turn(NPC target1) {
             Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
@@ -164,17 +164,17 @@ namespace GloryofGuardian.Content.Projectiles
             float tarrot = MathHelper.ToRadians(projRot + degree2 * Projectile.spriteDirection);
             float rspeed = 0.04f;
 
-            //×ªÍ·
+            //è½¬å¤´
             if (wrotation != tarrot) {
-                if (Math.Abs(wrotation - tarrot) % Math.PI <= rspeed) {//Èç¹û·½Ïò²îĞ¡ÓÚµ¥´Î×ªÁ¿Ôò±¾´ÎĞı×ª½«³¬¹ıÄ¿±ê,È¡ÓàºÜÖØÒª
-                    wrotation = tarrot;//ÄÇÃ´Ö±½ÓÈÃ·½ÏòÓëµ½Ä¿±ê·½Ïò·ÀÖ¹¶¶¶¯
+                if (Math.Abs(wrotation - tarrot) % Math.PI <= rspeed) {//å¦‚æœæ–¹å‘å·®å°äºå•æ¬¡è½¬é‡åˆ™æœ¬æ¬¡æ—‹è½¬å°†è¶…è¿‡ç›®æ ‡,å–ä½™å¾ˆé‡è¦
+                    wrotation = tarrot;//é‚£ä¹ˆç›´æ¥è®©æ–¹å‘ä¸åˆ°ç›®æ ‡æ–¹å‘é˜²æ­¢æŠ–åŠ¨
                                        //tarrot = wrotation;
                     return;
                 } else {
-                    Vector2 clockwise = (wrotation + rspeed).ToRotationVector2();//ÕâÊÇ¼ÙÉèNPCË³Ê±Õë×ª¶¯ºóµÄµ¥Î»·½ÏòÏòÁ¿
-                    Vector2 anticlockwise = (wrotation - rspeed).ToRotationVector2();//ÕâÊÇ¼ÙÉèNPCÄæÊ±Õë×ª¶¯ºóµÄµ¥Î»·½ÏòÏòÁ¿
-                                                                                     //ÏÔÈ»£¬Òª±È½ÏÁ½¸öÏòÁ¿ÄÄ¸öÓëÄ¿±ê¼Ğ½Ç¸ü½ü£¬¾ÍÊÇ±È½ÏËûÃÇÓëÄ¿±êÏòÁ¿Ïà¼õºóµÄ³¤¶È
-                    if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())//Èç¹ûË³Ê±ÕëµÄ²îÖµ¸üĞ¡
+                    Vector2 clockwise = (wrotation + rspeed).ToRotationVector2();//è¿™æ˜¯å‡è®¾NPCé¡ºæ—¶é’ˆè½¬åŠ¨åçš„å•ä½æ–¹å‘å‘é‡
+                    Vector2 anticlockwise = (wrotation - rspeed).ToRotationVector2();//è¿™æ˜¯å‡è®¾NPCé€†æ—¶é’ˆè½¬åŠ¨åçš„å•ä½æ–¹å‘å‘é‡
+                                                                                     //æ˜¾ç„¶ï¼Œè¦æ¯”è¾ƒä¸¤ä¸ªå‘é‡å“ªä¸ªä¸ç›®æ ‡å¤¹è§’æ›´è¿‘ï¼Œå°±æ˜¯æ¯”è¾ƒä»–ä»¬ä¸ç›®æ ‡å‘é‡ç›¸å‡åçš„é•¿åº¦
+                    if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())//å¦‚æœé¡ºæ—¶é’ˆçš„å·®å€¼æ›´å°
                     {
                         wrotation += rspeed;
                     } else {
@@ -199,7 +199,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnKill(int timeLeft) {
-            //±¬Õ¨Á£×Ó
+            //çˆ†ç‚¸ç²’å­
             for (int j = 0; j < 15; j++) {
                 int num1 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Wraith, 0f, 0f, 10, Color.White, 0.8f);
                 Main.dust[num1].noGravity = true;
@@ -213,7 +213,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override bool PreDraw(ref Color lightColor) {
-            //²»Í¬³¯ÏòÊ±·­×ªÌùÍ¼
+            //ä¸åŒæœå‘æ—¶ç¿»è½¬è´´å›¾
             SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
 
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "WildDT").Value;

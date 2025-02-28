@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Terraria.Localization;
-
-namespace GloryofGuardian.Content.Class
+﻿namespace GloryofGuardian.Content.Class
 {
     //以下是武器词条
     public abstract class GaurdianWeaponPrefix : ModPrefix
@@ -130,7 +127,7 @@ namespace GloryofGuardian.Content.Class
     {
         public override float DamageMult => 1.15f;
         public override float CoolingReduction => 1.1f;
-        public override int OverloadChance =>   0;
+        public override int OverloadChance => 0;
     }
 
     [LegacyName("Silent")]
@@ -152,7 +149,7 @@ namespace GloryofGuardian.Content.Class
     public class Scrapped0 : GaurdianWeaponPrefix
     {
         public override float DamageMult => 0.95f;
-        public override float CoolingReduction =>1.05f;
+        public override float CoolingReduction => 1.05f;
         public override int OverloadChance => -5;
     }
 

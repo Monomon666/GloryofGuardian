@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Projectiles;
 using Terraria;
 using Terraria.DataStructures;
@@ -59,11 +59,11 @@ namespace GloryofGuardian.Content.Items.Weapon
 
             if (player.altFunctionUse == 0) {
                 if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
-                    CombatText.NewText(player.Hitbox,//Ìø×ÖÉú³ÉµÄ¾ØĞÎ·¶Î§
-                            Color.Red,//Ìø×ÖµÄÑÕÉ«
-                            "ÊùÎÀÀ¸²»×ã",//ÕâÀïÊÇÄãĞèÒªÕ¹Ê¾µÄÎÄ×Ö
-                            false,//dramaticÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÉÁË¸£¬
-                            true //dotÎªtrue¿ÉÒÔÊ¹µÃ×ÖÌåÂÔĞ¡£¬Ìø¶¯·½Ê½Ò²²»Í¬(Ô­°ædebuff¿ÛÑª¸ñÊ½)
+                    CombatText.NewText(player.Hitbox,//è·³å­—ç”Ÿæˆçš„çŸ©å½¢èŒƒå›´
+                            Color.Red,//è·³å­—çš„é¢œè‰²
+                            "æˆå«æ ä¸è¶³",//è¿™é‡Œæ˜¯ä½ éœ€è¦å±•ç¤ºçš„æ–‡å­—
+                            false,//dramaticä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“é—ªçƒï¼Œ
+                            true //dotä¸ºtrueå¯ä»¥ä½¿å¾—å­—ä½“ç•¥å°ï¼Œè·³åŠ¨æ–¹å¼ä¹Ÿä¸åŒ(åŸç‰ˆdebuffæ‰£è¡€æ ¼å¼)
                             );
                     return false;
                 }
@@ -112,7 +112,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         /// <summary>
-        /// ÓÃÀ´ÌØÅĞºÍ´«µİÀ´×ÔÎäÆ÷Ç°×ºµÄ¹¥ËÙ¼Ó³É
+        /// ç”¨æ¥ç‰¹åˆ¤å’Œä¼ é€’æ¥è‡ªæ­¦å™¨å‰ç¼€çš„æ”»é€ŸåŠ æˆ
         /// </summary>
         float PrefixCD() {
             if (Item.prefix == ModContent.PrefixType<Stainless0>()
@@ -138,7 +138,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         /// <summary>
-        /// ÓÃÀ´ÌØÅĞºÍ´«µİÀ´×ÔÎäÆ÷Ç°×ºµÄ±©»÷¼Ó³É
+        /// ç”¨æ¥ç‰¹åˆ¤å’Œä¼ é€’æ¥è‡ªæ­¦å™¨å‰ç¼€çš„æš´å‡»åŠ æˆ
         /// </summary>
         float PrefixCrit() {
             if (Item.prefix == ModContent.PrefixType<Excellent0>()

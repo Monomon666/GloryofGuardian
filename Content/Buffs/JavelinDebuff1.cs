@@ -1,4 +1,4 @@
-using GloryofGuardian.Common;
+ï»¿using GloryofGuardian.Common;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Buffs
@@ -9,13 +9,13 @@ namespace GloryofGuardian.Content.Buffs
         public override string Texture => GOGConstant.Buffs + Name;
 
         public override void SetStaticDefaults() {
-            Main.debuff[Type] = true;//ÎªtrueÊ±¾ÍÊÇdebuff
-            Main.buffNoSave[Type] = true;//ÎªtrueÊ±ÍË³öÊÀ½çÊ±buffÏûÊ§
-            Main.buffNoTimeDisplay[Type] = false;//ÎªtrueÊ±²»ÏÔÊ¾Ê£ÓàÊ±¼ä
+            Main.debuff[Type] = true;//ä¸ºtrueæ—¶å°±æ˜¯debuff
+            Main.buffNoSave[Type] = true;//ä¸ºtrueæ—¶é€€å‡ºä¸–ç•Œæ—¶buffæ¶ˆå¤±
+            Main.buffNoTimeDisplay[Type] = false;//ä¸ºtrueæ—¶ä¸æ˜¾ç¤ºå‰©ä½™æ—¶é—´
             Main.pvpBuff[Type] = true; // PVP = true
 
-            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;//debuff²»¿É±»»¤Ê¿È¥³ı
-            BuffID.Sets.LongerExpertDebuff[Type] = false;//×¨¼ÒÄ£Ê½Debuff³ÖĞøÊ±¼äÊÇ·ñÑÓ³¤
+            BuffID.Sets.NurseCannotRemoveDebuff[Type] = true;//debuffä¸å¯è¢«æŠ¤å£«å»é™¤
+            BuffID.Sets.LongerExpertDebuff[Type] = false;//ä¸“å®¶æ¨¡å¼DebuffæŒç»­æ—¶é—´æ˜¯å¦å»¶é•¿
         }
 
         public override void Update(NPC npc, ref int buffIndex) {

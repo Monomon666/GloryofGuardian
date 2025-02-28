@@ -1,5 +1,4 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -174,7 +173,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -267,9 +266,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (closedoor) {
                     breath1 = 1;
                     breath2 = breath01;
-                }
-
-                else {
+                } else {
                     breath1 = breath02;
                     breath2 = breath03;
                 }
@@ -299,7 +296,7 @@ namespace GloryofGuardian.Content.Projectiles
             Main.EntitySpriteDraw(texture0g, drawPosition0, null, lightColor * breath1, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
             //伪导弹绘制
-            if(!hadfire) {
+            if (!hadfire) {
                 //导弹绘制
                 Main.EntitySpriteDraw(texturem, drawPosition0 + new Vector2(0, 16), null, lightColor, Projectile.rotation, texturem.Size() * 0.5f, Projectile.scale * 1f, SpriteEffects.None, 0);
                 //导弹光效
@@ -314,7 +311,7 @@ namespace GloryofGuardian.Content.Projectiles
             Main.EntitySpriteDraw(texture2, drawPosition0 - doorvec, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
             //右门绘制
             Main.EntitySpriteDraw(texture2g, drawPosition0 - doorvec, null, lightColor * breath2, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
-            
+
             return false;
         }
     }

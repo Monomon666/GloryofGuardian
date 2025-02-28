@@ -1,84 +1,81 @@
-using DreamJourney.Content.Items.Accessories;
-using GloryofGuardian.Content.Buffs;
+ï»¿using GloryofGuardian.Content.Buffs;
 using System.Collections.Generic;
-using System.Linq;
 using Terraria.DataStructures;
-using Terraria.ID;
 
 namespace GloryofGuardian.Content.Class
 {
     public class GOGModPlayer : ModPlayer
     {
-        //Ô´ÌáÈ¡
+        //æºæå–
         public IEntitySource Source;
 
-        //ÎÒ¾ö¶¨°ÑÅÚËşËùÒªÊ¹ÓÃµÄÊı¾İÍ¨¹ıÍæ¼ÒÀ´Í³³ï±£´æ
-        //Õâ¸ö¾ö¶¨¶ÔÓÚÏÖ½×¶ÎµÄÎÒÀ´ËµÄÜ¹»Ïà¶Ô¼¯ÖĞ×°±¸µÈ¶Ô±äÁ¿µÄÓ°Ïì
-        //±ÜÃâ¹ı¸´ÔÓµÄ¶ÁÈ¡
+        //æˆ‘å†³å®šæŠŠç‚®å¡”æ‰€è¦ä½¿ç”¨çš„æ•°æ®é€šè¿‡ç©å®¶æ¥ç»Ÿç­¹ä¿å­˜
+        //è¿™ä¸ªå†³å®šå¯¹äºç°é˜¶æ®µçš„æˆ‘æ¥è¯´èƒ½å¤Ÿç›¸å¯¹é›†ä¸­è£…å¤‡ç­‰å¯¹å˜é‡çš„å½±å“
+        //é¿å…è¿‡å¤æ‚çš„è¯»å–
 
-        //±äÁ¿
-        #region ±äÁ¿´æ´¢
+        //å˜é‡
+        #region å˜é‡å­˜å‚¨
 
         /// <summary>
-        /// ÅÚËş¸ñ×Ó
+        /// ç‚®å¡”æ ¼å­
         /// </summary>
         public int Gslot = 0;
 
         /// <summary>
-        /// ÅÚËş¸ñ×Ó2
+        /// ç‚®å¡”æ ¼å­2
         /// </summary>
         public int Gslot2 = 0;
 
         /// <summary>
-        /// ÅÚËş¹¥»÷¼ä¸ô³ËËãÒò×Ó
+        /// ç‚®å¡”æ”»å‡»é—´éš”ä¹˜ç®—å› å­
         /// </summary>
         public float GcountR = 1;
 
         /// <summary>
-        /// ÅÚËş¹¥»÷¼ä¸ô¼ÓËãÒò×Ó
+        /// ç‚®å¡”æ”»å‡»é—´éš”åŠ ç®—å› å­
         /// </summary>
         public int GcountEx = 0;
 
         /// <summary>
-        /// Ô¤Áô±äÁ¿
+        /// é¢„ç•™å˜é‡
         /// </summary>
         public int Todo;
 
         #endregion
 
-        #region ±ä¶¯¿ª¹Ø1
+        #region å˜åŠ¨å¼€å…³1
 
         /// <summary>
-        /// ²âÊÔÊÎÆ·¹Â¶À²ĞÏì
+        /// æµ‹è¯•é¥°å“å­¤ç‹¬æ®‹å“
         /// </summary>
         public bool residuallonelinessechoes = false;
 
         #endregion
 
-        #region ±ä¶¯¿ª¹Ø2
+        #region å˜åŠ¨å¼€å…³2
 
         /// <summary>
-        /// îÑ½ğÆÁÕÏ
+        /// é’›é‡‘å±éšœ
         /// </summary>
         public bool TitaniumShield = false;
 
         #endregion
 
-        //player·½·¨
-        #region ¹ÌÓĞ±ä¶¯
+        //playeræ–¹æ³•
+        #region å›ºæœ‰å˜åŠ¨
 
-        //È¥³ıÔ­ÓĞ³õÊ¼ÎïÆ·
+        //å»é™¤åŸæœ‰åˆå§‹ç‰©å“
         public override void ModifyStartingInventory(IReadOnlyDictionary<string, List<Item>> itemsByMod, bool mediumCoreDeath) {
-            //ÂÃĞĞÄ£Ê½µÄÍæ¼Ò³õÊ¼×°±¸¸ü¸Ä
+            //æ—…è¡Œæ¨¡å¼çš„ç©å®¶åˆå§‹è£…å¤‡æ›´æ”¹
             //Todo
-            //·ÇÂÃĞĞÄ£Ê½µÄÍæ¼Ò³õÊ¼×°±¸¸ü¸Ä
+            //éæ—…è¡Œæ¨¡å¼çš„ç©å®¶åˆå§‹è£…å¤‡æ›´æ”¹
             //itemsByMod["Terraria"].RemoveAll(item => item.type == ItemID.CopperShortsword);
             //itemsByMod["Terraria"].RemoveAll(item => item.type == ItemID.CopperAxe);
 
             //itemsByMod["Terraria"].RemoveAll(item => item.type == ItemID.CopperPickaxe);
         }
 
-        //¸øÓèÍæ¼ÒĞÂµÄ³õÊ¼ÎïÆ·£¬ÒÔ¼°ÖĞºËÍæ¼Ò¸´»îºó¸øÓèµÄÎïÆ·
+        //ç»™äºˆç©å®¶æ–°çš„åˆå§‹ç‰©å“ï¼Œä»¥åŠä¸­æ ¸ç©å®¶å¤æ´»åç»™äºˆçš„ç‰©å“
         //public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath) {
         //    if (mediumCoreDeath) {
         //        return Enumerable.Empty<Item>();
@@ -86,7 +83,7 @@ namespace GloryofGuardian.Content.Class
         //        return new[] {
         //        new Item(ItemID.LifeCrystal,5),
         //        new Item(ItemID.ManaCrystal,4),
-        //        new Item(ModContent.ItemType<WildCalling>(),1),//¿ª¾Ö¸ø»ÄÒ°ÅÚËşÕÈ
+        //        new Item(ModContent.ItemType<WildCalling>(),1),//å¼€å±€ç»™è’é‡ç‚®å¡”æ–
         //        };
         //    }
         //}
@@ -95,56 +92,56 @@ namespace GloryofGuardian.Content.Class
 
         #endregion
 
-        #region ¹¥»÷ÌØĞ§
+        #region æ”»å‡»ç‰¹æ•ˆ
 
-        //»÷ÖĞµĞ¹ÖÊ±´¥·¢£¬¿ÉÒÔ´¥·¢Ä³Ğ©»úÖÆ£¬¿ÉÒÔĞŞ¸Ä¶ÔµĞ·½µ¥Î»Ôì³ÉµÄÈÎºÎÉËº¦
+        //å‡»ä¸­æ•Œæ€ªæ—¶è§¦å‘ï¼Œå¯ä»¥è§¦å‘æŸäº›æœºåˆ¶ï¼Œå¯ä»¥ä¿®æ”¹å¯¹æ•Œæ–¹å•ä½é€ æˆçš„ä»»ä½•ä¼¤å®³
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) {
-            //Ö°Òµ»ìÓÃ³Í·£
-            //³ÖÓĞÅÚÌ¨ºËĞÄÊÎÆ·Ê±×Ô¼ºÕÙ»½µÄÅÚÌ¨²Å»á¹¤×÷
+            //èŒä¸šæ··ç”¨æƒ©ç½š
+            //æŒæœ‰ç‚®å°æ ¸å¿ƒé¥°å“æ—¶è‡ªå·±å¬å”¤çš„ç‚®å°æ‰ä¼šå·¥ä½œ
             //Todo
-            //²Ù×÷modifiers.SourceDamage,»ò¸ü¸ÄGcountÎª9999
+            //æ“ä½œmodifiers.SourceDamage,æˆ–æ›´æ”¹Gcountä¸º9999
         }
 
-        //½üÕ½ÎäÆ÷»÷ÖĞµĞ¹ÖÊ±´¥·¢£¬¿ÉÒÔ´¥·¢Ä³Ğ©»úÖÆ£¬¿ÉÒÔĞŞ¸Ä¶ÔµĞ·½µ¥Î»Ôì³ÉµÄÉËº¦£¬µ«ÊÇ¸Ãmod´ó¸ÅÂÊ²¢Ã»ÓĞ½üÕ½ÎäÆ÷£¨
+        //è¿‘æˆ˜æ­¦å™¨å‡»ä¸­æ•Œæ€ªæ—¶è§¦å‘ï¼Œå¯ä»¥è§¦å‘æŸäº›æœºåˆ¶ï¼Œå¯ä»¥ä¿®æ”¹å¯¹æ•Œæ–¹å•ä½é€ æˆçš„ä¼¤å®³ï¼Œä½†æ˜¯è¯¥modå¤§æ¦‚ç‡å¹¶æ²¡æœ‰è¿‘æˆ˜æ­¦å™¨ï¼ˆ
         public override void ModifyHitNPCWithItem(Item item, NPC target, ref NPC.HitModifiers modifiers) {
         }
 
-        //µ¯Ä»»÷ÖĞµĞ¹ÖÊ±´¥·¢£¬¿ÉÒÔ´¥·¢Ä³Ğ©»úÖÆ£¬¿ÉÒÔĞŞ¸Ä¶ÔµĞ·½µ¥Î»Ôì³ÉµÄÉËº¦
+        //å¼¹å¹•å‡»ä¸­æ•Œæ€ªæ—¶è§¦å‘ï¼Œå¯ä»¥è§¦å‘æŸäº›æœºåˆ¶ï¼Œå¯ä»¥ä¿®æ”¹å¯¹æ•Œæ–¹å•ä½é€ æˆçš„ä¼¤å®³
         public override void ModifyHitNPCWithProj(Projectile proj, NPC target, ref NPC.HitModifiers modifiers) {
-            //Ö¸Ïò¸ÃµĞÈËµÄµ¥Î»ÏòÁ¿
+            //æŒ‡å‘è¯¥æ•Œäººçš„å•ä½å‘é‡
             Vector2 totarget = (target.Center - Player.Center).SafeNormalize(Vector2.Zero);
             base.ModifyHitNPCWithProj(proj, target, ref modifiers);
         }
 
         #endregion
 
-        #region ÊÜ»÷ÌØĞ§
+        #region å—å‡»ç‰¹æ•ˆ
 
-        //ÊÜµ½ÉËº¦Ê±´¥·¢
+        //å—åˆ°ä¼¤å®³æ—¶è§¦å‘
         public override void ModifyHurt(ref Player.HurtModifiers modifiers) {
-            
+
         }
-        //ÊÜµ½½Ó´¥ÉËº¦Ê±´¥·¢
+        //å—åˆ°æ¥è§¦ä¼¤å®³æ—¶è§¦å‘
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers) {
 
         }
-        //ÊÜµ½µ¯Ä»ÉËº¦Ê±´¥·¢
+        //å—åˆ°å¼¹å¹•ä¼¤å®³æ—¶è§¦å‘
         public override void ModifyHitByProjectile(Projectile proj, ref Player.HurtModifiers modifiers) {
 
         }
 
         #endregion
 
-        #region ÃâÉË·½·¨
+        #region å…ä¼¤æ–¹æ³•
 
-        public override bool FreeDodge(Player.HurtInfo info)//³£¹æÉÁ±ÜÇ°µÄÉÁ±Ü,ÓÅÏÈ´¥·¢
+        public override bool FreeDodge(Player.HurtInfo info)//å¸¸è§„é—ªé¿å‰çš„é—ªé¿,ä¼˜å…ˆè§¦å‘
         {
-            //Player.immune = true;//¿ªÆôÎŞµĞÖ¡
-            //Player.SetImmuneTimeForAllTypes(80);//ÉèÖÃÎŞµĞÖ¡³¤¶È
-            //return true À´´¥·¢ÉÁ±Ü
+            //Player.immune = true;//å¼€å¯æ— æ•Œå¸§
+            //Player.SetImmuneTimeForAllTypes(80);//è®¾ç½®æ— æ•Œå¸§é•¿åº¦
+            //return true æ¥è§¦å‘é—ªé¿
             if (TitaniumShield) {
-                Player.immune = true;//¿ªÆôÎŞµĞÖ¡
-                Player.SetImmuneTimeForAllTypes(90);//ÉèÖÃÎŞµĞÖ¡³¤¶È
+                Player.immune = true;//å¼€å¯æ— æ•Œå¸§
+                Player.SetImmuneTimeForAllTypes(90);//è®¾ç½®æ— æ•Œå¸§é•¿åº¦
                 Player.ClearBuff(ModContent.BuffType<TitaniumShieldBuff>());
                 Player.AddBuff(ModContent.BuffType<TitaniumReloadBuff>(), 45 * 60);
                 return true;
@@ -153,26 +150,26 @@ namespace GloryofGuardian.Content.Class
             return base.FreeDodge(info);
         }
 
-        public override bool ConsumableDodge(Player.HurtInfo info)//³£¹æÉÁ±ÜºóµÄÉÁ±Ü£¬×îºó´¥·¢
+        public override bool ConsumableDodge(Player.HurtInfo info)//å¸¸è§„é—ªé¿åçš„é—ªé¿ï¼Œæœ€åè§¦å‘
         {
             return base.ConsumableDodge(info);
         }
 
         #endregion
 
-        #region Ã¿Ö¡¸üĞÂ
+        #region æ¯å¸§æ›´æ–°
 
-        //Ã¿Ö¡¸ºÃæbuffÉúÃüÖµ¸üĞÂ
+        //æ¯å¸§è´Ÿé¢buffç”Ÿå‘½å€¼æ›´æ–°
         public override void UpdateBadLifeRegen() {
         }
 
-        //Ã¿Ö¡ÉúÃüÖµ¸üĞÂ
+        //æ¯å¸§ç”Ÿå‘½å€¼æ›´æ–°
         public override void UpdateLifeRegen() {
             base.UpdateLifeRegen();
         }
 
         public override void PreUpdate() {
-            //¸üĞÂÇ°ÖØÖÃ¸³Öµ
+            //æ›´æ–°å‰é‡ç½®èµ‹å€¼
             Gslot = 0;
             GcountR = 1;
             GcountEx = 0;
@@ -182,18 +179,18 @@ namespace GloryofGuardian.Content.Class
             }
         }
 
-        //Ã¿Ö¡³£¹æ¸üĞÂ
+        //æ¯å¸§å¸¸è§„æ›´æ–°
         public override void PostUpdate() {
-            //´úĞĞ¼ÆÊ±Æ÷£¬¿ÉÒÔÔÚÕâÀï¶ÔÄ³Ğ©Ğ§¹û½øĞĞ³äÄÜ»òÀäÈ´¼ÆÊ±
+            //ä»£è¡Œè®¡æ—¶å™¨ï¼Œå¯ä»¥åœ¨è¿™é‡Œå¯¹æŸäº›æ•ˆæœè¿›è¡Œå……èƒ½æˆ–å†·å´è®¡æ—¶
         }
 
-        //Ã¿Ö¡ÖØÖÃ
+        //æ¯å¸§é‡ç½®
         public override void ResetEffects() {
-            //ÕâÀï²»ÄÜ¹»Ö±½ÓÖØÖÃÄ³Ğ©³ÖĞøĞÔ×÷ÓÃµÄ×Ö¶Î,²»È»»áµ¼ÖÂÎÊÌâ,ËüÃÇ±»·ÅÖÃÔÚÁËPreUpdate
-            //ÊÎÆ·ÅĞ¶¨ÖØÖÃ
-            residuallonelinessechoes = false;//¹Â¶À²ĞÏì
+            //è¿™é‡Œä¸èƒ½å¤Ÿç›´æ¥é‡ç½®æŸäº›æŒç»­æ€§ä½œç”¨çš„å­—æ®µ,ä¸ç„¶ä¼šå¯¼è‡´é—®é¢˜,å®ƒä»¬è¢«æ”¾ç½®åœ¨äº†PreUpdate
+            //é¥°å“åˆ¤å®šé‡ç½®
+            residuallonelinessechoes = false;//å­¤ç‹¬æ®‹å“
 
-            //buffÅĞ¶¨ÖØÖÃ
+            //buffåˆ¤å®šé‡ç½®
             TitaniumShield = false;
             base.ResetEffects();
         }

@@ -1,19 +1,17 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
 using System;
-using System.Linq;
 using Terraria.Audio;
 using Terraria.Enums;
 using Terraria.ID;
 
-namespace CalamityMod.Projectiles.Magic
+namespace GloryofGuardian.Content.Projectiles
 {
     public class NanoGuiderProj : GOGLaserBeamProj, ILocalizedModType
     {
         public new string LocalizationCategory => "Projectiles.Magic";
-        public override string Texture => "CalamityMod/Projectiles/InvisibleProj";
+        public override string Texture => GOGConstant.nulls;
 
         public bool playedSound = false;
         public const int ChargeupTime = 50;
@@ -46,7 +44,7 @@ namespace CalamityMod.Projectiles.Magic
 
         public override void DetermineScale() {
             Projectile.scale = Time < ChargeupTime ? 0f : MaxScale;
-        } 
+        }
 
         int count = 0;
         public override bool PreAI() {

@@ -1,5 +1,4 @@
-﻿using DreamJourney.Content.Projectiles.Ranged;
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Projectiles;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;

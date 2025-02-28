@@ -1,12 +1,11 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Projectiles;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace DreamJourney.Content.Projectiles.Ranged
+namespace GloryofGuardian.Content.Projectiles
 {
     public class PinkSlimeCallProj : GOGProj
     {
@@ -49,11 +48,11 @@ namespace DreamJourney.Content.Projectiles.Ranged
         int mode = 0;
         public override void AI() {
             count++;
-            if(Projectile.ai[0] == 0 && count <= 60) reboundcount = 3;
+            if (Projectile.ai[0] == 0 && count <= 60) reboundcount = 3;
 
             Projectile.rotation += 0.1f;
 
-            Projectile.velocity.Y += 0.35f;  
+            Projectile.velocity.Y += 0.35f;
         }
 
         public override Color? GetAlpha(Color lightColor) {
@@ -127,7 +126,7 @@ namespace DreamJourney.Content.Projectiles.Ranged
                             }
                         }
                         if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                            Projectile proj1 = Projectile.NewProjectileDirect (new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 1);
+                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
                                     proj2.OrichalcumMarkProj = true;
@@ -138,7 +137,7 @@ namespace DreamJourney.Content.Projectiles.Ranged
                         Projectile.Kill();
                     }
                 }
-                
+
             }
             return false;
         }
