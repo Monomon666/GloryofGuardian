@@ -1,42 +1,42 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using Terraria.Localization;
 
 namespace GloryofGuardian.Content.Class
 {
-    //ÒÔÏÂÊÇÎäÆ÷´ÊÌõ
+    //ä»¥ä¸‹æ˜¯æ­¦å™¨è¯æ¡
     public abstract class GaurdianWeaponPrefix : ModPrefix
     {
-        // ÊôĞÔÔ¤Éè
-        //Ó°ÏìÒò×Ó
+        // å±æ€§é¢„è®¾
+        //å½±å“å› å­
         public virtual float Power => 1f;
-        //ÉËº¦
+        //ä¼¤å®³
         public virtual float DamageMult => 1f;
-        //¹¥ËÙ
+        //æ”»é€Ÿ
         public virtual float CoolingReduction => 1f;
-        //¹ıÔØ
+        //è¿‡è½½
         public virtual int OverloadChance => 0;
 
-        // Ó°ÏìÄÄĞ©ÎïÆ·¿ÉÒÔ»ñµÃ´ËÇ°×º
+        // å½±å“å“ªäº›ç‰©å“å¯ä»¥è·å¾—æ­¤å‰ç¼€
         public override PrefixCategory Category => PrefixCategory.AnyWeapon;
 
         public override float RollChance(Item item) {
             return 5f;
         }
 
-        // ¾ö¶¨¸ÃÇ°×ºÊÇ·ñÄÜË¢ĞÂ
+        // å†³å®šè¯¥å‰ç¼€æ˜¯å¦èƒ½åˆ·æ–°
         public override bool CanRoll(Item item) {
             return item.CountsAsClass<GuardianDamageClass>();
         }
 
-        // Ç°×ºĞŞ¸ÄµÄ±äÁ¿ÓÚ´Ë´¢´æ
+        // å‰ç¼€ä¿®æ”¹çš„å˜é‡äºæ­¤å‚¨å­˜
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus) {
-            //Ê¹ÓÃÔ¤ÉèÁ¿µÄÔÚ´Ë´¦×÷ÓÃ
+            //ä½¿ç”¨é¢„è®¾é‡çš„åœ¨æ­¤å¤„ä½œç”¨
             damageMult = this.DamageMult;
             useTimeMult = this.CoolingReduction;
             critBonus = this.OverloadChance;
         }
 
-        // Ó°ÏìÎïÆ·µÄÏ¡ÓĞ¶È
+        // å½±å“ç‰©å“çš„ç¨€æœ‰åº¦
         public override void ModifyValue(ref float valueMult) {
             valueMult *= 1f + 0.05f * Power;
         }
@@ -46,12 +46,12 @@ namespace GloryofGuardian.Content.Class
                 item.GetGlobalItem<GOGGlobalItem>().GuardianStrikePrefixBonus = DamageMult;
         }
 
-        // Õâ¸öÇ°×º²»Ó°Ïì·Ç±ê×¼µÄÍ³¼Æ, ËùÒÔÕâĞ©¹¤¾ßĞĞ²»ÊÇ±ØÒªµÄ, µ«ÊÇ¶ÔÓÚÆäËüÀàËÆµÄ¿ÉÒÔ×ñÑ­´ËÄ£Ê½
+        // è¿™ä¸ªå‰ç¼€ä¸å½±å“éæ ‡å‡†çš„ç»Ÿè®¡, æ‰€ä»¥è¿™äº›å·¥å…·è¡Œä¸æ˜¯å¿…è¦çš„, ä½†æ˜¯å¯¹äºå…¶å®ƒç±»ä¼¼çš„å¯ä»¥éµå¾ªæ­¤æ¨¡å¼
         //public override IEnumerable<TooltipLine> GetTooltipLines(Item item) {
         //    yield return new TooltipLine(Mod, "PrefixWeaponAwesome", PowerTooltip.Format(Power)) {
-        //        IsModifier = true, // ÑÕÉ«ÎªÕıÇ°×ºÑÕÉ«
+        //        IsModifier = true, // é¢œè‰²ä¸ºæ­£å‰ç¼€é¢œè‰²
         //    };
-        //    // ÕâÖÖ±¾µØ»¯²»ÄÜÓë¼Ì³ĞµÄÀà¹²Ïí£¬ĞèÒª×Ô¼ºĞ´
+        //    // è¿™ç§æœ¬åœ°åŒ–ä¸èƒ½ä¸ç»§æ‰¿çš„ç±»å…±äº«ï¼Œéœ€è¦è‡ªå·±å†™
         //    yield return new TooltipLine(Mod, "PrefixWeaponAwesomeDescription", AdditionalTooltip.Value) {
         //        IsModifier = true,
         //    };
@@ -59,18 +59,18 @@ namespace GloryofGuardian.Content.Class
 
         //public static LocalizedText PowerTooltip { get; private set; }
 
-        // ±¾µØ»¯·½·¨
+        // æœ¬åœ°åŒ–æ–¹æ³•
         //public LocalizedText AdditionalTooltip => this.GetLocalization(nameof(AdditionalTooltip));
 
         //public override void SetStaticDefaults() {
-        //    // Ê¹ÓÃ¹²Ïí¼ü
+        //    // ä½¿ç”¨å…±äº«é”®
         //    PowerTooltip = Language.GetOrRegister(Mod.GetLocalizationKey($"{LocalizationCategory}.{nameof(PowerTooltip)}"));
-        //    // ×¢²áAdditionalTooltipËù±ØÒªµÄ´úÂë
+        //    // æ³¨å†ŒAdditionalTooltipæ‰€å¿…è¦çš„ä»£ç 
         //    _ = AdditionalTooltip;
         //}
     }
 
-    #region ´ÊÌõ´æ´¢1
+    #region è¯æ¡å­˜å‚¨1
     [LegacyName("Peerless")]
     public class Peerless0 : GaurdianWeaponPrefix
     {
@@ -175,13 +175,13 @@ namespace GloryofGuardian.Content.Class
 
     #endregion
 
-    //ÒÔÏÂÊÇÊÎÆ·µÄ´ÊÌõ
+    //ä»¥ä¸‹æ˜¯é¥°å“çš„è¯æ¡
     public abstract class GaurdianAccessoryPrefix : ModPrefix
     {
         //Todo
     }
 
-    #region ´ÊÌõ´æ´¢2
+    #region è¯æ¡å­˜å‚¨2
 
     #endregion
 }
