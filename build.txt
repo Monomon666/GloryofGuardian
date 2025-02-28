@@ -1,3 +1,4 @@
 displayName = Glory of Guardian
 author = Monomon
 version = 0.1
+modReferences = InnoVault@1.8
