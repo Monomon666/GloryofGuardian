@@ -1,70 +1,70 @@
-using GloryofGuardian.Content.Projectiles;
+ï»¿using GloryofGuardian.Content.Projectiles;
 using Terraria.DataStructures;
 
 namespace GloryofGuardian.Content.Class
 {
     public abstract class GOGDT : ModProjectile
     {
-        //ÅÚËş±¾ÌåËùÊôµÄÀà
+        //ç‚®å¡”æœ¬ä½“æ‰€å±çš„ç±»
 
-        //³£¹æ
+        //å¸¸è§„
         Player Owner => Main.player[Projectile.owner];
 
-        //¾ø¶ÔÊ±¼ä
+        //ç»å¯¹æ—¶é—´
         public int globalcount = 0;
-        //×îÔçÕÙ»½ÎïµÄ±ê¼Ç
+        //æœ€æ—©å¬å”¤ç‰©çš„æ ‡è®°
         bool earliest = true;
         public override void OnSpawn(IEntitySource source) {
-            //±»ÕÙ»½Ê±¼ÇÂ¼µÄ¾ø¶ÔÊ±¼ä£¬ÓÃÓÚÅÅĞòºÍ¼·Õ¼À¸Î»
+            //è¢«å¬å”¤æ—¶è®°å½•çš„ç»å¯¹æ—¶é—´ï¼Œç”¨äºæ’åºå’ŒæŒ¤å æ ä½
             globalcount = (int)Main.GameUpdateCount;
         }
 
-        //É½Í­Ç¿»¯±ê¼Ç
+        //å±±é“œå¼ºåŒ–æ ‡è®°
         public bool OrichalcumMarkDT;
         public bool OrichalcumMarkDT2;
         public bool OrichalcumMarkCrit;
         public int OrichalcumMarkDTcount;
         public override void AI() {
-            //À¸Î»¼ì²é:
-            //²éÑ¯µ±Ç°Íæ¼ÒµÄÀ¸Î»£¬Èç¹ûÒÑ¾­³¬³öÉÏÏŞ£¬ÔòÒÀ¾İ±àºÅ¼·µô×Ô¼º
+            //æ ä½æ£€æŸ¥:
+            //æŸ¥è¯¢å½“å‰ç©å®¶çš„æ ä½ï¼Œå¦‚æœå·²ç»è¶…å‡ºä¸Šé™ï¼Œåˆ™ä¾æ®ç¼–å·æŒ¤æ‰è‡ªå·±
             {
-                //ÖØÖÃ±ê¼Ç
+                //é‡ç½®æ ‡è®°
                 earliest = true;
-                //±àºÅ
+                //ç¼–å·
                 int MaxIndex = 0;
-                int index = 0;//¶¨ÒåĞòºÅÎª0
-                foreach (var proj in Main.projectile)//±éÀúËùÓĞµ¯Ä»
+                int index = 0;//å®šä¹‰åºå·ä¸º0
+                foreach (var proj in Main.projectile)//éå†æ‰€æœ‰å¼¹å¹•
                 {
-                    if (proj.active //»îÔ¾×´Ì¬
-                        && proj.ModProjectile is GOGDT gogdt1//±éÀú
-                        && proj.owner == Owner.whoAmI //Í¬ÊôÍ¬Ò»¸öÖ÷ÈË
+                    if (proj.active //æ´»è·ƒçŠ¶æ€
+                        && proj.ModProjectile is GOGDT gogdt1//éå†
+                        && proj.owner == Owner.whoAmI //åŒå±åŒä¸€ä¸ªä¸»äºº
                         ) {
 
-                        //×ÜÊı
+                        //æ€»æ•°
                         MaxIndex++;
 
-                        //ÌØÅĞÕ¼ÓÃ¸ü¶àÀ¸Î»µÄÅÚÌ¨
+                        //ç‰¹åˆ¤å ç”¨æ›´å¤šæ ä½çš„ç‚®å°
                         if (proj.type == ModContent.ProjectileType<ShurikenDT>()) MaxIndex += 1;
                         if (proj.type == ModContent.ProjectileType<SRMeteorProj>()) MaxIndex += 2;
-                        //ÌØÅĞ²»Õ¼ÓÃÀ¸Î»µÄÅÚÌ¨
+                        //ç‰¹åˆ¤ä¸å ç”¨æ ä½çš„ç‚®å°
                         if (proj.type == ModContent.ProjectileType<SlimeProj0>()) MaxIndex -= 1;
 
-                        //ĞòÁĞºÅ
+                        //åºåˆ—å·
                         if (gogdt1.globalcount < globalcount) {
-                            //¼ì²âÊÇ·ñÓĞ±È×Ô¼ºÏÈÉú³ÉµÄÅÚËş,Èç¹ûÓĞËµÃ÷×Ô¼ºµÄĞòºÅÒªºóÒÆÒ»Î»
+                            //æ£€æµ‹æ˜¯å¦æœ‰æ¯”è‡ªå·±å…ˆç”Ÿæˆçš„ç‚®å¡”,å¦‚æœæœ‰è¯´æ˜è‡ªå·±çš„åºå·è¦åç§»ä¸€ä½
                             index++;
                             earliest = false;
                         }
                     }
                 }
 
-                //Èç¹ûÕÙ»½Îï³¬³öÉÏÏŞ£¬Ôò
+                //å¦‚æœå¬å”¤ç‰©è¶…å‡ºä¸Šé™ï¼Œåˆ™
                 if (MaxIndex > Owner.GetModPlayer<GOGModPlayer>().Gslot && earliest) {
                     Projectile.Kill();
                 }
             }
 
-            //É½Í­Ó¡¼ÇÇ¿»¯
+            //å±±é“œå°è®°å¼ºåŒ–
             if (OrichalcumMarkDT2 == false) OrichalcumMarkDT = false;
             if (OrichalcumMarkDT2 == true) OrichalcumMarkDT2 = false;
 
