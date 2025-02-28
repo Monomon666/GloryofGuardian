@@ -1,0 +1,3 @@
+displayName = Glory of Guardian
+author = Monomon
+version = 0.1

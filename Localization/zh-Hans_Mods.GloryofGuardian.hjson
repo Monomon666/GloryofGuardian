@@ -1,0 +1,697 @@
+# This file will automatically update with entries for new content after a build and reload.
+
+Items: {
+	Calling: {
+		DisplayName: Calling
+		Tooltip:
+			'''
+			Template of an item
+			Replacing this tooltip is duty 
+			It's snowing on Mt.Fuji
+			'''
+	}
+
+	ResidualLonelinessEchoes: {
+		DisplayName: 孤独残响
+		Tooltip:
+			'''
+			那个人孤独地创造这一切的时候带着它
+			你不该拥有它
+
+			现在的加成:
+
+			'''
+	}
+
+	WildCalling: {
+		DisplayName: 无边荒野
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个弩箭炮塔
+			自动向范围内最近的敌人发射弩箭
+			过载攻击会发射强化弩箭
+			钉入敌怪并持续造成伤害
+			至多积累六支钉入箭
+			优先攻击boss
+			右键收回炮塔
+			"茫茫荒野,古老的荣耀被埋葬此地"
+			'''
+	}
+
+	AdamantiteCalling: {
+		DisplayName: 精金要塞
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个精金要塞
+			自动向两侧范围内最近的敌人发射精金子弹
+			过载攻击会转而发射精金弹射弹
+			弹射弹造成75%伤害
+			击中敌人时两次弹射向同侧最近的另一敌人
+			持续攻击将会为顶部宝石充能
+			充能完成后将获得10点穿甲
+			优先攻击boss
+			右键收回炮塔
+			"在潮水般的进攻中,精金要塞依然屹立不倒"
+			'''
+	}
+
+	BeeHiveCalling: {
+		DisplayName: 蜂后秘酿
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个小型蜂巢
+			散布一个甜蜜光环
+			为靠近的玩家提供蜂蜜和生命再生增益
+			在一个较大范围内解除玩家的中毒减益
+			受伤可以吃一口蜂蜜,但是要等候再次产出
+			更多的蜂巢可以更快酿造,4个到达上限
+			过载攻击会提供双倍回复的蜂蜜
+			右键收回炮塔
+			"这道甜蜜的防线守卫着大家的口腹"
+			'''
+	}
+
+	BloodyCalling: {
+		DisplayName: 鲜血喷涌
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个血盆大口
+			自动向范围内最近的敌人喷射血液
+			过载攻击会发射爆炸血块
+			优先攻击boss
+			右键收回炮塔
+			"猩红的血液仍在喷涌"
+			'''
+	}
+
+	CobaltCalling: {
+		DisplayName: 钴蓝旋刃
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个旋刃炮塔
+			炮塔本体可以造成接触伤害
+			自动向范围内最近的敌人发射一只追踪大型旋刃
+			击中敌人后会滞留并概率释放几只小型旋刃
+			过载攻击会转而释放圆斩旋刃
+			对敌人造成钴蓝咒刃减益
+			该减益将降低敌人20%的防御
+			优先攻击boss
+			boss存活时击中boss前不会进入滞留阶段
+			右键收回炮塔
+			"我们知道它们在哪儿，钴蓝剑会找到它们的心脏"
+			'''
+	}
+
+	CorruptCalling: {
+		DisplayName: 晦暗之雨
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个腐化预兆
+			自动向范围内最近的敌人召唤暗影雨
+			过载攻击会召唤持续更久的暗影云
+			优先攻击boss
+			右键收回炮塔
+			"腐化的病毒仍在传播"
+			'''
+	}
+
+	GarrisonCalling: {
+		DisplayName: 白银哨卫
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个强化弩箭炮塔
+			自动向范围内最近的敌人发射两支弩箭
+			过载攻击会发射强化弩箭
+			钉入敌怪并持续造成伤害
+			至多积累六支钉入箭
+			优先攻击boss
+			右键收回炮塔
+			"它的屹立证实了荣耀仍在"
+			'''
+	}
+
+	MushRoomCalling: {
+		DisplayName: 发光孢子
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个发光蘑菇炮塔
+			不停地散步孢子并发射小蘑菇
+			更多的孢子塔可以扩大它们的范围,4个到达上限
+			过载攻击会发射三个蘑菇
+			右键收回炮塔
+			"它日夜不息地散布发光的梦"
+			'''
+	}
+
+	PalladiumCalling: {
+		DisplayName: 钯金再生器
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个钯金再生器
+			钯金之心根据攻击速度进行搏动
+			每次搏动回复范围内玩家5生命值
+			过载搏动转而回复20生命值
+			搏动速度受攻速影响
+			右键收回炮塔
+			至多存在一个钯金再生器
+			"战胜恐惧,我们坚不可摧"
+			'''
+	}
+
+	RustyGunCalling: {
+		DisplayName: 生锈哨枪
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个火枪炮塔
+			自动向范围内最近且高于炮台的敌人发射火枪子弹
+			会随着发射逐渐提升攻速,最高提升150%
+			过载攻击会快速发射三发子弹
+			优先攻击boss
+			右键收回炮塔
+			"即便锈迹斑斑,它依然是一堵重火力城墙"
+			'''
+	}
+
+	ShurikenCalling: {
+		DisplayName: 影刃之哨
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个手里剑炮塔
+			其拥有双倍索敌范围
+			自动向范围内最近的敌人发射三枚手里剑
+			过载攻击会转而发射五发手里剑
+			手里剑有10%的几率淬毒
+			淬毒的手里剑将对命中的第一个未中毒敌人造成中毒和影刃减益
+			手里剑击中中毒或影刃的敌人将无视其防御力并穿过它
+			优先攻击boss
+			右键收回炮塔
+			"那些忍者依然在阴影中守护着什么"
+			'''
+	}
+
+	SpiderCalling: {
+		DisplayName: 织网蛛巢
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			和100生命值
+			召唤一个拥有400生命值的蜘蛛巢
+			首次受到伤害,以及每次失去25%生命值时,
+			召唤一只毒牙蜘蛛
+			自动发射大量穿透毒牙
+			并在数秒后消失
+
+			蜘蛛巢拥有等同于召唤者100%的防御
+			以及等同的接触伤害
+			不受益于召唤者的其它属性
+
+			毒牙蜘蛛优先攻击boss
+			右键收回蜘蛛巢
+			"编织者们潜伏在来自过去的恐惧与黑暗中"
+			'''
+	}
+
+	Shroom: {
+		DisplayName: 致幻蘑菇
+		Tooltip:
+			'''
+			你觉得你可以单杀仙人球了
+			减少90%输出
+			获得100%过载频率
+			'''
+	}
+
+	SlimeCalling: {
+		DisplayName: 凝胶尖刺
+		Tooltip:
+			'''
+			不消耗炮塔栏位
+			抛出一个史莱姆球
+			撞击到墙壁会反弹
+			撞击到地面会制造一个史莱姆地雷
+			敌人踩到会被减速并受到伤害
+			过载攻击转而更高频率地减速和造成伤害
+			直接撞击到敌人会转而爆为4枚尖刺
+			史莱姆球撞击到史莱姆地雷可能再次弹跳
+			"长出尖刺的史莱姆放弃了融合与进化
+			它们自愿为了未来的凝胶纪元铺垫道路"
+			'''
+	}
+
+	MythrilCalling: {
+		DisplayName: 秘银重弩
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个秘银弩箭塔
+			自动向范围内最近的敌人发射一支穿透弩箭
+			过载攻击转而发射三支穿透弩箭
+			有普通20%,过载33%的概率转而发射一支强力钉入箭
+			钉入敌人并持续造成伤害
+			至多积累三支钉入箭
+
+			三支强化弩箭将毙除低于15%生命值的非boss敌人
+			三支强化弩箭将剜除boss当前2%的当前生命值
+			三支强化弩箭将审判低于5%生命值的boss
+			剜除至少造成100点真实伤害
+
+			优先攻击boss
+			右键收回炮塔
+			"古老的秘银是那个时代的黎明，为刺穿恶魔的心脏而生"
+			'''
+	}
+
+	OrichalcumCalling: {
+		DisplayName: 山铜增幅器
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个山铜增幅器
+			每次振动重新标记范围内最近的一个其它类型的炮台
+			当过载频率高于50%时将额外标记一个炮台
+			提升被标记炮台20%的过载概率
+			增幅被标记炮台发射的弹幕
+			每秒增幅至多2个经过增幅范围内的戍卫弹幕
+			增幅弹幕将在命中时额外造成10%至少10点真实伤害
+			即使同一炮台被多次增幅效果也不会叠加
+			强化能够延伸至子弹幕
+			右键收回炮塔
+			"增幅力量,击破它们的弱点"
+			'''
+	}
+
+	TitaniumCalling: {
+		DisplayName: 钛金屏障仪
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个钛金屏障仪
+			三次脉冲后标记白色粒子范围内最近的玩家
+			标记状态下的玩家获得钛金屏障
+			拥有钛金屏障的玩家免收下次受到的伤害
+			并给予玩家1.5秒固定无敌帧
+			之后该玩家被施加一个"过度钛质化"debuff
+			在40秒内无法再次获得护盾
+			玩家距离屏障仪过远会有粒子提示
+			在黑色粒子范围时屏障会在5秒后解除
+			超出黑色粒子范围则会立即接触
+
+			该炮台的机能几乎不受常态属性影响
+			屏障将先于其它大部分"闪避"效果触发
+			右键收回炮塔
+			"提升视界,洞察敌人的行动"
+			'''
+	}
+
+	PaleClockworkGunCalling: {
+		DisplayName: 苍白的 链条机枪塔
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个轻机枪炮塔
+			自动向范围内最近且高于炮台的敌人
+			发射三发火枪子弹
+			过载攻击会快速发射十二发子弹
+			优先攻击boss
+			右键收回炮塔
+			"洗去了锈迹，随那些古代的遗梦一同苏醒"
+			'''
+	}
+
+	PaleShotGunCalling: {
+		DisplayName: 苍白的 爆破霰弹塔
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个霰弹枪炮塔
+			自动向范围内最近且高于炮台的敌人
+			发射一束五发火枪子弹
+			过载攻击会转而发射八发子弹
+			优先攻击boss
+			右键收回炮塔
+			"洗去了锈迹，随那些古代的遗梦一同苏醒"
+			'''
+	}
+
+	SirenCalling: {
+		DisplayName: 塞壬呼唤
+		Tooltip: ""
+	}
+
+	PinkSlimeCalling: {
+		DisplayName: 粉凝胶尖刺
+		Tooltip:
+			'''
+			不消耗炮塔栏位
+			抛出一个史莱姆球
+			撞击到墙壁会反弹
+			撞击到地面会制造一个史莱姆地雷
+			敌人踩到或8秒后会爆炸并发射5枚史莱姆尖刺
+			过载攻击会转而发射9枚史莱姆尖刺
+			直接撞击到敌人会转而发射8枚弱化的尖刺
+			右键转而发射一个不反弹的史莱姆球
+			史莱姆球撞击到史莱姆地雷均可能再次弹跳
+			"进化之路何等坎坷,即便佼佼者也会陨落
+			但仍有史莱姆走在那条道路上"
+			'''
+	}
+
+	NanoGMissileCaling: {
+		DisplayName: 纳米导弹发射井
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个纳米导弹发射井
+			准备一段时间后部署一枚纳米导弹
+			锁定智导纳米光刃标记的敌怪并发射导弹
+			导弹会在目标存活时追击目标
+			若失去目标则会自动追踪目标的同类型生物
+			过载攻击
+			首先锁定目标的导弹发射井会同时引导其它导弹
+			右键收回炮塔
+			"这些科技曾日夜守护着天空,击退群星的来犯"
+			'''
+	}
+
+	NanoGuider: {
+		DisplayName: 制导纳米光刃
+		Tooltip:
+			'''
+			按住蓄力以发射一束纳米射线
+			穿透解析敌人,并对他们施加标记
+			若敌人已被锁定则重置锁定时间
+			其将被附近的纳米科技炮台锁定
+			"你逃不过纳米科技"
+			'''
+	}
+
+	AncientBattleCalling: {
+		DisplayName: 禁戒烈风
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个禁戒封印柱
+			自动向范围内最近的敌人发射沙刃
+			它可以穿透两个个敌人击中第三个
+			过载攻击的沙刃将可以在击中墙面时贴墙前进而非消散
+			且拥有双倍穿透数量
+			每三次过载攻击将点亮一枚符文
+			点亮三枚符文时转而释放一阵沙风暴
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
+
+	ChlorophyteCalling: {
+		// DisplayName: Chlorophyte Calling
+		// Tooltip: ""
+	}
+
+	MeteorCalling: {
+		DisplayName: 群星之焰
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个群星之焰炮塔
+			使用祭坛自动向范围内最近的敌人发射火球
+			对命中的敌人造成短暂的[着火了]减益
+			命中的敌人若带有[着火了]减益
+			则额外引发一次小范围爆炸,
+			爆炸造成50%伤害并施加攻击效果
+
+			过载攻击将造成较长时间的[着火了]减益
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
+
+	SRMeteorCalling: {
+		DisplayName: 群星之核
+		Tooltip:
+			'''
+			消耗三个炮塔栏位
+			召唤一个群星之核炮塔
+			仅能同时召唤一个
+
+			附近存在群星之焰炮塔时启动:
+			在巨大范围内搜寻附带[着火了][狱炎]和[恶炎]的敌人
+			攻击时灼烧这些敌人造成基于持有buff种类的伤害
+			攻击时向这些敌人当中的随机一些发射一枚抛物线的流星
+			命中敌人时爆炸并造成50%额外伤害
+
+			向附近随机敌人发射1枚抛物线的流星
+			优先攻击近距离的目标
+
+			过载攻击将引导一枚大流星攻击附近
+			所有处于[着火了]或[狱炎]状态的敌人
+
+			各种流星命中敌人时都将额外引发一次小范围爆炸,
+			爆炸造成50%伤害并施加攻击效果
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
+
+	NanoArmorBody: {
+		DisplayName: 幻影合金重甲
+		Tooltip: ""
+	}
+
+	NanoArmorLegs: {
+		DisplayName: 幻影合金护腿
+		Tooltip: ""
+	}
+
+	NanoArmorHead: {
+		DisplayName: 幻影合金头盔
+		Tooltip: ""
+	}
+
+	NightWatcherLootBag: {
+		// DisplayName: Night Watcher Loot Bag
+		// Tooltip: ""
+	}
+
+	VigilsCandle: {
+		// DisplayName: Vigils Candle
+		// Tooltip: ""
+	}
+}
+
+Prefixes: {
+	PowerTooltip: Mods.GloryofGuardian.Prefixes.PowerTooltip
+
+	Blooey0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Blooey0.AdditionalTooltip
+		DisplayName: 故障的
+	}
+
+	Burdened0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Burdened0.AdditionalTooltip
+		DisplayName: 负荷的
+	}
+
+	Classic0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Classic0.AdditionalTooltip
+		DisplayName: 一流的
+	}
+
+	Damaged0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Damaged0.AdditionalTooltip
+		DisplayName: 毁坏的
+	}
+
+	Excellent0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Excellent0.AdditionalTooltip
+		DisplayName: 卓越的
+	}
+
+	Overclocked0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Overclocked0.AdditionalTooltip
+		DisplayName: 超频的
+	}
+
+	Peerless0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Peerless0.AdditionalTooltip
+		DisplayName: 绝世的
+	}
+
+	Precise0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Precise0.AdditionalTooltip
+		DisplayName: 精密的
+	}
+
+	Scrapped0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Scrapped0.AdditionalTooltip
+		DisplayName: 报废的
+	}
+
+	Sensitive0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Sensitive0.AdditionalTooltip
+		DisplayName: 灵敏的
+	}
+
+	ShortCircuited0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.ShortCircuited0.AdditionalTooltip
+		DisplayName: 短路的
+	}
+
+	Silent0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Silent0.AdditionalTooltip
+		DisplayName: 沉默的
+	}
+
+	Stainless0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Stainless0.AdditionalTooltip
+		DisplayName: 崭新的
+	}
+}
+
+DamageClasses.GuardianDamageClass.DisplayName: 戍卫伤害
+
+Buffs: {
+	JavelinDebuff1: {
+		DisplayName: 钉入
+		Description: 救命,好痛,快把它拔出来!
+	}
+
+	HoneyDebuff: {
+		DisplayName: 蜂蜜正在供应!
+		Description: 你还想吃,但是你现在需要等候蜜蜂们的下次供应!
+	}
+
+	ShadowbladeDebuff: {
+		DisplayName: 影刃
+		Description: 免疫中毒就不用被穿过了?抱歉~
+	}
+
+	CobaltDebuff: {
+		// DisplayName: Cobalt Debuff
+		// Description: Mods.GloryofGuardian.Buffs.CobaltDebuff.Description
+	}
+
+	SirenDebuff: {
+		// DisplayName: Siren Debuff
+		// Description: Mods.GloryofGuardian.Buffs.SirenDebuff.Description
+	}
+
+	TitaniumShieldBuff: {
+		DisplayName: 钛金屏障
+		Description: 你以视界之力洞察了敌人的行动,将以钛质化抵御下一次攻击
+	}
+
+	TitaniumReloadBuff: {
+		DisplayName: 过度钛质化
+		Description: 你需要一些时间缓解过度的钛质化
+	}
+
+	NanoMarkDebuff1: {
+		// DisplayName: Nano Mark Debuff1
+		// Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff1.Description
+	}
+
+	NanoMarkDebuff2: {
+		// DisplayName: Nano Mark Debuff2
+		// Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff2.Description
+	}
+
+	OnfireMalice: {
+		// DisplayName: Onfire Malice
+		// Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
+	}
+}
+
+Projectiles: {
+	WildDT.DisplayName: 荒野炮塔
+	WildProj.DisplayName: 荒野箭
+	GarrisonDT.DisplayName: 哨卫炮塔
+	GarrisonProj.DisplayName: 哨卫弩箭
+	BloodyDT.DisplayName: 鲜血炮塔
+	BloodyProj.DisplayName: 血弹
+	CorruptCloudProj.DisplayName: 晦暗云
+	CorruptDT.DisplayName: 晦暗炮塔
+	CorruptRainProj.DisplayName: 晦暗雨
+	MushroomDT.DisplayName: 蘑菇炮塔
+	MushRoomProj.DisplayName: 孢子光环
+	MushRoomProj2.DisplayName: 孢子光环
+	BeeHiveDT.DisplayName: 蜂蜜炮塔
+	// RustyGunProj.DisplayName: Rusty Gun Proj
+	// RustyGunDT.DisplayName: Rusty Gun D T
+	// ShurikeDT.DisplayName: Shurike D T
+	// ShurikenProj.DisplayName: Shuriken Proj
+	// ShurikenDT.DisplayName: Shuriken D T
+	// SlimeCallProj.DisplayName: Slime Call Proj
+	// SlimeProj.DisplayName: Slime Proj
+	// SlimeDT.DisplayName: Slime D T
+	// MythrilProj.DisplayName: Mythril Proj
+	// MythrilDT.DisplayName: Mythril D T
+	// MythrilProj2.DisplayName: Mythril Proj2
+	// OrichalcumDT.DisplayName: Orichalcum D T
+	// PalladiumDT.DisplayName: Palladium D T
+	// TitaniumDT.DisplayName: Titanium D T
+	// AdamantiteDT.DisplayName: Adamantite D T
+	// AdamantiteProj.DisplayName: Adamantite Proj
+	// PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
+	// PaleShotGunDT.DisplayName: Pale Shot Gun D T
+	// CobaltDT.DisplayName: Cobalt D T
+	// CobaltProj.DisplayName: Cobalt Proj
+	// CobaltProj2.DisplayName: Cobalt Proj2
+	// SlimeProj0.DisplayName: Slime Proj0
+	// SpiderProj.DisplayName: Spider Proj
+	// SpiderProj0.DisplayName: Spider Proj0
+	// PinkSlimeCallProj.DisplayName: Pink Slime Call Proj
+	// PinkSlimeProj.DisplayName: Pink Slime Proj
+	// PinkSlimeProj0.DisplayName: Pink Slime Proj0
+	// NanoGuiderProj.DisplayName: Nano Guider Proj
+	// NanoGuiderHeld.DisplayName: Nano Guider Held
+	// Magic.NanoGuiderProj.DisplayName: Nano Guider Proj
+	// NanoGMissileProj.DisplayName: Nano G Missile Proj
+	// NanoGMissileDT.DisplayName: Nano G Missile D T
+	// AncientBattleProj.DisplayName: Ancient Battle Proj
+	// AncientBattleProj2.DisplayName: Ancient Battle Proj2
+	// AncientBattleDT.DisplayName: Ancient Battle D T
+	// ChlorophyteDT.DisplayName: Chlorophyte D T
+	// ChlorophyteProj.DisplayName: Chlorophyte Proj
+	// SirenDT.DisplayName: Siren D T
+	// SirenProj.DisplayName: Siren Proj
+	// MeteorDT.DisplayName: Meteor D T
+	// MeteorProj.DisplayName: Meteor Proj
+	// SRMeteorDT.DisplayName: S R Meteor D T
+	// SRMeteorProj.DisplayName: S R Meteor Proj
+	// NightProj.DisplayName: Night Proj
+	// NightProj2.DisplayName: Night Proj2
+	// NightProj3.DisplayName: Night Proj3
+	// StarRay.DisplayName: Star Ray
+	// StarRay2.DisplayName: Star Ray2
+	// WarningLine.DisplayName: Warning Line
+	// WarningLine_2.DisplayName: Warning Line_2
+	// WarningLine_3.DisplayName: Warning Line_3
+	// NightFireProj.DisplayName: Night Fire Proj
+	// WarningLine_0.DisplayName: Warning Line_0
+}
+
+NPCs: {
+	SpiderNPC.DisplayName: 蜘蛛茧
+	// NightWatcher.DisplayName: Night Watcher
+	// NightLantern.DisplayName: Night Lantern
+	// NightLantern2.DisplayName: Night Lantern2
+	// NightLantern3.DisplayName: Night Lantern3
+	// NightLance.DisplayName: Night Lance
+	// NightRainBird.DisplayName: Night Rain Bird
+	// NightSlime.DisplayName: Night Slime
+	// NightLantern1.DisplayName: Night Lantern1
+}

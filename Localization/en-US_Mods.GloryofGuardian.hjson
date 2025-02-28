@@ -1,0 +1,382 @@
+# This file will automatically update with entries for new content after a build and reload.
+
+Items: {
+	Calling: {
+		DisplayName: Calling
+		Tooltip:
+			'''
+			Template of an item
+			Replacing this tooltip is duty 
+			It's snowing on Mt.Fuji
+			'''
+	}
+
+	ResidualLonelinessEchoes: {
+		DisplayName: Residual Loneliness Echoes
+		Tooltip: ""
+	}
+
+	WildCalling: {
+		DisplayName: Wild Calling
+		Tooltip: ""
+	}
+
+	AdamantiteCalling: {
+		DisplayName: Adamantite Calling
+		Tooltip: ""
+	}
+
+	BeeHiveCalling: {
+		DisplayName: Bee Hive Calling
+		Tooltip: ""
+	}
+
+	BloodyCalling: {
+		DisplayName: Bloody Calling
+		Tooltip: ""
+	}
+
+	CobaltCalling: {
+		DisplayName: Cobalt Calling
+		Tooltip: ""
+	}
+
+	CorruptCalling: {
+		DisplayName: Corrupt Calling
+		Tooltip: ""
+	}
+
+	GarrisonCalling: {
+		DisplayName: Garrison Calling
+		Tooltip: ""
+	}
+
+	MushRoomCalling: {
+		DisplayName: Mush Room Calling
+		Tooltip: ""
+	}
+
+	PalladiumCalling: {
+		DisplayName: Palladium Calling
+		Tooltip: ""
+	}
+
+	RustyGunCalling: {
+		DisplayName: Rusty Gun Calling
+		Tooltip: ""
+	}
+
+	ShurikenCalling: {
+		DisplayName: Shuriken Calling
+		Tooltip: ""
+	}
+
+	SpiderCalling: {
+		DisplayName: Spider Calling
+		Tooltip: ""
+	}
+
+	Shroom: {
+		DisplayName: Shroom
+		Tooltip: ""
+	}
+
+	SlimeCalling: {
+		DisplayName: Slime Calling
+		Tooltip: ""
+	}
+
+	MythrilCalling: {
+		DisplayName: Mythril Calling
+		Tooltip: ""
+	}
+
+	OrichalcumCalling: {
+		DisplayName: Orichalcum Calling
+		Tooltip: ""
+	}
+
+	TitaniumCalling: {
+		DisplayName: Titanium Calling
+		Tooltip: ""
+	}
+
+	PaleClockworkGunCalling: {
+		DisplayName: Pale Clockwork Gun Calling
+		Tooltip: ""
+	}
+
+	PaleShotGunCalling: {
+		DisplayName: Pale Shot Gun Calling
+		Tooltip: ""
+	}
+
+	SirenCalling: {
+		DisplayName: Siren Calling
+		Tooltip: ""
+	}
+
+	PinkSlimeCalling: {
+		DisplayName: Pink Slime Calling
+		Tooltip: ""
+	}
+
+	NanoGMissileCaling: {
+		DisplayName: Nano G Missile Caling
+		Tooltip: ""
+	}
+
+	NanoGuider: {
+		DisplayName: Nano Guider
+		Tooltip: ""
+	}
+
+	AncientBattleCalling: {
+		DisplayName: Ancient Battle Calling
+		Tooltip: ""
+	}
+
+	ChlorophyteCalling: {
+		DisplayName: Chlorophyte Calling
+		Tooltip: ""
+	}
+
+	MeteorCalling: {
+		DisplayName: Meteor Calling
+		Tooltip: ""
+	}
+
+	SRMeteorCalling: {
+		DisplayName: S R Meteor Calling
+		Tooltip: ""
+	}
+
+	NanoArmorBody: {
+		DisplayName: Nano Armor Body
+		Tooltip: ""
+	}
+
+	NanoArmorLegs: {
+		DisplayName: Nano Armor Legs
+		Tooltip: ""
+	}
+
+	NanoArmorHead: {
+		DisplayName: Nano Armor Head
+		Tooltip: ""
+	}
+
+	NightWatcherLootBag: {
+		DisplayName: Night Watcher Loot Bag
+		Tooltip: ""
+	}
+
+	VigilsCandle: {
+		DisplayName: Vigils Candle
+		Tooltip: ""
+	}
+}
+
+Prefixes: {
+	PowerTooltip: Mods.GloryofGuardian.Prefixes.PowerTooltip
+
+	Blooey0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Blooey0.AdditionalTooltip
+		DisplayName: Blooey0
+	}
+
+	Burdened0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Burdened0.AdditionalTooltip
+		DisplayName: Burdened0
+	}
+
+	Classic0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Classic0.AdditionalTooltip
+		DisplayName: Classic0
+	}
+
+	Damaged0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Damaged0.AdditionalTooltip
+		DisplayName: Damaged0
+	}
+
+	Excellent0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Excellent0.AdditionalTooltip
+		DisplayName: Excellent0
+	}
+
+	Overclocked0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Overclocked0.AdditionalTooltip
+		DisplayName: Overclocked0
+	}
+
+	Peerless0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Peerless0.AdditionalTooltip
+		DisplayName: Peerless0
+	}
+
+	Precise0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Precise0.AdditionalTooltip
+		DisplayName: Precise0
+	}
+
+	Scrapped0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Scrapped0.AdditionalTooltip
+		DisplayName: Scrapped0
+	}
+
+	Sensitive0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Sensitive0.AdditionalTooltip
+		DisplayName: Sensitive0
+	}
+
+	ShortCircuited0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.ShortCircuited0.AdditionalTooltip
+		DisplayName: Short Circuited0
+	}
+
+	Silent0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Silent0.AdditionalTooltip
+		DisplayName: Silent0
+	}
+
+	Stainless0: {
+		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Stainless0.AdditionalTooltip
+		DisplayName: Stainless0
+	}
+}
+
+DamageClasses.GuardianDamageClass.DisplayName: Guardian Damage Class
+
+Buffs: {
+	JavelinDebuff1: {
+		DisplayName: Javelin Debuff1
+		Description: Mods.GloryofGuardian.Buffs.JavelinDebuff1.Description
+	}
+
+	HoneyDebuff: {
+		DisplayName: Honey Debuff
+		Description: Mods.GloryofGuardian.Buffs.HoneyDebuff.Description
+	}
+
+	ShadowbladeDebuff: {
+		DisplayName: Shadowblade Debuff
+		Description: Mods.GloryofGuardian.Buffs.ShadowbladeDebuff.Description
+	}
+
+	CobaltDebuff: {
+		DisplayName: Cobalt Debuff
+		Description: Mods.GloryofGuardian.Buffs.CobaltDebuff.Description
+	}
+
+	SirenDebuff: {
+		DisplayName: Siren Debuff
+		Description: Mods.GloryofGuardian.Buffs.SirenDebuff.Description
+	}
+
+	TitaniumShieldBuff: {
+		DisplayName: Titanium Shield Buff
+		Description: Mods.GloryofGuardian.Buffs.TitaniumShieldBuff.Description
+	}
+
+	TitaniumReloadBuff: {
+		DisplayName: Titanium Reload Buff
+		Description: Mods.GloryofGuardian.Buffs.TitaniumReloadBuff.Description
+	}
+
+	NanoMarkDebuff1: {
+		DisplayName: Nano Mark Debuff1
+		Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff1.Description
+	}
+
+	NanoMarkDebuff2: {
+		DisplayName: Nano Mark Debuff2
+		Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff2.Description
+	}
+
+	OnfireMalice: {
+		DisplayName: Onfire Malice
+		Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
+	}
+}
+
+Projectiles: {
+	WildDT.DisplayName: Wild D T
+	WildProj.DisplayName: Wild Proj
+	GarrisonDT.DisplayName: Garrison D T
+	GarrisonProj.DisplayName: Garrison Proj
+	BloodyDT.DisplayName: Bloody D T
+	BloodyProj.DisplayName: Bloody Proj
+	CorruptCloudProj.DisplayName: Corrupt Cloud Proj
+	CorruptDT.DisplayName: Corrupt D T
+	CorruptRainProj.DisplayName: Corrupt Rain Proj
+	MushroomDT.DisplayName: Mushroom D T
+	MushRoomProj.DisplayName: Mush Room Proj
+	MushRoomProj2.DisplayName: Mush Room Proj2
+	BeeHiveDT.DisplayName: Bee Hive D T
+	RustyGunProj.DisplayName: Rusty Gun Proj
+	RustyGunDT.DisplayName: Rusty Gun D T
+	ShurikeDT.DisplayName: Shurike D T
+	ShurikenProj.DisplayName: Shuriken Proj
+	ShurikenDT.DisplayName: Shuriken D T
+	SlimeCallProj.DisplayName: Slime Call Proj
+	SlimeProj.DisplayName: Slime Proj
+	SlimeDT.DisplayName: Slime D T
+	MythrilProj.DisplayName: Mythril Proj
+	MythrilDT.DisplayName: Mythril D T
+	MythrilProj2.DisplayName: Mythril Proj2
+	OrichalcumDT.DisplayName: Orichalcum D T
+	PalladiumDT.DisplayName: Palladium D T
+	TitaniumDT.DisplayName: Titanium D T
+	AdamantiteDT.DisplayName: Adamantite D T
+	AdamantiteProj.DisplayName: Adamantite Proj
+	PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
+	PaleShotGunDT.DisplayName: Pale Shot Gun D T
+	CobaltDT.DisplayName: Cobalt D T
+	CobaltProj.DisplayName: Cobalt Proj
+	CobaltProj2.DisplayName: Cobalt Proj2
+	SlimeProj0.DisplayName: Slime Proj0
+	SpiderProj.DisplayName: Spider Proj
+	SpiderProj0.DisplayName: Spider Proj0
+	PinkSlimeCallProj.DisplayName: Pink Slime Call Proj
+	PinkSlimeProj.DisplayName: Pink Slime Proj
+	PinkSlimeProj0.DisplayName: Pink Slime Proj0
+	NanoGuiderProj.DisplayName: Nano Guider Proj
+	NanoGuiderHeld.DisplayName: Nano Guider Held
+	Magic.NanoGuiderProj.DisplayName: Nano Guider Proj
+	NanoGMissileProj.DisplayName: Nano G Missile Proj
+	NanoGMissileDT.DisplayName: Nano G Missile D T
+	AncientBattleProj.DisplayName: Ancient Battle Proj
+	AncientBattleProj2.DisplayName: Ancient Battle Proj2
+	AncientBattleDT.DisplayName: Ancient Battle D T
+	ChlorophyteDT.DisplayName: Chlorophyte D T
+	ChlorophyteProj.DisplayName: Chlorophyte Proj
+	SirenDT.DisplayName: Siren D T
+	SirenProj.DisplayName: Siren Proj
+	MeteorDT.DisplayName: Meteor D T
+	MeteorProj.DisplayName: Meteor Proj
+	SRMeteorDT.DisplayName: S R Meteor D T
+	SRMeteorProj.DisplayName: S R Meteor Proj
+	NightProj.DisplayName: Night Proj
+	NightProj2.DisplayName: Night Proj2
+	NightProj3.DisplayName: Night Proj3
+	StarRay.DisplayName: Star Ray
+	StarRay2.DisplayName: Star Ray2
+	WarningLine.DisplayName: Warning Line
+	WarningLine_2.DisplayName: Warning Line_2
+	WarningLine_3.DisplayName: Warning Line_3
+	NightFireProj.DisplayName: Night Fire Proj
+	WarningLine_0.DisplayName: Warning Line_0
+}
+
+NPCs: {
+	SpiderNPC.DisplayName: Spider N P C
+	NightWatcher.DisplayName: Night Watcher
+	NightLantern.DisplayName: Night Lantern
+	NightLantern2.DisplayName: Night Lantern2
+	NightLantern3.DisplayName: Night Lantern3
+	NightLance.DisplayName: Night Lance
+	NightRainBird.DisplayName: Night Rain Bird
+	NightSlime.DisplayName: Night Slime
+	NightLantern1.DisplayName: Night Lantern1
+}
