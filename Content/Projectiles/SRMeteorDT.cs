@@ -58,6 +58,7 @@ namespace GloryofGuardian.Content.Projectiles
         List<int> whoistar = new List<int>();
         int num = 0;
         int num0 = 0;
+        bool bosshere = false;
         public override void AI() {
 
             countfire++;
@@ -116,7 +117,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                 ignore.Clear();
                 for (int index = 0; index < Main.npc.Length; index++) {
-                    target1 = Projectile.Center.InPosClosestNPC(800, true, true, ignore);
+                    target1 = Projectile.Center.InPosClosestNPC(800, false, true, ignore);
                     if (target1 != null && target1.active) {
 
                         whoistar.Add(target1.whoAmI);//加入待打击目标
@@ -132,6 +133,12 @@ namespace GloryofGuardian.Content.Projectiles
                 if (whoistar.Count > 0) {
                     foreach (int npc in whoistar) {
                         Attack(Main.npc[npc]);
+                    }
+                    for (int index = 0; index < Main.npc.Length; index++) {
+                        NPC target2 = Main.npc[index];
+                        if (target2 != null && target2.boss && target2.active && Vector2.Distance(Projectile.Center, target2.Center) < 800) {
+                            Attack2(target2);
+                        }
                     }
 
                     //计时重置
@@ -222,10 +229,24 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         /// <summary>
-        /// 监测与超级攻击
+        /// 监测与头顶攻击
         /// </summary>
         void Attack2(NPC target1) {
+            for (int i = 0; i < 3; i++) {
+                //普通
+                Vector2 projcen = target1.Center + new Vector2(0, -1200);
+                projcen += new Vector2(-300 + (300 * i), 0);
 
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20);
+
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, projcen.Toz(target1.Center + new Vector2(0, (Projectile.Center.Y - target1.Center.Y))) * 24f, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 1, Owner.whoAmI);
+                if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                    if (proj1.ModProjectile is GOGProj proj2) {
+                        proj2.OrichalcumMarkProj = true;
+                        proj2.OrichalcumMarkProjcount = 300;
+                    }
+                }
+            }
         }
 
         public override Color? GetAlpha(Color lightColor) {
