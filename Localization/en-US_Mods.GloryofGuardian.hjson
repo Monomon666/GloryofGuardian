@@ -175,6 +175,11 @@ Items: {
 		DisplayName: Vigils Candle
 		Tooltip: ""
 	}
+
+	MaliceFireGun: {
+		DisplayName: Malice Fire Gun
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -367,6 +372,9 @@ Projectiles: {
 	WarningLine_3.DisplayName: Warning Line_3
 	NightFireProj.DisplayName: Night Fire Proj
 	WarningLine_0.DisplayName: Warning Line_0
+	MaliceFireGunHeld.DisplayName: Malice Fire Gun Held
+	MaliceFireGunFireProj.DisplayName: Malice Fire Gun Fire Proj
+	MaliceFireGunProj.DisplayName: Malice Fire Gun Proj
 }
 
 NPCs: {
