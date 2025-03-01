@@ -87,13 +87,26 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
                 Projectile.Kill();
             }
 
-            if (count == 2) {
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + (Main.MouseWorld - Projectile.Center).SafeNormalize(Vector2.Zero) * 12f, (Main.MouseWorld - Projectile.Center).SafeNormalize(Vector2.Zero) * 14f, ModContent.ProjectileType<NanoGuiderProj>(), lastdamage, 0, Owner.whoAmI);
+            if (count >= 2) {
+                //发射
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item34);
 
-                if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                    if (proj1.ModProjectile is GOGProj proj2) {
-                        proj2.OrichalcumMarkProj = true;
-                        proj2.OrichalcumMarkProjcount = 300;
+                if (count % 1 == 0) {
+                    for (int i = 0; i < 1; i++) {
+                        Vector2 projcen = Projectile.Center + new Vector2(0, 12);
+                        Vector2 tomou = projcen.Toz(Main.MouseWorld);
+
+                        float rot = Main.rand.NextFloat(-0.05f, 0.1f);
+                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 6f;
+
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + tomou * 64f, tomou.RotatedBy(rot) * vel, ModContent.ProjectileType<MaliceFireGunFireProj>(), lastdamage, 2, Owner.whoAmI, Projectile.ai[1]);
+
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
+                        }
                     }
                 }
             }
@@ -103,7 +116,7 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
             Vector2 aimVector = Vector2.Normalize(Main.MouseWorld - source);
             if (aimVector.HasNaNs())
                 aimVector = -Vector2.UnitY;
-            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), 0.8f));
+            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), 0.1f));
 
             if (aimVector != Projectile.velocity)
                 Projectile.netUpdate = true;

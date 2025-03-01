@@ -20,7 +20,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override Color LightCastColor => new Color(204, 204, 255); //#CCCCFF
         public override float Lifetime => 18000f;
-        public override float MaxScale => 0.6f;
+        public override float MaxScale => 1f;
         public override float MaxLaserLength => 1600f; //100 tiles
 
         private const float AimResponsiveness = 0.8f; //j激光旋转因子,越小越快
@@ -43,12 +43,18 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void DetermineScale() {
-            Projectile.scale = Time < ChargeupTime ? 0f : MaxScale;
+            //int scale0 = 1f;//宽度
+            //Projectile.scale = Time < ChargeupTime ? 0f : 2f;
+
+            if (Time > 50 && Time < 75) Projectile.scale = ((Time - 50) / 25f) * 2f;
+            if (Time > 75 && Time < 100) Projectile.scale = ((100 - Time) / 25f) * 2f;
+            if (Time > 100) Projectile.Kill();
         }
 
         int count = 0;
         public override bool PreAI() {
             count++;
+
             // 客户端运行以确保多人联机同步
             if (Projectile.owner == Main.myPlayer) {
                 Vector2 rrp = Owner.RotatedRelativePoint(Owner.MountedCenter, true);
@@ -105,7 +111,7 @@ namespace GloryofGuardian.Content.Projectiles
             Vector2 aimVector = Vector2.Normalize(Main.MouseWorld - source);
             if (aimVector.HasNaNs())
                 aimVector = -Vector2.UnitY;
-            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), AimResponsiveness));
+            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), 0.985f));
 
             if (aimVector != Projectile.velocity)
                 Projectile.netUpdate = true;
@@ -191,7 +197,8 @@ namespace GloryofGuardian.Content.Projectiles
 
         //激光的计算方法
         public override float DetermineLaserLength() {
-            return DetermineLaserLength_CollideWithTiles(12);
+            //return DetermineLaserLength_CollideWithTiles(12);
+            return MaxLaserLength;
         }
     }
 }

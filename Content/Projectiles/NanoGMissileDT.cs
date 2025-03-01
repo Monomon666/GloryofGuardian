@@ -96,7 +96,7 @@ namespace GloryofGuardian.Content.Projectiles
                     ignore.Clear();
                     for (int i = 0; i < Main.maxNPCs; i++) {
                         if (target0 == null) {
-                            NPC target1 = Projectile.Center.InPosClosestNPC(3600, false, true, ignore);
+                            NPC target1 = Projectile.Center.InPosClosestNPC(3600, true, true, ignore);
                             //标记检索
                             if (target1 != null && !target1.HasBuff<NanoMarkDebuff1>() && !target1.HasBuff<NanoMarkDebuff2>()) {
                                 ignore.Add(target1.whoAmI);

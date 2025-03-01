@@ -41,10 +41,12 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
         }
 
         int count = 0;
+        int count2 = 0;
         bool hadatk = false;
         public override void AI() {
             //计时器
             count++;
+            count2++;
             // 使用动画延长到使用完
             Owner.itemAnimation = Owner.itemTime = 2;
             //跟着主人
@@ -87,8 +89,8 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
                 Projectile.Kill();
             }
 
-            if (count == 2) {
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + (Main.MouseWorld - Projectile.Center).SafeNormalize(Vector2.Zero) * 12f, (Main.MouseWorld - Projectile.Center).SafeNormalize(Vector2.Zero) * 14f, ModContent.ProjectileType<NanoGuiderProj>(), lastdamage, 0, Owner.whoAmI);
+            if (count2 == 2) {
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + (Projectile.velocity).SafeNormalize(Vector2.Zero) * 12f, (Projectile.velocity).SafeNormalize(Vector2.Zero) * 14f, ModContent.ProjectileType<NanoGuiderProj>(), lastdamage, 0, Owner.whoAmI);
 
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                     if (proj1.ModProjectile is GOGProj proj2) {
@@ -97,13 +99,15 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
                     }
                 }
             }
+
+            if (count2 > 120) Projectile.Kill();
         }
 
         private void UpdateAim(Vector2 source) {
             Vector2 aimVector = Vector2.Normalize(Main.MouseWorld - source);
             if (aimVector.HasNaNs())
                 aimVector = -Vector2.UnitY;
-            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), 0.8f));
+            aimVector = Vector2.Normalize(Vector2.Lerp(aimVector, Vector2.Normalize(Projectile.velocity), 0.985f));
 
             if (aimVector != Projectile.velocity)
                 Projectile.netUpdate = true;
