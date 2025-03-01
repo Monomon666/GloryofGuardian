@@ -513,6 +513,45 @@ Items: {
 			“机动技术的结晶”
 			'''
 	}
+
+	FrostRelic: {
+		DisplayName: 霜月信物
+		Tooltip:
+			'''
+			圣诞树上结出的铃铛
+			能够强化结霜仪仗
+			转而召唤更加强大的霜月守卫
+			"北地的防线永不后退"
+			'''
+	}
+
+	NanoBar: {
+		DisplayName: 幻影合金锭
+		Tooltip:
+			'''
+			纳米科技与生命金属结合的产物
+			能够制造高科技装备
+			'''
+	}
+
+	FrostCalling: {
+		DisplayName: 结霜仪仗
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个冰霜守卫
+			自动向范围内最近的敌人发射寒霜法球
+			它可以穿透两个个敌人击中第三个
+			击中敌人造成短暂的[冻伤]减益
+			击中[冻伤]状态的敌人则降低敌人周围温度
+			造成50%的扩散伤害
+
+			在携带霜月信物时转而召唤一个强化的霜月守卫
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
 }
 
 Prefixes: {
@@ -708,6 +747,10 @@ Projectiles: {
 	// MaliceFireGunHeld.DisplayName: Malice Fire Gun Held
 	// MaliceFireGunFireProj.DisplayName: Malice Fire Gun Fire Proj
 	// MaliceFireGunProj.DisplayName: Malice Fire Gun Proj
+	// Frost2DT.DisplayName: Frost2 D T
+	// Frost2Proj.DisplayName: Frost2 Proj
+	// FrostDT.DisplayName: Frost D T
+	// FrostProj.DisplayName: Frost Proj
 }
 
 NPCs: {

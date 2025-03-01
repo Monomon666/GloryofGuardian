@@ -16,8 +16,8 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void SetDefaults() {
-            Projectile.width = 16;
-            Projectile.height = 16;
+            Projectile.width = 4;
+            Projectile.height = 4;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = DamageClass.Summon;
@@ -51,7 +51,7 @@ namespace GloryofGuardian.Content.Projectiles
             //粒子
             int dustnum = Math.Min((int)(count / 30f) + 3, 6);
 
-            if (count % 2 == 0) {
+            if (count % 1 == 0) {
                 int num1 = Dust.NewDust(Projectile.position, Projectile.width / 2, Projectile.height / 2, ModContent.DustType<FireLightDust>(), 0, 0, 0, default, 0.5f);
                 Main.dust[num1].noGravity = true;
                 Main.dust[num1].velocity = new Vector2(0, -dustvel);

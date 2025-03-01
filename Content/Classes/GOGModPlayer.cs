@@ -50,6 +50,11 @@ namespace GloryofGuardian.Content.Class
         /// </summary>
         public bool residuallonelinessechoes = false;
 
+        /// <summary>
+        /// 寒霜信物
+        /// </summary>
+        public bool frostrelic = false;
+
         #endregion
 
         #region 变动开关2
@@ -189,6 +194,7 @@ namespace GloryofGuardian.Content.Class
             //这里不能够直接重置某些持续性作用的字段,不然会导致问题,它们被放置在了PreUpdate
             //饰品判定重置
             residuallonelinessechoes = false;//孤独残响
+            frostrelic = false;//寒霜信物
 
             //buff判定重置
             TitaniumShield = false;

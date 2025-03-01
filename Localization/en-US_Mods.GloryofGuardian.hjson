@@ -185,6 +185,21 @@ Items: {
 		DisplayName: Nano Wings
 		Tooltip: ""
 	}
+
+	FrostRelic: {
+		DisplayName: Frost Relic
+		Tooltip: ""
+	}
+
+	NanoBar: {
+		DisplayName: Nano Bar
+		Tooltip: ""
+	}
+
+	FrostCalling: {
+		DisplayName: Frost Calling
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -380,6 +395,10 @@ Projectiles: {
 	MaliceFireGunHeld.DisplayName: Malice Fire Gun Held
 	MaliceFireGunFireProj.DisplayName: Malice Fire Gun Fire Proj
 	MaliceFireGunProj.DisplayName: Malice Fire Gun Proj
+	Frost2DT.DisplayName: Frost2 D T
+	Frost2Proj.DisplayName: Frost2 Proj
+	FrostDT.DisplayName: Frost D T
+	FrostProj.DisplayName: Frost Proj
 }
 
 NPCs: {
