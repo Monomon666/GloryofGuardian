@@ -180,6 +180,11 @@ Items: {
 		DisplayName: Malice Fire Gun
 		Tooltip: ""
 	}
+
+	NanoWings: {
+		DisplayName: Nano Wings
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
