@@ -481,16 +481,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	NightWatcherLootBag: {
-		// DisplayName: Night Watcher Loot Bag
-		// Tooltip: ""
-	}
-
-	VigilsCandle: {
-		// DisplayName: Vigils Candle
-		// Tooltip: ""
-	}
-
 	MaliceFireGun: {
 		DisplayName: 邪炎焚除
 		Tooltip:
@@ -550,6 +540,36 @@ Items: {
 
 			优先攻击boss
 			右键收回炮塔
+			'''
+	}
+
+	Bloody2Calling: {
+		DisplayName: 血肉异形
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个血肉异形
+			逐渐凝聚一把血肉镰刀并抛出
+			镰刀飞行中和击中时概率喷涌血液
+			过载攻击会召唤一把灵液镰刀
+			转而喷射大量灵液
+
+			优先攻击boss
+			右键
+			'''
+	}
+
+	Corrupt2Calling: {
+		DisplayName: 腐化恶疾
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个腐化恶疾
+			在炮塔周围喷涌腐化孢子
+			过载攻击将转而喷涌咒火柱
+
+			优先攻击boss
+			右键
 			'''
 	}
 }
@@ -751,6 +771,12 @@ Projectiles: {
 	// Frost2Proj.DisplayName: Frost2 Proj
 	// FrostDT.DisplayName: Frost D T
 	// FrostProj.DisplayName: Frost Proj
+	// Blood2Proj0.DisplayName: Blood2 Proj0
+	// Blood2Proj1.DisplayName: Blood2 Proj1
+	// Bloody2DT.DisplayName: Bloody2 D T
+	// Corrupt2DT.DisplayName: Corrupt2 D T
+	// Corrupt2Proj0.DisplayName: Corrupt2 Proj0
+	// Corrupt2Proj1.DisplayName: Corrupt2 Proj1
 }
 
 NPCs: {

@@ -166,16 +166,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	NightWatcherLootBag: {
-		DisplayName: Night Watcher Loot Bag
-		Tooltip: ""
-	}
-
-	VigilsCandle: {
-		DisplayName: Vigils Candle
-		Tooltip: ""
-	}
-
 	MaliceFireGun: {
 		DisplayName: Malice Fire Gun
 		Tooltip: ""
@@ -198,6 +188,16 @@ Items: {
 
 	FrostCalling: {
 		DisplayName: Frost Calling
+		Tooltip: ""
+	}
+
+	Bloody2Calling: {
+		DisplayName: Bloody2 Calling
+		Tooltip: ""
+	}
+
+	Corrupt2Calling: {
+		DisplayName: Corrupt2 Calling
 		Tooltip: ""
 	}
 }
@@ -399,6 +399,12 @@ Projectiles: {
 	Frost2Proj.DisplayName: Frost2 Proj
 	FrostDT.DisplayName: Frost D T
 	FrostProj.DisplayName: Frost Proj
+	Blood2Proj0.DisplayName: Blood2 Proj0
+	Blood2Proj1.DisplayName: Blood2 Proj1
+	Bloody2DT.DisplayName: Bloody2 D T
+	Corrupt2DT.DisplayName: Corrupt2 D T
+	Corrupt2Proj0.DisplayName: Corrupt2 Proj0
+	Corrupt2Proj1.DisplayName: Corrupt2 Proj1
 }
 
 NPCs: {
