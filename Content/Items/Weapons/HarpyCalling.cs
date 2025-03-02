@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
 {
-    public class SirenCalling : GOGCalling
+    public class HarpyCalling : GOGCalling
     {
         public override string Texture => GOGConstant.Weapons + Name;
 
@@ -27,10 +27,10 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = -13;
-            Item.UseSound = null;
+            Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
-            Item.shoot = ModContent.ProjectileType<SirenDT>();
+            Item.shoot = ModContent.ProjectileType<HarpyDT>();
             Item.shootSpeed = 5f;
 
             Item.channel = true;
@@ -48,7 +48,7 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
-                if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
+                if (player.GetModPlayer<GOGModPlayer>().Gslot < 2) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
                             "戍卫栏不足",//这里是你需要展示的文字
@@ -62,8 +62,6 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.noUseGraphic = false;
 
             if (player.altFunctionUse == 0) {
-                if (player.ownedProjectileCounts[ModContent.ProjectileType<SirenDT>()] == 0) Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
-                if (player.ownedProjectileCounts[ModContent.ProjectileType<SirenDT>()] > 0) Item.UseSound = null;
                 Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
                 int wid = 3;
                 int hig = 5;
@@ -84,7 +82,7 @@ namespace GloryofGuardian.Content.Items.Weapon
                 Item.noUseGraphic = true;
                 for (int i = 0; i < Main.maxProjectiles; i++) {
                     Projectile proj = Main.projectile[i];
-                    if (proj.type == ModContent.ProjectileType<SirenDT>() && proj.owner == player.whoAmI) {
+                    if (proj.type == ModContent.ProjectileType<HarpyDT>() && proj.owner == player.whoAmI) {
                         proj.Kill();
                     }
                 }
@@ -95,15 +93,15 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (player.altFunctionUse == 0) {
-                if (player.ownedProjectileCounts[ModContent.ProjectileType<SirenDT>()] == 0) {
-                    int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(), PrefixCrit());
-                    if (Main.projectile.IndexInRange(p))
-                        Main.projectile[p].originalDamage = Item.damage;
-                    player.UpdateMaxTurrets();
-                }
+                int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(), PrefixCrit());
+                if (Main.projectile.IndexInRange(p))
+                    Main.projectile[p].originalDamage = Item.damage;
+                player.UpdateMaxTurrets();
             }
             return false;
         }
+
+
 
         /// <summary>
         /// 用来特判和传递来自武器前缀的攻速加成

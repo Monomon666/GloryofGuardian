@@ -200,6 +200,16 @@ Items: {
 		DisplayName: Corrupt2 Calling
 		Tooltip: ""
 	}
+
+	HarpyCalling: {
+		DisplayName: Harpy Calling
+		Tooltip: ""
+	}
+
+	PlanteraCalling: {
+		DisplayName: Plantera Calling
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -405,6 +415,13 @@ Projectiles: {
 	Corrupt2DT.DisplayName: Corrupt2 D T
 	Corrupt2Proj0.DisplayName: Corrupt2 Proj0
 	Corrupt2Proj1.DisplayName: Corrupt2 Proj1
+	HarpyDT.DisplayName: Harpy D T
+	HarpyRainFeatherProj.DisplayName: Harpy Rain Feather Proj
+	HarpyRainProj.DisplayName: Harpy Rain Proj
+	PlanteraDT.DisplayName: Plantera D T
+	PlanteraCallProj.DisplayName: Plantera Call Proj
+	PlanteraProj0.DisplayName: Plantera Proj0
+	PlanteraProj1.DisplayName: Plantera Proj1
 }
 
 NPCs: {

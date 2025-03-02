@@ -5,9 +5,9 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class CorruptRainProj : GOGProj
+    public class HarpyRainProj : GOGProj
     {
-        public override string Texture => GOGConstant.Projectiles + Name;
+        public override string Texture => GOGConstant.nulls;
 
         public override void SetStaticDefaults() {
             //残影机制
@@ -25,9 +25,9 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 6;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = 2;//穿透数，1为攻击到第一个敌人就消失
+            Projectile.penetrate = 4;//穿透数，1为攻击到第一个敌人就消失
 
             Projectile.alpha = 255;
 
@@ -62,33 +62,19 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override void OnKill(int timeLeft) {
             //基本爆炸粒子
-            if (Projectile.ai[0] == 0) {
-                for (int i = 0; i < 4; i++) {
-                    int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Wraith, 0f, 0f, 50, Color.White, 0.8f);
-                    Main.dust[num].velocity *= 1f;
-                    if (Main.rand.NextBool(2)) {
-                        Main.dust[num].scale = 0.5f;
-                        Main.dust[num].noGravity = true;
-                        Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
-                    }
-                }
-            }
-
-            if (Projectile.ai[0] == 1) {
-                for (int i = 0; i < 4; i++) {
-                    int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.RainCloud, 0f, 0f, 50, Color.White, 0.8f);
-                    Main.dust[num].velocity *= 1f;
-                    if (Main.rand.NextBool(2)) {
-                        Main.dust[num].scale = 0.5f;
-                        Main.dust[num].noGravity = true;
-                        Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
-                    }
+            for (int i = 0; i < 4; i++) {
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Wraith, 0f, 0f, 50, Color.White, 0.8f);
+                Main.dust[num].velocity *= 1f;
+                if (Main.rand.NextBool(2)) {
+                    Main.dust[num].scale = 0.5f;
+                    Main.dust[num].noGravity = true;
+                    Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
                 }
             }
         }
 
         public override bool PreDraw(ref Color lightColor) {
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "CorruptRainProj").Value;
+            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "HarpyRainProj").Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
             Main.EntitySpriteDraw(texture, drawPos, null, lightColor * ((255f - Projectile.alpha) / 255f), Projectile.rotation, new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f), Projectile.scale, SpriteEffects.None, 0);
 

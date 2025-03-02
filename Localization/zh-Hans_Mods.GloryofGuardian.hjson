@@ -143,7 +143,7 @@ Items: {
 			'''
 			消耗一个炮塔栏位
 			召唤一个发光蘑菇炮塔
-			不停地散步孢子并发射小蘑菇
+			不停地散布孢子并发射小蘑菇
 			更多的孢子塔可以扩大它们的范围,4个到达上限
 			过载攻击会发射三个蘑菇
 			右键收回炮塔
@@ -346,7 +346,22 @@ Items: {
 
 	SirenCalling: {
 		DisplayName: 塞壬呼唤
-		Tooltip: ""
+		Tooltip:
+			'''
+			消耗3个炮塔栏位
+			召唤一个附魔贝壳
+			按照顺序演奏出不同的音符
+			1/8:垂直和水平发射共四个粉色音符
+			F:发射七个绕炮台旋转的绿色音符
+			G:发射一个能减速敌怪的紫色音符
+			1/4:向敌人方向发射三个黛色音符
+			发射数个追踪青色音符
+
+			过载攻击会导致节奏紊乱,从头开始
+			右键收回炮塔
+			仅能召唤一个
+			"那海妖的歌声仍然在回响,隔绝着大海最深处的威胁"
+			'''
 	}
 
 	PinkSlimeCalling: {
@@ -418,8 +433,17 @@ Items: {
 	}
 
 	ChlorophyteCalling: {
-		// DisplayName: Chlorophyte Calling
-		// Tooltip: ""
+		DisplayName: 叶绿新生
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个叶绿炮塔
+			不停地散布叶绿孢子并发射孢子云
+			更多的叶绿塔可以扩大它们的范围,4个到达上限
+			过载攻击会发射三团孢子云
+			右键收回炮塔
+			"这些绿色吸收了光芒,编织着它们发光的梦"
+			'''
 	}
 
 	MeteorCalling: {
@@ -555,7 +579,7 @@ Items: {
 			转而喷射大量灵液
 
 			优先攻击boss
-			右键
+			右键收回炮塔
 			'''
 	}
 
@@ -568,8 +592,38 @@ Items: {
 			在炮塔周围喷涌腐化孢子
 			过载攻击将转而喷涌咒火柱
 
-			优先攻击boss
-			右键
+			右键收回炮塔
+			'''
+	}
+
+	HarpyCalling: {
+		DisplayName: 羽妖之遗
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个鸟妖云
+			悬浮在空中降下雨滴
+			过载攻击转而发射2-3根羽毛
+			羽毛可以钉入敌怪持续造成伤害
+
+			右键收回炮塔
+			"每一朵云彩上都有一只小鸟妖抓住它"
+			'''
+	}
+
+	PlanteraCalling: {
+		DisplayName: 丛林之心
+		Tooltip:
+			'''
+			消耗三个炮塔栏位
+			召唤一个世纪小花
+			在炮塔周围伸出荆棘
+			过载攻击额外发射两个刺球,在落地的地方散播荆棘
+			在丛林中时,荆棘将更加旺盛
+			荆棘刺中敌人时将汲取生命力并蔓延
+			散播花粉,对巨大范围内的敌人陷施加[中毒]与[毒液]减益
+
+			右键收回炮塔
 			'''
 	}
 }
@@ -777,6 +831,13 @@ Projectiles: {
 	// Corrupt2DT.DisplayName: Corrupt2 D T
 	// Corrupt2Proj0.DisplayName: Corrupt2 Proj0
 	// Corrupt2Proj1.DisplayName: Corrupt2 Proj1
+	// HarpyDT.DisplayName: Harpy D T
+	// HarpyRainFeatherProj.DisplayName: Harpy Rain Feather Proj
+	// HarpyRainProj.DisplayName: Harpy Rain Proj
+	// PlanteraDT.DisplayName: Plantera D T
+	// PlanteraCallProj.DisplayName: Plantera Call Proj
+	// PlanteraProj0.DisplayName: Plantera Proj0
+	// PlanteraProj1.DisplayName: Plantera Proj1
 }
 
 NPCs: {

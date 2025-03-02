@@ -2,21 +2,14 @@
 using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class WildProj : GOGProj
+    public class HarpyRainFeatherProj : GOGProj
     {
-        public override string Texture => GOGConstant.Projectiles + Name;
-
-        //弩箭炮塔属性预设：
-
-        //下落阶段
-        int GravityDelayTimer = 0;//下落计时器
-        int GravityDelay = 45;//下落前的飞行时间,///////////////////////////////////////改为注入
+        public override string Texture => GOGConstant.nulls;
 
         //钉入
         //判定
@@ -54,7 +47,9 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.aiStyle = -1;
             Projectile.penetrate = 2;//穿透数，1为攻击到第一个敌人就消失
 
-            Projectile.scale *= 1.2f;
+            Projectile.alpha = 255;
+
+            Projectile.scale *= 0.8f;
 
             Projectile.hide = true;//触发Drawbehind，来使贴图隐藏在某些图层之后
         }
@@ -71,6 +66,7 @@ namespace GloryofGuardian.Content.Projectiles
         int count = 0;
         public override void AI() {
             count++;
+
             UpdateAlpha();
             if (IsStickingToTarget) {
                 StickyAI();
@@ -82,20 +78,12 @@ namespace GloryofGuardian.Content.Projectiles
 
         //普通模式
         private void NormalAI() {
-            GravityDelayTimer++;
+            //渐入
+            if (Projectile.alpha <= 0) Projectile.alpha = 0;
+            else if (Projectile.alpha > 0) Projectile.alpha -= 15;
 
-            //在一段时间内，标枪将以同样的速度运动，但在此之后，标枪的速度迅速下降。
-            if (GravityDelayTimer >= GravityDelay) {
-                GravityDelayTimer = GravityDelay;
-
-                // 阻力
-                Projectile.velocity.X *= 0.98f;
-                // 重力
-                Projectile.velocity.Y += 0.35f;
-            }
-
-            // 旋转90度
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+            // 旋转
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
         }
 
         //扦插模式
@@ -140,13 +128,12 @@ namespace GloryofGuardian.Content.Projectiles
             }
         }
 
+        private const int MaxStickingJavelin = 16; //该类标枪上限
+        private readonly Point[] stickingJavelins = new Point[MaxStickingJavelin]; // 点数组
+
         public override Color? GetAlpha(Color lightColor) {
             return null;
         }
-
-
-        private const int MaxStickingJavelin = 6; //该类标枪上限
-        private readonly Point[] stickingJavelins = new Point[MaxStickingJavelin]; // 点数组
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             if (Projectile.ai[2] != 0) Projectile.Kill();
@@ -167,10 +154,9 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnKill(int timeLeft) {
-            SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             //基本爆炸粒子
             for (int i = 0; i < 4; i++) {
-                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Wraith, 0f, 0f, 50, Color.White, 0.8f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Cloud, 0f, 0f, 50, Color.White, 0.8f);
                 Main.dust[num].velocity *= 1f;
                 if (Main.rand.NextBool(2)) {
                     Main.dust[num].scale = 0.5f;
@@ -180,26 +166,13 @@ namespace GloryofGuardian.Content.Projectiles
             }
         }
 
+        SpriteEffects type0 = SpriteEffects.None;
         public override bool PreDraw(ref Color lightColor) {
-            Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+            if (count == 1 && Main.rand.NextBool(2)) type0 = SpriteEffects.FlipHorizontally;
 
-            for (int k = 0; k < Projectile.oldPos.Length; k++) {
-                if (k != 0 && !IsStickingToTarget) {
-                    Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f) + new Vector2(0f, Projectile.gfxOffY);
-
-                    //Main.spriteBatch.End();
-                    //Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-                    Color color = lightColor * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
-                    Main.EntitySpriteDraw(texture, drawPos, null, color * 0.3f, Projectile.rotation, new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f), Projectile.scale, SpriteEffects.None, 0);
-                    //Main.spriteBatch.ResetBlendState();
-                }
-
-                if (k == 0) {
-                    Vector2 drawPos = (Projectile.oldPos[k] - Main.screenPosition) + new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f) + new Vector2(0f, Projectile.gfxOffY);
-
-                    Main.EntitySpriteDraw(texture, drawPos, null, lightColor, Projectile.rotation, new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f), Projectile.scale, SpriteEffects.None, 0);
-                }
-            }
+            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "HarpyProj").Value;
+            Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
+            Main.EntitySpriteDraw(texture, drawPos, null, lightColor * ((255f - Projectile.alpha) / 255f), Projectile.rotation, new Vector2(texture.Width * 0.5f, Projectile.height * 0.5f), Projectile.scale, type0, 0);
 
             return false;
         }

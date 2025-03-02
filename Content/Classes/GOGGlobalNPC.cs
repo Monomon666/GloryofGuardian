@@ -4,7 +4,6 @@ using GloryofGuardian.Content.Projectiles;
 using GloryofGuardian.Content.Projectiles.ProjNPC;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Threading;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Class
@@ -76,6 +75,8 @@ namespace GloryofGuardian.Content.Class
                         } else if (p.type == ModContent.ProjectileType<MythrilProj2>()) {
                             MythrilJavelin += 1;
                             JavelinCount += 6;
+                        } else if (p.type == ModContent.ProjectileType<HarpyRainFeatherProj>()) {
+                            JavelinCount += 3;
                         }
                     }
                 }
@@ -86,7 +87,7 @@ namespace GloryofGuardian.Content.Class
 
                 //秘银三环
                 if (MythrilJavelin >= 3) {
-                    buffcount1 ++;
+                    buffcount1++;
 
                     if (!npc.boss && npc.life <= npc.lifeMax * 0.15f) {
                         npc.life = 1;
@@ -139,7 +140,7 @@ namespace GloryofGuardian.Content.Class
                     }
                 }
                 //一秒后延迟生效
-                if (buffcount1 >=  60) {
+                if (buffcount1 >= 60) {
                     if (npc.boss && npc.life > npc.lifeMax * 0.05f) {
                         npc.life -= Math.Max((int)(npc.life * 0.02f), 100);
                         CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
@@ -323,7 +324,7 @@ namespace GloryofGuardian.Content.Class
                 if (NanoMarkDebuff1) sca0 *= MathHelper.Min(1, (nanomarkcount / 20f));
                 if (NanoMarkDebuff1) sca0 *= 1;
 
-                if (NanoMarkDebuff1 || NanoMarkDebuff2) { 
+                if (NanoMarkDebuff1 || NanoMarkDebuff2) {
                     Main.EntitySpriteDraw(
                     texturenm,
                     npc.Center - Main.screenPosition,
