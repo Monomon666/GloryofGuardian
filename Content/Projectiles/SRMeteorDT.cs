@@ -216,7 +216,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                 Vector2 velfire = new Vector2(vx, -vy);//降低精度 * Main.rand.NextFloat(0.9f, 1.1f)
 
-                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20);
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
 
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 1, Owner.whoAmI, 0, G);
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -237,7 +237,7 @@ namespace GloryofGuardian.Content.Projectiles
                 Vector2 projcen = target1.Center + new Vector2(0, -1200);
                 projcen += new Vector2(-300 + (300 * i), 0);
 
-                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20);
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
 
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, projcen.Toz(target1.Center + new Vector2(0, (Projectile.Center.Y - target1.Center.Y))) * 24f, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 1, Owner.whoAmI);
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {

@@ -105,7 +105,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(4, 0), ModContent.ProjectileType<Corrupt2Proj0>(), lastdamage, 1, Owner.whoAmI);
                         Projectile proj3 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(-4, 0), ModContent.ProjectileType<Corrupt2Proj0>(), lastdamage, 1, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -125,7 +125,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //过载
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(4, 0), ModContent.ProjectileType<Corrupt2Proj0>(), lastdamage, 1, Owner.whoAmI, 1);
                         Projectile proj3 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(-4, 0), ModContent.ProjectileType<Corrupt2Proj0>(), lastdamage, 1, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {

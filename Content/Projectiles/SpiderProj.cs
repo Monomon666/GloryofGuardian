@@ -60,7 +60,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnKill(int timeLeft) {
-            Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig);
+            Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             //基本爆炸粒子
             for (int i = 0; i < 3; i++) {
                 int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Wraith, 0f, 0f, 50, Color.White, 1f);

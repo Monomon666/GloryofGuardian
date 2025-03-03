@@ -145,7 +145,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                         Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<Blood2Proj0>(), lastdamage, 1, Owner.whoAmI, G, 0);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
@@ -168,7 +168,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                         Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<Blood2Proj0>(), lastdamage, 1, Owner.whoAmI, G, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {

@@ -7,9 +7,9 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class PinkSlimeCallProj : GOGProj
+    public class FlamingJackProj : GOGProj
     {
-        public override string Texture => GOGConstant.Projectiles + Name;
+        public override string Texture => GOGConstant.nulls;
 
         public override void SetStaticDefaults() {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
@@ -17,8 +17,8 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void SetDefaults() {
-            Projectile.width = 30;
-            Projectile.height = 28;
+            Projectile.width = 16;
+            Projectile.height = 16;
             Projectile.friendly = true;
             Projectile.hostile = false;
             Projectile.DamageType = GuardianDamageClass.Instance;
@@ -26,9 +26,9 @@ namespace GloryofGuardian.Content.Projectiles
             //Projectile.light = 1.0f;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 0;
+            Projectile.localNPCHitCooldown = 12;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = 1;
+            Projectile.penetrate = 12;
 
             Projectile.extraUpdates = 0;
             Projectile.light = 1.5f;
@@ -46,13 +46,25 @@ namespace GloryofGuardian.Content.Projectiles
 
         int count = 0;
         int mode = 0;
+        int jumpnum = 0;
         public override void AI() {
             count++;
             if (Projectile.ai[0] == 0 && count <= 60) reboundcount = 3;
+            if (Projectile.ai[0] == 0 && count <= 60) reboundcount0 = 12;
 
             Projectile.rotation += 0.1f;
 
             Projectile.velocity.Y += 0.35f;
+
+            if (count % 1 == 0) {
+                for (int i = 0; i < 12; i++) {
+                    int num = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Torch, 0f, 0f, 50, Color.White, 1f);
+                    Main.dust[num].velocity *= 0f;
+                    Main.dust[num].noGravity = true;
+                }
+            }
+
+            if (reboundcount0 < 0) Projectile.Kill();
         }
 
         public override Color? GetAlpha(Color lightColor) {
@@ -60,17 +72,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            for (int i = 0; i < 8; i++) {
-                Vector2 vel = new Vector2(0, -8);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center, vel.RotatedBy(-MathHelper.Pi + MathHelper.PiOver4 * i), ModContent.ProjectileType<SlimeProj>(), Projectile.damage / 4, 1, Owner.whoAmI, 2);
-                if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
-                    if (proj1.ModProjectile is GOGProj proj2) {
-                        proj2.OrichalcumMarkProj = true;
-                        proj2.OrichalcumMarkProjcount = 300;
-                    }
-                }
-            }
-            Projectile.Kill();
+            target.AddBuff(BuffID.OnFire, 180);
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -79,6 +81,7 @@ namespace GloryofGuardian.Content.Projectiles
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 
+        int reboundcount0 = 0;
         int reboundcount = 0;
         public override bool OnTileCollide(Vector2 oldVelocity) {
             bool willcontinue = false;
@@ -86,55 +89,41 @@ namespace GloryofGuardian.Content.Projectiles
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item154, Projectile.position);
 
-            for (int i = 0; i < 1000; i++) {
-                Projectile p = Main.projectile[i];
-                if (p.active) {//安全性检测
-                    if (p.type == ModContent.ProjectileType<SlimeProj0>()) {//判戍卫弹幕
-                        if (Vector2.Distance(Projectile.Center, p.Center) < 32) {//判距离
-                            reboundcount++;
-                            if (Projectile.ai[0] == 1) {
-                                Projectile.velocity.X *= 1.05f;
-                                Projectile.velocity.Y -= 4f;
-                                willcontinue = true;
-                            }
-                        }
-                    }
-                }
-            }
-
             if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon) {
                 if (Projectile.ai[0] == 0) Projectile.velocity.X = -oldVelocity.X;
                 if (Projectile.ai[0] == 1 && !willcontinue) Projectile.velocity.X *= 0f;
                 reboundcount--;
+                reboundcount0--;
             }
 
             if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon) {
-                if (Projectile.ai[0] == 0) Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
+                if (Projectile.ai[0] == 0) Projectile.velocity.Y = -oldVelocity.Y * 0.95f;
                 if (reboundcount > 0) {
                     reboundcount--;
+                    reboundcount0--;
                 }
                 if (reboundcount <= 0) {
                     if (Projectile.velocity.Y <= 0) {
-                        //判定过载攻击
-                        if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 0);
-                            if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
-                                if (proj1.ModProjectile is GOGProj proj2) {
-                                    proj2.OrichalcumMarkProj = true;
-                                    proj2.OrichalcumMarkProjcount = 300;
-                                }
-                            }
+
+                        NPC target1 = Projectile.Center.InPosClosestNPC(800, true, true);
+                        if (target1 != null && target1.active) {
+                            // 计算水平距离和垂直距离
+                            float distanceX = target1.Center.X - Projectile.Center.X;
+                            float distanceY = target1.Center.Y - Projectile.Center.Y;
+
+                            // 假设飞行时间为固定值（可以根据需要调整）
+                            float time = 60f; // 60 帧（1 秒）
+
+                            // 计算水平速度和垂直速度
+                            float velocityX = distanceX / time;
+                            float velocityY = (distanceY - 0.5f * 0.35f * time * time) / time;
+
+                            // 设置初速度
+                            Vector2 initialVelocity = new Vector2(velocityX, velocityY);
+                            Projectile.velocity = initialVelocity;
                         }
-                        if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 1);
-                            if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
-                                if (proj1.ModProjectile is GOGProj proj2) {
-                                    proj2.OrichalcumMarkProj = true;
-                                    proj2.OrichalcumMarkProjcount = 300;
-                                }
-                            }
-                        }
-                        Projectile.Kill();
+
+                        reboundcount = 3;
                     }
                 }
 

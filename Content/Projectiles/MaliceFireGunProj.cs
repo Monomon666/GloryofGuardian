@@ -52,7 +52,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnKill(int timeLeft) {
-            if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig);
+            if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
         }
 
         public override bool PreDraw(ref Color lightColor) {

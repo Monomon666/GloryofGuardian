@@ -125,7 +125,7 @@ namespace GloryofGuardian.Content.Projectiles
                         for (int i = 0; i < 1; i++) {
                             Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero);
 
-                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60);
+                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<AncientBattleProj>(), lastdamage, 1, Owner.whoAmI);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
@@ -146,7 +146,7 @@ namespace GloryofGuardian.Content.Projectiles
                         for (int i = 0; i < 1; i++) {
                             Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero);
 
-                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60);
+                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<AncientBattleProj>(), lastdamage, 1, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
@@ -171,7 +171,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                         int vec = Projectile.Center.X > target1.Center.X ? 1 : -1;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<AncientBattleProj2>(), lastdamage, 1, Owner.whoAmI, vec);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {

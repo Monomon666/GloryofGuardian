@@ -204,8 +204,7 @@ Items: {
 		DisplayName: 织网蛛巢
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			和100生命值
+			消耗100生命值
 			召唤一个拥有400生命值的蜘蛛巢
 			首次受到伤害,以及每次失去25%生命值时,
 			召唤一只毒牙蜘蛛
@@ -626,6 +625,77 @@ Items: {
 			右键收回炮塔
 			'''
 	}
+
+	AbyssalEchoCalling: {
+		DisplayName: 深渊回响
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个机械鲨鱼炮
+			锁定敌人并释放机械鲨鱼导弹
+			能够追踪被纳米标记的敌人Todo
+			过载攻击发射一发大型导弹
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
+
+	FerryLightCalling: {
+		DisplayName: 引渡魂灯
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个引渡魂灯
+			标记并锁定范围内生命低于50%且低于2000的敌怪
+			若敌怪非boss，则在引导4秒后将其灵魂引爆
+			对其范围内所有敌怪造成
+			等于其剩余生命值的伤害
+
+			过载攻击会使灵魂引爆范围增大
+
+			优先攻击boss
+			右键收回炮塔
+			"此灯用于引领那些逝去战士的灵魂，
+			而战士们却愿意牺牲灵魂的全部来守护"
+			'''
+	}
+
+	FlamingJackCalling: {
+		DisplayName: 火焰杰克南瓜
+		Tooltip:
+			'''
+			消耗一定生命值
+			召唤一个火焰杰克南瓜
+			南瓜在完成充能后收到伤害时会发射跳跃南瓜火焰
+			火焰每3次跳跃会跃向范围内最近的敌人
+			若一段时间内未受伤，南瓜将会主动跃向最近的敌人
+			南瓜击中敌人时造成[涂油]减益
+			南瓜火焰击中敌人时造成[着火了]减益
+
+			南瓜拥有等同于召唤者100%的防御
+			以及等同的接触伤害
+			不受益于召唤者的其它属性
+
+			优先攻击boss
+			右键收回炮塔
+			"永恒的希腊烈火，传递着不灭的希望"
+			'''
+	}
+
+	ShadowFlameScrollCalling: {
+		DisplayName: 暗影卷轴
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个暗影祭坛
+			卷轴会释放出扭曲的力量扭曲附近所有弹幕的方向
+
+			优先攻击boss
+			右键收回炮塔
+			"为了守护此地,它们不惜向黑暗借取力量"
+			'''
+	}
 }
 
 Prefixes: {
@@ -838,6 +908,14 @@ Projectiles: {
 	// PlanteraCallProj.DisplayName: Plantera Call Proj
 	// PlanteraProj0.DisplayName: Plantera Proj0
 	// PlanteraProj1.DisplayName: Plantera Proj1
+	// AbyssalEchoDT.DisplayName: Abyssal Echo D T
+	// AbyssalEchoProj.DisplayName: Abyssal Echo Proj
+	// AbyssalEchoWarningLine.DisplayName: Abyssal Echo Warning Line
+	// FerryLightDT.DisplayName: Ferry Light D T
+	// FerryLightProj.DisplayName: Ferry Light Proj
+	// FlamingJackProj.DisplayName: Flaming Jack Proj
+	// ShadowFlameScrollDT.DisplayName: Shadow Flame Scroll D T
+	// FerryLightProj2.DisplayName: Ferry Light Proj2
 }
 
 NPCs: {
@@ -850,4 +928,5 @@ NPCs: {
 	// NightRainBird.DisplayName: Night Rain Bird
 	// NightSlime.DisplayName: Night Slime
 	// NightLantern1.DisplayName: Night Lantern1
+	// FlamingJackNPC.DisplayName: Flaming Jack N P C
 }

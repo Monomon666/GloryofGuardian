@@ -220,6 +220,21 @@ namespace GloryofGuardian.Content.Class
                                 false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
                                 );
             }
+            //南瓜实现反伤
+            if (target.type == ModContent.NPCType<FlamingJackNPC>()) {
+                int touchdamage = (int)MathHelper.Max(1, target.defense - (int)(npc.defense * 0.5f));
+                if (npc.life <= touchdamage) npc.life = 0;
+                else npc.life -= touchdamage;
+
+                CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
+                                Color.White,//跳字的颜色
+                                touchdamage,//这里是你需要展示的文字
+                                false,//dramatic为true可以使得字体闪烁，
+                                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                                );
+
+                npc.AddBuff(BuffID.Oiled, 300);
+            }
 
             base.ModifyHitNPC(npc, target, ref modifiers);
         }

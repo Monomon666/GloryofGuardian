@@ -143,7 +143,7 @@ namespace GloryofGuardian.Content.Projectiles
                             if (player.statLife < player.statLifeMax2) {
                                 
                                 if (!player.HasBuff<HoneyDebuff>()) {
-                                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4);
+                                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Projectile.Center);
                                     player.statLife += 40;
                                     player.AddBuff(ModContent.BuffType<HoneyDebuff>(), 3600 - Acount * 600);
                                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
@@ -182,7 +182,7 @@ namespace GloryofGuardian.Content.Projectiles
                             if (player.statLife < player.statLifeMax2) {
 
                                 if (!player.HasBuff<HoneyDebuff>()) {
-                                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4);
+                                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Projectile.Center);
                                     player.statLife += 60;
                                     player.AddBuff(ModContent.BuffType<HoneyDebuff>(), 3600 - Acount * 600);
                                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围

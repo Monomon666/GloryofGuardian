@@ -130,7 +130,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int i = -firenum; i <= firenum; i++) {
                     Vector2 vel = (target1.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * 12f;
 
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39);
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
 
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel.RotatedBy(i * fireveltor), ModContent.ProjectileType<SpiderProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
 

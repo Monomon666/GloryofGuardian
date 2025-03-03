@@ -133,7 +133,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //轴
                 if (count == Gcount) {
                     for (int i = 0; i < 4; i++) {
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(12, 0).RotatedBy(i * MathHelper.PiOver2), ModContent.ProjectileType<SirenProj>(), lastdamage, 1, Owner.whoAmI, 0);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -148,7 +148,7 @@ namespace GloryofGuardian.Content.Projectiles
                 }//转
                 if (count == 2 * Gcount) {
                     for (int i = 0; i < 7; i++) {
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -4).RotatedBy(i * 2 * MathHelper.Pi / 7f), ModContent.ProjectileType<SirenProj>(), lastdamage, 1, Owner.whoAmI, 2);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -165,7 +165,7 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 vel = projcen.Toz(target1.Center) * 4f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel, ModContent.ProjectileType<SirenProj>(), lastdamage, 1, Owner.whoAmI, 3);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -182,7 +182,7 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = -1; i < 2; i++) {
                         Vector2 vel = projcen.Toz(target1.Center) * 6f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel.RotatedBy(i * 0.3f - 0.3f), ModContent.ProjectileType<SirenProj>(), lastdamage, 1, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -197,7 +197,7 @@ namespace GloryofGuardian.Content.Projectiles
                 }//合奏
                 if (count == 5 * Gcount) {
                     for (int i = 0; i < mode; i++) {
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -1).RotatedByRandom(0.5f), ModContent.ProjectileType<SirenProj>(), lastdamage, 1, Owner.whoAmI, 4);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {

@@ -124,7 +124,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 8f;
                         if (target1.boss) nowvel *= 1.2f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
                         if (Main.rand.NextBool(10)) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -163,7 +163,7 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 8f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
                         if (Main.rand.NextBool(10)) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {

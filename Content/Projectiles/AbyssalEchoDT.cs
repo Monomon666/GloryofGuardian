@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class RustyGunDT : GOGDT
+    public class AbyssalEchoDT : GOGDT
     {
         //不使用贴图,重写绘制
         public override string Texture => GOGConstant.nulls;
@@ -25,6 +25,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 36000;
 
             Projectile.scale *= 1f;
+
+            Projectile.light = 1.5f;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -128,7 +130,9 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel * vel, ModContent.ProjectileType<AbyssalEchoProj>(), 100, Projectile.knockBack, Main.myPlayer, 1, 0, Owner.whoAmI);//生成预警线
+
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -136,39 +140,15 @@ namespace GloryofGuardian.Content.Projectiles
                             }
                         }
                     }
-
-                    //计时重置,通过更改这个值来重置攻击
-                    if (interval > 12) interval -= 1;
-                    count = Main.rand.Next(4);
                 }
 
                 //过载
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 1; i++) {
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
-                        Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
-                            }
-                        }
-
-                        if (interval > 12) interval -= 1;
-                    }
-
-                    if (numatk < 3) {
-                        numatk += 1;
-                        count -= 4;
-                    }
-                    if (numatk >= 3) {
-                        numatk = 0;
-                        count = Main.rand.Next(4);
-                    }
                 }
+
+                //计时重置,通过更改这个值来重置攻击
+                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
             }
         }
 
@@ -241,11 +221,11 @@ namespace GloryofGuardian.Content.Projectiles
             //不同朝向时翻转贴图
             SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
 
-            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
+            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AbyssalEchoDT").Value;
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -16);
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT2").Value;
+            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AbyssalEchoDT2").Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -36);
             //if (spriteEffects == SpriteEffects.None) drawPosition += new Vector2(0, -8);
             Vector2 fix = new Vector2(0, 0);

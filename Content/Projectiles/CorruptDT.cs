@@ -91,7 +91,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -118,7 +118,7 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), tarpos + new Vector2(0, -240), Vector2.Zero, ModContent.ProjectileType<CorruptCloudProj>(), lastdamage, 1, Owner.whoAmI, 0);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
@@ -142,7 +142,7 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), tarpos + new Vector2(0, -240), Vector2.Zero, ModContent.ProjectileType<CorruptCloudProj>(), lastdamage, 1, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {

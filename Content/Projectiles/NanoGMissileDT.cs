@@ -190,7 +190,7 @@ namespace GloryofGuardian.Content.Projectiles
             //普通
             if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                 for (int i = 0; i < 1; i++) {
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -2), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
@@ -204,7 +204,7 @@ namespace GloryofGuardian.Content.Projectiles
             //过载
             if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                 for (int i = 0; i < 1; i++) {
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -2), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {

@@ -210,6 +210,26 @@ Items: {
 		DisplayName: Plantera Calling
 		Tooltip: ""
 	}
+
+	AbyssalEchoCalling: {
+		DisplayName: Abyssal Echo Calling
+		Tooltip: ""
+	}
+
+	FerryLightCalling: {
+		DisplayName: Ferry Light Calling
+		Tooltip: ""
+	}
+
+	FlamingJackCalling: {
+		DisplayName: Flaming Jack Calling
+		Tooltip: ""
+	}
+
+	ShadowFlameScrollCalling: {
+		DisplayName: Shadow Flame Scroll Calling
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -422,6 +442,14 @@ Projectiles: {
 	PlanteraCallProj.DisplayName: Plantera Call Proj
 	PlanteraProj0.DisplayName: Plantera Proj0
 	PlanteraProj1.DisplayName: Plantera Proj1
+	AbyssalEchoDT.DisplayName: Abyssal Echo D T
+	AbyssalEchoProj.DisplayName: Abyssal Echo Proj
+	AbyssalEchoWarningLine.DisplayName: Abyssal Echo Warning Line
+	FerryLightDT.DisplayName: Ferry Light D T
+	FerryLightProj.DisplayName: Ferry Light Proj
+	FlamingJackProj.DisplayName: Flaming Jack Proj
+	ShadowFlameScrollDT.DisplayName: Shadow Flame Scroll D T
+	FerryLightProj2.DisplayName: Ferry Light Proj2
 }
 
 NPCs: {
@@ -434,4 +462,5 @@ NPCs: {
 	NightRainBird.DisplayName: Night Rain Bird
 	NightSlime.DisplayName: Night Slime
 	NightLantern1.DisplayName: Night Lantern1
+	FlamingJackNPC.DisplayName: Flaming Jack N P C
 }

@@ -140,7 +140,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 projcen = Projectile.Center + new Vector2(0, -76) + new Vector2(0, -1) * breath;
                         Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
                         int crit = (Main.rand.Next(100) >= (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1])) ? 0 : 1;
 
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<MeteorProj>(), lastdamage, 1, Owner.whoAmI, crit);

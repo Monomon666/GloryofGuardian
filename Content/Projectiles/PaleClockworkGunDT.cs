@@ -127,7 +127,7 @@ namespace GloryofGuardian.Content.Projectiles
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
@@ -154,7 +154,7 @@ namespace GloryofGuardian.Content.Projectiles
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {

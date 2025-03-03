@@ -150,7 +150,7 @@ namespace GloryofGuardian.Content.Projectiles
                     float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                     Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                     //普通
                     if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, power);
@@ -189,7 +189,7 @@ namespace GloryofGuardian.Content.Projectiles
                     float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                     Vector2 nowvel = new Vector2((float)Math.Cos(wrotation2), (float)Math.Sin(wrotation2));
 
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11);
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                     //普通
                     if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(-20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, power);

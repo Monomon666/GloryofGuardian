@@ -89,7 +89,7 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
 
             if (count >= 2) {
                 //发射
-                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item34);
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
 
                 if (count % 1 == 0) {
                     for (int i = 0; i < 1; i++) {

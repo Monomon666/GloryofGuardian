@@ -1,10 +1,14 @@
 ﻿using Terraria.DataStructures;
+using Terraria.ID;
 
 namespace GloryofGuardian.Content.Class
 {
-    public class GOGGlobaProj : GlobalProjectile
+    public class GOGGlobalProj : GlobalProjectile
     {
         public override bool InstancePerEntity => true;
+
+        //暗影卷轴偏移角
+        public float ShadowAngleOffset = 0;
 
         //戍卫伤害暴击转过载攻击
         public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers) {
@@ -18,6 +22,14 @@ namespace GloryofGuardian.Content.Class
         }
 
         public override void AI(Projectile projectile) {
+            if (ShadowAngleOffset != 0) {
+                for (int j = 0; j < 2; j++) {
+                    int num1 = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.PurpleTorch, 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num1].noGravity = true;
+                    Main.dust[num1].velocity *= 3f;
+                }
+            }
+
             base.AI(projectile);
         }
 
