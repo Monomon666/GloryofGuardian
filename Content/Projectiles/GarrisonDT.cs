@@ -109,7 +109,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// 监测与攻击
         /// </summary>
         void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
+            Vector2 tarpos = target1.Center + new Vector2(0, target1.height);
             Vector2 projcen = Projectile.Center + new Vector2(0, 16);
 
             //发射
@@ -121,7 +121,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -46) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -46) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 8, Owner.whoAmI, 0, 0, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -138,7 +138,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -46) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -46) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 8, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -161,7 +161,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -40) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -40) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 8, Owner.whoAmI, 0, 0, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -178,7 +178,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -40) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -40) + nowvel * 20f, nowvel * vel, ModContent.ProjectileType<GarrisonProj>(), lastdamage, 8, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -198,7 +198,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// 炮台旋转
         /// </summary>
         void Turn(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
+            Vector2 tarpos = target1.Center + new Vector2(0, target1.height);
             Vector2 projcen = Projectile.Center + new Vector2(0, 16);
 
             Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;

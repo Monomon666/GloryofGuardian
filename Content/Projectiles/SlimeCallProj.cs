@@ -61,7 +61,7 @@ namespace GloryofGuardian.Content.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             for (int i = 0; i < 4; i++) {
                 Vector2 vel = new Vector2(0, -8);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center, vel.RotatedBy(-MathHelper.Pi + MathHelper.PiOver2 * i), ModContent.ProjectileType<SlimeProj>(), Projectile.damage / 4, 1, Owner.whoAmI, 2);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center, vel.RotatedBy(-MathHelper.Pi + MathHelper.PiOver2 * i), ModContent.ProjectileType<SlimeProj>(), Projectile.damage / 2, 1, Owner.whoAmI, 2);
                 if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
                     if (proj1.ModProjectile is GOGProj proj2) {
                         proj2.OrichalcumMarkProj = true;

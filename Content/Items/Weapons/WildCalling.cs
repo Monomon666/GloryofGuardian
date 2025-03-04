@@ -1,7 +1,5 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Projectiles;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -25,16 +23,16 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         //SD，在生成该武器时设定和确认的数值
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 15;
             Item.DamageType = GuardianDamageClass.Instance;//戍卫伤害
             Item.width = 56;
             Item.height = 56;
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 6;
+            Item.knockBack = 0;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;//哨兵召唤声音
             Item.autoReuse = false;
 
@@ -175,7 +173,9 @@ namespace GloryofGuardian.Content.Items.Weapon
         //物品合成表
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
+            recipe.AddIngredient(ItemID.Wood, 10);
+            recipe.AddRecipeGroup("GloryofGuardian.AnyCopperBar", 2);
+            recipe.AddIngredient(ItemID.WoodenArrow, 5);
             recipe.AddTile(TileID.WorkBenches);
             recipe.Register();
         }

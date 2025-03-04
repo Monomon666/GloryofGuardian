@@ -24,7 +24,7 @@ Items: {
 	}
 
 	WildCalling: {
-		DisplayName: 无边荒野
+		DisplayName: 荒野
 		Tooltip:
 			'''
 			消耗一个炮塔栏位
@@ -122,7 +122,7 @@ Items: {
 	}
 
 	GarrisonCalling: {
-		DisplayName: 白银哨卫
+		DisplayName: 哨卫
 		Tooltip:
 			'''
 			消耗一个炮塔栏位
@@ -695,6 +695,21 @@ Items: {
 			右键收回炮塔
 			"为了守护此地,它们不惜向黑暗借取力量"
 			'''
+	}
+
+	DarkCrystalBody: {
+		DisplayName: 黯晶胸甲
+		Tooltip: ""
+	}
+
+	DarkCrystalLegs: {
+		DisplayName: 黯晶腿铠
+		Tooltip: ""
+	}
+
+	DarkCrystalHead: {
+		DisplayName: 黯晶头盔
+		Tooltip: ""
 	}
 }
 

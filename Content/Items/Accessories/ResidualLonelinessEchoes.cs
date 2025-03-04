@@ -25,8 +25,7 @@ namespace GloryofGuardian.Content.Items.Accessories
         int mode = 0;
         public override void UpdateAccessory(Player player, bool hideVisual) {
             player.GetModPlayer<GOGModPlayer>().residuallonelinessechoes = true;
-            player.GetDamage<GuardianDamageClass>() += 1f;
-
+            player.GetDamage<GuardianDamageClass>() += 0f;
             player.GetCritChance<GenericDamageClass>() += 0;
 
             base.UpdateAccessory(player, hideVisual);

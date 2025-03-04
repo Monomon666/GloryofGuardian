@@ -23,7 +23,6 @@ namespace GloryofGuardian.Content.Items.Accessories
         int mode = 0;
         public override void UpdateAccessory(Player player, bool hideVisual) {
             //player.GetModPlayer<GOGModPlayer>().Shroom = true;
-            player.GetDamage<GuardianDamageClass>() *= 0.1f;
             player.GetCritChance<GenericDamageClass>() = 100;
 
             base.UpdateAccessory(player, hideVisual);

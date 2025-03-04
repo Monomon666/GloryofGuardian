@@ -24,7 +24,7 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.scale *= 1f;
             Projectile.timeLeft = 480;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 6;
+            Projectile.localNPCHitCooldown = 12;
 
             Projectile.scale *= 1f;
         }

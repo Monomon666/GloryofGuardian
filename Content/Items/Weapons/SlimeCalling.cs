@@ -17,16 +17,16 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 10;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 64;
             Item.height = 66;
-            Item.useTime = 45;
-            Item.useAnimation = 45;
+            Item.useTime = 90;
+            Item.useAnimation = 90;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 6;
+            Item.knockBack = 9;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.Item54;
             Item.autoReuse = true;
 

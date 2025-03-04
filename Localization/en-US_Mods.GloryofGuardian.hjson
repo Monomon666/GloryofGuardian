@@ -230,6 +230,21 @@ Items: {
 		DisplayName: Shadow Flame Scroll Calling
 		Tooltip: ""
 	}
+
+	DarkCrystalBody: {
+		DisplayName: Dark Crystal Body
+		Tooltip: ""
+	}
+
+	DarkCrystalLegs: {
+		DisplayName: Dark Crystal Legs
+		Tooltip: ""
+	}
+
+	DarkCrystalHead: {
+		DisplayName: Dark Crystal Head
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
