@@ -17,7 +17,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 30;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 60;
             Item.height = 64;
@@ -26,7 +26,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 

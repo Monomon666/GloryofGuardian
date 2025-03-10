@@ -1,9 +1,12 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
+using GloryofGuardian.Content.Items.Materials;
+using GloryofGuardian.Content.Items.Weapon;
 using GloryofGuardian.Content.Projectiles;
 using GloryofGuardian.Content.Projectiles.ProjNPC;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Class
@@ -142,10 +145,11 @@ namespace GloryofGuardian.Content.Class
                 //一秒后延迟生效
                 if (buffcount1 >= 60) {
                     if (npc.boss && npc.life > npc.lifeMax * 0.05f) {
-                        npc.life -= Math.Max((int)(npc.life * 0.02f), 100);
+                        npc.life -= Math.Min((int)(npc.life * 0.02f), 100);
+                        Main.NewText(Math.Min((int)(npc.life * 0.02f), 100));
                         CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
-                            Math.Max((int)(npc.life * 0.02f), 100),//这里是你需要展示的文字
+                            Math.Min((int)(npc.life * 0.02f), 100),//这里是你需要展示的文字
                             false,//dramatic为true可以使得字体闪烁，
                             false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
                             );
@@ -261,6 +265,25 @@ namespace GloryofGuardian.Content.Class
 
         public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone) {
             base.OnHitByProjectile(npc, projectile, hit, damageDone);
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+            //暗影焰幻鬼掉落暗影卷轴
+            if (npc.netID == NPCID.ShadowFlameApparition) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShadowFlameScrollCalling>(), 10, 1));
+            }
+            //T2T3食人魔T3魔法师掉落异界之魂
+            if (npc.netID == NPCID.DD2DarkMageT3) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulofAnotherWorld>(), 1, 3, 5));
+            }
+            if (npc.netID == NPCID.DD2OgreT2) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulofAnotherWorld>(), 1, 3, 5));
+            }
+            if (npc.netID == NPCID.DD2OgreT3) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulofAnotherWorld>(), 1, 5, 10));
+            }
+
+            base.ModifyNPCLoot(npc, npcLoot);
         }
 
         public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {

@@ -23,8 +23,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.DamageType = GuardianDamageClass.Instance;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
-            Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.usesLocalNPCImmunity = true;//是否使用本地
+            Projectile.localNPCHitCooldown = 12;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;//穿透数，1为攻击到第一个敌人就消失
             Projectile.tileCollide = false;
@@ -72,6 +72,9 @@ namespace GloryofGuardian.Content.Projectiles
                     }
                 }
             }
+
+            if (Projectile.ai[0] == 1 && !Owner.ZoneJungle && count > 20) Projectile.Kill();
+            if (Projectile.ai[0] == 1 && Owner.ZoneJungle && count > 30) Projectile.Kill();
 
             if (!Owner.ZoneJungle && count > 60) Projectile.Kill();
             if (Owner.ZoneJungle && count > 120) Projectile.Kill();

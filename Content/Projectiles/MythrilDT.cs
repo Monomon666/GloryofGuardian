@@ -37,7 +37,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 60;//默认发射间隔
+            count0 = 120;//默认发射间隔
             interval = 5;//多重攻击间隔长度
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
@@ -63,7 +63,7 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
             Calculate();
             //索敌与行动
-            NPC target1 = Projectile.Center.InPosClosestNPC(800, false, true);
+            NPC target1 = (Projectile.Center + new Vector2(-6, -32)).InPosClosestNPC(800, false, true);
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
@@ -110,8 +110,8 @@ namespace GloryofGuardian.Content.Projectiles
         /// 监测与攻击
         /// </summary>
         void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, 16);
+            Vector2 tarpos = target1.Center;
+            Vector2 projcen = Projectile.Center + new Vector2(-6, -24);
 
             //发射
             if (count >= Gcount) {
@@ -123,20 +123,17 @@ namespace GloryofGuardian.Content.Projectiles
                     if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
-                        if (Main.rand.NextBool(5)) {
-                            if (count == Gcount) {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -44) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj2>(), lastdamage * 2, 0, Owner.whoAmI);
+                        if (count == Gcount) {
+                            if (Main.rand.NextBool(5)) {
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 52f, nowvel * 36f, ModContent.ProjectileType<MythrilProj2>(), lastdamage, 8, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
                                         proj2.OrichalcumMarkProjcount = 300;
                                     }
                                 }
-                            }
-
-                        } else {
-                            if (count == Gcount) {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -44) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage * 2, 0, Owner.whoAmI);
+                            } else {
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 52f, nowvel * 36f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 8, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -154,7 +151,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
                         if (count == Gcount + 2) {
                             if (Main.rand.NextBool(3)) {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -52) + nowvel * 52f, nowvel.RotatedBy(-rotby) * 24f, ModContent.ProjectileType<MythrilProj2>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 52f, nowvel.RotatedBy(-rotby) * 24f, ModContent.ProjectileType<MythrilProj2>(), lastdamage, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -162,7 +159,7 @@ namespace GloryofGuardian.Content.Projectiles
                                     }
                                 }
                             } else {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -52) + nowvel * 52f, nowvel.RotatedBy(-rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 52f, nowvel.RotatedBy(-rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -173,7 +170,7 @@ namespace GloryofGuardian.Content.Projectiles
                         }
                         if (count == Gcount + 4) {
                             if (Main.rand.NextBool(3)) {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -44) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj2>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 2) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj2>(), lastdamage / 2, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -181,7 +178,7 @@ namespace GloryofGuardian.Content.Projectiles
                                     }
                                 }
                             } else {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -44) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 2) + nowvel * 52f, nowvel * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage / 2, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -192,7 +189,7 @@ namespace GloryofGuardian.Content.Projectiles
                         }
                         if (count == Gcount + 6) {
                             if (Main.rand.NextBool(3)) {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -36) + nowvel * 52f, nowvel.RotatedBy(rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 4) + nowvel * 52f, nowvel.RotatedBy(rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage / 3, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -200,7 +197,7 @@ namespace GloryofGuardian.Content.Projectiles
                                     }
                                 }
                             } else {
-                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -36) + nowvel * 52f, nowvel.RotatedBy(rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 4) + nowvel * 52f, nowvel.RotatedBy(rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage / 3, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                     if (proj1.ModProjectile is GOGProj proj2) {
                                         proj2.OrichalcumMarkProj = true;
@@ -221,8 +218,8 @@ namespace GloryofGuardian.Content.Projectiles
         /// 炮台旋转
         /// </summary>
         void Turn(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, 16);
+            Vector2 tarpos = target1.Center;
+            Vector2 projcen = Projectile.Center + new Vector2(-6, -24);
 
             Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;
             float rot2 = vector2.ToRotation();

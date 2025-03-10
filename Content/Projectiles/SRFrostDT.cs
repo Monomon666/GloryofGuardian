@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class Frost2DT : GOGDT
+    public class SRFrostDT : GOGDT
     {
         //不使用贴图,重写绘制
         public override string Texture => GOGConstant.nulls;
@@ -24,7 +24,7 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.scale *= 1f;
             Projectile.timeLeft = 36000;
 
-            Projectile.scale *= 1f;
+            Projectile.scale *= 1.5f;
 
             Projectile.light = 2f;
         }
@@ -38,7 +38,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 45;//默认发射间隔
+            count0 = 90;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
@@ -52,6 +52,9 @@ namespace GloryofGuardian.Content.Projectiles
         int Gcount = 0;
         int lastdamage = 0;
         Projectile projcenter = null;
+        //冰霜标记
+        int frostburnnum = 0;
+        bool frost = false;
         public override void AI() {
             countdust++;
 
@@ -61,33 +64,45 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
             Calculate();
 
+            float breath = (float)Math.Sin(drawcount / 8f);
+
             if (countdust % 1 == 0) {
                 for (int j = 0; j < 1; j++) {
-                    int num1 = Dust.NewDust(drawPosition1 + Main.screenPosition + new Vector2(-28, -20), 32, 16, DustID.SnowflakeIce, 0f, 0f, 10, Color.White, 1f);
+                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(12, -56) + new Vector2(0, -1) * breath + new Vector2(-28, -20), 32, 16, DustID.SnowflakeIce, 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num1].noGravity = true;
                     Main.dust[num1].velocity *= 1f;
                 }
             }
 
-            //SnowSpray
+            //仆从判定
+            frostburnnum = 0;
+            for (int i = 0; i < Main.maxProjectiles; i++) {
+                Projectile p = Main.projectile[i];
+                if (p.active) {//安全性检测
+                    if (p.type == ModContent.ProjectileType<FrostDT>()) {//判戍卫弹幕
+                        if (Vector2.Distance(Projectile.Center, p.Center) < 1600) {//判距离
+                            frostburnnum++;
+                        }
+                    }
+                }
+            }
 
-            if (countdust % 1 == 0) {
-                for (int j = 0; j < 1; j++) {
-                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(-24, -72), 42, 24, DustID.SnowSpray, 0f, 0f, 10, Color.White, 0.4f);
-                    Main.dust[num1].noGravity = false;
-                    Main.dust[num1].velocity = new Vector2(0, 1f) * Main.rand.NextFloat(1, 1.5f);
+            //强化判定
+            frost = false;
+            if ((Owner.ZoneSnow || Main.xMas) && frostburnnum >= 3) {
+                frost = true;
+                if (countdust % 1 == 0) {
+                    for (int j = 0; j < 1; j++) {
+                        int num1 = Dust.NewDust(Projectile.Center + new Vector2(-48, -72), 90, 24, DustID.SnowSpray, 0f, 0f, 10, Color.White, 0.4f);
+                        Main.dust[num1].noGravity = false;
+                        Main.dust[num1].velocity = new Vector2(0, 1f) * Main.rand.NextFloat(1, 1.5f);
+                    }
                 }
             }
 
             //索敌与行动
-            NPC target1 = Projectile.Center.InPosClosestNPC(800, true, true);
+            NPC target1 = Projectile.Center.InPosClosestNPC(1600, true, true);
             if (target1 != null) {
-                for (int i = 0; i <= 8; i++) {
-                    Dust dust1 = Dust.NewDustDirect(Projectile.Center + new Vector2(-12, -72) + Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * 80, 8, 8, DustID.SnowSpray, 1f, 1f, 100, Color.Blue, 0.8f);
-                    dust1.velocity *= 0;
-                    dust1.noGravity = true;
-                }
-
                 Attack(target1);
             }
 
@@ -135,38 +150,52 @@ namespace GloryofGuardian.Content.Projectiles
             Vector2 tarpos = target1.Center;
 
             if (count >= Gcount) {
-                if (count >= Gcount) {
-                    for (int i = 0; i < 1; i++) {
-                        float breath = (float)Math.Sin(drawcount / 18f);
-                        Vector2 projcen = Projectile.Center + new Vector2(0, -76) + new Vector2(0, -1) * breath;
-                        Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
+                for (int i = 0; i < 1; i++) {
+                    float breath = (float)Math.Sin(drawcount / 18f);
+                    Vector2 projcen = Projectile.Center + new Vector2(0, -76) + new Vector2(0, -1) * breath;
+                    Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
-                        int crit = (Main.rand.Next(100) >= (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1])) ? 0 : 1;
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+                    int crita = frost ? 25 : 0;
+                    int crit = (Main.rand.Next(100) >= (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) + crita) ? 0 : 1;
+                    int type = 0;
+                    if (frost) type = Main.rand.Next(3);
 
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<Frost2Proj>(), lastdamage, 1, Owner.whoAmI, crit);
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<SRFrostProj0>(), lastdamage, 6, Owner.whoAmI, crit, type);
+                    if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                        if (proj1.ModProjectile is GOGProj proj2) {
+                            proj2.OrichalcumMarkProj = true;
+                            proj2.OrichalcumMarkProjcount = 300;
+                        }
+                    }
+
+                    if (frost && crit == 1) {
+                        int a = Main.rand.Next(2, 4);
+                        for (int j = 0; j < 3; j++) {
+                            Projectile proj01 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire.RotatedBy(-0.1f + (0.1f * j)), ModContent.ProjectileType<SRFrostProj>(), lastdamage, 6, Owner.whoAmI, a);
+                            if (Projectile.ModProjectile is GOGDT proj00 && proj00.OrichalcumMarkDT) {
+                                if (proj01.ModProjectile is GOGProj proj02) {
+                                    proj02.OrichalcumMarkProj = true;
+                                    proj02.OrichalcumMarkProjcount = 300;
+                                }
                             }
                         }
                     }
-
-                    if (projcenter != null) {
-                        Vector2 p1 = Projectile.Center + new Vector2(0, -32);
-                        Vector2 p2 = projcenter.Center + new Vector2(0, -8);
-
-                        for (int j = 0; j < 128; j++) {
-                            int num1 = Dust.NewDust(p1 + (p2 - p1) * Main.rand.NextFloat(1), 2, 2, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
-                            Main.dust[num1].noGravity = true;
-                            Main.dust[num1].velocity *= 0;
-                        }
-                    }
-
-                    //计时重置
-                    count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
                 }
+
+                if (projcenter != null) {
+                    Vector2 p1 = Projectile.Center + new Vector2(0, -32);
+                    Vector2 p2 = projcenter.Center + new Vector2(0, -8);
+
+                    for (int j = 0; j < 128; j++) {
+                        int num1 = Dust.NewDust(p1 + (p2 - p1) * Main.rand.NextFloat(1), 2, 2, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
+                        Main.dust[num1].noGravity = true;
+                        Main.dust[num1].velocity *= 0;
+                    }
+                }
+
+                //计时重置
+                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
             }
         }
 
@@ -209,11 +238,14 @@ namespace GloryofGuardian.Content.Projectiles
             drawcount++;
             float breath = (float)Math.Sin(drawcount / 8f);
 
-            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Frost2DT").Value;
-            Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FrostDT2").Value;
+            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SRFrostDT").Value;
+            Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SRFrostProj1").Value;
+            Texture2D texture2 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SRFrostProj2").Value;
+            Texture2D texture3 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SRFrostProj3").Value;
+            Texture2D texture4 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SRFrostProj04").Value;
 
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -14);
-            drawPosition1 = Projectile.Center - Main.screenPosition + new Vector2(12, -56) + new Vector2(0, -1) * breath;
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -12);
+            drawPosition1 = Projectile.Center - Main.screenPosition + new Vector2(16, -56) + new Vector2(0, -1) * breath;
 
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(texture1, drawPosition1, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);

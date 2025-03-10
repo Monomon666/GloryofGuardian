@@ -18,16 +18,16 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 80;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 6;
+            Item.knockBack = 8;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = null;
             Item.autoReuse = false;
 
@@ -63,8 +63,8 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.noUseGraphic = false;
 
             if (player.altFunctionUse == 0) {
-                if(player.ownedProjectileCounts[ModContent.ProjectileType<SRMeteorDT>()] == 0) Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
-                if(player.ownedProjectileCounts[ModContent.ProjectileType<SRMeteorDT>()] > 0) Item.UseSound = null;
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<SRMeteorDT>()] == 0) Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<SRMeteorDT>()] > 0) Item.UseSound = null;
                 int wid = 3;
                 int hig = 5;
                 Vector2 offset = new Vector2(wid, hig) / -2 * 16;

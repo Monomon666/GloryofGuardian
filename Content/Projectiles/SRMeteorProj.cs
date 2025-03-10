@@ -53,6 +53,10 @@ namespace GloryofGuardian.Content.Projectiles
 
         int count = 0;
         public override void AI() {
+            if (count == 0) {
+                if (Projectile.ai[0] == 0) Projectile.extraUpdates += 2;
+                if (Projectile.ai[0] == 1) Projectile.extraUpdates += 0;
+            }
             count++;
             Projectile.rotation = Projectile.velocity.ToRotation();
 

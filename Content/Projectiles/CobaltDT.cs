@@ -41,7 +41,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 240;//默认发射间隔
+            count0 = 120;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
@@ -166,7 +166,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<CobaltProj>(), lastdamage, 0, Owner.whoAmI, 0, target1.whoAmI);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<CobaltProj>(), lastdamage, 2, Owner.whoAmI, 0, target1.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;
@@ -182,7 +182,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //过载
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<CobaltProj>(), lastdamage, 0, Owner.whoAmI, 1, target1.whoAmI);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<CobaltProj>(), lastdamage, 2, Owner.whoAmI, 1, target1.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;

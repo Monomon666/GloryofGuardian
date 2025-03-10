@@ -17,7 +17,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 28;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
@@ -26,7 +26,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
@@ -161,8 +161,9 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
-            recipe.AddTile(TileID.WorkBenches);
+            recipe.AddIngredient(ItemID.CrimtaneBar, 8);
+            recipe.AddIngredient(ItemID.TissueSample, 6);
+            recipe.AddTile(TileID.DemonAltar);
             recipe.Register();
         }
     }

@@ -24,11 +24,11 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.hostile = false;
             Projectile.DamageType = GuardianDamageClass.Instance;
             Projectile.timeLeft = 600;
-            Projectile.ignoreWater = true;
+            Projectile.ignoreWater = false;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = 1;//穿透数，1为攻击到第一个敌人就消失
+            Projectile.penetrate = 2;//穿透数，1为攻击到第一个敌人就消失
             Projectile.tileCollide = true;
 
             Projectile.light = 1f;
@@ -60,6 +60,8 @@ namespace GloryofGuardian.Content.Projectiles
                     Main.dust[num].noGravity = true;
                 }
             }
+
+            if (Projectile.wet) Projectile.Kill();
         }
 
         public override Color? GetAlpha(Color lightColor) {
@@ -72,11 +74,6 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Projectile.ai[0] == 0) {
                     Projectile.damage /= 2;
                     Projectile.ai[0] = -1;
-                }
-                //强化
-                if (Projectile.ai[0] == 1) {
-                    Projectile.ai[0] = -2;
-                    Projectile.Kill();
                 }
             }
 
@@ -93,32 +90,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override void OnKill(int timeLeft) {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
-            //
-            if (Projectile.ai[0] == 0) {
-
-            }
-            //常态
             if (Projectile.ai[0] == -1) {
-                //爆炸
-                for (int j = 0; j < 52; j++) {
-                    int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 1f);
-                    Main.dust[num2].noGravity = true;
-                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(6f, 7f);
-                }
-                SoundEngine.PlaySound(in SoundID.NPCHit3, Projectile.Center);
-                Projectile.position = Projectile.Center;
-                Projectile.width = Projectile.height = 80;
-                Projectile.position.X = Projectile.position.X - Projectile.width / 2;
-                Projectile.position.Y = Projectile.position.Y - Projectile.height / 2;
-                Projectile.maxPenetrate = -1;
-                Projectile.penetrate = -1;
-                Projectile.usesLocalNPCImmunity = false;
-                Projectile.usesIDStaticNPCImmunity = true;
-                Projectile.idStaticNPCHitCooldown = 0;
-                Projectile.Damage();
-            }
-            //强化
-            if (Projectile.ai[0] == -2) {
                 //爆炸
                 for (int j = 0; j < 52; j++) {
                     int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 1f);

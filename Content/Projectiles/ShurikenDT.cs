@@ -36,7 +36,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 60;//默认发射间隔
+            count0 = 90;//默认发射间隔
             interval = 60;//多重攻击间隔长度
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
@@ -123,9 +123,11 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 8f;
                         if (target1.boss) nowvel *= 1.2f;
+                        int type = Main.rand.Next(20);
+                        if (Owner.HasBuff(BuffID.WeaponImbuePoison)) type = Main.rand.Next(4);
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
-                        if (Main.rand.NextBool(10)) {
+                        if (type == 0) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
@@ -134,7 +136,7 @@ namespace GloryofGuardian.Content.Projectiles
                                 }
                             }
                         }
-                        if (!Main.rand.NextBool(10)) {
+                        if (type != 0) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
@@ -162,9 +164,11 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
                         Vector2 nowvel = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 8f;
+                        int type = Main.rand.Next(20);
+                        if (Owner.HasBuff(BuffID.WeaponImbuePoison)) type = Main.rand.Next(4);
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
-                        if (Main.rand.NextBool(10)) {
+                        if (type == 0) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI, 1);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
@@ -173,7 +177,7 @@ namespace GloryofGuardian.Content.Projectiles
                                 }
                             }
                         }
-                        if (!Main.rand.NextBool(10)) {
+                        if (type != 0) {
                             Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)), ModContent.ProjectileType<ShurikenProj>(), lastdamage, 0, Owner.whoAmI);
                             if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                                 if (proj1.ModProjectile is GOGProj proj2) {

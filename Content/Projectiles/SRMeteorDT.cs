@@ -37,7 +37,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 120;//默认发射间隔
+            count0 = 90;//默认发射间隔
             firedamage = 33;//默认灼烧伤害
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
@@ -90,8 +90,7 @@ namespace GloryofGuardian.Content.Projectiles
             }
 
             if (count >= Gcount) {
-                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) num0 = 2;
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) num0 = 4;
+                num0 = 2;
                 //索敌与行动
                 ignore.Clear();
                 NPC target1 = null;
@@ -99,7 +98,8 @@ namespace GloryofGuardian.Content.Projectiles
                 //攻击人数预定
                 ignore.Clear();
                 for (int index = 0; index < Main.npc.Length; index++) {
-                    target1 = Projectile.Center.InPosClosestNPC(800, true, true, ignore);
+                    target1 = (Projectile.Center).InPosClosestNPC(1200, true, true, ignore);
+
                     if (target1 != null && target1.active) {
 
                         if (num == num0) {
@@ -117,7 +117,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                 ignore.Clear();
                 for (int index = 0; index < Main.npc.Length; index++) {
-                    target1 = Projectile.Center.InPosClosestNPC(800, false, true, ignore);
+                    target1 = Projectile.Center.InPosClosestNPC(1200, true, true, ignore);
                     if (target1 != null && target1.active) {
 
                         whoistar.Add(target1.whoAmI);//加入待打击目标
@@ -131,15 +131,37 @@ namespace GloryofGuardian.Content.Projectiles
                 }
 
                 if (whoistar.Count > 0) {
-                    foreach (int npc in whoistar) {
-                        Attack(Main.npc[npc]);
-                    }
-                    for (int index = 0; index < Main.npc.Length; index++) {
-                        NPC target2 = Main.npc[index];
-                        if (target2 != null && target2.boss && target2.active && Vector2.Distance(Projectile.Center, target2.Center) < 800) {
-                            Attack2(target2);
+                    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                        foreach (int npc in whoistar) {
+                            Attack(Main.npc[npc]);
+                        }
+                        for (int index = 0; index < Main.npc.Length; index++) {
+                            NPC target2 = Main.npc[index];
+                            if (target2 != null && target2.boss && target2.active && Vector2.Distance(Projectile.Center, target2.Center) < 800) {
+                                Attack2(target2);
+                            }
+                        }
+                    } else {
+                        foreach (int npc in whoistar) {
+                            Attack2(Main.npc[npc]);
+                            whoistar.Clear();
+                            break;
+                        }
+                        for (int index = 0; index < Main.npc.Length; index++) {
+                            NPC target2 = Main.npc[index];
+                            if (target2 != null && target2.boss && target2.active && Vector2.Distance(Projectile.Center, target2.Center) < 800) {
+                                Attack2(target2);
+                            }
+                        }
+
+                        for (int index = 0; index < Main.npc.Length; index++) {
+                            NPC target2 = Main.npc[index];
+                            if (target2 != null && target2.boss && target2.active && Vector2.Distance(Projectile.Center, target2.Center) < 800) {
+                                Attack2(target2);
+                            }
                         }
                     }
+
 
                     //计时重置
                     count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
@@ -218,7 +240,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
 
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 1, Owner.whoAmI, 0, G);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 8, Owner.whoAmI, 0, G);
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                     if (proj1.ModProjectile is GOGProj proj2) {
                         proj2.OrichalcumMarkProj = true;
@@ -233,13 +255,26 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Attack2(NPC target1) {
             for (int i = 0; i < 3; i++) {
-                //普通
                 Vector2 projcen = target1.Center + new Vector2(0, -1200);
                 projcen += new Vector2(-300 + (300 * i), 0);
 
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
 
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, projcen.Toz(target1.Center + new Vector2(0, (Projectile.Center.Y - target1.Center.Y))) * 24f, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 1, Owner.whoAmI);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, projcen.Toz(target1.Center + new Vector2(0, (Projectile.Center.Y - target1.Center.Y))) * 24f, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 8, Owner.whoAmI, 0);
+                if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                    if (proj1.ModProjectile is GOGProj proj2) {
+                        proj2.OrichalcumMarkProj = true;
+                        proj2.OrichalcumMarkProjcount = 300;
+                    }
+                }
+            }
+            for (int i = 0; i < 2; i++) {
+                Vector2 projcen = target1.Center + new Vector2(0, -1200);
+                projcen += new Vector2(-350 + (700 * i), 0);
+
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, projcen.Toz(target1.Center + new Vector2(0, (Projectile.Center.Y - target1.Center.Y + 240))) * 24f, ModContent.ProjectileType<SRMeteorProj>(), lastdamage, 8, Owner.whoAmI, 0);
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                     if (proj1.ModProjectile is GOGProj proj2) {
                         proj2.OrichalcumMarkProj = true;

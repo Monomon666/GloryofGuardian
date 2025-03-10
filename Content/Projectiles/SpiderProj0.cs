@@ -132,7 +132,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
 
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel.RotatedBy(i * fireveltor), ModContent.ProjectileType<SpiderProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, vel.RotatedBy(i * fireveltor), ModContent.ProjectileType<SpiderProj>(), lastdamage, 6, Owner.whoAmI, 0, 0, 1);
 
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {

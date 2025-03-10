@@ -24,7 +24,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 0;
+            Item.knockBack = 8;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = -13;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
@@ -160,12 +160,12 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void AddRecipes() {
-            CreateRecipe()
-            .AddRecipeGroup("AnySilverBar", 5)
-            .AddRecipeGroup("AnyGoldBar", 2)
-            .AddIngredient(ItemID.Ruby, 1)
-            .AddTile(TileID.Anvils)
-            .Register();
+            Recipe recipe = CreateRecipe();
+            recipe.AddRecipeGroup("GloryofGuardian.AnySilverBar", 5);
+            recipe.AddRecipeGroup("GloryofGuardian.AnyGoldBar", 2);
+            recipe.AddIngredient(ItemID.Ruby, 1);
+            recipe.AddTile(TileID.Anvils);
+            recipe.Register();
         }
     }
 }

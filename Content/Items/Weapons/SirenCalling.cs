@@ -162,12 +162,5 @@ namespace GloryofGuardian.Content.Items.Weapon
             //return Color.White;
             return null;
         }
-
-        public override void AddRecipes() {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
-        }
     }
 }

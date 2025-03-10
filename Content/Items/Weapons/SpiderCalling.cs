@@ -1,7 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Projectiles;
 using GloryofGuardian.Content.Projectiles.ProjNPC;
-using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -19,7 +18,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 30;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
@@ -28,7 +27,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.Orange;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
@@ -50,11 +49,27 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
-                if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
+                if (player.statLife < 100) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
-                            "戍卫栏不足",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
+                            "鲜血不足",//这里是你需要展示的文字
+                            true,//dramatic为true可以使得字体闪烁，
+                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            );
+                    return false;
+                }
+            }
+
+            if (player.altFunctionUse == 0) {
+                // 检测世界中存活的 SpiderNPC 数量
+                int spiderCount = CountSpiderNPCs();
+
+                // 如果 SpiderNPC 数量大于等于 4，返回 false
+                if (spiderCount >= 4) {
+                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
+                            Color.Red,//跳字的颜色
+                            "到达上限",//这里是你需要展示的文字
+                            true,//dramatic为true可以使得字体闪烁，
                             true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
                             );
                     return false;
@@ -97,9 +112,31 @@ namespace GloryofGuardian.Content.Items.Weapon
                         //网络同步放在这里
                     }
                 }
+
+                for (int i = 0; i < Main.maxProjectiles; i++) {
+                    Projectile proj = Main.projectile[i];
+                    if (proj.type == ModContent.ProjectileType<SpiderProj0>() && proj.owner == player.whoAmI) {
+                        proj.Kill();
+                    }
+                }
             }
 
             return base.CanUseItem(player);
+        }
+
+        private int CountSpiderNPCs() {
+            int count = 0;
+
+            for (int i = 0; i < Main.maxNPCs; i++) {
+                NPC npc = Main.npc[i];
+
+                // 检查 NPC 是否存活且类型为 SpiderNPC
+                if (npc.active && npc.type == ModContent.NPCType<SpiderNPC>()) {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
@@ -111,6 +148,9 @@ namespace GloryofGuardian.Content.Items.Weapon
                         int y = (int)Main.MouseWorld.Y - 20;
                         int npc1 = NPC.NewNPC(new EntitySource_ItemUse(player, Item), x, y, ModContent.NPCType<SpiderNPC>());
                         Main.npc[npc1].defense = player.statDefense;
+                        Main.npc[npc1].damage = damage;
+
+                        player.statLife -= 100;
                     } else {
                         NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type0);//发包，用来联机同步
                     }
@@ -179,8 +219,10 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
-            recipe.AddTile(TileID.WorkBenches);
+            recipe.AddIngredient(ItemID.Cobweb, 6);
+            recipe.AddIngredient(ItemID.Bone, 6);
+            recipe.AddRecipeGroup("GloryofGuardian.AnyEvilMaterials", 6);
+            recipe.AddTile(TileID.Loom);
             recipe.Register();
         }
     }

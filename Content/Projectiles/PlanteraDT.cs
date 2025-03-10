@@ -161,7 +161,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<PlanteraCallProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<PlanteraCallProj>(), lastdamage, 4, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

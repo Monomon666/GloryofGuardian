@@ -15,7 +15,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public sealed override void SetDefaults() {
             Projectile.width = 76;
-            Projectile.height = 50;
+            Projectile.height = 32;
             Projectile.tileCollide = true;
 
             Projectile.friendly = true;
@@ -36,8 +36,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 60;//默认发射间隔
-            interval = 60;
+            count0 = 120;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
@@ -58,12 +57,15 @@ namespace GloryofGuardian.Content.Projectiles
         int numatk = 0;
         public override void AI() {
             count++;
+            anicount++;
             Projectile.timeLeft = 2;
             Projectile.StickToTiles(false, false);//形成判定
             Drop();
             Calculate();
             //索敌与行动
-            NPC target1 = ((Projectile.Center + new Vector2(0, 16)).InDir2ClosestNPC(800, false, true, 1));
+            NPC target1;
+            target1 = ((Projectile.Center + new Vector2(0, 8)).InDir2ClosestNPC(800, false, true, 1));
+            if (target1 == null) target1 = ((Projectile.Center + new Vector2(-4, -42)).InDir2ClosestNPC(800, false, true, 1));
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
@@ -116,18 +118,18 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Attack(NPC target1) {
             Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, 16);
+            Vector2 projcen = Projectile.Center + new Vector2(-4, -42);
 
             //发射
-            if (count >= interval) {
+            if (count >= count0) {
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 5; i++) {
+                    for (int i = 0; i < 3; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 32f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item36, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.15f, 0.15f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 6, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -137,29 +139,29 @@ namespace GloryofGuardian.Content.Projectiles
                     }
 
                     //计时重置,通过更改这个值来重置攻击
-                    count = -30;
+                    count = 0;
+                    anicount = -30;
                 }
 
                 //过载
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 8; i++) {
+                    for (int i = 0; i < 3; i++) {
                         float vel = Main.rand.NextFloat(0.9f, 1.15f) * 32f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item36, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.08f, 0.08f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 9, Owner.whoAmI, 2);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
                                 proj2.OrichalcumMarkProjcount = 300;
                             }
                         }
-
-                        if (interval > 12) interval -= 1;
                     }
 
                     //计时重置,通过更改这个值来重置攻击,枪械不受ex缩减影响
-                    count = -30;
+                    count = count0 / 2;
+                    anicount = -30;
                 }
             }
         }
@@ -169,7 +171,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Turn(NPC target1) {
             Vector2 tarpos = target1.Center;
-            Vector2 projcen = Projectile.Center + new Vector2(0, -20);
+            Vector2 projcen = Projectile.Center + new Vector2(-4, -42);
 
             Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;
             float rot2 = vector2.ToRotation();
@@ -229,23 +231,24 @@ namespace GloryofGuardian.Content.Projectiles
             }
         }
 
+        int anicount = 0;
         public override bool PreDraw(ref Color lightColor) {
             int dirrecoil = 0;//后坐力
-            if (count <= 0) {
-                if (count <= -25) dirrecoil = -150 + (-5 * count);
+            if (anicount <= 0) {
+                if (anicount <= -25) dirrecoil = -150 + (-5 * anicount);
 
-                if (count >= -25 && count <= 0) dirrecoil = count;
+                if (anicount >= -25 && anicount <= 0) dirrecoil = anicount;
             }
 
             //不同朝向时翻转贴图
             SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
 
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleGunDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, 0);
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleShotGunDT2").Value;
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -36);
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -44);
             //if (spriteEffects == SpriteEffects.None) drawPosition += new Vector2(0, -8);
             Vector2 fix = new Vector2(0, 0);
             if (spriteEffects == SpriteEffects.None) fix = new Vector2(-8, 0);

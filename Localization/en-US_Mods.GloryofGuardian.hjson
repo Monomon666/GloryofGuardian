@@ -176,11 +176,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	FrostRelic: {
-		DisplayName: Frost Relic
-		Tooltip: ""
-	}
-
 	NanoBar: {
 		DisplayName: Nano Bar
 		Tooltip: ""
@@ -216,8 +211,8 @@ Items: {
 		Tooltip: ""
 	}
 
-	FerryLightCalling: {
-		DisplayName: Ferry Light Calling
+	SoulBalanceCalling: {
+		DisplayName: Soul lBalance Calling
 		Tooltip: ""
 	}
 
@@ -243,6 +238,26 @@ Items: {
 
 	DarkCrystalHead: {
 		DisplayName: Dark Crystal Head
+		Tooltip: ""
+	}
+
+	SoulofAnotherWorld: {
+		DisplayName: Soulof Another World
+		Tooltip: ""
+	}
+
+	SoulDementorBookCalling: {
+		DisplayName: Soul Dementor Book Calling
+		Tooltip: ""
+	}
+
+	SoulFerryLanternCalling: {
+		DisplayName: Soul Ferry Lantern Calling
+		Tooltip: ""
+	}
+
+	SRFrostCalling: {
+		DisplayName: S R Frost Calling
 		Tooltip: ""
 	}
 }
@@ -465,6 +480,13 @@ Projectiles: {
 	FlamingJackProj.DisplayName: Flaming Jack Proj
 	ShadowFlameScrollDT.DisplayName: Shadow Flame Scroll D T
 	FerryLightProj2.DisplayName: Ferry Light Proj2
+	SoulBalanceDT.DisplayName: Soul Balance D T
+	SoulBalanceProj.DisplayName: Soul Balance Proj
+	SoulDementorBookProj.DisplayName: Soul Dementor Book Proj
+	SoulFerryLanternProj.DisplayName: Soul Ferry Lantern Proj
+	SRFrostDT.DisplayName: S R Frost D T
+	SRFrostProj.DisplayName: S R Frost Proj
+	SRFrostProj0.DisplayName: S R Frost Proj0
 }
 
 NPCs: {

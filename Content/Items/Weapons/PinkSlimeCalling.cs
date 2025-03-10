@@ -26,7 +26,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = ItemRarityID.LightRed;
             Item.UseSound = SoundID.Item54;
             Item.autoReuse = true;
 
@@ -113,7 +113,10 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
+            recipe.AddIngredient(ModContent.ItemType<SlimeCalling>(), 1);
+            recipe.AddIngredient(ItemID.GelBalloon, 20);
+            recipe.AddIngredient(ItemID.SoulofLight, 10);
+            recipe.AddIngredient(ItemID.CrystalShard, 10);
             recipe.AddTile(TileID.WorkBenches);
             recipe.Register();
         }

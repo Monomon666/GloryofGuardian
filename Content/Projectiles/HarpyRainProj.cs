@@ -27,7 +27,7 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 6;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = 4;//穿透数，1为攻击到第一个敌人就消失
+            Projectile.penetrate = 1;//穿透数，1为攻击到第一个敌人就消失
 
             Projectile.alpha = 255;
 

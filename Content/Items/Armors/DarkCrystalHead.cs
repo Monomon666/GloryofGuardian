@@ -52,8 +52,10 @@ namespace GloryofGuardian.Content.Items.Armors
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient(ItemID.DirtBlock, 1)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.CrystalShard, 20)
+                .AddIngredient(ItemID.SoulofNight, 12)
+                .AddIngredient(ItemID.UnicornHorn, 1)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

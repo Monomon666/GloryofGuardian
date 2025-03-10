@@ -21,8 +21,8 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 64;
             Item.height = 66;
-            Item.useTime = 90;
-            Item.useAnimation = 90;
+            Item.useTime = 75;
+            Item.useAnimation = 75;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 9;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
@@ -47,6 +47,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override bool CanUseItem(Player player) {
+            SetDefaults();
             if (player.altFunctionUse == 2) {
                 Item.UseSound = null;
                 return false;
@@ -117,8 +118,10 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
-            recipe.AddTile(TileID.WorkBenches);
+            recipe.AddRecipeGroup("GloryofGuardian.AnyGoldBar", 5);
+            recipe.AddIngredient(ItemID.Gel, 20);
+            recipe.AddIngredient(ItemID.RoyalGel, 1);
+            recipe.AddTile(TileID.Anvils);
             recipe.Register();
         }
     }

@@ -74,6 +74,15 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
             Owner.itemAnimation = 2;
             Owner.itemRotation = ((Projectile.rotation + MathHelper.PiOver2).ToRotationVector2() * -Owner.direction).ToRotation();
 
+            //代价
+            if (!Owner.wet) {
+                if (count % 30 == 0) Owner.statLife -= 1;
+                Owner.AddBuff(BuffID.OnFire, 2);
+                if (count % 60 == 0 && Main.rand.NextBool(8)) {
+                    Owner.AddBuff(BuffID.OnFire3, 120);
+                }
+            }
+
             //伤害矫正
             int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(DamageClass.Ranged).ApplyTo(100) / 100f;
@@ -87,24 +96,26 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
                 Projectile.Kill();
             }
 
-            if (count >= 2) {
-                //发射
-                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
+            if (!Owner.wet) {
+                if (count >= 2) {
+                    //发射
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item34, Projectile.Center);
 
-                if (count % 1 == 0) {
-                    for (int i = 0; i < 1; i++) {
-                        Vector2 projcen = Projectile.Center + new Vector2(0, 0);
-                        Vector2 tomou = projcen.Toz(Main.MouseWorld);
+                    if (count % 1 == 0) {
+                        for (int i = 0; i < 1; i++) {
+                            Vector2 projcen = Projectile.Center + new Vector2(0, 0);
+                            Vector2 tomou = projcen.Toz(Main.MouseWorld);
 
-                        float rot = Main.rand.NextFloat(-0.05f, 0.1f);
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 6f;
+                            float rot = Main.rand.NextFloat(-0.05f, 0.1f);
+                            float vel = Main.rand.NextFloat(0.9f, 1.15f) * 6f;
 
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + tomou * 68f, tomou.RotatedBy(rot) * vel, ModContent.ProjectileType<MaliceFireGunFireProj>(), lastdamage, 2, Owner.whoAmI, Projectile.ai[1]);
+                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + tomou * 68f, tomou.RotatedBy(rot) * vel, ModContent.ProjectileType<MaliceFireGunFireProj>(), lastdamage, 0, Owner.whoAmI, Projectile.ai[1]);
 
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
+                            if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                                if (proj1.ModProjectile is GOGProj proj2) {
+                                    proj2.OrichalcumMarkProj = true;
+                                    proj2.OrichalcumMarkProjcount = 300;
+                                }
                             }
                         }
                     }

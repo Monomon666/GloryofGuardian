@@ -7,7 +7,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class FerryLightDT : GOGDT
+    public class SoulBalanceDT : GOGDT
     {
         public override string Texture => GOGConstant.Projectiles + Name;
 
@@ -88,7 +88,7 @@ namespace GloryofGuardian.Content.Projectiles
             //普通
             if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                 for (int i = 0; i < 1; i++) {
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), position, new Vector2(0, 0), ModContent.ProjectileType<FerryLightProj>(), damage, 1, Owner.whoAmI);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), position, new Vector2(0, 0), ModContent.ProjectileType<SoulBalanceProj>(), damage, 1, Owner.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;
@@ -101,7 +101,7 @@ namespace GloryofGuardian.Content.Projectiles
             //过载
             if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                 for (int i = 0; i < 1; i++) {
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), position, new Vector2(0, 0), ModContent.ProjectileType<FerryLightProj>(), damage, 1, Owner.whoAmI, 1);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), position, new Vector2(0, 0), ModContent.ProjectileType<SoulBalanceProj>(), damage, 1, Owner.whoAmI, 1);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;
@@ -199,7 +199,7 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override bool PreDraw(ref Color lightColor) {
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FerryLightDT").Value;
+            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SoulBalanceDT").Value;
             Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Shadow").Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
 

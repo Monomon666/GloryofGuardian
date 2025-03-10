@@ -1,8 +1,8 @@
 ﻿global using GloryofGuardian.Content.Class;
+global using InnoVault;
 global using Microsoft.Xna.Framework;
 global using Terraria;
 global using Terraria.ModLoader;
-using Terraria.ID;
 
 namespace GloryofGuardian
 {

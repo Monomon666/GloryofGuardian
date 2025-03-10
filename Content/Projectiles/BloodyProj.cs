@@ -1,12 +1,8 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Class;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
-using Terraria.ModLoader;
 
 namespace GloryofGuardian.Content.Projectiles
 {
@@ -46,6 +42,7 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 ToMou => Main.MouseWorld - OwnerPos;
 
         public override void OnSpawn(IEntitySource source) {
+            Projectile.extraUpdates += 1;
             if (Projectile.ai[1] > 1) {
                 Projectile.extraUpdates += 1;
 

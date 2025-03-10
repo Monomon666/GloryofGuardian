@@ -81,7 +81,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                 if (Projectile.ai[0] == 0) {
                     if (countfade % 40 == 0 && Main.rand.NextBool(2)) {
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(-6, -12), new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)).SafeNormalize(Vector2.Zero) * 4f, ModContent.ProjectileType<CobaltProj2>(), Projectile.damage, 0, Owner.whoAmI, 0);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(-6, -12), new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)).SafeNormalize(Vector2.Zero) * 4f, ModContent.ProjectileType<CobaltProj2>(), Projectile.damage, 2, Owner.whoAmI, 0);
                         if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -97,7 +97,7 @@ namespace GloryofGuardian.Content.Projectiles
                     if (countfade == 30) {
                         Vector2 mainvel = new Vector2(Main.rand.NextFloat(-1, 1), Main.rand.NextFloat(-1, 1)).SafeNormalize(Vector2.Zero);
                         for (int i = 0; i < 3; i++) {
-                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(-6, -12), mainvel.RotatedBy(i * 2 * (MathHelper.Pi / 3f)) * 8f, ModContent.ProjectileType<CobaltProj2>(), Projectile.damage, 0, Owner.whoAmI, 1, Projectile.Center.X, Projectile.Center.Y);
+                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(-6, -12), mainvel.RotatedBy(i * 2 * (MathHelper.Pi / 3f)) * 8f, ModContent.ProjectileType<CobaltProj2>(), Projectile.damage, 2, Owner.whoAmI, 1, Projectile.Center.X, Projectile.Center.Y);
                             if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
                                 if (proj1.ModProjectile is GOGProj proj2) {
                                     proj2.OrichalcumMarkProj = true;

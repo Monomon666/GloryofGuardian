@@ -24,6 +24,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 36000;
 
             Projectile.scale *= 1f;
+
+            Projectile.light += 1.5f;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -64,10 +66,6 @@ namespace GloryofGuardian.Content.Projectiles
             }
 
             //符文充能
-            if (overatknum >= 3) {
-                overatknum = 0;
-                runenul += 1;
-            }
             if (runenul == 3) {
                 rune = true;
             }
@@ -156,7 +154,7 @@ namespace GloryofGuardian.Content.Projectiles
                             }
                         }
 
-                        overatknum += 1;
+                        if (Main.rand.NextBool(3)) runenul += 1;
                         //计时重置
                         count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
                     }
@@ -169,10 +167,9 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero);
 
-                        int vec = Projectile.Center.X > target1.Center.X ? 1 : -1;
-
+                        int vec = target1.Center.X > Projectile.Center.X ? 1 : -1;
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<AncientBattleProj2>(), lastdamage, 1, Owner.whoAmI, vec);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire * vec, ModContent.ProjectileType<AncientBattleProj2>(), lastdamage * 2, 9, Owner.whoAmI, 0, vec);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

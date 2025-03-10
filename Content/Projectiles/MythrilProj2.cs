@@ -2,7 +2,6 @@
 using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -174,23 +173,23 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Main.rand.NextBool(2)) {
                     Main.dust[num].scale = 0.5f;
                     Main.dust[num].noGravity = true;
-                    Main.dust[num].fadeIn = 1f + (float)Main.rand.Next(10) * 0.1f;
+                    Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
                 }
             }
 
-            if (IsStickingToTarget) {
-                //Todo
-                int npcTarget = TargetWhoAmI;
-                if(Main.npc[npcTarget].life > 10)
-                Main.npc[npcTarget].life -= 10;
-            
-                CombatText.NewText(Main.npc[npcTarget].Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            "10",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
-                            );
-            }
+            //if (IsStickingToTarget) {
+            //    //Todo
+            //    int npcTarget = TargetWhoAmI;
+            //    if(Main.npc[npcTarget].life > 10)
+            //    Main.npc[npcTarget].life -= 10;
+            //
+            //    CombatText.NewText(Main.npc[npcTarget].Hitbox,//跳字生成的矩形范围
+            //                Color.Red,//跳字的颜色
+            //                "10",//这里是你需要展示的文字
+            //                false,//dramatic为true可以使得字体闪烁，
+            //                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+            //                );
+            //}
         }
 
         public override bool PreDraw(ref Color lightColor) {

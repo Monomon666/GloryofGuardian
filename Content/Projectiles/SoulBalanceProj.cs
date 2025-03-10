@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles
 {
-    public class FerryLightProj : GOGProj
+    public class SoulBalanceProj : GOGProj
     {
         public override string Texture => GOGConstant.nulls;
 

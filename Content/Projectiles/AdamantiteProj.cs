@@ -46,10 +46,11 @@ namespace GloryofGuardian.Content.Projectiles
                 Projectile.height = 2;
             }
             if (Projectile.ai[0] == 1) {
+                Projectile.extraUpdates = 1;
                 Projectile.width = 8;
                 Projectile.height = 8;
             }
-            if (Projectile.ai[2] == 1) Projectile.extraUpdates += 2;
+            if (Projectile.ai[2] == 1) Projectile.velocity *= 1.5f;
             if (Projectile.ai[2] == 1) Projectile.ArmorPenetration += 10;
             reboundcount = 3;
         }
@@ -97,11 +98,11 @@ namespace GloryofGuardian.Content.Projectiles
                 SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
 
                 if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon) {
-                    Projectile.velocity.X = -oldVelocity.X;
+                    Projectile.velocity.X = -oldVelocity.X * 0.9f;
                 }
 
                 if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon) {
-                    Projectile.velocity.Y = -oldVelocity.Y * 0.8f;
+                    Projectile.velocity.Y = -oldVelocity.Y * 0.9f;
                 }
                 return false;
             }

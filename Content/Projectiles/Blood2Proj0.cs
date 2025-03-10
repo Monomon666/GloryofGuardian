@@ -73,7 +73,7 @@ namespace GloryofGuardian.Content.Projectiles
                 }
             }
 
-            if (count % 30 == 0 && Main.rand.NextBool(2)) {
+            if (count % 45 == 0 && Main.rand.NextBool(2)) {
                 Fire();
             }
         }
@@ -81,7 +81,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Fire() {
             if (Projectile.ai[1] == 0) {
                 for (int i = 0; i < 8; i++) {
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(10, -20), new Vector2(0, -4).RotatedBy(MathHelper.PiOver4 * i), ModContent.ProjectileType<Blood2Proj1>(), Projectile.damage, 1, Owner.whoAmI);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(10, -20), new Vector2(0, -4).RotatedBy(MathHelper.PiOver4 * i), ModContent.ProjectileType<Blood2Proj1>(), Projectile.damage / 4, 2, Owner.whoAmI);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;
@@ -93,7 +93,7 @@ namespace GloryofGuardian.Content.Projectiles
 
             if (Projectile.ai[1] == 1) {
                 for (int i = 0; i < 8; i++) {
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(10, -20), new Vector2(0, -4).RotatedBy(MathHelper.PiOver4 * i), ModContent.ProjectileType<Blood2Proj1>(), Projectile.damage, 1, Owner.whoAmI, 1);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(10, -20), new Vector2(0, -4).RotatedBy(MathHelper.PiOver4 * i), ModContent.ProjectileType<Blood2Proj1>(), Projectile.damage / 2, 2, Owner.whoAmI, 1);
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;

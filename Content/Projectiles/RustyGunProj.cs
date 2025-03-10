@@ -51,6 +51,16 @@ namespace GloryofGuardian.Content.Projectiles
             return Color.White;
         }
 
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+            if (Projectile.ai[0] == 1) {
+                target.velocity += Projectile.velocity * 0.05f;
+            }
+            if (Projectile.ai[0] == 2) {
+                target.velocity += Projectile.velocity * 0.1f;
+            }
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
         public override void OnKill(int timeLeft) {
             if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
         }
@@ -67,7 +77,7 @@ namespace GloryofGuardian.Content.Projectiles
                     texture.Size() / 2,
                     Projectile.scale,
                     SpriteEffects.None,
-                    0); ;
+                    0);
 
             return false;
         }

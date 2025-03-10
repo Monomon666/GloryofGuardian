@@ -1,7 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -37,7 +36,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 45;//默认发射间隔
+            count0 = 25;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
@@ -93,7 +92,7 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
         }
@@ -118,20 +117,20 @@ namespace GloryofGuardian.Content.Projectiles
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
-                    G *= Main.rand.NextFloat(0.8f, 1.2f);
-                    vy *= Main.rand.NextFloat(0.9f, 1.1f);
+                        G *= Main.rand.NextFloat(0.8f, 1.2f);
+                        vy *= Main.rand.NextFloat(0.9f, 1.1f);
 
-                    //对速度进行一些观赏度调整
-                    //vx *=
-                    //vy *=
-                    vy *= (dy >= 0 ? 0.75f : 1.2f);
+                        //对速度进行一些观赏度调整
+                        //vx *=
+                        //vy *=
+                        vy *= (dy >= 0 ? 0.75f : 1.2f);
 
-                    float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
+                        float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
 
-                    Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
+                        Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
 
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<BloodyProj>(), lastdamage, 1, Owner.whoAmI, G, 1);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<BloodyProj>(), lastdamage, 6, Owner.whoAmI, G, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -157,7 +156,7 @@ namespace GloryofGuardian.Content.Projectiles
                         Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<BloodyProj>(), lastdamage, 1, Owner.whoAmI, G, 2f);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<BloodyProj>(), lastdamage, 6, Owner.whoAmI, G, 2f);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

@@ -1,5 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -40,6 +41,11 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
+            rangeMultiplier = 0.5f; // 当前范围倍数
+            MaxStacks = 10; // 最大叠加层数
+            StackValue = 0.08f; // 每层增幅
+            RecoilSpeed = 0.01f; // 每秒回缩速率
+
             count0 = 60;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
@@ -53,7 +59,23 @@ namespace GloryofGuardian.Content.Projectiles
         int Gcount = 0;
         int Acount = 0;
         int lastdamage = 0;
+        //特殊数值
+        public float PstackCount = 0;//交互生长,实现不了,已删除
+
+        float rangeMultiplier = 1f;// 当前范围倍数
+        int stackCount;// 当前叠加层数
+        int MaxStacks = 0;// 最大叠加层数
+        float StackValue = 0;// 每层增幅
+        float RecoilSpeed = 0;// 每秒回缩速率
+        int countdec = 0;// 回缩倒计时
         public override void AI() {
+            //同步
+            if (PstackCount > stackCount) {
+                stackCount = (int)PstackCount;
+                Main.NewText(333);
+            }
+            PstackCount = stackCount;
+
             count++;
             Projectile.timeLeft = 2;
             Projectile.StickToTiles(false, false);//形成判定
@@ -61,6 +83,19 @@ namespace GloryofGuardian.Content.Projectiles
             Calculate();
             //常态下即攻击
             Attack();
+
+            // 每秒回缩1%（每帧减少0.01/60）
+            countdec--;
+            if (rangeMultiplier > 0.5f && countdec < 0) {
+                rangeMultiplier -= RecoilSpeed;
+                rangeMultiplier = Math.Max(rangeMultiplier, 0.5f); // 不低于原始大小
+
+                // 当回到基础值时重置层数
+                if (rangeMultiplier <= 0.5f) {
+                    stackCount = 0;
+                    rangeMultiplier = 0.5f;
+                }
+            }
 
             base.AI();
         }
@@ -94,18 +129,9 @@ namespace GloryofGuardian.Content.Projectiles
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
             //伤害修正
-            int newDamage = (int)(Projectile.originalDamage);
+            int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
             lastdamage = (int)(newDamage * rangedOffset);
-            //辅助炮塔叠加计算
-            Acount = 0;
-            foreach (var proj in Main.projectile)//遍历所有弹幕
-            {
-                if (proj.active && proj.type == Projectile.type) {
-                    Acount++;
-                }
-            }
-            if (Acount > 4) Acount = 4;
         }
 
         /// <summary>
@@ -113,11 +139,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Attack() {
             Vector2 projcen = Projectile.Center + new Vector2(0, -12);
-            float AddR = 1;
-            if (Acount == 1) AddR = 1;
-            if (Acount == 2) AddR = 1.2f;
-            if (Acount == 3) AddR = 1.4f;
-            if (Acount == 4) AddR = 1.6f;
+            float AddR = 1 * rangeMultiplier;// 应用动态范围系数
 
             //碰撞粒子展现
             for (int i = 0; i <= 1; i++) {
@@ -138,7 +160,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<ChlorophyteProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<ChlorophyteProj>(), lastdamage, 2, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -151,7 +173,7 @@ namespace GloryofGuardian.Content.Projectiles
                 //过载
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = -1; i < 2; i++) {
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire.RotatedBy(2f * i), ModContent.ProjectileType<ChlorophyteProj>(), lastdamage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire.RotatedBy(2f * i), ModContent.ProjectileType<ChlorophyteProj>(), lastdamage, 2, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -167,17 +189,13 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
-            fallThrough = false;
+            fallThrough = true;
             return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-            float AddR = 1;
-            if (Acount == 1) AddR = 1;
-            if (Acount == 2) AddR = 1.2f;
-            if (Acount == 3) AddR = 1.4f;
-            if (Acount == 4) AddR = 1.6f;
-            if (GOGUtils.CircularHitboxCollision(Projectile.Center, 240 * AddR, targetHitbox) && Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, targetHitbox.TopLeft(), targetHitbox.Width, targetHitbox.Height)) {
+            float AddR = 1 * rangeMultiplier;
+            if (GOGUtils.CircularHitboxCollision(Projectile.Center, 240 * AddR, targetHitbox)) {
                 return true;
             }
             return false;
@@ -188,10 +206,19 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+            countdec = 120;//重置回缩倒计时
+
             for (int i = 0; i <= 16; i++) {
-                Dust dust1 = Dust.NewDustDirect(target.position, target.width, target.height, DustID.ChlorophyteWeapon, 1f, 1f, 100, Color.White, 1.2f);
+                Dust dust1 = Dust.NewDustDirect(target.position, target.width, target.height,
+                    DustID.ChlorophyteWeapon, 1f, 1f, 100, Color.White, 1.2f);
                 dust1.velocity *= 1;
                 dust1.noGravity = true;
+            }
+
+            // 新增：击中时扩大范围
+            if (target.type != NPCID.TargetDummy && stackCount < MaxStacks) {
+                rangeMultiplier *= (1 + StackValue); // 增加5%
+                stackCount++;
             }
         }
 

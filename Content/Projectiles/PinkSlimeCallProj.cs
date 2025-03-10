@@ -62,7 +62,7 @@ namespace GloryofGuardian.Content.Projectiles
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             for (int i = 0; i < 8; i++) {
                 Vector2 vel = new Vector2(0, -8);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center, vel.RotatedBy(-MathHelper.Pi + MathHelper.PiOver4 * i), ModContent.ProjectileType<SlimeProj>(), Projectile.damage / 4, 1, Owner.whoAmI, 2);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center, vel.RotatedBy(-MathHelper.Pi + MathHelper.PiOver4 * i), ModContent.ProjectileType<PinkSlimeProj>(), Projectile.damage / 3, 1, Owner.whoAmI, 2);
                 if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
                     if (proj1.ModProjectile is GOGProj proj2) {
                         proj2.OrichalcumMarkProj = true;
@@ -86,7 +86,7 @@ namespace GloryofGuardian.Content.Projectiles
             Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
             SoundEngine.PlaySound(SoundID.Item154, Projectile.position);
 
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < Main.maxProjectiles; i++) {
                 Projectile p = Main.projectile[i];
                 if (p.active) {//安全性检测
                     if (p.type == ModContent.ProjectileType<SlimeProj0>()) {//判戍卫弹幕

@@ -76,13 +76,15 @@ namespace GloryofGuardian.Content.Projectiles.ProjNPC
                 Attack();
             }
 
+            if (count > 3600) NPC.active = false;
+
             base.AI();
         }
 
         void Attack() {
             Vector2 vel = new Vector2(0, -8);
             Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCDeath11);
-            Projectile.NewProjectileDirect(new EntitySource_Parent(NPC), NPC.Center, new Vector2(0, -4).RotatedBy(Main.rand.NextFloat(-MathHelper.PiOver4, MathHelper.PiOver4)), ModContent.ProjectileType<SpiderProj0>(), spiderdamage, 1, 0, 0);
+            Projectile.NewProjectileDirect(new EntitySource_Parent(NPC), NPC.Center, new Vector2(0, -4).RotatedBy(Main.rand.NextFloat(-MathHelper.PiOver4, MathHelper.PiOver4)), ModContent.ProjectileType<SpiderProj0>(), NPC.damage, 1, 0, 0);
 
             spideremain -= 1;
         }

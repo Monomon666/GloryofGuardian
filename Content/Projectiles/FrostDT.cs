@@ -52,6 +52,9 @@ namespace GloryofGuardian.Content.Projectiles
         int Gcount = 0;
         int lastdamage = 0;
         Projectile projcenter = null;
+        //
+        int frostburnnum = 0;
+        bool frost = false;
         public override void AI() {
             countdust++;
 
@@ -61,21 +64,39 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
             Calculate();
 
+            float breath = (float)Math.Sin(drawcount / 8f);
+
             if (countdust % 1 == 0) {
                 for (int j = 0; j < 1; j++) {
-                    int num1 = Dust.NewDust(drawPosition1 + Main.screenPosition + new Vector2(-28, -20), 32, 16, DustID.SnowflakeIce, 0f, 0f, 10, Color.White, 1f);
+                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(12, -56) + new Vector2(0, -1) * breath + new Vector2(-28, -20), 32, 16, DustID.SnowflakeIce, 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num1].noGravity = true;
                     Main.dust[num1].velocity *= 1f;
                 }
             }
 
-            //SnowSpray
+            //仆从判定
+            frostburnnum = 0;
+            for (int i = 0; i < Main.maxProjectiles; i++) {
+                Projectile p = Main.projectile[i];
+                if (p.active) {//安全性检测
+                    if (p.type == ModContent.ProjectileType<SRFrostDT>()) {//判戍卫弹幕
+                        if (Vector2.Distance(Projectile.Center, p.Center) < 1600) {//判距离
+                            frostburnnum++;
+                        }
+                    }
+                }
+            }
 
-            if (countdust % 1 == 0) {
-                for (int j = 0; j < 1; j++) {
-                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(-24, -72), 42, 24, DustID.SnowSpray, 0f, 0f, 10, Color.White, 0.4f);
-                    Main.dust[num1].noGravity = false;
-                    Main.dust[num1].velocity = new Vector2(0, 1f) * Main.rand.NextFloat(1, 1.5f);
+            //雪地特判
+            frost = false;
+            if (Owner.ZoneSnow || frostburnnum > 0) {
+                frost = true;
+                if (countdust % 1 == 0) {
+                    for (int j = 0; j < 1; j++) {
+                        int num1 = Dust.NewDust(Projectile.Center + new Vector2(-24, -72), 42, 24, DustID.SnowSpray, 0f, 0f, 10, Color.White, 0.4f);
+                        Main.dust[num1].noGravity = false;
+                        Main.dust[num1].velocity = new Vector2(0, 1f) * Main.rand.NextFloat(1, 1.5f);
+                    }
                 }
             }
 
@@ -127,18 +148,52 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Attack(NPC target1) {
             Vector2 tarpos = target1.Center;
+            int snow = 0;
+            if (!frost) snow = 0;
+            if (frost) snow = 25;
 
             if (count >= Gcount) {
-                if (count >= Gcount) {
+                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + snow) {
                     for (int i = 0; i < 1; i++) {
                         float breath = (float)Math.Sin(drawcount / 18f);
                         Vector2 projcen = Projectile.Center + new Vector2(0, -76) + new Vector2(0, -1) * breath;
-                        Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 16f;
+                        Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 6f;
+
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<FrostProj>(), lastdamage, 2, Owner.whoAmI);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
+                        }
+                    }
+
+                    if (projcenter != null) {
+                        Vector2 p1 = Projectile.Center + new Vector2(0, -32);
+                        Vector2 p2 = projcenter.Center + new Vector2(0, -8);
+
+                        for (int j = 0; j < 128; j++) {
+                            int num1 = Dust.NewDust(p1 + (p2 - p1) * Main.rand.NextFloat(1), 2, 2, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
+                            Main.dust[num1].noGravity = true;
+                            Main.dust[num1].velocity *= 0;
+                        }
+                    }
+
+                    //计时重置
+                    count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                }
+                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + snow) {
+                    for (int i = 0; i < 1; i++) {
+                        float breath = (float)Math.Sin(drawcount / 18f);
+                        Vector2 projcen = Projectile.Center + new Vector2(0, -76) + new Vector2(0, -1) * breath;
+                        Vector2 velfire = (tarpos - projcen).SafeNormalize(Vector2.Zero) * 12f;
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
                         int crit = (Main.rand.Next(100) >= (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1])) ? 0 : 1;
 
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<FrostProj>(), lastdamage, 1, Owner.whoAmI, crit);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<FrostProj>(), lastdamage, 2, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

@@ -104,6 +104,8 @@ namespace GloryofGuardian.Content.Projectiles
             if (target.knockBackResist > 0) target.velocity += new Vector2(Projectile.Center.Toz(target.Center).X * 24f, 0);
 
             if (Projectile.ai[0] == 1) target.AddBuff(BuffID.CursedInferno, 180);
+
+            Projectile.damage = (int)(Projectile.damage * 2 / 3f);
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {

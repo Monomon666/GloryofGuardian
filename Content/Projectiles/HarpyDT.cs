@@ -42,7 +42,7 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 ToMou => Main.MouseWorld - OwnerPos;
 
         public override void OnSpawn(IEntitySource source) {
-            count0 = 12;//默认发射间隔
+            count0 = 9;//默认发射间隔
             if (Projectile.ai[0] == 1) Projectile.scale *= 1.5f;
             Projectile.frame += Main.rand.Next(6);
         }
@@ -64,7 +64,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
                         int randx = Main.rand.Next(-32, 32);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(randx, 6) + new Vector2(0, (float)Math.Sin(sincount / 30f) * 0.5f), new Vector2(0, 12), ModContent.ProjectileType<HarpyRainProj>(), Projectile.damage, 1, Owner.whoAmI, 1);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(randx, 6) + new Vector2(0, (float)Math.Sin(sincount / 30f) * 0.5f), new Vector2(0, 12), ModContent.ProjectileType<HarpyRainProj>(), Projectile.damage, 0, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -78,7 +78,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < Main.rand.Next(2, 4); i++) {
                         int randx = Main.rand.Next(-32, 32);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(randx, 36) + new Vector2(0, (float)Math.Sin(sincount / 30f) * 0.5f), new Vector2(0, 8) * Main.rand.NextFloat(0.8f, 1.2f), ModContent.ProjectileType<HarpyRainFeatherProj>(), Projectile.damage, 1, Owner.whoAmI);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(randx, 36) + new Vector2(0, (float)Math.Sin(sincount / 30f) * 0.5f), new Vector2(0, 8) * Main.rand.NextFloat(0.8f, 1.2f), ModContent.ProjectileType<HarpyRainFeatherProj>(), Projectile.damage, 0, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
 {
-    public class FerryLightCalling : GOGCalling
+    public class SRFrostCalling : GOGCalling
     {
         public override string Texture => GOGConstant.Weapons + Name;
 
@@ -17,7 +17,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 50;
+            Item.damage = 120;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
@@ -30,7 +30,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
-            Item.shoot = ModContent.ProjectileType<FerryLightDT>();
+            Item.shoot = ModContent.ProjectileType<SRFrostDT>();
             Item.shootSpeed = 5f;
 
             Item.channel = true;
@@ -48,7 +48,7 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
-                if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
+                if (player.GetModPlayer<GOGModPlayer>().Gslot < 3) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
                             "戍卫栏不足",//这里是你需要展示的文字
@@ -62,7 +62,8 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.noUseGraphic = false;
 
             if (player.altFunctionUse == 0) {
-                Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<SRFrostDT>()] == 0) Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<SRFrostDT>()] > 0) Item.UseSound = null;
                 int wid = 3;
                 int hig = 5;
                 Vector2 offset = new Vector2(wid, hig) / -2 * 16;
@@ -82,7 +83,7 @@ namespace GloryofGuardian.Content.Items.Weapon
                 Item.noUseGraphic = true;
                 for (int i = 0; i < Main.maxProjectiles; i++) {
                     Projectile proj = Main.projectile[i];
-                    if (proj.type == ModContent.ProjectileType<FerryLightDT>() && proj.owner == player.whoAmI) {
+                    if (proj.type == ModContent.ProjectileType<SRFrostDT>() && proj.owner == player.whoAmI) {
                         proj.Kill();
                     }
                 }
@@ -93,10 +94,12 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (player.altFunctionUse == 0) {
-                int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(), PrefixCrit());
-                if (Main.projectile.IndexInRange(p))
-                    Main.projectile[p].originalDamage = Item.damage;
-                player.UpdateMaxTurrets();
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<SRFrostDT>()] == 0) {
+                    int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(), PrefixCrit());
+                    if (Main.projectile.IndexInRange(p))
+                        Main.projectile[p].originalDamage = Item.damage;
+                    player.UpdateMaxTurrets();
+                }
             }
             return false;
         }

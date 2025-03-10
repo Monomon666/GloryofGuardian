@@ -63,8 +63,9 @@ namespace GloryofGuardian.Content.Projectiles
 
             if (count % 10 == 0) {
                 int num = count / 10;
+                int damage1 = (int)(Projectile.damage * ((13 - num) / 12f));
 
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 16), new Vector2(0, -8), ModContent.ProjectileType<Corrupt2Proj1>(), Projectile.damage, 1, Owner.whoAmI, Projectile.ai[0], num);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 16), new Vector2(0, -8), ModContent.ProjectileType<Corrupt2Proj1>(), damage1, 6, Owner.whoAmI, Projectile.ai[0], num);
                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                     if (proj1.ModProjectile is GOGProj proj2) {
                         proj2.OrichalcumMarkProj = true;

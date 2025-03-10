@@ -61,23 +61,23 @@ namespace GloryofGuardian.Content.Class
                 // 遍历所有TooltipLine
                 // 但是遍历变量不能拿来修改
                 for (int i = 0; i < tooltips.Count; i++) {
-                    TooltipLine line = tooltips[i];
-
-                    if (line.Name != "Damage") {
-                        continue;
-                    }
-
-                    // 获取暴击率的文本（例如："暴击率: 13%"）
-                    string DamageText = line.Text;
-
-                    // 从文本中提取暴击率数值
-                    if (TryExtractCritChance(DamageText, out int Damage)) {
-                        // 替换“暴击率”为“过载频率”，并保留数值
-                        line.Text = $"{Damage}% 戍卫能效";
-                    } else {
-                        // 如果提取失败，保留原始文本
-                        line.Text = DamageText;
-                    }
+                    //TooltipLine line = tooltips[i];
+                    //
+                    //if (line.Name != "Damage") {
+                    //    continue;
+                    //}
+                    //
+                    //// 获取暴击率的文本（例如："暴击率: 13%"）
+                    //string DamageText = line.Text;
+                    //
+                    //// 从文本中提取暴击率数值
+                    //if (TryExtractCritChance(DamageText, out int Damage)) {
+                    //    // 替换“暴击率”为“过载频率”，并保留数值
+                    //    line.Text = $"{Damage}戍卫能效";
+                    //} else {
+                    //    // 如果提取失败，保留原始文本
+                    //    line.Text = DamageText;
+                    //}
                 }
             }
         }

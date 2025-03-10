@@ -36,8 +36,8 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 30;//默认发射间隔
-            interval = 30;
+            count0 = 60;//默认发射间隔
+            interval = 60;
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
@@ -63,7 +63,9 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
             Calculate();
             //索敌与行动
-            NPC target1 = (Projectile.Center.InDir2ClosestNPC(800, false, true, 1));
+            NPC target1;
+            target1 = ((Projectile.Center + new Vector2(0, 6)).InDir2ClosestNPC(800, false, true, 1));
+            if (target1 == null) target1 = ((Projectile.Center + new Vector2(0, 16)).InDir2ClosestNPC(800, false, true, 1));
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
@@ -116,7 +118,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// 监测与攻击
         /// </summary>
         void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
+            Vector2 tarpos = target1.Center;
             Vector2 projcen = Projectile.Center + new Vector2(0, 16);
 
             //发射
@@ -135,11 +137,18 @@ namespace GloryofGuardian.Content.Projectiles
                                 proj2.OrichalcumMarkProjcount = 300;
                             }
                         }
+
+                        if (interval > 18) interval -= 1;
                     }
 
-                    //计时重置,通过更改这个值来重置攻击
-                    if (interval > 12) interval -= 1;
-                    count = Main.rand.Next(4);
+                    if (numatk < 3) {
+                        numatk += 1;
+                        count -= 4;
+                    }
+                    if (numatk >= 3) {
+                        numatk = 0;
+                        count = 0;
+                    }
                 }
 
                 //过载
@@ -157,19 +166,71 @@ namespace GloryofGuardian.Content.Projectiles
                             }
                         }
 
-                        if (interval > 12) interval -= 1;
+                        if (interval > 18) interval -= 1;
                     }
 
-                    if (numatk < 3) {
+                    if (numatk < 6) {
                         numatk += 1;
                         count -= 4;
                     }
-                    if (numatk >= 3) {
+                    if (numatk >= 6) {
                         numatk = 0;
-                        count = Main.rand.Next(4);
+                        count = -30;
                     }
                 }
             }
+
+            ////发射
+            //if (count >= interval) {
+            //    //普通
+            //    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+            //        for (int i = 0; i < 1; i++) {
+            //            float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+            //            Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+            //
+            //            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+            //            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+            //            if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+            //                if (proj1.ModProjectile is GOGProj proj2) {
+            //                    proj2.OrichalcumMarkProj = true;
+            //                    proj2.OrichalcumMarkProjcount = 300;
+            //                }
+            //            }
+            //        }
+            //
+            //        //计时重置,通过更改这个值来重置攻击
+            //        if (interval > 18) interval -= 1;
+            //        count = Main.rand.Next(6);
+            //    }
+            //
+            //    //过载
+            //    if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+            //        for (int i = 0; i < 1; i++) {
+            //            float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+            //            Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+            //
+            //            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+            //            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
+            //            if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+            //                if (proj1.ModProjectile is GOGProj proj2) {
+            //                    proj2.OrichalcumMarkProj = true;
+            //                    proj2.OrichalcumMarkProjcount = 300;
+            //                }
+            //            }
+            //
+            //            if (interval > 18) interval -= 1;
+            //        }
+            //
+            //        if (numatk < 3) {
+            //            numatk += 1;
+            //            count -= 4;
+            //        }
+            //        if (numatk >= 3) {
+            //            numatk = 0;
+            //            count = Main.rand.Next(18);
+            //        }
+            //    }
+            //}
         }
 
         /// <summary>

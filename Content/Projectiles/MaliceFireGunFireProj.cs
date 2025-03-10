@@ -24,9 +24,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 60;
             Projectile.light = 3.0f;
             Projectile.ignoreWater = false;
-            //Projectile.usesLocalNPCImmunity = true;
-            //Projectile.localNPCHitCooldown = 12;
-            Projectile.idStaticNPCHitCooldown = 12;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 30;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
 
@@ -69,13 +68,14 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            Projectile.velocity *= 0.2f;
+            Projectile.velocity *= 0.5f;
 
-            if (Main.rand.Next(100) < (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) / 2f) target.AddBuff(BuffID.OnFire, 180);
-            if (target.HasBuff(BuffID.OnFire) && Main.rand.Next(100) < (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) / 2f) target.AddBuff(BuffID.OnFire3, 180);
+            if (Main.rand.Next(100) < (Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) / 2f) target.AddBuff(BuffID.Oiled, 180);
 
-            if (target.HasBuff(BuffID.OnFire)) target.velocity *= 0.8f;
-            if (target.HasBuff(BuffID.OnFire3)) Projectile.velocity *= 0.6f;
+            target.AddBuff(BuffID.OnFire, 180);
+            if (target.HasBuff(BuffID.OnFire) && Main.rand.NextBool(25)) target.AddBuff(BuffID.OnFire3, 180);
+            if (target.HasBuff(BuffID.Oiled) && !target.boss) target.velocity *= 0.9f;
+            if (target.HasBuff(BuffID.Oiled) && target.type == NPCID.DukeFishron) target.velocity *= 0.995f;
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity) {

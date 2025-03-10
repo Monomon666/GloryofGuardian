@@ -38,7 +38,6 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 ToMou => Main.MouseWorld - OwnerPos;
 
         public override void OnSpawn(IEntitySource source) {
-            if (Projectile.ai[0] == 1) Projectile.penetrate = 6;
         }
 
         int count = 0;
@@ -68,6 +67,8 @@ namespace GloryofGuardian.Content.Projectiles
             if (Projectile.alpha < 50) {
                 Projectile.alpha = 50;
             }
+
+            if (count > 180) Projectile.Kill();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {

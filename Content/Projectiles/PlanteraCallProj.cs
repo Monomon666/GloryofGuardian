@@ -25,7 +25,7 @@ namespace GloryofGuardian.Content.Projectiles
             //Projectile.light = 1.0f;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 0;
+            Projectile.localNPCHitCooldown = 12;
             Projectile.aiStyle = -1;
             Projectile.penetrate = -1;
 
@@ -39,8 +39,6 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 ToMou => Main.MouseWorld - OwnerPos;
 
         public override void OnSpawn(IEntitySource source) {
-            if (Projectile.ai[0] == 0) reboundcount = 3;
-            if (Projectile.ai[0] == 1) reboundcount = 0;
         }
 
         int count = 0;
@@ -121,29 +119,27 @@ namespace GloryofGuardian.Content.Projectiles
                 }
                 if (reboundcount <= 0) {
                     if (Projectile.velocity.Y <= 0) {
-                        //判定过载攻击
-                        if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 0);
-                            if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
-                                if (proj1.ModProjectile is GOGProj proj2) {
-                                    proj2.OrichalcumMarkProj = true;
-                                    proj2.OrichalcumMarkProjcount = 300;
-                                }
-                            }
-                        }
-                        if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, new Vector2(0, 64), ModContent.ProjectileType<PinkSlimeProj0>(), Projectile.damage, 0, Owner.whoAmI, 1);
-                            if (Projectile.ModProjectile is GOGProj proj0 && proj0.OrichalcumMarkProj) {
-                                if (proj1.ModProjectile is GOGProj proj2) {
-                                    proj2.OrichalcumMarkProj = true;
-                                    proj2.OrichalcumMarkProjcount = 300;
-                                }
-                            }
-                        }
                         Projectile.Kill();
                     }
                 }
+                if (reboundcount % 2 == 0) {
+                    for (int i = 0; i < 1; i++) {
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(4, 0), ModContent.ProjectileType<PlanteraProj0>(), Projectile.damage, 1, Owner.whoAmI, 1);
+                        Projectile proj3 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center + new Vector2(0, 20), new Vector2(-4, 0), ModContent.ProjectileType<PlanteraProj0>(), Projectile.damage, 1, Owner.whoAmI, 1);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
 
+                            if (proj3.ModProjectile is GOGProj proj4) {
+                                proj4.OrichalcumMarkProj = true;
+                                proj4.OrichalcumMarkProjcount = 300;
+                            }
+                        }
+                    }
+                }
             }
             return false;
         }

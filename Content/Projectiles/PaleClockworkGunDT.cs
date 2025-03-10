@@ -15,7 +15,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public sealed override void SetDefaults() {
             Projectile.width = 76;
-            Projectile.height = 50;
+            Projectile.height = 32;
             Projectile.tileCollide = true;
 
             Projectile.friendly = true;
@@ -63,7 +63,9 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
             Calculate();
             //索敌与行动
-            NPC target1 = ((Projectile.Center + new Vector2(0, 16)).InDir2ClosestNPC(800, false, true, 1));
+            NPC target1;
+            target1 = ((Projectile.Center + new Vector2(0, 6)).InDir2ClosestNPC(800, false, true, 1));
+            if (target1 == null) target1 = ((Projectile.Center + new Vector2(-4, -48)).InDir2ClosestNPC(800, false, true, 1));
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
@@ -116,27 +118,51 @@ namespace GloryofGuardian.Content.Projectiles
         /// 监测与攻击
         /// </summary>
         void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, 16);
+            Vector2 tarpos = target1.Center + new Vector2(0, 4);
+            Vector2 projcen = Projectile.Center + new Vector2(-4, -48);
 
             //发射
             if (count >= interval) {
                 //普通
                 if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                     for (int i = 0; i < 1; i++) {
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+                        float vel = Main.rand.NextFloat(0.99f, 1.01f) * 24f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 2) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 2, Owner.whoAmI, 0, 0, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
                                 proj2.OrichalcumMarkProjcount = 300;
                             }
                         }
-                        bmove = true;
                     }
+                    bmove = true;
+
+                    //计时重置,通过更改这个值来重置攻击
+                    if (interval > 12) interval -= 1;
+                    count = Main.rand.Next(6);
+                }
+
+                //过载
+                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                    for (int i = 0; i < 1; i++) {
+                        float vel = Main.rand.NextFloat(0.99f, 1.01f) * 24f;
+                        Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 2) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.03f, 0.03f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 2, Owner.whoAmI);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
+                        }
+
+                        if (interval > 12) interval -= 1;
+                    }
+                    bmove = true;
 
                     if (numatk < 3) {
                         numatk += 1;
@@ -144,39 +170,69 @@ namespace GloryofGuardian.Content.Projectiles
                     }
                     if (numatk >= 3) {
                         numatk = 0;
-                        count = 0;
-                    }
-                }
-
-                //过载
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 1; i++) {
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
-                        Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
-
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
-                            }
-                        }
-                        bmove = true;
-
-                        if (interval > 12) interval -= 1;
-                    }
-
-                    if (numatk < 12) {
-                        numatk += 1;
-                        count -= 4;
-                    }
-                    if (numatk >= 12) {
-                        numatk = 0;
-                        count = 0;
+                        count = Main.rand.Next(12);
                     }
                 }
             }
+
+            ////发射
+            //if (count >= interval) {
+            //    //普通
+            //    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+            //        for (int i = 0; i < 1; i++) {
+            //            float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+            //            Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+            //
+            //            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+            //            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, 1);
+            //            if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+            //                if (proj1.ModProjectile is GOGProj proj2) {
+            //                    proj2.OrichalcumMarkProj = true;
+            //                    proj2.OrichalcumMarkProjcount = 300;
+            //                }
+            //            }
+            //            bmove = true;
+            //        }
+            //
+            //        if (numatk < 3) {
+            //            numatk += 1;
+            //            count -= 4;
+            //        }
+            //        if (numatk >= 3) {
+            //            numatk = 0;
+            //            count = 0;
+            //        }
+            //    }
+            //
+            //    //过载
+            //    if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+            //        for (int i = 0; i < 1; i++) {
+            //            float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+            //            Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+            //
+            //            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+            //            Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, -50) + nowvel * 42f, nowvel.RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 1, Owner.whoAmI);
+            //            if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+            //                if (proj1.ModProjectile is GOGProj proj2) {
+            //                    proj2.OrichalcumMarkProj = true;
+            //                    proj2.OrichalcumMarkProjcount = 300;
+            //                }
+            //            }
+            //            bmove = true;
+            //
+            //            if (interval > 12) interval -= 1;
+            //        }
+            //
+            //        if (numatk < 12) {
+            //            numatk += 1;
+            //            count -= 4;
+            //        }
+            //        if (numatk >= 12) {
+            //            numatk = 0;
+            //            count = 0;
+            //        }
+            //    }
+            //}
         }
 
         /// <summary>
@@ -184,7 +240,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Turn(NPC target1) {
             Vector2 tarpos = target1.Center;
-            Vector2 projcen = Projectile.Center + new Vector2(0, -20);
+            Vector2 projcen = Projectile.Center + new Vector2(0, -24);
 
             Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;
             float rot2 = vector2.ToRotation();
@@ -249,9 +305,13 @@ namespace GloryofGuardian.Content.Projectiles
         bool bmove = false;
         Vector2 fmove = new Vector2(0, 0);
         public override bool PreDraw(ref Color lightColor) {
+            //不同朝向时翻转贴图
+            SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
+
             if (bmove) {
                 floatcount++;
-                fmove = new Vector2(Main.rand.NextFloat(-4f, 4f), Main.rand.NextFloat(-4f, 4f));
+                if (spriteEffects == SpriteEffects.None) fmove = new Vector2(Main.rand.NextFloat(-2f, 2f), Main.rand.NextFloat(-2f, 2f));
+                if (spriteEffects != SpriteEffects.None) fmove = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f), Main.rand.NextFloat(-0.5f, 0.5f));
             }
 
             if (floatcount > 18) {
@@ -260,19 +320,16 @@ namespace GloryofGuardian.Content.Projectiles
                 fmove = new Vector2(0, 0);
             }
 
-            //不同朝向时翻转贴图
-            SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
-
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleGunDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, 0);
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleClockworkGunDT2").Value;
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -36);
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -46);
             //if (spriteEffects == SpriteEffects.None) drawPosition += new Vector2(0, -8);
             Vector2 fix = new Vector2(0, 0);
             if (spriteEffects == SpriteEffects.None) fix = new Vector2(-8, 0);
-            if (spriteEffects != SpriteEffects.None) fix = new Vector2(-4, 0);
+            if (spriteEffects != SpriteEffects.None) fix = new Vector2(-4, 2);
             Main.EntitySpriteDraw(texture, drawPosition + fmove, null, lightColor, wrotation, texture.Size() * 0.5f + new Vector2(-4, -0) + fix + fmove, Projectile.scale * 1.2f, spriteEffects, 0);
 
             return false;

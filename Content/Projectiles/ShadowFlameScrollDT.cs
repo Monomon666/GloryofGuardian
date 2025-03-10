@@ -61,8 +61,8 @@ namespace GloryofGuardian.Content.Projectiles
             Drop();
 
             foreach (Projectile proj in Main.ActiveProjectiles) {
-                // 检测距离是否小于 96，并且 proj 不属于 GOGDT 类
-                if (Vector2.Distance(proj.Center, Projectile.Center) < 96 && !(proj.ModProjectile is GOGDT)) {
+                // 检测距离是否小于 160，并且 proj 不属于 GOGDT 类
+                if (Vector2.Distance(proj.Center, Projectile.Center) < 160 && !(proj.ModProjectile is GOGDT)) {
                     // 获取 GlobalProjectile 实例
                     GOGGlobalProj globalProj = proj.GetGlobalProjectile<GOGGlobalProj>();
 
@@ -185,8 +185,8 @@ namespace GloryofGuardian.Content.Projectiles
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
 
-            Main.EntitySpriteDraw(textures, DTcenter, null, new Color(177, 60, 255) * ringscale, Projectile.rotation, textures.Size() * 0.5f, Projectile.scale * 0.06f, SpriteEffects.None, 0);
-            Main.EntitySpriteDraw(textures2, DTcenter, null, new Color(177, 60, 255) * ringscale, Projectile.rotation, textures2.Size() * 0.5f, Projectile.scale * 0.06f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(textures, DTcenter, null, new Color(177, 60, 255) * ringscale, Projectile.rotation, textures.Size() * 0.5f, Projectile.scale * 0.1f, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(textures2, DTcenter, null, new Color(177, 60, 255) * ringscale, Projectile.rotation, textures2.Size() * 0.5f, Projectile.scale * 0.1f, SpriteEffects.None, 0);
 
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);

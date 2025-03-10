@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.Utilities;
 
@@ -33,9 +32,9 @@ namespace GloryofGuardian.Common
         /// <param name="vr1"></param>
         /// <param name="vr2"></param>
         /// <returns></returns>
-        public static Vector2 To(this Vector2 vr1, Vector2 vr2) {
-            return vr2 - vr1;
-        }
+        //public static Vector2 To(this Vector2 vr1, Vector2 vr2) {
+        //    return vr2 - vr1;
+        //}
 
         /// <summary>
         /// 两点之间的单位向量
@@ -57,9 +56,9 @@ namespace GloryofGuardian.Common
         /// <param name="leftCed">是否检查左鼠标键，否则检测右鼠标键</param>
         /// <param name="netCed">是否进行网络同步检查</param>
         /// <returns>如果按下了指定的鼠标键，则返回true，否则返回false</returns>
-        public static bool PressKey(this Player player, bool leftCed = true, bool netCed = true) {
-            return (!netCed || Main.myPlayer == player.whoAmI) && (leftCed ? PlayerInput.Triggers.Current.MouseLeft : PlayerInput.Triggers.Current.MouseRight);
-        }
+        //public static bool PressKey(this Player player, bool leftCed = true, bool netCed = true) {
+        //    return (!netCed || Main.myPlayer == player.whoAmI) && (leftCed ? PlayerInput.Triggers.Current.MouseLeft : PlayerInput.Triggers.Current.MouseRight);
+        //}
 
         /// <summary>
         /// 判定弹幕是否能被物块阻挡

@@ -31,16 +31,16 @@ namespace GloryofGuardian.Content.Items.Accessories
             Lighting.AddLight(player.Center, 0.5f, 2.25f, 2.25f);
             player.wingTime = player.wingTimeMax;//无限飞
 
-            if (player.controlDown && player.controlJump && !player.mount.Active) {
-                player.position.Y -= player.velocity.Y;
-                if (player.velocity.Y > 0.1f)
-                    player.velocity.Y = 0.1f;
-                else if (player.velocity.Y < 0.1f)
-                    player.velocity.Y = -0.1f;
-
-                player.maxRunSpeed *= 5f;
-                player.runAcceleration *= 2.5f;
-            }
+            //if (player.controlDown && player.controlJump && !player.mount.Active) {
+            //    player.position.Y -= player.velocity.Y;
+            //    if (player.velocity.Y > 0.1f)
+            //        player.velocity.Y = 0.1f;
+            //    else if (player.velocity.Y < 0.1f)
+            //        player.velocity.Y = -0.1f;
+            //
+            //    player.maxRunSpeed *= 5f;
+            //    player.runAcceleration *= 2.5f;
+            //}
 
             int downrushswitch = 0;
             int downdistence = 0;
@@ -51,10 +51,12 @@ namespace GloryofGuardian.Content.Items.Accessories
                 downdistence = 60;
                 downdistence--;
                 if (downrushswitch == 1 && player.controlDown && !player.controlJump && !player.mount.Active) {
-                    if (downdash <= 48) downdash++;
+                    if (downdash <= 4) downdash++;
                     Vector2 pos = player.BottomLeft;
+                    Vector2 pos2 = player.BottomRight;
                     Vector2 tilePos = GOGUtils.WEPosToTilePos(pos + new Vector2(0, 8));
-                    if (!TileHelper.GetTile(tilePos).HasSolidTile()) player.position += new Vector2(0, downdash);
+                    Vector2 tilePos2 = GOGUtils.WEPosToTilePos(pos2 + new Vector2(0, 8));
+                    if (!TileHelper.GetTile(tilePos).HasSolidTile() && !TileHelper.GetTile(tilePos2).HasSolidTile()) player.position += new Vector2(0, 4);
                 } else downdash = 8;
                 if (!player.controlDown && downdistence < 0) downrushswitch = 0;
             }

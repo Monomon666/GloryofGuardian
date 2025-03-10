@@ -30,7 +30,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 0;
+            Item.knockBack = 8;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = ItemRarityID.Blue;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;//哨兵召唤声音
