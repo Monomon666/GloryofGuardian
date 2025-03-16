@@ -21,5 +21,24 @@ namespace GloryofGuardian.Content.Classes
             //任意地牢装饰旗帜
             RecipeGroup.RegisterGroup("GloryofGuardian.AnyDungeonFactionFlags", new(() => AnyDungeonFactionFlags.Value, ItemID.MarchingBonesBanner, ItemID.NecromanticSign, ItemID.RustedCompanyStandard, ItemID.RaggedBrotherhoodSigil, ItemID.MoltenLegionFlag, ItemID.DiabolicSigil));
         }
+
+        //合成
+        public override void PostAddRecipes() {
+            //添加
+            {
+                //植物纤维绳索宝典 合成
+                Recipe.Create(ItemID.CordageGuide)
+                        .AddIngredient(ItemID.Book, 4)
+                        .AddTile(TileID.Vines)
+                        .Register();
+
+                //生命木织机 合成
+                Recipe.Create(ItemID.LivingLoom)
+                        .AddIngredient(ItemID.Wood, 12)
+                        .AddIngredient(ItemID.CordageGuide, 1)
+                        .AddTile(TileID.Sawmill)
+                        .Register();
+            }
+        }
     }
 }

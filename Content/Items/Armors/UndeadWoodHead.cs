@@ -14,7 +14,7 @@ namespace GloryofGuardian.Content.Items.Armors
             Item.width = 22;
             Item.height = 22;
             Item.value = 10000;
-            Item.rare = 0;
+            Item.rare = ItemRarityID.White;
 
             Item.defense = 2;
         }
@@ -78,10 +78,8 @@ namespace GloryofGuardian.Content.Items.Armors
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient(ItemID.CrystalShard, 20)
-                .AddIngredient(ItemID.SoulofNight, 12)
-                .AddIngredient(ItemID.UnicornHorn, 1)
-                .AddTile(TileID.MythrilAnvil)
+                .AddIngredient(ItemID.Wood, 12)
+                .AddTile(TileID.LivingLoom)
                 .Register();
         }
     }

@@ -26,9 +26,8 @@ namespace GloryofGuardian.Content.Items.Armor
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient(ItemID.CrystalShard, 30)
-                .AddIngredient(ItemID.SoulofNight, 18)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.Wood, 18)
+                .AddTile(TileID.LivingLoom)
                 .Register();
         }
     }
