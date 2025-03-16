@@ -27,6 +27,8 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 36000;
 
             Projectile.scale *= 1f;
+
+            Projectile.extraUpdates = 1;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -65,6 +67,8 @@ namespace GloryofGuardian.Content.Projectiles
         NPC target0 = null;
         bool hadatk = false;
         bool closedoor = false;
+        //过载
+        bool next = false;
         public override void AI() {
             count++;
             Projectile.timeLeft = 2;
@@ -96,7 +100,7 @@ namespace GloryofGuardian.Content.Projectiles
                     ignore.Clear();
                     for (int i = 0; i < Main.maxNPCs; i++) {
                         if (target0 == null) {
-                            NPC target1 = Projectile.Center.InPosClosestNPC(3600, true, true, ignore);
+                            NPC target1 = Main.npc[i];
                             //标记检索
                             if (target1 != null && !target1.HasBuff<NanoMarkDebuff1>() && !target1.HasBuff<NanoMarkDebuff2>()) {
                                 ignore.Add(target1.whoAmI);
@@ -187,25 +191,33 @@ namespace GloryofGuardian.Content.Projectiles
             Vector2 projcen = Projectile.Center + new Vector2(0, 16);
 
             //发射
-            //普通
-            if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                for (int i = 0; i < 1; i++) {
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -2), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI);
-                    if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                        if (proj1.ModProjectile is GOGProj proj2) {
-                            proj2.OrichalcumMarkProj = true;
-                            proj2.OrichalcumMarkProjcount = 300;
-                        }
+            for (int i = 0; i < 3; i++) {
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -4).RotatedBy(Main.rand.NextFloat((i - 1) * 0.5f)), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI);
+                //if(i == 1) proj1.extraUpdates += 1;
+                if (i == 1) proj1.velocity *= 1.5f;
+                if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                    if (proj1.ModProjectile is GOGProj proj2) {
+                        proj2.OrichalcumMarkProj = true;
+                        proj2.OrichalcumMarkProjcount = 300;
                     }
                 }
+            }
+            //普通
+            if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                //计时重置,通过更改这个值来重置攻击
+                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                modecount = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                hadfire = true;
             }
 
             //过载
             if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 3; i++) {
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -2), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, new Vector2(0, -4).RotatedBy(Main.rand.NextFloat((i - 1) * 0.25f)), ModContent.ProjectileType<NanoGMissileProj>(), lastdamage, 0, Owner.whoAmI, target1.whoAmI, 2);
+                    //if(i == 1) proj1.extraUpdates += 1;
+                    if (i == 1) proj1.velocity *= 1.5f;
                     if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                         if (proj1.ModProjectile is GOGProj proj2) {
                             proj2.OrichalcumMarkProj = true;
@@ -213,12 +225,11 @@ namespace GloryofGuardian.Content.Projectiles
                         }
                     }
                 }
+                //计时重置,通过更改这个值来重置攻击
+                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                modecount = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                hadfire = true;
             }
-
-            //计时重置,通过更改这个值来重置攻击
-            count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
-            modecount = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
-            hadfire = true;
         }
 
         public override Color? GetAlpha(Color lightColor) {

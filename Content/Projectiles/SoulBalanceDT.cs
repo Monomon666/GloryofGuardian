@@ -123,7 +123,7 @@ namespace GloryofGuardian.Content.Projectiles
                 NPC npc = Main.npc[i];
 
                 // 检查 NPC 是否存活且血量低于 50%
-                if (npc.active && !npc.friendly && !npc.boss && npc.life < npc.lifeMax * 0.5f && npc.life < 2000) {
+                if (npc.active && !npc.friendly && !npc.boss && npc.life < npc.lifeMax * 0.5f && npc.life < 4000) {
                     // 检查 NPC 是否在检测范围内
                     if (Vector2.Distance(Projectile.Center, npc.Center) <= detectionRadius) {
                         // 如果 NPC 未被跟踪，则添加到跟踪列表
@@ -155,7 +155,13 @@ namespace GloryofGuardian.Content.Projectiles
                     npc.velocity *= 0.95f;
 
                     for (int i = 0; i <= 4; i++) {
-                        Dust dust1 = Dust.NewDustDirect(npc.Center + new Vector2(-2, -4) + Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * Main.rand.NextFloat(0, 8), 0, 0, DustID.PurpleCrystalShard, 1f, 1f, 100, Color.Purple, 1f);
+                        Dust dust1 = Dust.NewDustDirect(npc.Center + new Vector2(-2, -4) + new Vector2(0, -32 - npc.height / 2) + Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * Main.rand.NextFloat(0, 8), 0, 0, DustID.PurpleCrystalShard, 1f, 1f, 100, Color.Purple, 1f);
+                        dust1.velocity = dust1.position.Toz(Projectile.Center) * 4f;
+                        dust1.noGravity = true;
+                    }
+
+                    for (int i = 0; i <= 2; i++) {
+                        Dust dust1 = Dust.NewDustDirect(npc.position, npc.width, npc.height, DustID.PurpleCrystalShard, 1f, 1f, 100, Color.Purple, 1f);
                         dust1.velocity = dust1.position.Toz(Projectile.Center) * 4f;
                         dust1.noGravity = true;
                     }
@@ -200,7 +206,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override bool PreDraw(ref Color lightColor) {
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SoulBalanceDT").Value;
-            Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Shadow").Value;
+            Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SoulBalanceDT").Value;
             Vector2 drawPos = Projectile.Center - Main.screenPosition + new Vector2(0, -8);
 
             Main.spriteBatch.Draw(
@@ -224,7 +230,7 @@ namespace GloryofGuardian.Content.Projectiles
 
                     Main.spriteBatch.Draw(
                         texture1,
-                        drawPos2,
+                        drawPos2 + new Vector2(0, -32 - npc.height / 2),
                         null,
                         lightColor * 0.3f,
                         Projectile.rotation,

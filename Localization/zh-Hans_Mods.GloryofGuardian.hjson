@@ -388,14 +388,14 @@ Items: {
 			'''
 			消耗一个炮塔栏位
 			召唤一个纳米导弹发射井
-			准备一段时间后部署一枚纳米导弹
+			准备一段时间后部署三枚纳米导弹
 			锁定智导纳米光刃标记的敌怪并发射导弹
 			导弹会在目标存活时追击目标
-			若失去目标则会自动追踪目标的同类型生物
-			过载攻击
-			首先锁定目标的导弹发射井会同时引导其它导弹
+
+			过载攻击会连续释放两轮导弹再重新装填
 
 			右键收回炮塔
+			只要敌人被标记,无论多远都会攻击
 			"这些科技曾日夜守护着天空,击退群星的来犯"
 			'''
 	}
@@ -498,17 +498,32 @@ Items: {
 
 	NanoArmorBody: {
 		DisplayName: 幻影合金重甲
-		Tooltip: ""
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			最大生命值提升200
+			攻速降低25%
+			'''
 	}
 
 	NanoArmorLegs: {
 		DisplayName: 幻影合金护腿
-		Tooltip: ""
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			戍卫过载率增加12%
+			获得爆发性的起跑速度
+			'''
 	}
 
 	NanoArmorHead: {
 		DisplayName: 幻影合金头盔
-		Tooltip: ""
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			戍卫伤害增加16%
+			增加10点盔甲穿透力
+			'''
 	}
 
 	MaliceFireGun: {
@@ -646,7 +661,7 @@ Items: {
 			'''
 			消耗一个炮塔栏位
 			召唤一个判魂天平
-			标记并锁定范围内生命低于50%且低于2000的敌怪
+			标记并锁定范围内生命低于50%且低于4000的敌怪
 			若敌怪非boss，则在引导4秒后对其审判,50%概率处死
 			若审判结果为处死,则对其附近所有敌怪造成
 
@@ -696,18 +711,32 @@ Items: {
 	}
 
 	DarkCrystalBody: {
-		DisplayName: 黯晶胸甲
-		Tooltip: ""
+		DisplayName: 黯晶重甲
+		Tooltip:
+			'''
+			最大生命值提升100
+			攻速降低25%
+			'''
 	}
 
 	DarkCrystalLegs: {
 		DisplayName: 黯晶腿铠
-		Tooltip: ""
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			戍卫伤害增加6%
+			戍卫过载率增加6%
+			'''
 	}
 
 	DarkCrystalHead: {
 		DisplayName: 黯晶头盔
-		Tooltip: ""
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			戍卫伤害增加12%
+			增加5点盔甲穿透力
+			'''
 	}
 
 	SoulofAnotherWorld: {
@@ -763,6 +792,107 @@ Items: {
 			"寒霜的堡垒,极地的防线一步也不会后退"
 			'''
 	}
+
+	DragonFireCalling: {
+		DisplayName: 异世龙焱
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个埃特尼亚龙焱喷射塔
+			喷射出带油的聚合龙焱
+			对敌人造成
+			[着火了][狱炎][涂油]debuff
+
+			过载攻击额外对敌人造成[龙焱][霜火][咒火]减益
+			并使其在一段时间内持续爆发龙焱
+			龙焱减益能使敌怪每秒失去120生命值
+			且非boss敌怪的移速大幅减缓
+
+			优先攻击boss
+			boss被烧尽前龙焱buff不会解除
+			右键收回炮塔
+			"取自异世界的龙，用这不息的火焰守护这世界"
+			'''
+	}
+
+	NanoUAVCalling: {
+		DisplayName: 纳米武装无人机
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个能够悬浮的纳米武装无人机
+			其能同时攻击左右侧最近的一个敌人
+			当仅有一侧有敌人时,会同时攻击一侧的敌人
+
+			发射电能子弹,击中敌人时使敌人被瞬间麻痹
+			过载攻击发射高能带电子弹
+			高能带电子弹击中敌人产生一束电流
+			电流能够穿过附近的敌人进入地面
+			造成50%伤害
+
+			优先攻击boss
+			对boss的麻痹效能减弱
+			右键收回炮塔
+			"与外星人技术结合的产物,是强大的戍卫科技"
+			'''
+	}
+
+	UndeadWoodBody: {
+		DisplayName: 不朽木藤甲
+		Tooltip: 获得50点最大生命值
+	}
+
+	UndeadWoodLegs: {
+		DisplayName: 不朽木护腿
+		Tooltip: 戍卫伤害增加6%
+	}
+
+	UndeadWoodHead: {
+		DisplayName: 不朽木面具
+		Tooltip: 戍卫栏位上限增加1
+	}
+
+	GoldTrident: {
+		DisplayName: 戍天投枪
+		Tooltip:
+			'''
+			左键蓄力
+			松开左键投掷一杆重型长枪
+			贯穿击中的敌人并将其带至长枪的落点
+			蓄力期间按下右键取消投掷
+			"无人可以突破阵线"
+			'''
+	}
+
+	LightningRod: {
+		DisplayName: 风暴引信
+		Tooltip:
+			'''
+			左键蓄力
+			松开左键投掷一杆风暴长枪
+			握住这把枪会遭到电击和放电
+			扔出后释放雷电攻击敌人
+			过载攻击击中boss将引发过载雷电
+			过载雷电还会附带目标boss当前生命值1%的额外伤害
+			(至多100点)
+			蓄力期间按下右键取消投掷
+			"雷鸣声中,我们的世界坚不可摧"
+			'''
+	}
+}
+
+ArmorSetBonuses: {
+	UndeadWood.Description:
+		'''
+		生根:在地面不移动时获得10点防御并免疫击退,
+		但起跑速度大幅降低
+		'''
+	DarkCrystal.Description: 黯晶护盾:受到来源高于40点的伤害时超出部分伤害降低50%
+	Nano.Description:
+		'''
+		纳米自适应:在高于50%生命值时获得15%增伤
+		在低于50%生命值时获得15%伤害减免
+		'''
 }
 
 Prefixes: {
@@ -886,6 +1016,11 @@ Buffs: {
 		// DisplayName: Onfire Malice
 		// Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
 	}
+
+	OnDragonFireDebuff: {
+		// DisplayName: On Dragon Fire Debuff
+		// Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -990,6 +1125,20 @@ Projectiles: {
 	// SRFrostDT.DisplayName: S R Frost D T
 	// SRFrostProj.DisplayName: S R Frost Proj
 	// SRFrostProj0.DisplayName: S R Frost Proj0
+	// DragonFireDT.DisplayName: Dragon Fire D T
+	// DragonFireProj.DisplayName: Dragon Fire Proj
+	// NanoUAVDT.DisplayName: Nano U A V D T
+	// NanoUAVProj.DisplayName: Nano U A V Proj
+	// GelTridentHeld.DisplayName: Gel Trident Held
+	// GoldTridentHeld.DisplayName: Gold Trident Held
+	// GoldTridentProj.DisplayName: Gold Trident Proj
+	// GelTridentPreProj.DisplayName: Gel Trident Pre Proj
+	// GelTridentProj.DisplayName: Gel Trident Proj
+	// GoldTridentPreProj.DisplayName: Gold Trident Pre Proj
+	// LightningRodHeld.DisplayName: Lightning Rod Held
+	// LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
+	// LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
+	// LightningRodProj.DisplayName: Lightning Rod Proj
 }
 
 NPCs: {

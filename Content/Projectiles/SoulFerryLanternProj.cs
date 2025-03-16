@@ -172,7 +172,7 @@ namespace GloryofGuardian.Content.Projectiles
             Player clone = new Player();
             clone.CopyVisuals(Owner);
             SetCloneAppearance(clone, Color.Gray, Color.Red); // 设置灰色外观和红色眼睛
-            ApplyShadowDye(clone); // 应用暗影染料
+            ApplyDye(clone); // 应用染料
             UpdateCloneState(clone); // 更新克隆玩家的状态
 
             // 设置克隆玩家的动作
@@ -198,7 +198,7 @@ namespace GloryofGuardian.Content.Projectiles
             }
 
             // 应用缥缈染料
-            void ApplyShadowDye(Player clone) {
+            void ApplyDye(Player clone) {
                 for (int i = 0; i < clone.dye.Length; i++) {
                     if (clone.dye[i].type != ItemID.VoidDye) {
                         clone.dye[i].SetDefaults(ItemID.VoidDye);

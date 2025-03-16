@@ -260,6 +260,47 @@ Items: {
 		DisplayName: S R Frost Calling
 		Tooltip: ""
 	}
+
+	DragonFireCalling: {
+		DisplayName: Dragon Fire Calling
+		Tooltip: ""
+	}
+
+	NanoUAVCalling: {
+		DisplayName: Nano U A V Calling
+		Tooltip: ""
+	}
+
+	UndeadWoodBody: {
+		DisplayName: Undead Wood Body
+		Tooltip: ""
+	}
+
+	UndeadWoodLegs: {
+		DisplayName: Undead Wood Legs
+		Tooltip: ""
+	}
+
+	UndeadWoodHead: {
+		DisplayName: Undead Wood Head
+		Tooltip: ""
+	}
+
+	GoldTrident: {
+		DisplayName: Gold Trident
+		Tooltip: ""
+	}
+
+	LightningRod: {
+		DisplayName: Lightning Rod
+		Tooltip: ""
+	}
+}
+
+ArmorSetBonuses: {
+	UndeadWood.Description: ""
+	DarkCrystal.Description: ""
+	Nano.Description: ""
 }
 
 Prefixes: {
@@ -383,6 +424,11 @@ Buffs: {
 		DisplayName: Onfire Malice
 		Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
 	}
+
+	OnDragonFireDebuff: {
+		DisplayName: On Dragon Fire Debuff
+		Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -487,6 +533,20 @@ Projectiles: {
 	SRFrostDT.DisplayName: S R Frost D T
 	SRFrostProj.DisplayName: S R Frost Proj
 	SRFrostProj0.DisplayName: S R Frost Proj0
+	DragonFireDT.DisplayName: Dragon Fire D T
+	DragonFireProj.DisplayName: Dragon Fire Proj
+	NanoUAVDT.DisplayName: Nano U A V D T
+	NanoUAVProj.DisplayName: Nano U A V Proj
+	GelTridentHeld.DisplayName: Gel Trident Held
+	GoldTridentHeld.DisplayName: Gold Trident Held
+	GoldTridentProj.DisplayName: Gold Trident Proj
+	GelTridentPreProj.DisplayName: Gel Trident Pre Proj
+	GelTridentProj.DisplayName: Gel Trident Proj
+	GoldTridentPreProj.DisplayName: Gold Trident Pre Proj
+	LightningRodHeld.DisplayName: Lightning Rod Held
+	LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
+	LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
+	LightningRodProj.DisplayName: Lightning Rod Proj
 }
 
 NPCs: {

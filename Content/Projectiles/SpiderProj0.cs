@@ -126,7 +126,6 @@ namespace GloryofGuardian.Content.Projectiles
                 atknum += firenum;
                 atknum += firenum;
                 float fireveltor = Main.rand.NextFloat(0.07f, 0.09f) - firenum * 0.01f;
-                Main.NewText(atknum);
                 for (int i = -firenum; i <= firenum; i++) {
                     Vector2 vel = (target1.Center - Projectile.Center).SafeNormalize(Vector2.Zero) * 12f;
 

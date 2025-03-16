@@ -1,5 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
+using GloryofGuardian.Content.Dusts;
 using GloryofGuardian.Content.Items.Materials;
 using GloryofGuardian.Content.Items.Weapon;
 using GloryofGuardian.Content.Projectiles;
@@ -28,11 +29,11 @@ namespace GloryofGuardian.Content.Class
         //钴蓝破甲
         public bool CobaltDebuff;
         public bool CobaltDebuff2;
-        //塞壬引诱
-        public bool SirenDebuff;
         //纳米标记
         public bool NanoMarkDebuff1;
         public bool NanoMarkDebuff2;
+        //龙焱
+        public bool OnDragonFire;
 
         //每帧buff重设，用于动态不定时的buff
         public override void ResetEffects(NPC npc) {
@@ -41,14 +42,54 @@ namespace GloryofGuardian.Content.Class
             OnfireMalice = false;
             MythrilJavelin = 0;
             CobaltDebuff = false;
-            SirenDebuff = false;
             NanoMarkDebuff1 = false;
             NanoMarkDebuff2 = false;
+            OnDragonFire = false;
         }
 
         public override void SetDefaults(NPC entity) {
             // 使我们的长矛debuff伤害判定和原版的骨矛一样
             entity.buffImmune[ModContent.BuffType<JavelinDebuff1>()] = entity.buffImmune[BuffID.BoneJavelin];
+        }
+
+        int aicount = 0;
+
+        int dragonfirecount = 0;
+        public override void PostAI(NPC npc) {
+            aicount++;
+            if (OnDragonFire) {
+                dragonfirecount++;
+                if (!npc.boss) npc.velocity *= Main.rand.NextFloat(0.8f, 0.9f);
+                if (npc.boss) npc.AddBuff(ModContent.BuffType<OnDragonFireDebuff>(), 300);
+
+                if (updatecount % 12 == 0) {
+                    for (int i = 0; i < 4; i++) {
+                        Projectile proj1 = Projectile.NewProjectileDirect(npc.GetSource_FromThis(), npc.Center, new Vector2(0, 0.3f).RotatedBy(MathHelper.PiOver2 * i + Main.rand.NextFloat(MathHelper.PiOver2)), ModContent.ProjectileType<MaliceFireGunFireProj>(), 1, 0, npc.whoAmI, 3);
+                    }
+                }
+
+                if (dragonfirecount > 300) {
+                    // 检查 NPC 是否拥有指定的 Buff
+                    int buffIndex = FindBuffIndex(npc, ModContent.BuffType<OnDragonFireDebuff>());
+                    if (buffIndex != -1) {
+                        // 移除 Buff
+                        npc.DelBuff(buffIndex);
+                    }
+                }
+            } else {
+                dragonfirecount = 0;
+            }
+            base.PostAI(npc);
+        }
+
+        // 查找指定 Buff 的索引
+        private int FindBuffIndex(NPC npc, int buffType) {
+            for (int i = 0; i < npc.buffType.Length; i++) {
+                if (npc.buffType[i] == buffType) {
+                    return i; // 返回 Buff 的索引
+                }
+            }
+            return -1; // 如果未找到 Buff，返回 -1
         }
 
         int updatecount = 0;//buff生效计时器
@@ -146,7 +187,6 @@ namespace GloryofGuardian.Content.Class
                 if (buffcount1 >= 60) {
                     if (npc.boss && npc.life > npc.lifeMax * 0.05f) {
                         npc.life -= Math.Min((int)(npc.life * 0.02f), 100);
-                        Main.NewText(Math.Min((int)(npc.life * 0.02f), 100));
                         CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
                             Math.Min((int)(npc.life * 0.02f), 100),//这里是你需要展示的文字
@@ -189,9 +229,6 @@ namespace GloryofGuardian.Content.Class
                 npc.lifeRegen -= 40;
             }
 
-            if (SirenDebuff) {
-            }
-
             if (CobaltDebuff) {
                 npc.defense = (int)(npc.defDefense * 0.8f);
             }
@@ -203,6 +240,27 @@ namespace GloryofGuardian.Content.Class
 
             if (NanoMarkDebuff1 || NanoMarkDebuff2) {
                 Lighting.AddLight(npc.Center, 7 * 0.01f, 255 * 0.01f, 255 * 0.01f);//战斗状态发亮
+            }
+
+            if (OnDragonFire) {
+                if (updatecount % 1 == 0) {
+                    int a = npc.width / 16;
+                    int b = npc.height / 16;
+
+                    for (int i = 0; i <= 2 * a * b; i++) {
+                        Dust dust1 = Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<FireLightDust2>(), 1f, 1f, 100, Color.Black, 2f);
+                        dust1.velocity = new Vector2(0, -4).RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f));
+                        dust1.noGravity = true;
+                    }
+
+                    for (int i = 0; i <= 4 * a * b; i++) {
+                        Dust dust1 = Dust.NewDustDirect(npc.position, npc.width, npc.height, ModContent.DustType<FireLightDust2>(), 1f, 1f, 100, Color.Black, 1f);
+                        dust1.velocity = new Vector2(0, -6).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
+                        dust1.noGravity = true;
+                    }
+                }
+
+                npc.lifeRegen -= 120;
             }
         }
 
@@ -281,6 +339,10 @@ namespace GloryofGuardian.Content.Class
             }
             if (npc.netID == NPCID.DD2OgreT3) {
                 npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<SoulofAnotherWorld>(), 1, 5, 10));
+            }
+            //肉前猪鲨掉落风暴引信
+            if (npc.netID == NPCID.DukeFishron && !Main.hardMode) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<LightningRod>(), 1, 1));
             }
 
             base.ModifyNPCLoot(npc, npcLoot);

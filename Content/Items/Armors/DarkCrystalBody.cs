@@ -12,16 +12,20 @@ namespace GloryofGuardian.Content.Items.Armor
             Item.width = 44;
             Item.height = 28;
             Item.value = 10000;
-            Item.rare = -12;
-            Item.defense = 100;
+            Item.rare = ItemRarityID.LightRed;
+
+            Item.defense = 7;
         }
 
         public override void ArmorSetShadows(Player player) {
-            //player.armorEffectDrawShadow = true;
             player.endurance += 0.3f;
         }
 
         public override void UpdateEquip(Player player) {
+            Lighting.AddLight(player.Center, 120 * 0.01f, 66 * 0.01f, 181 * 0.01f);
+            player.GetAttackSpeed(DamageClass.Generic) -= 0.25f;
+            player.GetAttackSpeed(GuardianDamageClass.Instance) -= 0.25f;
+            player.statLifeMax2 += 100;
         }
 
         public override void AddRecipes() {

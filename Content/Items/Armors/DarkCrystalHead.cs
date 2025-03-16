@@ -1,6 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Items.Armor;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace GloryofGuardian.Content.Items.Armors
 {
@@ -13,18 +14,12 @@ namespace GloryofGuardian.Content.Items.Armors
             Item.width = 22;
             Item.height = 22;
             Item.value = 10000;
-            Item.rare = -12;
-            Item.defense = 100;
+            Item.rare = ItemRarityID.LightRed;
+
+            Item.defense = 5;
         }
 
         public override void ArmorSetShadows(Player player) {
-            //player.armorEffectDrawShadow = true;
-
-            //player.armorEffectDrawShadowBasilisk = true;
-            //player.armorEffectDrawShadowEOCShield = true;
-            //player.armorEffectDrawShadowLokis = true;
-            //player.armorEffectDrawShadowSubtle = true;
-            //player.armorEffectDrawOutlines = true;
         }
 
         public override bool IsArmorSet(Item head, Item body, Item legs) {
@@ -35,11 +30,15 @@ namespace GloryofGuardian.Content.Items.Armors
         }
 
         public override void UpdateEquip(Player player) {
-
+            Lighting.AddLight(player.Center, 120 * 0.01f, 66 * 0.01f, 181 * 0.01f);
+            player.GetModPlayer<GOGModPlayer>().Gslot += 1;
+            player.GetDamage<GuardianDamageClass>() += 0.12f;
+            player.GetArmorPenetration(DamageClass.Generic) += 5;
         }
 
         public override void UpdateArmorSet(Player player) {
-
+            player.setBonus = Language.GetTextValue("Mods.GloryofGuardian.ArmorSetBonuses.DarkCrystal.Description");
+            player.GetModPlayer<GOGModPlayer>().DarkCrystal = true;
         }
 
         //public override Color? GetAlpha(Color lightColor) {

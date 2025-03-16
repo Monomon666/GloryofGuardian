@@ -1,6 +1,7 @@
 ﻿using GloryofGuardian.Content.Buffs;
 using System.Collections.Generic;
 using Terraria.DataStructures;
+using Terraria.ID;
 
 namespace GloryofGuardian.Content.Class
 {
@@ -61,6 +62,25 @@ namespace GloryofGuardian.Content.Class
 
         #endregion
 
+        #region 变动开关3
+
+        /// <summary>
+        /// 木套装效果
+        /// </summary>
+        public bool UndeadWood = false;
+
+        /// <summary>
+        /// 黯晶套装效果
+        /// </summary>
+        public bool DarkCrystal = false;
+
+        /// <summary>
+        /// 纳米套装效果
+        /// </summary>
+        public bool Nano = false;
+
+        #endregion
+
         //player方法
         #region 固有变动
 
@@ -100,6 +120,9 @@ namespace GloryofGuardian.Content.Class
             //持有炮台核心饰品时自己召唤的炮台才会工作
             //Todo
             //操作modifiers.SourceDamage,或更改Gcount为9999
+
+            //继承穿透,穿透不会自己继承
+            //但是写在proj里面就行,因为这个职业目前不存在真近战攻击
         }
 
         //近战武器击中敌怪时触发，可以触发某些机制，可以修改对敌方单位造成的伤害，但是该mod大概率并没有近战武器（
@@ -111,16 +134,61 @@ namespace GloryofGuardian.Content.Class
             //指向该敌人的单位向量
             Vector2 totarget = (target.Center - Player.Center).SafeNormalize(Vector2.Zero);
             base.ModifyHitNPCWithProj(proj, target, ref modifiers);
+
+            // 如果当前伤害类型是 GuardianDamageClass
+            if (proj.DamageType == ModContent.GetInstance<GuardianDamageClass>()) {
+                // 继承 DamageClass.Generic 的护甲穿透
+                modifiers.ArmorPenetration += Player.GetArmorPenetration(DamageClass.Generic);
+            }
         }
 
         #endregion
 
         #region 受击特效
 
+        int origindamage = 0;//伤害来源
+        int comingdamage = 0;//计算防御
+        //减伤?我不会算啊,先不算了吧(
+        //从此获取受到伤害的量
+        public override void OnHurt(Player.HurtInfo info) {
+            // 获取玩家受到的伤害
+            origindamage = info.SourceDamage;
+            info.SourceDamage = 1;
+            base.OnHurt(info);
+        }
+
         //受到伤害时触发
         public override void ModifyHurt(ref Player.HurtModifiers modifiers) {
+            //黯晶护盾
+            if (DarkCrystal) {
+                // 获取玩家受到的原始伤害
+                int damage = origindamage;
 
+                // 如果单次伤害高于 60
+                if (damage > 40) {
+                    // 计算超出部分的伤害
+                    int excessDamage = damage - 40;
+
+                    // 将超出部分的伤害降低 50%
+                    int reducedDamage = excessDamage / 2;
+
+                    // 设置最终伤害为 40 + 降低后的超出部分
+                    int FinalDamage = 40 + reducedDamage;
+                    modifiers.SetMaxDamage(FinalDamage);
+
+                    // 显示粒子
+                    for (int i = 0; i < 32; i++) {
+                        int dust0 = DustID.BlueCrystalShard;
+                        if (Main.rand.NextBool(4)) dust0 = DustID.PinkCrystalShard;
+                        if (Main.rand.NextBool(4)) dust0 = DustID.PurpleCrystalShard;
+                        int num1 = Dust.NewDust(Player.position, Player.width, Player.height, dust0, 0f, 0f, 10, Color.White, 2f);
+                        Main.dust[num1].noGravity = true;
+                        Main.dust[num1].velocity *= 2.5f;
+                    }
+                }
+            }
         }
+
         //受到接触伤害时触发
         public override void ModifyHitByNPC(NPC npc, ref Player.HurtModifiers modifiers) {
 
@@ -154,6 +222,10 @@ namespace GloryofGuardian.Content.Class
         {
             return base.ConsumableDodge(info);
         }
+
+        #endregion
+
+        #region 其它效果
 
         #endregion
 
@@ -192,6 +264,12 @@ namespace GloryofGuardian.Content.Class
 
             //buff判定重置
             TitaniumShield = false;
+
+            //套装效果重置
+            UndeadWood = false;
+            DarkCrystal = false;
+            Nano = false;
+
             base.ResetEffects();
         }
 

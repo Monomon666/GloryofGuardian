@@ -1,5 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Projectiles.HeldProj;
+using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
@@ -39,6 +40,11 @@ namespace GloryofGuardian.Content.Items.Weapon
         public override Color? GetAlpha(Color lightColor) {
             //return Color.White;
             return null;
+        }
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+            int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, PrefixCD(Item), PrefixCrit(Item));
+            return false;
         }
 
         public override void AddRecipes() {

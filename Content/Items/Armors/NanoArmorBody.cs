@@ -12,8 +12,9 @@ namespace GloryofGuardian.Content.Items.Armor
             Item.width = 44;
             Item.height = 28;
             Item.value = 10000;
-            Item.rare = -12;
-            Item.defense = 100;
+            Item.rare = ItemRarityID.Yellow;
+
+            Item.defense = 24;
         }
 
         public override void ArmorSetShadows(Player player) {
@@ -22,12 +23,17 @@ namespace GloryofGuardian.Content.Items.Armor
         }
 
         public override void UpdateEquip(Player player) {
+            Lighting.AddLight(player.Center, 255 * 0.005f, 255 * 0.005f, 255 * 0.005f);
+            player.GetAttackSpeed(DamageClass.Generic) -= 0.25f;
+            player.GetAttackSpeed(GuardianDamageClass.Instance) -= 0.25f;
+            player.statLifeMax2 += 200;
         }
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient(ItemID.DirtBlock, 1)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.Nanites, 50)
+                .AddIngredient(ItemID.HallowedBar, 20)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

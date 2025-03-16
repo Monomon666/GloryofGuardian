@@ -192,7 +192,7 @@ namespace GloryofGuardian.Content.Projectiles
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                     //普通
                     if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(-20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 0, Owner.whoAmI, 0, 0, power);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(-20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 2, Owner.whoAmI, 0, 0, power);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;
@@ -202,7 +202,7 @@ namespace GloryofGuardian.Content.Projectiles
                     }
                     //过载
                     if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(-20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel * 0.5f, ModContent.ProjectileType<AdamantiteProj>(), (int)(lastdamage * 0.75f), 0, Owner.whoAmI, 1, 1, power);
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(-20, -24) + nowvel * 44f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * vel * 0.5f, ModContent.ProjectileType<AdamantiteProj>(), (int)(lastdamage * 0.75f), 2, Owner.whoAmI, 1, 1, power);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
                                 proj2.OrichalcumMarkProj = true;

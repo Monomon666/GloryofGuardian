@@ -159,59 +159,6 @@ namespace GloryofGuardian.Content.Items.Weapon
             return false;
         }
 
-        /// <summary>
-        /// 用来特判和传递来自武器前缀的攻速加成
-        /// </summary>
-        float PrefixCD() {
-            if (Item.prefix == ModContent.PrefixType<Stainless0>()
-                || Item.prefix == ModContent.PrefixType<Sensitive0>()
-                || Item.prefix == ModContent.PrefixType<Silent0>()
-                ) return 0.85f;
-            if (Item.prefix == ModContent.PrefixType<Peerless0>()
-                || Item.prefix == ModContent.PrefixType<Excellent0>()
-                || Item.prefix == ModContent.PrefixType<Classic0>()
-                || Item.prefix == ModContent.PrefixType<Precise0>()
-                ) return 0.9f;
-            if (Item.prefix == ModContent.PrefixType<Overclocked0>()
-                || Item.prefix == ModContent.PrefixType<Blooey0>()
-                ) return 1f;
-            if (Item.prefix == ModContent.PrefixType<Scrapped0>()
-                ) return 1.05f;
-            if (Item.prefix == ModContent.PrefixType<Burdened0>()
-                || Item.prefix == ModContent.PrefixType<Damaged0>()
-                ) return 1.1f;
-            if (Item.prefix == ModContent.PrefixType<ShortCircuited0>()
-                ) return 1.15f;
-            return 1;
-        }
-
-        /// <summary>
-        /// 用来特判和传递来自武器前缀的暴击加成
-        /// </summary>
-        float PrefixCrit() {
-            if (Item.prefix == ModContent.PrefixType<Excellent0>()
-                || Item.prefix == ModContent.PrefixType<Sensitive0>()
-                ) return 0f;
-            if (Item.prefix == ModContent.PrefixType<Peerless0>()
-                || Item.prefix == ModContent.PrefixType<Classic0>()
-                || Item.prefix == ModContent.PrefixType<Silent0>()
-                ) return 5f;
-            if (Item.prefix == ModContent.PrefixType<Overclocked0>()
-                || Item.prefix == ModContent.PrefixType<Burdened0>()
-                ) return 10f;
-            if (Item.prefix == ModContent.PrefixType<Blooey0>()
-                || Item.prefix == ModContent.PrefixType<ShortCircuited0>()
-                ) return 20f;
-            if (Item.prefix == ModContent.PrefixType<Scrapped0>()
-                ) return -5f;
-            if (Item.prefix == ModContent.PrefixType<Precise0>()
-                || Item.prefix == ModContent.PrefixType<Damaged0>()
-                ) return -10f;
-            if (Item.prefix == ModContent.PrefixType<Stainless0>()
-                ) return -20f;
-            return 0;
-        }
-
         public override Color? GetAlpha(Color lightColor) {
             //return Color.White;
             return null;

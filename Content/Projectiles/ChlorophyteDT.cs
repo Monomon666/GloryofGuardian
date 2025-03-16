@@ -72,7 +72,6 @@ namespace GloryofGuardian.Content.Projectiles
             //同步
             if (PstackCount > stackCount) {
                 stackCount = (int)PstackCount;
-                Main.NewText(333);
             }
             PstackCount = stackCount;
 

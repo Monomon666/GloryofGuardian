@@ -94,8 +94,6 @@ namespace GloryofGuardian.Content.Projectiles.ProjNPC
         }
 
         public override void HitEffect(NPC.HitInfo hit) {
-
-            Main.NewText(13);
             base.HitEffect(hit);
         }
 

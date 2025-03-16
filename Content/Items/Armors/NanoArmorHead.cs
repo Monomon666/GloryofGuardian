@@ -1,6 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Items.Armor;
 using Terraria.ID;
+using Terraria.Localization;
 
 namespace GloryofGuardian.Content.Items.Armors
 {
@@ -13,8 +14,9 @@ namespace GloryofGuardian.Content.Items.Armors
             Item.width = 22;
             Item.height = 22;
             Item.value = 10000;
-            Item.rare = -12;
-            Item.defense = 100;
+            Item.rare = ItemRarityID.Yellow;
+
+            Item.defense = 12;
         }
 
         public override void ArmorSetShadows(Player player) {
@@ -35,25 +37,25 @@ namespace GloryofGuardian.Content.Items.Armors
         }
 
         public override void UpdateEquip(Player player) {
-
+            Lighting.AddLight(player.Center, 255 * 0.005f, 255 * 0.005f, 255 * 0.005f);
+            player.GetModPlayer<GOGModPlayer>().Gslot += 1;
+            player.GetDamage<GuardianDamageClass>() += 0.16f;
+            player.GetArmorPenetration(DamageClass.Generic) += 10;
         }
 
         public override void UpdateArmorSet(Player player) {
+            player.setBonus = Language.GetTextValue("Mods.GloryofGuardian.ArmorSetBonuses.Nano.Description");
 
+            if (player.statLife < player.statLifeMax2 / 2) player.endurance = 0.15f;
+            if (player.statLife > player.statLifeMax2 / 2) player.GetDamage<GuardianDamageClass>() += 0.15f;
+            if (player.statLife > player.statLifeMax2 / 2) player.GetDamage<GenericDamageClass>() += 0.15f;
         }
-
-        //public override Color? GetAlpha(Color lightColor) {
-        //    return base.GetAlpha(lightColor);
-        //}
-
-        //public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor) {
-        //    base.DrawArmorColor(drawPlayer, shadow, ref color, ref glowMask, ref glowMaskColor);
-        //}
 
         public override void AddRecipes() {
             CreateRecipe()
-                .AddIngredient(ItemID.DirtBlock, 1)
-                .AddTile(TileID.WorkBenches)
+                .AddIngredient(ItemID.Nanites, 30)
+                .AddIngredient(ItemID.HallowedBar, 12)
+                .AddTile(TileID.MythrilAnvil)
                 .Register();
         }
     }

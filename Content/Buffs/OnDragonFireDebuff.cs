@@ -1,10 +1,9 @@
 ﻿using GloryofGuardian.Common;
-using System;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Buffs
 {
-    public class SirenDebuff : ModBuff
+    public class OnDragonFireDebuff : ModBuff
     {
         public override string Texture => GOGConstant.Buffs + Name;
 
@@ -18,8 +17,11 @@ namespace GloryofGuardian.Content.Buffs
             BuffID.Sets.LongerExpertDebuff[Type] = false;//专家模式Debuff持续时间是否延长
         }
 
+        int count = 0;
         public override void Update(NPC npc, ref int buffIndex) {
-            npc.GetGlobalNPC<GOGGlobalNPCs>().SirenDebuff = true;
+            count++;
+            npc.GetGlobalNPC<GOGGlobalNPCs>().OnDragonFire = true;
+
             base.Update(npc, ref buffIndex);
         }
     }

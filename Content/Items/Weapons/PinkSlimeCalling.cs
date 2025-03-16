@@ -74,36 +74,9 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
-            if (player.altFunctionUse == 0) Projectile.NewProjectile(source, position + velocity.SafeNormalize(Vector2.Zero) * 48f, velocity, type, damage, knockback, player.whoAmI, 0, PrefixCrit());
-            if (player.altFunctionUse == 2) Projectile.NewProjectile(source, position + velocity.SafeNormalize(Vector2.Zero) * 48f, velocity, type, damage, knockback, player.whoAmI, 1, PrefixCrit());
+            if (player.altFunctionUse == 0) Projectile.NewProjectile(source, position + velocity.SafeNormalize(Vector2.Zero) * 48f, velocity, type, damage, knockback, player.whoAmI, 0, PrefixCrit(Item));
+            if (player.altFunctionUse == 2) Projectile.NewProjectile(source, position + velocity.SafeNormalize(Vector2.Zero) * 48f, velocity, type, damage, knockback, player.whoAmI, 1, PrefixCrit(Item));
             return false;
-        }
-
-        /// <summary>
-        /// 用来特判和传递来自武器前缀的暴击加成
-        /// </summary>
-        float PrefixCrit() {
-            if (Item.prefix == ModContent.PrefixType<Excellent0>()
-                || Item.prefix == ModContent.PrefixType<Sensitive0>()
-                ) return 0f;
-            if (Item.prefix == ModContent.PrefixType<Peerless0>()
-                || Item.prefix == ModContent.PrefixType<Classic0>()
-                || Item.prefix == ModContent.PrefixType<Silent0>()
-                ) return 5f;
-            if (Item.prefix == ModContent.PrefixType<Overclocked0>()
-                || Item.prefix == ModContent.PrefixType<Burdened0>()
-                ) return 10f;
-            if (Item.prefix == ModContent.PrefixType<Blooey0>()
-                || Item.prefix == ModContent.PrefixType<ShortCircuited0>()
-                ) return 20f;
-            if (Item.prefix == ModContent.PrefixType<Scrapped0>()
-                ) return -5f;
-            if (Item.prefix == ModContent.PrefixType<Precise0>()
-                || Item.prefix == ModContent.PrefixType<Damaged0>()
-                ) return -10f;
-            if (Item.prefix == ModContent.PrefixType<Stainless0>()
-                ) return -20f;
-            return 0;
         }
 
         public override Color? GetAlpha(Color lightColor) {

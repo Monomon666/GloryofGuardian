@@ -50,9 +50,17 @@ namespace GloryofGuardian.Content.Projectiles
         int count = 0;
         int mode = 0;
         bool thefirst = true;
+
+        int findcount = 30;
         public override void AI() {
             count++;
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+
+            if (Projectile.ai[1] != 0) {
+                if (count == 15) Projectile.velocity *= 0.8f;
+                findcount = 90;
+            }
+
             //粒子
             if (count % 1 == 0) {
                 for (int i = 0; i < 1; i++) {
@@ -62,10 +70,11 @@ namespace GloryofGuardian.Content.Projectiles
                 }
             }
 
-            if (count % 15 == 0) Projectile.velocity *= 1.05f;
+            if (Projectile.ai[1] == 0 && count % 15 == 0) Projectile.velocity *= 1.05f;
+            if (Projectile.ai[1] != 0 && count > 90 && count % 15 == 0) Projectile.velocity *= 1.05f;
 
             //制导
-            if (count >= 30) {
+            if (count >= findcount) {
                 //如果敌怪存活就追踪
                 if (Main.npc[(int)Projectile.ai[0]] != null && Main.npc[(int)Projectile.ai[0]].active) {
                     if (thefirst) Main.npc[(int)Projectile.ai[0]].AddBuff(ModContent.BuffType<NanoMarkDebuff2>(), 300);
@@ -99,7 +108,7 @@ namespace GloryofGuardian.Content.Projectiles
             float rot2 = vector2.ToRotation();
             float degree2 = (float)((180 / Math.PI) * rot2);
             float tarrot = MathHelper.ToRadians(projRot + degree2 * Projectile.spriteDirection);
-            float rspeed = 0.04f + (count / 1200f);
+            float rspeed = 0.08f + (count / 1200f);
 
             //转头
             if (wrotation != tarrot) {
