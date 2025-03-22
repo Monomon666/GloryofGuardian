@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
 {
-    public class DragonFireCalling : GOGCalling
+    public class ImmortalAltarCalling : GOGCalling
     {
         public override string Texture => GOGConstant.Weapons + Name;
 
@@ -17,7 +17,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 66;
+            Item.damage = 20;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
@@ -30,7 +30,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
-            Item.shoot = ModContent.ProjectileType<DragonFireDT>();
+            Item.shoot = ModContent.ProjectileType<ImmortalAltarDT>();
             Item.shootSpeed = 5f;
 
             Item.channel = true;
@@ -82,7 +82,7 @@ namespace GloryofGuardian.Content.Items.Weapon
                 Item.noUseGraphic = true;
                 for (int i = 0; i < Main.maxProjectiles; i++) {
                     Projectile proj = Main.projectile[i];
-                    if (proj.type == ModContent.ProjectileType<DragonFireDT>() && proj.owner == player.whoAmI) {
+                    if (proj.type == ModContent.ProjectileType<ImmortalAltarDT>() && proj.owner == player.whoAmI) {
                         proj.Kill();
                     }
                 }
@@ -108,10 +108,8 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override void AddRecipes() {
             Recipe recipe = CreateRecipe();
-            recipe.AddRecipeGroup("GloryofGuardian.AnySilverBar", 5);
-            recipe.AddRecipeGroup("GloryofGuardian.AnyGoldBar", 2);
-            recipe.AddIngredient(ItemID.Ruby, 1);
-            recipe.AddTile(TileID.Anvils);
+            recipe.AddIngredient(ItemID.Ectoplasm, 100);
+            recipe.AddTile(TileID.LunarCraftingStation);
             recipe.Register();
         }
     }

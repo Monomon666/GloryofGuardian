@@ -148,7 +148,6 @@ namespace GloryofGuardian.Content.Projectiles
                     Main.EntitySpriteDraw(texture0, drawPos, null, lightColor * 3, Projectile.rotation, texture0.Size() / 2, Projectile.scale * scaproj, SpriteEffects.None, 0);
                 }
             }
-
             return false;
         }
     }

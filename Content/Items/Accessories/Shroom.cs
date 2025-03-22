@@ -32,11 +32,6 @@ namespace GloryofGuardian.Content.Items.Accessories
             return Color.White;
         }
 
-        public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) {
-            if (equippedItem == null) return false;
-            return base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
-        }
-
         public override void PostUpdate() {
             Lighting.AddLight(Item.Center, Color.WhiteSmoke.ToVector3() * 0.55f * Main.essScale);
         }

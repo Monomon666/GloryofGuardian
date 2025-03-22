@@ -18,6 +18,8 @@
         public const string Tiles = Asset + "Tiles/";
         public const string UIs = Asset + "UIs/";
         public const string Effects = Asset + "Effects/";
+        public const string Shader = Effects + "Shader/";
+
         /// <summary>
         /// 空贴图
         /// </summary>

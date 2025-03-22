@@ -261,11 +261,6 @@ Items: {
 		Tooltip: ""
 	}
 
-	DragonFireCalling: {
-		DisplayName: Dragon Fire Calling
-		Tooltip: ""
-	}
-
 	NanoUAVCalling: {
 		DisplayName: Nano U A V Calling
 		Tooltip: ""
@@ -293,6 +288,76 @@ Items: {
 
 	LightningRod: {
 		DisplayName: Lightning Rod
+		Tooltip: ""
+	}
+
+	BloomingLife: {
+		DisplayName: Blooming Life
+		Tooltip: ""
+	}
+
+	Candor: {
+		DisplayName: Candor
+		Tooltip: ""
+	}
+
+	Dirge: {
+		DisplayName: Dirge
+		Tooltip: ""
+	}
+
+	Elegy: {
+		DisplayName: Elegy
+		Tooltip: ""
+	}
+
+	GuardianEmblem: {
+		DisplayName: Guardian Emblem
+		Tooltip: ""
+	}
+
+	HellFlare: {
+		DisplayName: Hell Flare
+		Tooltip: ""
+	}
+
+	HolyBond: {
+		DisplayName: Holy Bond
+		Tooltip: ""
+	}
+
+	Resolute: {
+		DisplayName: Resolute
+		Tooltip: ""
+	}
+
+	Syncore: {
+		DisplayName: Syncore
+		Tooltip: ""
+	}
+
+	WildernessSeed: {
+		DisplayName: Wilderness Seed
+		Tooltip: ""
+	}
+
+	FireDragonCalling: {
+		DisplayName: Fire Dragon Calling
+		Tooltip: ""
+	}
+
+	ImmortalLotusCalling: {
+		DisplayName: Silver Bough Calling
+		Tooltip: ""
+	}
+
+	SwordNurturingGourdCalling: {
+		DisplayName: Sword Nurturing Gourd Calling
+		Tooltip: ""
+	}
+
+	ImmortalAltarCalling: {
+		DisplayName: Immortal Altar Calling
 		Tooltip: ""
 	}
 }
@@ -547,6 +612,20 @@ Projectiles: {
 	LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
 	LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
 	LightningRodProj.DisplayName: Lightning Rod Proj
+	FireDragonDT.DisplayName: Fire Dragon D T
+	FireDragonProj.DisplayName: Fire Dragon Proj
+	SilverBoughDT.DisplayName: Silver Bough D T
+	SilverBoughProj.DisplayName: Silver Bough Proj
+	SilverBoughProj0.DisplayName: Silver Bough Proj0
+	ImmortalLotusDT.DisplayName: Immortal Lotus D T
+	ImmortalLotusProj.DisplayName: Immortal Lotus Proj
+	ImmortalLotusProj0.DisplayName: Immortal Lotus Proj0
+	ImmortalLotusProj2.DisplayName: Immortal Lotus Proj2
+	SwordNurturingGourdDT.DisplayName: Sword Nurturing Gourd D T
+	SwordNurturingGourdProj.DisplayName: Sword Nurturing Gourd Proj
+	SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
+	ImmortalAltarDT.DisplayName: Immortal Altar D T
+	ImmortalAltarProj.DisplayName: Immortal Altar Proj
 }
 
 NPCs: {

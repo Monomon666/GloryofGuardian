@@ -14,6 +14,8 @@ namespace GloryofGuardian.Common
 
         #region 绘制
 
+
+
         #endregion
 
         #region 方法
@@ -342,6 +344,22 @@ namespace GloryofGuardian.Common
             Vector2 ToTarget = TargetCenter - entity.Center;
             Vector2 ToTargetNormalize = ToTarget.SafeNormalize(Vector2.Zero);
             Vector2 speed = ToTargetNormalize * AsymptoticVelocity(entity.Center, TargetCenter, Speed, ShutdownDistance);
+            entity.velocity = speed;
+            return speed;
+        }
+
+        /// <summary>
+        /// 更加缓和的追逐行为
+        /// </summary>
+        /// <param name="entity">需要操纵的实体</param>
+        /// <param name="TargetCenter">目标地点</param>
+        /// <param name="SpeedUpdates">速度的更新系数</param>
+        /// <param name="HomingStrenght">追击力度</param>
+        /// <returns></returns>
+        public static Vector2 SmoothHomingBehavior(this Entity entity, Vector2 TargetCenter, float SpeedUpdates = 1, float HomingStrenght = 0.1f) {
+            float targetAngle = entity.AngleTo(TargetCenter);
+            float f = entity.velocity.ToRotation().RotTowards(targetAngle, HomingStrenght);
+            Vector2 speed = f.ToRotationVector2() * entity.velocity.Length() * SpeedUpdates;
             entity.velocity = speed;
             return speed;
         }

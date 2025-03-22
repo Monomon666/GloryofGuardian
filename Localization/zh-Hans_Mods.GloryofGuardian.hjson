@@ -226,7 +226,7 @@ Items: {
 			'''
 			你觉得你可以单杀仙人球了
 			减少90%输出
-			获得100%过载频率
+			获得100%过载率
 			'''
 	}
 
@@ -277,8 +277,8 @@ Items: {
 			消耗一个炮塔栏位
 			召唤一个山铜增幅器
 			每次振动重新标记范围内最近的一个其它类型的炮台
-			当过载频率高于50%时将额外标记一个炮台
-			提升被标记炮台20%的过载概率
+			当过载率高于50%时将额外标记一个炮台
+			提升被标记炮台20%的过载率
 			增幅被标记炮台发射的弹幕
 			每秒增幅至多2个经过增幅范围内的戍卫弹幕
 			增幅弹幕将在命中时额外造成10%至少10点真实伤害
@@ -780,7 +780,7 @@ Items: {
 			击中敌人将发射圣诞烟花
 			处于圣诞节或位于雪原,且附近有不低于3个冰霜守卫时
 			获得强化,炮塔上降下雪花
-			将能够召唤更多圣诞礼物并获得25%过载概率
+			将能够召唤更多圣诞礼物并获得25%过载率
 			圣诞礼物具有不同的攻击方式
 			伤害均会造成[霜冻]继而造成[霜火]减益
 
@@ -790,28 +790,6 @@ Items: {
 			优先攻击boss
 			右键收回炮塔
 			"寒霜的堡垒,极地的防线一步也不会后退"
-			'''
-	}
-
-	DragonFireCalling: {
-		DisplayName: 异世龙焱
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一个埃特尼亚龙焱喷射塔
-			喷射出带油的聚合龙焱
-			对敌人造成
-			[着火了][狱炎][涂油]debuff
-
-			过载攻击额外对敌人造成[龙焱][霜火][咒火]减益
-			并使其在一段时间内持续爆发龙焱
-			龙焱减益能使敌怪每秒失去120生命值
-			且非boss敌怪的移速大幅减缓
-
-			优先攻击boss
-			boss被烧尽前龙焱buff不会解除
-			右键收回炮塔
-			"取自异世界的龙，用这不息的火焰守护这世界"
 			'''
 	}
 
@@ -878,6 +856,170 @@ Items: {
 			蓄力期间按下右键取消投掷
 			"雷鸣声中,我们的世界坚不可摧"
 			'''
+	}
+
+	BloomingLife: {
+		DisplayName: 生命之赐
+		Tooltip:
+			'''
+			戍卫栏位上限增加1
+			获得持续的[树妖祝福]增益
+			白天时,额外获得[快乐]增益
+			戍卫信物之间不能互相叠加
+			'''
+	}
+
+	Candor: {
+		DisplayName: 无秽之心
+		Tooltip:
+			'''
+			戍卫徽章
+			当生命上限不低于200时
+			将献祭100生命上限
+			以使戍卫栏位上限额外增加1
+			戍卫过载率增加10%
+			戍卫徽章之间不能互相叠加
+			'''
+	}
+
+	Dirge: {
+		DisplayName: 鲜血之契
+		Tooltip:
+			'''
+			戍卫徽章
+			当生命上限不低于200时
+			将献祭100生命上限获得主效果：
+			使戍卫栏位上限额外增加1
+			获得10%戍卫伤害提升
+
+			血腥主题炮塔获得
+			戍卫徽章之间不能互相叠加
+			'''
+	}
+
+	Elegy: {
+		DisplayName: 侵蚀之约
+		Tooltip:
+			'''
+			戍卫徽章
+			当生命上限不低于200时
+			将献祭100生命上限
+			以使戍卫栏位上限额外增加1
+			戍卫过载率增加10%
+			戍卫徽章之间不能互相叠加
+			'''
+	}
+
+	GuardianEmblem: {
+		DisplayName: 戍卫徽章
+		Tooltip: ""
+	}
+
+	HellFlare: {
+		DisplayName: 炼狱战旗
+		Tooltip: ""
+	}
+
+	HolyBond: {
+		DisplayName: 神圣盟誓
+		Tooltip: ""
+	}
+
+	Resolute: {
+		DisplayName: 戍心无悔
+		Tooltip: ""
+	}
+
+	Syncore: {
+		DisplayName: 共振核心
+		Tooltip: ""
+	}
+
+	WildernessSeed: {
+		DisplayName: 旷野之子
+		Tooltip:
+			'''
+			戍卫信物
+			戍卫栏位上限增加1
+			当饰品栏中仅装备了这一个饰品时
+			戍卫栏位上限额外加1
+			只能携带一个戍卫信物
+			"虽是一片荒芜，但你仍守护着这希望的种子"
+			'''
+	}
+
+	FireDragonCalling: {
+		DisplayName: 异世龙焱
+		Tooltip:
+			'''
+			消耗两个炮塔栏位
+			召唤一个幼年翼龙
+			喷射出带油的聚合龙焱
+			对敌人造成
+			[着火了][狱炎][涂油]debuff
+
+			过载攻击额外对敌人造成[龙焱][霜火][咒火]减益
+			[龙焱]并使其在一段时间内持续爆发火焰
+			并能使敌怪每秒失去120生命值
+			且非boss敌怪的移速大幅减缓
+
+			优先攻击boss
+			boss被烧尽前龙焱buff不会解除
+			右键收回炮塔
+			"异世界的龙，用这不息的火焰守护这世界"
+			'''
+	}
+
+	ImmortalLotusCalling: {
+		DisplayName: 不朽莲华
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一枝不朽莲华
+
+			莲华会根据附近的其它莲华的数量进行调律
+			以解锁更多攻击方式
+
+			默认发射数枚水晶围绕炮塔
+			一朵莲华:向敌人发射数枚黯淡水晶
+			三朵莲华:发射数枚纯净水晶
+			六朵莲华:
+
+			优先攻击boss
+			右键收回炮塔
+			'''
+	}
+
+	SwordNurturingGourdCalling: {
+		DisplayName: 剑葫芦
+		Tooltip:
+			'''
+			消耗四个炮塔栏位
+			召唤一个滋养剑的宝葫芦
+			至多召唤一个
+
+			葫芦中养着一把仙剑
+			会释放追踪虹影剑气攻击最近的敌人
+			过载攻击会释放剑影,剑影会自上而下贯穿敌人
+			击中敌人后触发两种追加攻击之一:
+			若击中地面则会对附近的至多4个敌人发动锁定落剑
+			若没有击中敌人则会释放飞剑发动剑阵
+			若击中的是boss则同时触发两种攻击
+
+			每3秒至多触发一次过载攻击
+
+			诛灭了所有闪亮光辉之源，你得到了这把剑的认可
+			但是它的实力还没有解放
+			优先攻击boss
+			右键收回炮塔
+
+			怎么得到它?你可能需要找到那把剑……
+			'''
+	}
+
+	ImmortalAltarCalling: {
+		// DisplayName: Immortal Altar Calling
+		// Tooltip: ""
 	}
 }
 
@@ -1139,6 +1281,20 @@ Projectiles: {
 	// LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
 	// LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
 	// LightningRodProj.DisplayName: Lightning Rod Proj
+	// FireDragonDT.DisplayName: Fire Dragon D T
+	// FireDragonProj.DisplayName: Fire Dragon Proj
+	// SilverBoughDT.DisplayName: Silver Bough D T
+	// SilverBoughProj.DisplayName: Silver Bough Proj
+	// SilverBoughProj0.DisplayName: Silver Bough Proj0
+	// ImmortalLotusDT.DisplayName: Immortal Lotus D T
+	// ImmortalLotusProj.DisplayName: Immortal Lotus Proj
+	// ImmortalLotusProj0.DisplayName: Immortal Lotus Proj0
+	// ImmortalLotusProj2.DisplayName: Immortal Lotus Proj2
+	// SwordNurturingGourdDT.DisplayName: Sword Nurturing Gourd D T
+	// SwordNurturingGourdProj.DisplayName: Sword Nurturing Gourd Proj
+	// SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
+	// ImmortalAltarDT.DisplayName: Immortal Altar D T
+	// ImmortalAltarProj.DisplayName: Immortal Altar Proj
 }
 
 NPCs: {

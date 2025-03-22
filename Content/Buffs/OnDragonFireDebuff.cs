@@ -21,6 +21,7 @@ namespace GloryofGuardian.Content.Buffs
         public override void Update(NPC npc, ref int buffIndex) {
             count++;
             npc.GetGlobalNPC<GOGGlobalNPCs>().OnDragonFire = true;
+            if (npc.boss) npc.AddBuff(ModContent.BuffType<OnDragonFireDebuff>(), 300);
 
             base.Update(npc, ref buffIndex);
         }

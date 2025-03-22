@@ -13,13 +13,11 @@ namespace GloryofGuardian.Content.Items.Accessories
         public override void SetDefaults() {
             Item.width = 32;
             Item.height = 44;
-            Item.maxStack = 999;
+            Item.maxStack = 1;
             Item.value = 10000;
             Item.rare = -12;
 
             Item.accessory = true;
-
-            Item.defense = 5;
         }
 
         int mode = 0;
@@ -33,11 +31,6 @@ namespace GloryofGuardian.Content.Items.Accessories
 
         public override Color? GetAlpha(Color lightColor) {
             return Color.White;
-        }
-
-        public override bool CanAccessoryBeEquippedWith(Item equippedItem, Item incomingItem, Player player) {
-            if (equippedItem == null) return false;
-            return base.CanAccessoryBeEquippedWith(equippedItem, incomingItem, player);
         }
 
         public override void PostUpdate() {

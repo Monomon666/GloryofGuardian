@@ -20,7 +20,7 @@ namespace GloryofGuardian.Content.Class
         /// <summary>
         /// 炮塔格子
         /// </summary>
-        public int Gslot = 0;
+        public int Gslot = 1;
 
         /// <summary>
         /// 炮塔格子2
@@ -50,6 +50,56 @@ namespace GloryofGuardian.Content.Class
         /// 测试饰品孤独残响
         /// </summary>
         public bool residuallonelinessechoes = false;
+
+        /// <summary>
+        /// 旷野之子
+        /// </summary>
+        public bool wildernessseed = false;
+
+        /// <summary>
+        /// 生命之赐
+        /// </summary>
+        public bool bloominglife = false;
+
+        /// <summary>
+        /// 没落之言(腐化)
+        /// </summary>
+        public bool elegy = false;
+
+        /// <summary>
+        /// 陨落之言(猩红)
+        /// </summary>
+        public bool dirge = false;
+
+        /// <summary>
+        /// 炼狱战旗
+        /// </summary>
+        public bool hellflare = false;
+
+        /// <summary>
+        /// 戍卫徽章
+        /// </summary>
+        public bool guardianemblem = false;
+
+        /// <summary>
+        /// 无秽之心
+        /// </summary>
+        public bool candor = false;
+
+        /// <summary>
+        /// 神圣盟誓
+        /// </summary>
+        public bool holybond = false;
+
+        /// <summary>
+        /// 戍心无悔
+        /// </summary>
+        public bool resolute = false;
+
+        /// <summary>
+        /// 共振核心
+        /// </summary>
+        public bool syncore = false;
 
         #endregion
 
@@ -241,13 +291,34 @@ namespace GloryofGuardian.Content.Class
         }
 
         public override void PreUpdate() {
+            // 遍历玩家的饰品栏，计算装备的饰品数量
+            int accessoryCount = 0;
+            for (int i = 3; i < 10; i++) // 3-9是饰品位
+            {
+                if (!Player.armor[i].IsAir) // 如果该位置有饰品
+                {
+                    accessoryCount++;
+                }
+            }
+
             //更新前重置赋值
-            Gslot = 0;
+            Gslot = 1;
             GcountR = 1;
             GcountEx = 0;
 
             if (residuallonelinessechoes) {
-                Gslot += 511;
+                Gslot += 20;
+            }
+
+            if (wildernessseed) {
+                Gslot += 1;
+                if (accessoryCount == 1) Gslot += 1;
+            }
+
+            if (bloominglife) {
+                Gslot += 1;
+                if (Main.dayTime) Player.AddBuff(BuffID.Sunflower, 30);
+                Player.AddBuff(BuffID.DryadsWard, 30);
             }
         }
 
@@ -261,6 +332,16 @@ namespace GloryofGuardian.Content.Class
             //这里不能够直接重置某些持续性作用的字段,不然会导致问题,它们被放置在了PreUpdate
             //饰品判定重置
             residuallonelinessechoes = false;//孤独残响
+            wildernessseed = false;
+            bloominglife = false;
+            elegy = false;
+            dirge = false;
+            hellflare = false;
+            guardianemblem = false;
+            candor = false;
+            holybond = false;
+            resolute = false;
+            syncore = false;
 
             //buff判定重置
             TitaniumShield = false;

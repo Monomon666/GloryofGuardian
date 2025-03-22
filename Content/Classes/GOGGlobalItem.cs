@@ -1,5 +1,7 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Items.Weapon;
 using System.Collections.Generic;
+using Terraria.ID;
 using Terraria.Utilities;
 
 namespace GloryofGuardian.Content.Class
@@ -33,6 +35,11 @@ namespace GloryofGuardian.Content.Class
         }
 
         #endregion
+
+        public override void SetStaticDefaults() {
+            ItemID.Sets.ShimmerTransformToItem[ItemID.EmpressBlade] = ModContent.ItemType<SwordNurturingGourdCalling>();
+            base.SetStaticDefaults();
+        }
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             if (item.DamageType == GuardianDamageClass.Instance) {

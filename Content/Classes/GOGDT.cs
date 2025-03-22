@@ -47,6 +47,10 @@ namespace GloryofGuardian.Content.Class
                         if (proj.type == ModContent.ProjectileType<AdamantiteDT>()) MaxIndex += 2;
                         if (proj.type == ModContent.ProjectileType<PlanteraDT>()) MaxIndex += 2;
                         if (proj.type == ModContent.ProjectileType<SirenDT>()) MaxIndex += 2;
+                        if (proj.type == ModContent.ProjectileType<NanoUAVDT>()) MaxIndex += 1;
+                        if (proj.type == ModContent.ProjectileType<FireDragonDT>()) MaxIndex += 1;
+                        if (proj.type == ModContent.ProjectileType<SwordNurturingGourdDT>()) MaxIndex += 3;
+
                         //特判不占用栏位的炮台
                         if (proj.type == ModContent.ProjectileType<SlimeProj0>()) MaxIndex -= 1;
 

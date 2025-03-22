@@ -43,6 +43,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
+            SetDefaults();
             int p = Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI, PrefixCD(Item), PrefixCrit(Item));
             return false;
         }

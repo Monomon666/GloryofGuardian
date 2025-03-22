@@ -10,7 +10,6 @@ namespace GloryofGuardian.Content.Projectiles
 {
     public class NanoGuiderProj : GOGLaserBeamProj, ILocalizedModType
     {
-        public new string LocalizationCategory => "Projectiles.Magic";
         public override string Texture => GOGConstant.nulls;
 
         public bool playedSound = false;

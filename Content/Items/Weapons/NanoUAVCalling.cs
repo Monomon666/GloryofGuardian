@@ -48,7 +48,7 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
-                if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
+                if (player.GetModPlayer<GOGModPlayer>().Gslot < 2) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
                             "戍卫栏不足",//这里是你需要展示的文字

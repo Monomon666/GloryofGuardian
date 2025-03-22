@@ -42,6 +42,7 @@ namespace GloryofGuardian.Content.Projectiles
             base.OnKill(timeLeft);
         }
 
+        int drawcount = 0;
         public override bool PreDraw(ref Color lightColor)//predraw返回false即可禁用原版绘制
         {
             //这次我们做一个简单点的预警线，也就是蓝白色来回闪动
