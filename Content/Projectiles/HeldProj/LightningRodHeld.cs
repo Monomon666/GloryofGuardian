@@ -213,7 +213,7 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
             Projectile.width = 16;
             Projectile.height = 16;
             Projectile.friendly = true;
-            Projectile.hostile = false;
+            Projectile.hostile = true;
             Projectile.DamageType = GuardianDamageClass.Instance;
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
@@ -293,7 +293,7 @@ namespace GloryofGuardian.Content.Projectiles.HeldProj
 
         List<int> ignore = new List<int>();
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            if (Projectile.ai[1] == 0) {
+            if (Projectile.ai[1] == 0 || !target.boss) {
                 for (int i = 0; i < 2; i++) {
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<LightningRodLightningProj>(), Projectile.damage, 2, Owner.whoAmI, 0);
                     proj1.penetrate = -1;

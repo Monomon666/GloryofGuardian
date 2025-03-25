@@ -6,7 +6,7 @@ using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items.Weapon
 {
-    public class ImmortalLotusCalling : GOGCalling
+    public class FinalSpiralfCalling : GOGCalling
     {
         public override string Texture => GOGConstant.Weapons + Name;
 
@@ -14,23 +14,24 @@ namespace GloryofGuardian.Content.Items.Weapon
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;
             ItemID.Sets.LockOnIgnoresCollision[Item.type] = true;
+            ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.EmpressBlade;
         }
 
         public override void SetDefaults() {
-            Item.damage = 80;
+            Item.damage = 190;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
             Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.knockBack = 8;
+            Item.knockBack = 2;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = ItemRarityID.Red;
+            Item.rare = ItemRarityID.Pink;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
-            Item.shoot = ModContent.ProjectileType<ImmortalLotusDT>();
+            Item.shoot = ModContent.ProjectileType<FinalSpiralfDT>();
             Item.shootSpeed = 5f;
 
             Item.channel = true;
@@ -48,6 +49,13 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
+                for (int i = 0; i < Main.maxProjectiles; i++) {
+                    Projectile proj = Main.projectile[i];
+                    if (proj.type == ModContent.ProjectileType<FinalSpiralfDT>() && proj.owner == player.whoAmI) {
+                        proj.Kill();
+                    }
+                }
+
                 if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
                             Color.Red,//跳字的颜色
@@ -82,7 +90,7 @@ namespace GloryofGuardian.Content.Items.Weapon
                 Item.noUseGraphic = true;
                 for (int i = 0; i < Main.maxProjectiles; i++) {
                     Projectile proj = Main.projectile[i];
-                    if (proj.type == ModContent.ProjectileType<ImmortalLotusDT>() && proj.owner == player.whoAmI) {
+                    if (proj.type == ModContent.ProjectileType<FinalSpiralfDT>() && proj.owner == player.whoAmI) {
                         proj.Kill();
                     }
                 }
@@ -104,13 +112,6 @@ namespace GloryofGuardian.Content.Items.Weapon
         public override Color? GetAlpha(Color lightColor) {
             //return Color.White;
             return null;
-        }
-
-        public override void AddRecipes() {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Ectoplasm, 100);
-            recipe.AddTile(TileID.LunarCraftingStation);
-            recipe.Register();
         }
     }
 }

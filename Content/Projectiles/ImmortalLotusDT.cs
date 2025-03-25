@@ -1,6 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using Terraria.DataStructures;
 using Terraria.ID;
 
@@ -37,13 +38,22 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 30;//默认发射间隔
+            count0 = 60;//默认发射间隔
+            count00 = 60;//多重攻击间隔
+
+            interval = 600;//恢复弹间隔长度
+            countleft = -120;//修整时长
+
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }
 
+        int interval = 0;
+        int countin = 0;
         int count = 0;
         int count0 = 0;
+        int count00 = 0;
+        int countleft = 0;
         public int countp = 0;
         public bool earliest = false;
         //重力
@@ -54,6 +64,7 @@ namespace GloryofGuardian.Content.Projectiles
         //状态机
         int allnum = 0;
         int mode = 0;
+        int dtnum = 0;
 
         int drawcircount = 0;
         //帧
@@ -63,13 +74,15 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 firepos = Vector2.Zero;
         public override void AI() {
             count++;
+            countin++;
+
             countp = count;
             Projectile.timeLeft = 2;
             Projectile.StickToTiles(false, false);//形成判定
             Drop();
             Calculate();
 
-            int dtnum = 0;
+            int dtnum0 = 0;
             int index = 0;//定义序号为0
             foreach (var proj in Main.projectile)//遍历所有弹幕
             {
@@ -89,20 +102,19 @@ namespace GloryofGuardian.Content.Projectiles
 
                     //调率同步
 
-
                     //总数
-                    dtnum++;
+                    dtnum0++;
                 }
             }
 
-            Main.NewText(dtnum);
+            dtnum = dtnum0;
 
-            if (dtnum <= 2) mode = 0;
-            if (dtnum > 2 && dtnum <= 5) mode = 1;
-            if (dtnum > 5 && dtnum <= 9) mode = 2;
+            mode = 0;
+            if (dtnum >= 3) mode = 1;
+            if (dtnum >= 6) mode = 2;
 
             //水晶位置标定
-            firepos = Projectile.Center + new Vector2(-2, -96) + new Vector2(0, -8) * breath;
+            firepos = Projectile.Center + new Vector2(2, -96) + new Vector2(0, -8) * breath;
 
             if (mode >= 1) {
                 for (int j = 0; j < 1; j++) {
@@ -113,8 +125,26 @@ namespace GloryofGuardian.Content.Projectiles
             }
 
             //索敌与行动
-            NPC target1 = Projectile.Center.InPosClosestNPC(1200, true, true);
+            NPC target1 = Projectile.Center.InPosClosestNPC(3000, true, true);
             if (target1 != null && target1.active) Attack(target1);
+            if ((target1 == null || !target1.active) && count < 180) count = 0;
+
+            //治愈
+            if (countin >= interval) {
+                for (int i = 0; i < 1; i++) {
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), firepos, new Vector2(0, -12f), ModContent.ProjectileType<ImmortalLotusProj>(), lastdamage, 2, Owner.whoAmI, 120);
+                    if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                        if (proj1.ModProjectile is GOGProj proj2) {
+                            proj2.OrichalcumMarkProj = true;
+                            proj2.OrichalcumMarkProjcount = 300;
+                        }
+                    }
+                }
+                //计时重置
+                countin = 0;
+            }
 
             //帧图
             Projectile.frameCounter++;
@@ -163,31 +193,59 @@ namespace GloryofGuardian.Content.Projectiles
         /// </summary>
         void Attack(NPC target1) {
             Vector2 projcen = firepos;
-            Vector2 vel = projcen.Toz(target1.Center);
+            Vector2 vel = projcen.Toz(target1.Center) * 12f;
+            int firenum = Math.Min(6, dtnum);
 
             //发射,不过载
             if (count >= Gcount) {
-                for (int i = 0; i < 1; i++) {
-                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item26, Projectile.Center);
+                if (count == Gcount) {
+                    for (int i = 0; i < firenum; i++) {
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
 
-                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, Vector2.Zero, ModContent.ProjectileType<ImmortalLotusProj>(), lastdamage, 1, Owner.whoAmI);
-                    if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                        if (proj1.ModProjectile is GOGProj proj2) {
-                            proj2.OrichalcumMarkProj = true;
-                            proj2.OrichalcumMarkProjcount = 300;
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), firepos, new Vector2(0, -12f).RotatedBy(MathHelper.Pi * 2 / firenum * i), ModContent.ProjectileType<ImmortalLotusProj>(), lastdamage, 2, Owner.whoAmI);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
+                        }
+
+                        if (mode == 0) count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                    }
+                }
+
+                if (count == Gcount + count00) {
+                    for (int i = 0; i < 3; i++) {
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), firepos, new Vector2(0, -12f).RotatedBy(MathHelper.Pi * 2 / 3 * i), ModContent.ProjectileType<ImmortalLotusProj>(), lastdamage, 2, Owner.whoAmI, 1);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
                         }
                     }
 
-                    //int projectileID = ProjectileID.FairyQueenMagicItemShot; // 夜光弹幕的ID
-                    //int projectileIndex = Projectile.NewProjectile(new EntitySource_Parent(Projectile), projcen, new Vector2(12, 0).RotatedBy(i * MathHelper.PiOver2), projectileID, lastdamage, 1, Owner.whoAmI);
-                    //Projectile projectile = Main.projectile[projectileIndex];
-                    //projectile.DamageType = GuardianDamageClass.Instance; // 修改伤害类型
-                    //projectile.velocity *= 1.5f; // 提高弹幕速度
-                    //projectile.scale = 1.2f; // 增大弹幕大小
+                    if (mode == 1) count = Owner.GetModPlayer<GOGModPlayer>().GcountEx + countleft;
                 }
 
-                //计时重置
-                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+                if (count == Gcount + count00) {
+                    for (int i = 0; i < 3; i++) {
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item20, Projectile.Center);
+
+                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), firepos, new Vector2(0, -12f).RotatedBy(MathHelper.Pi * 2 / 3 * i), ModContent.ProjectileType<ImmortalLotusProj>(), lastdamage, 2, Owner.whoAmI, 2);
+                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                            if (proj1.ModProjectile is GOGProj proj2) {
+                                proj2.OrichalcumMarkProj = true;
+                                proj2.OrichalcumMarkProjcount = 300;
+                            }
+                        }
+                    }
+
+                    //计时重置
+                    count = Owner.GetModPlayer<GOGModPlayer>().GcountEx + countleft;
+                }
             }
         }
 
@@ -229,6 +287,7 @@ namespace GloryofGuardian.Content.Projectiles
         float breath = 0;
         public override bool PreDraw(ref Color lightColor) {
             breath = (float)Math.Sin((int)Main.GameUpdateCount / 18f);
+            drawcount = (int)Main.GameUpdateCount;
 
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusDT").Value;
             Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusDT2").Value;
@@ -250,6 +309,85 @@ namespace GloryofGuardian.Content.Projectiles
                 SpriteEffects.None,
                 0);
 
+            if (mode < 2) drawcircount = 0;
+            if (mode >= 2) {
+                if (drawcircount < 99) drawcircount++;
+
+                //Main.spriteBatch.End();
+                //Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                //
+                //Main.EntitySpriteDraw(
+                //        texture2,
+                //        Projectile.Center - Main.screenPosition + new Vector2(0, -96),
+                //        null,
+                //        lightColor * 0.8f * (drawcircount / 100f),
+                //        Projectile.rotation + (int)Main.GameUpdateCount / 60f,
+                //        texture2.Size() / 2,
+                //        Projectile.scale * 0.4f,
+                //        SpriteEffects.None,
+                //        0);
+                //
+                //Main.spriteBatch.End();
+                //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+                float rs = drawcount / 30f;
+                List<VertexInfo2> vertices = new List<VertexInfo2>();
+                float FlipRotation = 0f;
+                float rotcount = drawcount / 30f;
+
+                if (0 == 0) {
+                    //Vector2 v1 = new Vector2(-300, -300).RotatedBy(rotcount);
+                    //vertices.Add(new VertexInfo2(Drwapos1(v1, FlipRotation), new Vector3(0, 0, 1), Color.White * (drawcircount / 100f)));
+                    ////记录纹理左上角的顶点坐标
+                    //v1 = new Vector2(300, -300).RotatedBy(rotcount);
+                    //vertices.Add(new VertexInfo2(Drwapos1(v1, FlipRotation), new Vector3(1, 0, 1), Color.White * (drawcircount / 100f)));
+                    ////记录纹理右上角的顶点坐标
+                    //v1 = new Vector2(-300, 300).RotatedBy(rotcount);
+                    //vertices.Add(new VertexInfo2(Drwapos1(v1, FlipRotation), new Vector3(0, 1, 1), Color.White * (drawcircount / 100f)));
+                    ////记录纹理左下角的顶点坐标
+                    //v1 = new Vector2(300, 300).RotatedBy(rotcount);
+                    //vertices.Add(new VertexInfo2(Drwapos1(v1, FlipRotation), new Vector3(1, 1, 1), Color.White * (drawcircount / 100f)));
+                    //
+                    //Main.spriteBatch.End();
+                    //Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                    //if (vertices.Count >= 3) {
+                    //    for (int j = 0; j < 3; j++) {
+                    //        Main.graphics.GraphicsDevice.Textures[0] = texture2;
+                    //        Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count - 2);
+                    //    }
+                    //}
+                    //vertices.Clear();
+                    //Main.spriteBatch.End();
+                    //Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+                    //大环
+                    Vector2 v2 = new Vector2(-300, -300).RotatedBy(rotcount * 2);
+                    vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 0, 1), Color.White * (drawcircount / 100f)));
+                    //记录纹理左上角的顶点坐标
+                    v2 = new Vector2(300, -300).RotatedBy(rotcount * 2);
+                    vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 0, 1), Color.White * (drawcircount / 100f)));
+                    //记录纹理右上角的顶点坐标
+                    v2 = new Vector2(-300, 300).RotatedBy(rotcount * 2);
+                    vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 1, 1), Color.White * (drawcircount / 100f)));
+                    //记录纹理左下角的顶点坐标
+                    v2 = new Vector2(300, 300).RotatedBy(rotcount * 2);
+                    vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 1, 1), Color.White * (drawcircount / 100f)));
+
+                    Main.spriteBatch.End();
+                    Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                    if (vertices.Count >= 3) {
+                        for (int j = 0; j < 3; j++) {
+                            Main.graphics.GraphicsDevice.Textures[0] = texture2;
+                            Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count - 2);
+                        }
+                    }
+                    vertices.Clear();
+                    Main.spriteBatch.End();
+                    Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+                }
+            }
+
+            //宝石绘制
             int singleFrameY2 = texture1.Height / (Main.projFrames[Type]);
             Vector2 drawPos2 = Projectile.Center - Main.screenPosition + new Vector2(0, -52) + new Vector2(0, -8) * breath;
 
@@ -266,29 +404,38 @@ namespace GloryofGuardian.Content.Projectiles
                 SpriteEffects.None,
                 0);
 
-            if (mode < 2) drawcircount = 0;
-            if (mode >= 2) {
-                if (drawcircount < 99) drawcircount++;
-
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
-
-                Main.EntitySpriteDraw(
-                        texture2,
-                        Projectile.Center - Main.screenPosition + new Vector2(0, -96),
-                        null,
-                        lightColor * 0.8f * (drawcircount / 100f),
-                        Projectile.rotation + (int)Main.GameUpdateCount / 60f,
-                        texture2.Size() / 2,
-                        Projectile.scale * 0.4f,
-                        SpriteEffects.None,
-                        0);
-
-                Main.spriteBatch.End();
-                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
-            }
-
             return false;
+        }
+
+        Vector2 Drwapos1(Vector2 v1, float FlipRotation) {
+            //return Projectile.Center - Main.screenPosition + new Vector2(0, -64) + new Vector2(v1.X / 4, v1.Y / 12).RotatedBy(FlipRotation);
+            return Projectile.Center - Main.screenPosition + new Vector2(0, -80) + new Vector2(0, -6) * breath + new Vector2(v1.X / 8, v1.Y / 24).RotatedBy(FlipRotation);
+        }
+
+        Vector2 Drwapos2(Vector2 v1, float FlipRotation) {
+            return Projectile.Center - Main.screenPosition + new Vector2(0, -64) + new Vector2(0, -12) * breath + new Vector2(v1.X / 6, v1.Y / 16).RotatedBy(FlipRotation);
+        }
+
+        //Shader结构体
+        public struct VertexInfo2 : IVertexType
+        {
+            private static VertexDeclaration _vertexDeclaration = new VertexDeclaration(new VertexElement[3]
+            {
+            new VertexElement(0,VertexElementFormat.Vector2,VertexElementUsage.Position,0),
+            new VertexElement(8,VertexElementFormat.Color,VertexElementUsage.Color,0),
+            new VertexElement(12,VertexElementFormat.Vector3,VertexElementUsage.TextureCoordinate,0)
+            });
+            public Vector2 Position;
+            public Color Color;
+            public Vector3 TexCoord;
+            public VertexInfo2(Vector2 position, Vector3 texCoord, Color color) {
+                Position = position;
+                TexCoord = texCoord;
+                Color = color;
+            }
+            public VertexDeclaration VertexDeclaration {
+                get => _vertexDeclaration;
+            }
         }
     }
 }

@@ -107,10 +107,10 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void AddRecipes() {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.Ectoplasm, 100);
-            recipe.AddTile(TileID.LunarCraftingStation);
-            recipe.Register();
+            //Recipe recipe = CreateRecipe();
+            //recipe.AddIngredient(ItemID.Ectoplasm, 100);
+            //recipe.AddTile(TileID.LunarCraftingStation);
+            //recipe.Register();
         }
     }
 }

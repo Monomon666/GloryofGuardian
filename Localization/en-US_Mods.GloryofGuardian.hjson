@@ -360,6 +360,11 @@ Items: {
 		DisplayName: Immortal Altar Calling
 		Tooltip: ""
 	}
+
+	FinalSpiralfCalling: {
+		DisplayName: Final Spiralf Calling
+		Tooltip: ""
+	}
 }
 
 ArmorSetBonuses: {
@@ -494,6 +499,11 @@ Buffs: {
 		DisplayName: On Dragon Fire Debuff
 		Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
 	}
+
+	WitheredDebuff: {
+		DisplayName: Withered Debuff
+		Description: Mods.GloryofGuardian.Buffs.WitheredDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -626,6 +636,9 @@ Projectiles: {
 	SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
 	ImmortalAltarDT.DisplayName: Immortal Altar D T
 	ImmortalAltarProj.DisplayName: Immortal Altar Proj
+	FinalSpiralfDT.DisplayName: Final Spiralf D T
+	FinalSpiralfProj.DisplayName: Final Spiralf Proj
+	FinalSpiralfProj0.DisplayName: Final Spiralf Proj0
 }
 
 NPCs: {

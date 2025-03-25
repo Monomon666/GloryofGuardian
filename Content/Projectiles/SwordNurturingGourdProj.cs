@@ -147,12 +147,6 @@ namespace GloryofGuardian.Content.Projectiles
 
             // 弹幕的发光效果
             Lighting.AddLight(Projectile.Center, 0.5f, 0.5f, 1f); // 添加淡蓝色光效
-
-            // 弹幕的粒子效果
-            //if (Main.rand.NextBool(5)) {
-            //    Dust dust = Dust.NewDustPerfect(Projectile.Center, DustID.PinkFairy, Projectile.velocity * 0.5f);
-            //    dust.noGravity = true;
-            //}
         }
 
         void ConcentrateAttack(NPC target) {
@@ -188,15 +182,15 @@ namespace GloryofGuardian.Content.Projectiles
                 if (target.boss) {
                     int maxIterations = 4;
 
-                    for (int i = 0; i < maxIterations; i++) {
-                        Attack(maxIterations, i);
-                        Main.NewText(4);
-                    }
+                    Attack(maxIterations);
 
                     ConcentrateAttack(target);
 
                     Projectile.Kill();
                 }
+            }
+            if (mode == -1) {
+                Projectile.Kill();
             }
 
             base.OnHitNPC(target, hit, damageDone);
@@ -207,16 +201,14 @@ namespace GloryofGuardian.Content.Projectiles
             if (mode == 1) {
                 int maxIterations = 4;
 
-                for (int i = 0; i < maxIterations; i++) {
-                    Attack(maxIterations, i);
-                }
+                Attack(maxIterations);
 
                 Projectile.Kill();
             }
             return base.OnTileCollide(oldVelocity);
         }
 
-        void Attack(int maxIterations, int j) {
+        void Attack(int maxIterations) {
             float maxDistance = 1200f; // 索敌范围
 
             // 遍历并选取 NPC
@@ -259,7 +251,7 @@ namespace GloryofGuardian.Content.Projectiles
                     proj00.mode = -1;
                     proj00.totar = totar;
                     proj00.count2 = 0;
-                    proj00.drawcount = 30 + j * 10;
+                    proj00.drawcount = 30 + i * 10;
                     proj00.tar0 = npc;
                 }
             }
@@ -286,9 +278,21 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public override void OnKill(int timeLeft) {
-            int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Wraith, 0f, 0f, 10, Color.White, 2f);
-            Main.dust[num2].noGravity = true;
-            Main.dust[num2].velocity *= 10f;
+            if (drawcount >= 60) drawcount = 0;
+            float hue = (drawcount % 60) / 60f;
+            Color rainbowColor = HsvToRgb(hue, 1f, 1f);
+
+            for (int i = 0; i < 12; i++) {
+                int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RainbowMk2, 0f, 0f, 10, rainbowColor, 1f);
+                Main.dust[num2].noGravity = true;
+                Main.dust[num2].velocity *= 8f;
+            }
+
+            for (int i = 0; i < 6; i++) {
+                int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RainbowMk2, 0f, 0f, 10, rainbowColor, 1.5f);
+                Main.dust[num2].noGravity = true;
+                Main.dust[num2].velocity *= 4f;
+            }
         }
 
         int drawcount = 0;
@@ -297,6 +301,19 @@ namespace GloryofGuardian.Content.Projectiles
             if (drawcount >= 60) drawcount = 0;
             float hue = (drawcount % 60) / 60f;
             Color rainbowColor = HsvToRgb(hue, 1f, 1f);
+
+            // 弹幕的粒子效果
+            if (Main.rand.NextBool(2)) {
+                int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RainbowMk2, 0f, 0f, 10, rainbowColor, 1f);
+                Main.dust[num2].noGravity = true;
+                Main.dust[num2].velocity *= 1f;
+            }
+
+            if (Main.rand.NextBool(4)) {
+                int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.RainbowMk2, 0f, 0f, 10, rainbowColor, 1.5f);
+                Main.dust[num2].noGravity = true;
+                Main.dust[num2].velocity = Projectile.velocity;
+            }
 
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SwordNurturingGourdProj0").Value;
             if (Projectile.ai[0] == 1) texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "SwordNurturingGourdProj").Value;

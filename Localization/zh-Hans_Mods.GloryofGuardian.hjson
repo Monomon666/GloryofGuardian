@@ -974,19 +974,18 @@ Items: {
 		DisplayName: 不朽莲华
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
+			消耗两个炮塔栏位
 			召唤一枝不朽莲华
 
-			莲华会根据附近的其它莲华的数量进行调律
-			以解锁更多攻击方式
+			莲华会根据附近的其它莲华的数量进行调谐
+			以在调谐时解锁更多攻击方式
+			六个时到达上限
 
-			默认发射数枚水晶围绕炮塔
-			一朵莲华:向敌人发射数枚黯淡水晶
-			三朵莲华:发射数枚纯净水晶
-			六朵莲华:
+			过载攻击Todo
 
 			优先攻击boss
 			右键收回炮塔
+			"于家乡的烈火中,它傲然屹立,甘愿化为灰烬"
 			'''
 	}
 
@@ -1018,8 +1017,25 @@ Items: {
 	}
 
 	ImmortalAltarCalling: {
-		// DisplayName: Immortal Altar Calling
-		// Tooltip: ""
+		DisplayName: 不朽之心
+		Tooltip: 你不该拥有它
+	}
+
+	FinalSpiralfCalling: {
+		DisplayName: 终末堡垒
+		Tooltip:
+			'''
+			消耗八个炮塔栏位
+			召唤一台终末堡垒
+
+
+
+			过载攻击时,发射终末无人机并制造两个
+
+			优先攻击boss
+			右键收回炮塔
+			"烈火直破苍穹,大地荡然无存"
+			'''
 	}
 }
 
@@ -1163,6 +1179,11 @@ Buffs: {
 		// DisplayName: On Dragon Fire Debuff
 		// Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
 	}
+
+	WitheredDebuff: {
+		// DisplayName: Withered Debuff
+		// Description: Mods.GloryofGuardian.Buffs.WitheredDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -1295,6 +1316,9 @@ Projectiles: {
 	// SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
 	// ImmortalAltarDT.DisplayName: Immortal Altar D T
 	// ImmortalAltarProj.DisplayName: Immortal Altar Proj
+	// FinalSpiralfDT.DisplayName: Final Spiralf D T
+	// FinalSpiralfProj.DisplayName: Final Spiralf Proj
+	// FinalSpiralfProj0.DisplayName: Final Spiralf Proj0
 }
 
 NPCs: {
