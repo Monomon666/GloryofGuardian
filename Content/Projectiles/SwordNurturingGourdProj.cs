@@ -48,6 +48,7 @@ namespace GloryofGuardian.Content.Projectiles
         Vector2 totar = new Vector2(0, 0);
         Vector2 firepos2 = new Vector2(0, 0);
         int rcolor = 0;
+        float smoothFactor = 0;
         public override void AI() {
             count++;
             Projectile.rotation = Projectile.velocity.ToRotation();
@@ -55,9 +56,10 @@ namespace GloryofGuardian.Content.Projectiles
             if (Projectile.ai[0] == 0) {
                 NPC target1 = Projectile.Center.InPosClosestNPC(3000, true, true);
                 //旋量
-                float smoothFactor = Main.rand.NextFloat(0.05f, 0.1f) + count / 2400f;
-                if (smoothFactor > 0.25f) smoothFactor = 0.25f;
+                smoothFactor = Main.rand.NextFloat(0.05f, 0.1f) + count / 1200f;
+                if (smoothFactor > 1f) smoothFactor = 1f;
                 float speed = 16f + count / 60f;
+                if (speed > 24f) speed = 24f;
 
                 if (target1 != null && target1.active && count > 10) {
                     // 获取弹幕和目标的位置
@@ -192,6 +194,8 @@ namespace GloryofGuardian.Content.Projectiles
             if (mode == -1) {
                 Projectile.Kill();
             }
+
+            smoothFactor = Main.rand.NextFloat(0.05f, 0.1f);
 
             base.OnHitNPC(target, hit, damageDone);
         }

@@ -159,6 +159,8 @@ namespace GloryofGuardian.Content.Projectiles
                         }
                     }
                 }
+
+                count -= 2;
             }
         }
 

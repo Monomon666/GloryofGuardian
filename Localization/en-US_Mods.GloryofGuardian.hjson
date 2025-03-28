@@ -639,6 +639,9 @@ Projectiles: {
 	FinalSpiralfDT.DisplayName: Final Spiralf D T
 	FinalSpiralfProj.DisplayName: Final Spiralf Proj
 	FinalSpiralfProj0.DisplayName: Final Spiralf Proj0
+	FinalSpiralf2Proj.DisplayName: Final Spiralf2 Proj
+	FinalSpiralf3Proj.DisplayName: Final Spiralf3 Proj
+	FinalSpiralfLaserBeamProj.DisplayName: Final Spiralf Laser Beam Proj
 }
 
 NPCs: {
@@ -652,4 +655,6 @@ NPCs: {
 	NightSlime.DisplayName: Night Slime
 	NightLantern1.DisplayName: Night Lantern1
 	FlamingJackNPC.DisplayName: Flaming Jack N P C
+	FinalSpiralf2DT.DisplayName: Final Spiralf2 D T
+	FinalSpiralf3DT.DisplayName: Final Spiralf3 D T
 }

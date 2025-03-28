@@ -283,8 +283,8 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         public int drawcountp = 0;
-        int drawcount = 0;
         float breath = 0;
+        int drawcount = 0;
         public override bool PreDraw(ref Color lightColor) {
             breath = (float)Math.Sin((int)Main.GameUpdateCount / 18f);
             drawcount = (int)Main.GameUpdateCount;

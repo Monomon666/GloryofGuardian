@@ -1,5 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Projectiles;
+using Mono.Cecil;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -18,7 +19,7 @@ namespace GloryofGuardian.Content.Items.Weapon
         }
 
         public override void SetDefaults() {
-            Item.damage = 190;
+            Item.damage = 999;
             Item.DamageType = GuardianDamageClass.Instance;
             Item.width = 56;
             Item.height = 56;
@@ -49,12 +50,28 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
-                for (int i = 0; i < Main.maxProjectiles; i++) {
-                    Projectile proj = Main.projectile[i];
-                    if (proj.type == ModContent.ProjectileType<FinalSpiralfDT>() && proj.owner == player.whoAmI) {
-                        proj.Kill();
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<FinalSpiralfDT>()] == 0)
+                {
+                    Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
+                    int wid = 3;
+                    int hig = 5;
+                    Vector2 offset = new Vector2(wid, hig) / -2 * 16;
+                    Vector2 mouPos = Main.MouseWorld + offset;
+                    for (int y = 0; y < hig; y++)
+                    {
+                        for (int x = 0; x < wid; x++)
+                        {
+                            Tile tile = TileHelper.GetTile(GOGUtils.WEPosToTilePos(mouPos + new Vector2(x, y) * 16));
+                            if (tile.HasSolidTile())
+                            {
+                                return false;
+                            }
+                        }
                     }
+
+                    return true;
                 }
+                if (player.ownedProjectileCounts[ModContent.ProjectileType<FinalSpiralfDT>()] > 0) return false;
 
                 if (player.GetModPlayer<GOGModPlayer>().Gslot == 0) {
                     CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
@@ -68,22 +85,6 @@ namespace GloryofGuardian.Content.Items.Weapon
             }
 
             Item.noUseGraphic = false;
-
-            if (player.altFunctionUse == 0) {
-                Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
-                int wid = 3;
-                int hig = 5;
-                Vector2 offset = new Vector2(wid, hig) / -2 * 16;
-                Vector2 mouPos = Main.MouseWorld + offset;
-                for (int y = 0; y < hig; y++) {
-                    for (int x = 0; x < wid; x++) {
-                        Tile tile = TileHelper.GetTile(GOGUtils.WEPosToTilePos(mouPos + new Vector2(x, y) * 16));
-                        if (tile.HasSolidTile()) {
-                            return false;
-                        }
-                    }
-                }
-            }
 
             if (player.altFunctionUse == 2) {
                 Item.UseSound = null;

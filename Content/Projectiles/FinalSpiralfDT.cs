@@ -1,8 +1,18 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Classes;
+using GloryofGuardian.Content.Dusts;
+using GloryofGuardian.Content.Items.Weapon;
+using GloryofGuardian.Content.Projectiles.ProjNPC;
+using GloryofGuardian.Skies;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using Terraria;
 using Terraria.DataStructures;
+using Terraria.Graphics.Effects;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace GloryofGuardian.Content.Projectiles
 {
@@ -23,6 +33,9 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.penetrate = -1;
             Projectile.scale *= 1f;
             Projectile.timeLeft = 36000;
+
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 0;
 
             Projectile.scale *= 1f;
         }
@@ -45,6 +58,14 @@ namespace GloryofGuardian.Content.Projectiles
         int count = 0;
         int count0 = 0;
         int interval = 0;
+
+        int countank = 0;
+        int countUAV = 0;
+
+        bool hereboss = false;
+        int countfinal = 0;
+        int final = 0;
+        bool shield = false;
         //重力
         bool drop = true;
         //炮台转动
@@ -62,13 +83,21 @@ namespace GloryofGuardian.Content.Projectiles
         int mode = 0;
         public override void AI() {
             count++;
+            countank++;
+            countUAV++;
+
+            shield = false;
+
             Projectile.timeLeft = 2;
             Projectile.StickToTiles(false, false);//形成判定
             Drop();
             Calculate();
             //索敌与行动
             NPC target1 = Projectile.Center.InPosClosestNPC(3000, true, true);
-            if (target1 != null) {
+
+            if (target1 != null && !target1.active) target1 = null;
+
+            if (target1 != null && final == 0) {
                 if (mode == 0) {
                     Attack(target1);
                 }
@@ -77,14 +106,209 @@ namespace GloryofGuardian.Content.Projectiles
                 Turn(target1);
             }
 
+            //boss检测
+            hereboss = false;
+            for (int i = 0; i < Main.maxNPCs; i++)
+            {
+                if (Main.npc[i].active && Main.npc[i].boss)
+                {
+                    hereboss = true;
+                }
+            }
+
+            //无boss重置
+            if(!hereboss) {
+            countfinal = 0;
+            if(final > 0)
+            {
+            
+            }
+            }
+
+            //boss存活
+            if (target1 != null && target1.boss)
+            {
+                countfinal++;
+
+                //粒子展现
+                for (int i = 0; i <= 54; i++)
+                {
+                    Dust dust1 = Dust.NewDustDirect(firepos + Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * 1200, 8, 8, DustID.PinkFairy, 1f, 1f, 100, Color.Pink, 0.8f);
+                    dust1.velocity = dust1.position.Toz(firepos) * 4f;
+                    dust1.noGravity = true;
+
+                    Dust dust2 = Dust.NewDustDirect(firepos + Main.rand.NextFloat(MathHelper.TwoPi).ToRotationVector2() * 1200, 8, 8, DustID.PinkFairy, 1f, 1f, 100, Color.Pink, 0.8f);
+                    dust2.velocity = dust2.position.Toz(firepos) * 0.5f;
+                    dust2.noGravity = true;
+                }
+
+                if (Vector2.Distance(Owner.Center, Projectile.Center) < 1200)
+                {
+                    Owner.statDefense += 100;
+                    shield = true;
+                }
+
+                if (final == 0 && countfinal > 300)
+                {
+                    countfinal = 0;
+                    final = 1;
+                }
+            }
+
+            //蓄能
+            //动画
+            if (final == 1)
+            {
+                Turn2(firepos + new Vector2(1, -600));
+                if (countfinal > 520)
+                {
+                    final = 2;
+                }
+            }
+
+            //发射0
+            if (final == 2)
+            {
+                if (Owner.HeldItem.type == ModContent.ItemType<FinalSpiralfCalling>() && Owner.PressKey(true, true))
+                {
+                    final = 3;
+                    countfinal = 0;
+                }
+            }
+
+            //发射
+            if (final == 3)
+            {
+                if (countfinal == 2) Terraria.Audio.SoundEngine.PlaySound(SoundID.Zombie104, Projectile.Center);
+
+                //加载天空
+                if (countfinal > 2)
+                {
+                    //加载天空
+                    SkyManager.Instance.Activate("LightPinkSky");//激活我们注册的天空
+                    if (!SkyManager.Instance["LightPinkSky"].IsActive())//如果这个天空没激活
+                        SkyManager.Instance.Activate("LightPinkSky");
+                    ((LightPinkSky)SkyManager.Instance["LightPinkSky"]).Timeleft = 2;//之后每帧赋予这个倒计时2，如果npc不在了，天空自动关闭
+                    //天空逐渐开启
+                    if (countfinal <= 20) GloryofGuardianMod.Instance.skycount = (20 - countfinal) / 20f;
+                    if (countfinal > 20 && countfinal <= 100) GloryofGuardianMod.Instance.skycount = 0;
+                    if (countfinal > 100 && countfinal < 120) GloryofGuardianMod.Instance.skycount = (countfinal - 100) / 20f;
+                }
+
+                for (int j = 0; j < 500; j++)
+                {
+                    int num2 = Dust.NewDust(firepos + new Vector2(0, -68) + new Vector2(0, Main.rand.NextFloat(0, -1200)), 0, 0, ModContent.DustType<FireLightDust>(), 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num2].noGravity = true;
+                    Main.dust[num2].velocity = new Vector2(0, -4).RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f));
+                }
+
+                for (int j = 0; j < 50; j++)
+                {
+                    int num2 = Dust.NewDust(firepos + new Vector2(0, -68) + new Vector2(Main.rand.NextFloat(-16, 16), Main.rand.NextFloat(0, -1200)), 0, 0, DustID.FireworkFountain_Red, 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num2].noGravity = true;
+                    Main.dust[num2].velocity = new Vector2(0, -16).RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f));
+                }
+
+                if (countfinal > 120)
+                {
+                    final = 4;
+                    countfinal = 0;
+                }
+            }
+
+            //收回
+            if (final == 4)
+            {
+                if (countfinal >= 160)
+                {
+                    final = 0;
+                    countfinal = 0;
+                    drawcircount = 0;
+                }
+            }
+
+            if (countank >= 480 && target1 != null)
+            {
+                int numtank = 0;
+                foreach (NPC npc in Main.ActiveNPCs)
+                {
+                    if (npc.type == ModContent.NPCType<FinalSpiralf2DT>())
+                    {
+                        numtank += 1;
+                    }
+                }
+
+                if (numtank == 1)
+                {
+                    foreach (NPC npc in Main.ActiveNPCs)
+                    {
+                        if (npc.type == ModContent.NPCType<FinalSpiralf2DT>())
+                        {
+                            npc.life = 0;
+                            npc.active = false;
+                        }
+                    }
+                    numtank -= 1;
+                }
+
+                if (numtank == 0)
+                {
+                    for (int i = -1; i < 2; i+=2)
+                    {
+                        int type0 = ModContent.NPCType<SpiderNPC>();
+                        if (Main.netMode != NetmodeID.MultiplayerClient)
+                        {
+                            int x = (int)Projectile.Center.X;
+                            int y = (int)Projectile.Center.Y;
+                            int npc1 = NPC.NewNPC(new EntitySource_ItemUse(Owner, Item), x, y, ModContent.NPCType<FinalSpiralf2DT>());
+                            Main.npc[npc1].velocity = new Vector2(1.5f * i, 0);
+                        }
+                        else
+                        {
+                            NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: Owner.whoAmI, number2: type0);//发包，用来联机同步
+                        }
+                    }
+                }
+
+                countank = 0;
+            }
+
+            if (countUAV >= 60 && target1 != null)
+            {
+                for (int i = -1; i < 2; i += 2)
+                {
+                    int type0 = ModContent.NPCType<SpiderNPC>();
+                    if (Main.netMode != NetmodeID.MultiplayerClient)
+                    {
+                        int x = (int)Projectile.Center.X;
+                        int y = (int)Projectile.Center.Y;
+                        int npc1 = NPC.NewNPC(new EntitySource_ItemUse(Owner, Item), x, y, ModContent.NPCType<FinalSpiralf3DT>());
+                        Main.npc[npc1].velocity = new Vector2(1.5f * i, 0);
+                    }
+                    else
+                    {
+                        NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: Owner.whoAmI, number2: type0);//发包，用来联机同步
+                    }
+                }
+
+                countUAV = 0;
+            }
+
             //帧图
             Projectile.frameCounter++;
             frame1 = (int)MathHelper.Min(Projectile.frameCounter / 8, 8);
-            //if (frame1 <= 15) frame2 = (Projectile.frameCounter / 8) % 17;
-
-
-            //frame1 = (Projectile.frameCounter / 15) % 8;//要手动填，不然会出错
-            //frame2 = (Projectile.frameCounter / 8) % 17;//要手动填，不然会出错
+            if (final == 1 && countfinal > 180)
+            {
+                frame2 = (int)MathHelper.Min((countfinal - 180) / 8, 16);
+            }
+            if (final == 2 || final == 3)
+            {
+                frame2 = 16;
+            }
+            if (final == 4)
+            {
+                frame2 = (int)MathHelper.Max(16 - countfinal / 8, 0);
+            }
 
             base.AI();
         }
@@ -127,7 +351,7 @@ namespace GloryofGuardian.Content.Projectiles
         /// 监测与攻击
         /// </summary>
         void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height);
+            Vector2 tarpos = target1.Center;
             Vector2 projcen = firepos;
             //发射
             if (count + interval >= Gcount && !firstatk) {
@@ -136,7 +360,8 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item33, Projectile.Center);
+
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + nowvel * 68f, nowvel * 48f, ModContent.ProjectileType<FinalSpiralfProj>(), lastdamage, 8, Owner.whoAmI);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
@@ -151,7 +376,8 @@ namespace GloryofGuardian.Content.Projectiles
                     for (int i = 0; i < 1; i++) {
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item33, Projectile.Center);
+
                         Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + nowvel * 68f, nowvel * 48f, ModContent.ProjectileType<FinalSpiralfProj>(), lastdamage, 8, Owner.whoAmI, 1);
                         if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
                             if (proj1.ModProjectile is GOGProj proj2) {
@@ -208,6 +434,46 @@ namespace GloryofGuardian.Content.Projectiles
             }
         }
 
+        /// <summary>
+        /// 炮台旋转2
+        /// </summary>
+        void Turn2(Vector2 vec)
+        {
+            Vector2 tarpos = vec;
+            Vector2 projcen = firepos;
+
+            Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;
+            float rot2 = vector2.ToRotation();
+            float degree2 = (float)((180 / Math.PI) * rot2);
+            float tarrot = MathHelper.ToRadians(projRot + degree2 * Projectile.spriteDirection);
+            float rspeed = 0.04f;
+
+            //转头
+            if (wrotation != tarrot)
+            {
+                if (Math.Abs(wrotation - tarrot) % Math.PI <= rspeed)
+                {//如果方向差小于单次转量则本次旋转将超过目标,取余很重要
+                    wrotation = tarrot;//那么直接让方向与到目标方向防止抖动
+                                       //tarrot = wrotation;
+                    return;
+                }
+                else
+                {
+                    Vector2 clockwise = (wrotation + rspeed).ToRotationVector2();//这是假设NPC顺时针转动后的单位方向向量
+                    Vector2 anticlockwise = (wrotation - rspeed).ToRotationVector2();//这是假设NPC逆时针转动后的单位方向向量
+                                                                                     //显然，要比较两个向量哪个与目标夹角更近，就是比较他们与目标向量相减后的长度
+                    if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())//如果顺时针的差值更小
+                    {
+                        wrotation += rspeed;
+                    }
+                    else
+                    {
+                        wrotation -= rspeed;
+                    }
+                }
+            }
+        }
+
         public override Color? GetAlpha(Color lightColor) {
             return Color.White;
         }
@@ -222,8 +488,17 @@ namespace GloryofGuardian.Content.Projectiles
             return false;
         }
 
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-            return false;
+            if (final == 3)
+            {
+                return true;
+            }
+            else return base.Colliding(projHitbox, targetHitbox);
         }
 
         public override void OnKill(int timeLeft) {
@@ -241,16 +516,27 @@ namespace GloryofGuardian.Content.Projectiles
         }
 
         int drawcount = 0;
+        int drawcount2 = 0;
+        int drawcircount = 0;
+        float float2 = 0;
         Vector2 firepos = Vector2.Zero;
+        float breath = 0;
         public override bool PreDraw(ref Color lightColor) {
+            GloryofGuardianMod.Instance.skycount += 0.02f;
+
             drawcount++;
             if (drawcount < 30 || drawcount >= 60) drawcount++;
             if (drawcount >= 80) drawcount = 10;
             float t = (drawcount % 90) / 90f; // t在 [0, 1) 范围内循环
             Color RedColor = WhiteToRedGradient(t); // 生成渐变色
 
-            //不同朝向时翻转贴图
-            SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
+            drawcount2++;
+            float t2 = (drawcount2 % 60) / 60f; // t在 [0, 1) 范围内循环
+            Color RedColor2 = WhiteToRedGradient(t2); // 生成渐变色
+
+            breath = (float)Math.Sin((int)Main.GameUpdateCount / 18f);
+
+            float2 = (float)Math.Sin(drawcount / 12f + MathHelper.PiOver2) + 1;
 
             Texture2D texture01 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FinalSpiralfDT").Value;
             Texture2D texture012 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FinalSpiralfDTG").Value;
@@ -260,7 +546,9 @@ namespace GloryofGuardian.Content.Projectiles
             Texture2D texture023 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FinalSpiralfDT2G2").Value;
             Texture2D texture024 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FinalSpiralfDT2G3").Value;
 
-            Texture2D texture4 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "FinalSpiralfProj").Value;
+            Texture2D shieldtexture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "LightPulse").Value;
+
+            Texture2D texture2 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusProj01").Value;
 
             Vector2 drawPosition1 = Projectile.Center - Main.screenPosition;
 
@@ -306,9 +594,6 @@ namespace GloryofGuardian.Content.Projectiles
             Lighting.AddLight(firepos, 255 * 0.05f, 20 * 0.05f, 20 * 0.05f);
             Lighting.AddLight(firepos, 255 * 0.01f, 255 * 0.01f, 255 * 0.01f);
 
-            SpriteEffects spriteEffects2 = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
-            if (spriteEffects2 == SpriteEffects.FlipVertically) drawPos2 += new Vector2(6, 0);
-
             Main.spriteBatch.Draw(
                 texture02,
                 drawPos2 + new Vector2(10, -68),
@@ -317,7 +602,7 @@ namespace GloryofGuardian.Content.Projectiles
                 wrotation,
                 new Vector2(28, 18),
                 Projectile.scale * 1.5f,
-                spriteEffects2,
+                SpriteEffects.None,
                 0);
 
             Main.spriteBatch.End();
@@ -326,14 +611,14 @@ namespace GloryofGuardian.Content.Projectiles
             for (int i = 0; i < 2; i++) {
                 if (Projectile.frameCounter > 64) {
                     Main.spriteBatch.Draw(
-                        texture02,
+                        texture022,
                         drawPos2 + new Vector2(10, -68),
                         new Rectangle(0, singleFrameY2 * frame2, texture02.Width, singleFrameY2),//动图读帧
                         RedColor * 0.4f,
                         wrotation,
                         new Vector2(28, 18),
                         Projectile.scale * 1.5f,
-                        spriteEffects2,
+                        SpriteEffects.None,
                         0);
                 }
             }
@@ -341,8 +626,118 @@ namespace GloryofGuardian.Content.Projectiles
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.GameViewMatrix.TransformationMatrix);
 
+            if (shield)
+            {
+                Vector2 shieldpos = Owner.Center + new Vector2(0, 0) - Main.screenPosition;
+                Main.EntitySpriteDraw(shieldtexture, shieldpos, null, Color.Red, Projectile.rotation, shieldtexture.Size() * 0.5f, 1.6f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(shieldtexture, shieldpos, null, RedColor2, Projectile.rotation, shieldtexture.Size() * 0.5f, 1.6f, SpriteEffects.None, 0);
+            }
+
+            /////////////////////////////////////////////////////////
+
+            float rs = drawcount / 30f;
+            List<VertexInfo2> vertices = new List<VertexInfo2>();
+            float FlipRotation = 0f;
+            float rotcount = drawcount / 30f;
+
+            if ((final == 1 && countfinal > 340))
+            {
+                if(drawcircount < 100) drawcircount++;
+                float v0 = 4 - drawcircount / 33f;
+
+                //大环
+                Vector2 v2 = 
+                    new Vector2(-300, -300).RotatedBy(rotcount * 2) * v0;
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 0, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理左上角的顶点坐标
+                v2 = new Vector2(300, -300).RotatedBy(rotcount * 2) * v0;
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 0, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理右上角的顶点坐标
+                v2 = new Vector2(-300, 300).RotatedBy(rotcount * 2) * v0;
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 1, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理左下角的顶点坐标
+                v2 = new Vector2(300, 300).RotatedBy(rotcount * 2) * v0;
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 1, 1), Color.Red * (drawcircount / 100f)));
+
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                if (vertices.Count >= 3)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Main.graphics.GraphicsDevice.Textures[0] = texture2;
+                        Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count - 2);
+                    }
+                }
+                vertices.Clear();
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+            }
+
+            if (final == 2 || final == 3)
+            {
+                drawcircount = 100;
+
+                //大环
+                Vector2 v2 = 
+                    new Vector2(-300, -300).RotatedBy(rotcount * 2);
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 0, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理左上角的顶点坐标
+                v2 = new Vector2(300, -300).RotatedBy(rotcount * 2);
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 0, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理右上角的顶点坐标                                                         
+                v2 = new Vector2(-300, 300).RotatedBy(rotcount * 2);                           
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(0, 1, 1), Color.Red * (drawcircount / 100f)));
+                //记录纹理左下角的顶点坐标                                                         
+                v2 = new Vector2(300, 300).RotatedBy(rotcount * 2);                            
+                vertices.Add(new VertexInfo2(Drwapos2(v2, FlipRotation), new Vector3(1, 1, 1), Color.Red * (drawcircount / 100f)));
+
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+                if (vertices.Count >= 3)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Main.graphics.GraphicsDevice.Textures[0] = texture2;
+                        Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleStrip, vertices.ToArray(), 0, vertices.Count - 2);
+                    }
+                }
+                vertices.Clear();
+                Main.spriteBatch.End();
+                Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+
+            }
 
             return false;
+        }
+
+        Vector2 Drwapos2(Vector2 v1, float FlipRotation)
+        {
+            return Projectile.Center - Main.screenPosition + new Vector2(0, -96) + new Vector2(0, -2) * breath + new Vector2(v1.X / 6, v1.Y / 16).RotatedBy(FlipRotation);
+        }
+
+        //Shader结构体
+        public struct VertexInfo2 : IVertexType
+        {
+            private static VertexDeclaration _vertexDeclaration = new VertexDeclaration(new VertexElement[3]
+            {
+            new VertexElement(0,VertexElementFormat.Vector2,VertexElementUsage.Position,0),
+            new VertexElement(8,VertexElementFormat.Color,VertexElementUsage.Color,0),
+            new VertexElement(12,VertexElementFormat.Vector3,VertexElementUsage.TextureCoordinate,0)
+            });
+            public Vector2 Position;
+            public Color Color;
+            public Vector3 TexCoord;
+            public VertexInfo2(Vector2 position, Vector3 texCoord, Color color)
+            {
+                Position = position;
+                TexCoord = texCoord;
+                Color = color;
+            }
+            public VertexDeclaration VertexDeclaration
+            {
+                get => _vertexDeclaration;
+            }
         }
 
         // 生成白色和红色之间的渐变色

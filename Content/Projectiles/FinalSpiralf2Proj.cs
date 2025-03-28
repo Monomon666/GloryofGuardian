@@ -1,4 +1,5 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Buffs;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace GloryofGuardian.Content.Projectiles
 {
     public class FinalSpiralf2Proj : GOGProj
     {
-        public override string Texture => GOGConstant.Projectiles + Name;
+        public override string Texture => GOGConstant.nulls;
 
         public override void SetStaticDefaults()
         {
@@ -30,7 +31,7 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 4;
             Projectile.aiStyle = -1;
-            Projectile.penetrate = 50;
+            Projectile.penetrate = 12;
 
             Projectile.extraUpdates = 0;
             Projectile.light = 1.5f;
@@ -49,16 +50,61 @@ namespace GloryofGuardian.Content.Projectiles
 
         int countsin = 0;
         int count = 0;
+        int count2 = 0;
         int mode = 0;
         Vector2 orivel = Vector2.Zero;
         Vector2 oldpos = Vector2.Zero;
+        NPC tar0 = null;
         public override void AI()
         {
             countsin++;
             count++;
             Projectile.rotation = Projectile.velocity.ToRotation();
-        }
 
+            //常态追踪
+            NPC target1 = null;
+            if (Projectile.ai[0] == 0)
+            {
+                target1 = Projectile.Center.InPosClosestNPC(800, true, true);
+            }
+
+            //旋量
+            float smoothFactor = Main.rand.NextFloat(0.15f, 0.2f) + count / 2400f;
+            float speed = 16f + count / 6f;
+
+            if (target1 != null && target1.active && count > 10)
+            {
+                count2 = 0;
+                tar0 = target1;
+
+                Vector2 projectilePosition = Projectile.Center;
+                Vector2 targetPosition = target1.Center;
+
+                Vector2 direction = targetPosition - projectilePosition;
+                direction.Normalize();
+
+                Vector2 currentVelocity = Projectile.velocity;
+                currentVelocity.Normalize();
+
+                Vector2 newVelocity = Vector2.Lerp(currentVelocity, direction, smoothFactor);
+                newVelocity.Normalize();
+                Projectile.velocity = newVelocity * speed;
+            }
+
+            if (target1 != null && target1.active && Vector2.Distance(Projectile.Center, target1.Center) < 120)
+            {
+                Projectile.velocity *= 0.8f;
+                Projectile.velocity += Projectile.Center.Toz(target1.Center) * speed;
+            }
+
+            if ((target1 == null || target1.active))
+            {
+                count2++;
+                if (count2 > 60) Projectile.Kill();
+            }
+
+            if (count > 120) Projectile.Kill();
+        }
 
         public override bool ShouldUpdatePosition()
         {
@@ -77,7 +123,12 @@ namespace GloryofGuardian.Content.Projectiles
 
         public override void OnKill(int timeLeft)
         {
-            if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
+            for (int j = 0; j < 15; j++)
+            {
+                int num1 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Flare, 0f, 0f, 10, Color.Pink, 2f);
+                Main.dust[num1].noGravity = true;
+                Main.dust[num1].velocity *= 2f;
+            }
         }
 
         int drawcount = 0;

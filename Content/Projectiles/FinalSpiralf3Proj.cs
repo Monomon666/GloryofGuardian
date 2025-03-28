@@ -9,7 +9,7 @@ namespace GloryofGuardian.Content.Projectiles
 {
     public class FinalSpiralf3Proj : GOGProj
     {
-        public override string Texture => GOGConstant.Projectiles + Name;
+        public override string Texture => GOGConstant.nulls;
 
         public override void SetStaticDefaults()
         {

@@ -3,6 +3,7 @@ global using InnoVault;
 global using Microsoft.Xna.Framework;
 global using Terraria;
 global using Terraria.ModLoader;
+using GloryofGuardian.Skies;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.Graphics.Effects;
@@ -14,13 +15,22 @@ namespace GloryofGuardian
     {
         internal static GloryofGuardianMod Instance;
 
+        public float skycount = 0;
+
         public override void Load() {
             Instance = this;
 
             //加载天空
-            //Todo
+            if (skycount <= 1) skycount -= 0.01f;
+
+            //梦红色
+            SkyManager.Instance["LightPinkSky"] = new LightPinkSky();
 
             //加载Shader
+
+            //终末
+
+
             //灰化特效
             Asset<Effect> GrayColorShader = GloryofGuardianMod.Instance.Assets.Request<Effect>("Assets/Effects/Shader/Gray", AssetRequestMode.AsyncLoad);
             Filters.Scene["Gray"] = new Filter(new ScreenShaderData(GrayColorShader, "Gray"), EffectPriority.VeryHigh);

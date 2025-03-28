@@ -1,4 +1,7 @@
-﻿using Terraria.ID;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.Localization;
 
 namespace GloryofGuardian.Content.Classes
