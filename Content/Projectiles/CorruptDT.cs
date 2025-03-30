@@ -35,7 +35,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         //生成时自由下坠
         public override void OnSpawn(IEntitySource source) {
-            count0 = 60;//默认发射间隔
+            count0 = 120;//默认发射间隔
             Projectile.velocity = new Vector2(0, 8);
             base.OnSpawn(source);
         }

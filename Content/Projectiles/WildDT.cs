@@ -64,6 +64,7 @@ namespace GloryofGuardian.Content.Projectiles
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
+                Turn(target1);
             }
 
             base.AI();
@@ -96,7 +97,14 @@ namespace GloryofGuardian.Content.Projectiles
         /// 重新计算和赋值参数
         /// </summary>
         void Calculate() {
-            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
+            float accessory = 1;
+            //获取来自专属饰品的加成
+            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow)
+            {
+                accessory = 0.8f;
+            }
+
+            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * accessory);//攻击间隔因子重新提取
             //伤害修正
             int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
@@ -110,12 +118,20 @@ namespace GloryofGuardian.Content.Projectiles
             Vector2 m = target1.Center;
             Vector2 projcen = Projectile.Center + new Vector2(0, -20);
 
+            int acccrit = 0;
+            //获取来自专属饰品的加成
+            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow)
+            {
+                acccrit = 20;
+                if (target1.boss) acccrit = 30;
+            }
+
             //发射
             if (count >= Gcount) {
                 //普通
-                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + acccrit) {
                     for (int i = 0; i < 1; i++) {
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 16f;
+                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
@@ -126,13 +142,17 @@ namespace GloryofGuardian.Content.Projectiles
                                 proj2.OrichalcumMarkProjcount = 300;
                             }
                         }
+                        if (proj1.ModProjectile is GOGProj proj3)
+                        {
+                            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow) proj3.ReverseHookArrow = true;
+                        }
                     }
                 }
 
                 //过载
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + acccrit) {
                     for (int i = 0; i < 1; i++) {
-                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 16f;
+                        float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
                         Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
@@ -142,6 +162,10 @@ namespace GloryofGuardian.Content.Projectiles
                                 proj2.OrichalcumMarkProj = true;
                                 proj2.OrichalcumMarkProjcount = 300;
                             }
+                        }
+                        if (proj1.ModProjectile is GOGProj proj3)
+                        {
+                            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow) proj3.ReverseHookArrow = true;
                         }
                     }
                 }
@@ -155,8 +179,8 @@ namespace GloryofGuardian.Content.Projectiles
         /// 炮台旋转
         /// </summary>
         void Turn(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, 16);
+            Vector2 tarpos = target1.Center;
+            Vector2 projcen = Projectile.Center + new Vector2(0, -24);
 
             Vector2 vector2 = (tarpos - projcen).SafeNormalize(Vector2.Zero) * Projectile.spriteDirection;
             float rot2 = vector2.ToRotation();

@@ -365,6 +365,11 @@ Items: {
 		DisplayName: Final Spiralf Calling
 		Tooltip: ""
 	}
+
+	ReverseHookArrow: {
+		DisplayName: Reverse Hook Arrow
+		Tooltip: ""
+	}
 }
 
 ArmorSetBonuses: {

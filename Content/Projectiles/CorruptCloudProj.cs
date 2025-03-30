@@ -50,12 +50,12 @@ namespace GloryofGuardian.Content.Projectiles
         public override void AI() {
             count++;
             if (Projectile.ai[0] == 0) {
-                if (count >= 90) Projectile.Kill();
-                if (count >= 60) Projectile.alpha += 10;
-            }
-            if (Projectile.ai[0] == 1) {
                 if (count >= 120) Projectile.Kill();
                 if (count >= 90) Projectile.alpha += 10;
+            }
+            if (Projectile.ai[0] == 1) {
+                if (count >= 150) Projectile.Kill();
+                if (count >= 120) Projectile.alpha += 10;
             }
             if (count % 15 == 0) {
                 int randx = Main.rand.Next(-6, 6);

@@ -6,6 +6,9 @@ namespace GloryofGuardian.Content.Class
 {
     public abstract class GOGProj : ModProjectile
     {
+        //倒钩箭头倒钩标记
+        public bool ReverseHookArrow = false;
+
         public override void OnSpawn(IEntitySource source) {
             base.OnSpawn(source);
         }

@@ -1,4 +1,5 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Items.Accessories;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria.DataStructures;
@@ -67,6 +68,7 @@ namespace GloryofGuardian.Content.Projectiles
             if (target1 != null) {
                 Attack(target1);
                 Turn(target1);
+                Turn(target1);
             }
 
             base.AI();
@@ -99,7 +101,14 @@ namespace GloryofGuardian.Content.Projectiles
         /// 重新计算和赋值参数
         /// </summary>
         void Calculate() {
-            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取s
+            float accessory = 1;
+            //获取来自专属饰品的加成
+            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow)
+            {
+                accessory = 0.8f;
+            }
+
+            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * accessory);//攻击间隔因子重新提取
             //伤害修正
             int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
@@ -113,6 +122,14 @@ namespace GloryofGuardian.Content.Projectiles
             Vector2 tarpos = target1.Center;
             Vector2 projcen = Projectile.Center + new Vector2(-6, -24);
 
+            int acccrit = 0;
+            //获取来自专属饰品的加成
+            if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow)
+            {
+                acccrit = 20;
+                if(target1.boss) acccrit = 30;
+            }
+
             //发射
             if (count >= Gcount) {
                 for (int i = 0; i < 1; i++) {
@@ -120,7 +137,7 @@ namespace GloryofGuardian.Content.Projectiles
                     float rotby = Main.rand.NextFloat(0.05f, 0.08f);
 
                     //普通
-                    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + acccrit) {
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
                         if (count == Gcount) {
@@ -146,7 +163,7 @@ namespace GloryofGuardian.Content.Projectiles
                     }
 
                     //过载
-                    if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
+                    if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + acccrit) {
 
                         Terraria.Audio.SoundEngine.PlaySound(SoundID.DD2_BallistaTowerShot, Projectile.Center);
                         if (count == Gcount + 2) {
@@ -158,6 +175,10 @@ namespace GloryofGuardian.Content.Projectiles
                                         proj2.OrichalcumMarkProjcount = 300;
                                     }
                                 }
+                                if (proj1.ModProjectile is GOGProj proj3)
+                                {
+                                    if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow) proj3.ReverseHookArrow = true;
+                                }
                             } else {
                                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen + new Vector2(0, 0) + nowvel * 52f, nowvel.RotatedBy(-rotby) * 24f, ModContent.ProjectileType<MythrilProj>(), lastdamage, 0, Owner.whoAmI);
                                 if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
@@ -165,6 +186,10 @@ namespace GloryofGuardian.Content.Projectiles
                                         proj2.OrichalcumMarkProj = true;
                                         proj2.OrichalcumMarkProjcount = 300;
                                     }
+                                }
+                                if (proj1.ModProjectile is GOGProj proj3)
+                                {
+                                    if (Owner.GetModPlayer<GOGModPlayer>().reversehookarrow) proj3.ReverseHookArrow = true;
                                 }
                             }
                         }

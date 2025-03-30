@@ -64,7 +64,7 @@ namespace GloryofGuardian.Content.Projectiles
                 if (Projectile.ai[0] == 3) Main.dust[num1].scale = 0.8f;
             }
 
-            if (count % 16 == 0 && Main.rand.NextBool(3)) {
+            if (count % 12 == 0 && Main.rand.NextBool(3)) {
                 for (int i = 0; i < 1; i++) {
                     int num1 = Dust.NewDust(Projectile.position, Projectile.width / 2, Projectile.height / 2, DustID.OrangeTorch, 0, 0, 0, Color.Red, 1f);
                     Main.dust[num1].noGravity = false;

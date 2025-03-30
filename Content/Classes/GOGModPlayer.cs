@@ -101,6 +101,10 @@ namespace GloryofGuardian.Content.Class
         /// </summary>
         public bool syncore = false;
 
+        /// <summary>
+        /// 倒钩箭头
+        /// </summary>
+        public bool reversehookarrow = false;
         #endregion
 
         #region 变动开关2
@@ -342,6 +346,8 @@ namespace GloryofGuardian.Content.Class
             holybond = false;
             resolute = false;
             syncore = false;
+
+            reversehookarrow = false;
 
             //buff判定重置
             TitaniumShield = false;

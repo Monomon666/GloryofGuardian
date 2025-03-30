@@ -1044,6 +1044,15 @@ Items: {
 			"烈火直破苍穹,大地荡然无存"
 			'''
 	}
+
+	ReverseHookArrow: {
+		DisplayName: 倒钩箭头
+		Tooltip: 
+			'''
+			使弩箭类炮塔的攻速和过载概率提升20%
+			并在目标为boss时再提升10%
+			'''
+	}
 }
 
 ArmorSetBonuses: {

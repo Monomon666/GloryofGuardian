@@ -115,7 +115,7 @@ namespace GloryofGuardian.Content.Class
                         if (p.type == ModContent.ProjectileType<WildProj>()) {
                             JavelinCount += 4;
                         } else if (p.type == ModContent.ProjectileType<GarrisonProj>()) {
-                            JavelinCount += 6;
+                            JavelinCount += 4;
                         } else if (p.type == ModContent.ProjectileType<MythrilProj2>()) {
                             MythrilJavelin += 1;
                             JavelinCount += 6;

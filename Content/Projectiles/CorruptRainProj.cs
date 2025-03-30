@@ -25,7 +25,7 @@ namespace GloryofGuardian.Content.Projectiles
             Projectile.timeLeft = 600;
             Projectile.ignoreWater = true;
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 4;
+            Projectile.localNPCHitCooldown = 12;
             Projectile.aiStyle = -1;
             Projectile.penetrate = 4;//穿透数，1为攻击到第一个敌人就消失
 
