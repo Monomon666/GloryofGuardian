@@ -1047,7 +1047,7 @@ Items: {
 
 	ReverseHookArrow: {
 		DisplayName: 倒钩箭头
-		Tooltip: 
+		Tooltip:
 			'''
 			使弩箭类炮塔的攻速和过载概率提升20%
 			并在目标为boss时再提升10%

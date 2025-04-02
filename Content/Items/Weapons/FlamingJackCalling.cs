@@ -27,7 +27,7 @@ namespace GloryofGuardian.Content.Items.Weapon
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.knockBack = 6;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
-            Item.rare = -13;
+            Item.rare = 7;
             Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
             Item.autoReuse = false;
 
