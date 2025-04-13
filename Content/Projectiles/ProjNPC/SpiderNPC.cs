@@ -109,7 +109,6 @@ namespace GloryofGuardian.Content.Projectiles.ProjNPC
         public override void OnKill()//在确认被杀后执行的一系列操作，例如推进世界进度，开启某些条件等,死亡效果不是用这个完成的
         {
             //击杀记录
-            //GOGDownedBossSystem.downedNightWatcher = true;
             base.OnKill();
         }
 

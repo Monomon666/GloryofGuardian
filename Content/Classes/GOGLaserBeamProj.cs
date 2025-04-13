@@ -26,13 +26,12 @@ namespace GloryofGuardian.Content.Class
         #region Virtual Methods
 
         /// <summary>
-        /// Handles all AI logic for the laser. Can be overridden, but you probably won't need to do that.
+        /// 处理激光的AI
         /// </summary>
         public virtual void Behavior() {
-            // Attach to some arbitrary thing/position optionally. (The ai[1] value is a reserved for this in vanilla's Phantasmal Deathray)
+            // 附着
             AttachToSomething();
 
-            // Ensure the the velocity is a unit vector. This has NaN safety in place with a fallback of <0, -1>.
             Projectile.velocity = Projectile.velocity.SafeNormalize(-Vector2.UnitY);
 
             Time++;
@@ -46,7 +45,7 @@ namespace GloryofGuardian.Content.Class
             UpdateLaserMotion();
 
             float idealLaserLength = DetermineLaserLength();
-            LaserLength = MathHelper.Lerp(LaserLength, idealLaserLength, 0.9f); // Very quickly approach the ideal laser length.
+            LaserLength = MathHelper.Lerp(LaserLength, idealLaserLength, 0.9f); // 延长速度
 
             if (LightCastColor != Color.Transparent) {
                 DelegateMethods.v3_1 = LightCastColor.ToVector3();
@@ -55,21 +54,16 @@ namespace GloryofGuardian.Content.Class
         }
 
         /// <summary>
-        /// Handles movement logic for the laser. By default causes arcing/sweeping motiom.
+        /// 处理激光的运动逻辑
         /// </summary>
         public virtual void UpdateLaserMotion() {
-            // This part is rather complicated at a glance.
-            // What it's doing is converting the velocity to an angle, doing something with that angle, and changing it back into the velocity.
-            // In this case, "doing something with that angle" means incrementing it by a constant. This allows the laser to perform "arcing" motion.
-            // You could attempt to make it intelligent by having it move towards the target like the Last Prism, but that's not done here.
-
             float updatedVelocityDirection = Projectile.velocity.ToRotation() + RotationalSpeed;
-            Projectile.rotation = updatedVelocityDirection - MathHelper.PiOver2; // Pretty much all lasers have a vertical sheet.
+            Projectile.rotation = updatedVelocityDirection - MathHelper.PiOver2;
             Projectile.velocity = updatedVelocityDirection.ToRotationVector2();
         }
 
         /// <summary>
-        /// Calculates the total scale of the laser. By default uses a clamped sine of time.
+        /// 计算激光比例尺
         /// </summary>
         public virtual void DetermineScale() {
             Projectile.scale = (float)Math.Sin(Time / Lifetime * MathHelper.Pi) * ScaleExpandRate * MaxScale;
@@ -78,18 +72,18 @@ namespace GloryofGuardian.Content.Class
         }
 
         /// <summary>
-        /// Handles direct attachment to things. The projectile.ai[1] array index is reserved for this. Does nothing by default.
+        /// 处理附着
         /// </summary>
         public virtual void AttachToSomething() { }
 
         /// <summary>
-        /// Calculates the current laser's length. By default does not collide with tiles. <see cref="DetermineLaserLength_CollideWithTiles"/> is a generic laser collision method if you want to use it.
+        /// 处理激光长度,默认不碰撞tile
         /// </summary>
-        /// <returns>The laser length as a float.</returns>
+        /// <returns>激光长度是浮点数</returns>
         public virtual float DetermineLaserLength() => MaxLaserLength;
 
         /// <summary>
-        /// An extra, empty by default method that exists so that a developer can add custom code after all typical AI logic is done. Think of it like PostAI.
+        /// PostAI.
         /// </summary>
         public virtual void ExtraBehavior() { }
         #endregion
@@ -97,9 +91,9 @@ namespace GloryofGuardian.Content.Class
         #region Helper Methods
 
         /// <summary>
-        /// Calculates the laser length while taking tiles into account.
+        /// 与tile碰撞的激光的长度
         /// </summary>
-        /// <param name="samplePointCount">The amount of samples the ray uses. The higher this is, the more precision, but also more calculations done.</param>
+        /// <param name="samplePointCount">计算的样本数量</param>
         public float DetermineLaserLength_CollideWithTiles(int samplePointCount) {
             float[] laserLengthSamplePoints = new float[samplePointCount];
             Collision.LaserScan(Projectile.Center, Projectile.velocity, Projectile.scale, MaxLaserLength, laserLengthSamplePoints);
@@ -111,7 +105,6 @@ namespace GloryofGuardian.Content.Class
             Rectangle middleFrameArea = LaserMiddleTexture.Frame(1, Main.projFrames[Projectile.type], 0, middleFrame);
             Rectangle endFrameArea = LaserEndTexture.Frame(1, Main.projFrames[Projectile.type], 0, endFrame);
 
-            // Start texture drawing.
             Main.EntitySpriteDraw(LaserBeginTexture,
                              Projectile.Center - Main.screenPosition,
                              startFrameArea,
@@ -122,13 +115,11 @@ namespace GloryofGuardian.Content.Class
                              SpriteEffects.None,
                              0);
 
-            // Prepare things for body drawing.
             float laserBodyLength = LaserLength;
             laserBodyLength -= (startFrameArea.Height / 2 + endFrameArea.Height) * scale;
             Vector2 centerOnLaser = Projectile.Center;
             centerOnLaser += Projectile.velocity * scale * startFrameArea.Height / 2f;
 
-            // Body drawing.
             if (laserBodyLength > 0f) {
                 float laserOffset = middleFrameArea.Height * scale;
                 float incrementalBodyLength = 0f;
@@ -147,7 +138,6 @@ namespace GloryofGuardian.Content.Class
                 }
             }
 
-            // End texture drawing.
             if (Math.Abs(LaserLength - DetermineLaserLength()) < 30f) {
                 Vector2 laserEndCenter = centerOnLaser - Main.screenPosition;
                 Main.EntitySpriteDraw(LaserEndTexture,
@@ -175,7 +165,6 @@ namespace GloryofGuardian.Content.Class
             Utils.PlotTileLine(Projectile.Center, Projectile.Center + Projectile.velocity * LaserLength, Projectile.Size.Length() * Projectile.scale, DelegateMethods.CutTiles);
         }
         public override bool PreDraw(ref Color lightColor) {
-            // This should never happen, but just in case-
             if (Projectile.velocity == Vector2.Zero)
                 return false;
 

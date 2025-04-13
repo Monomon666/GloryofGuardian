@@ -42,29 +42,6 @@
             if (item.CountsAsClass<GuardianDamageClass>())
                 item.GetGlobalItem<GOGGlobalItem>().GuardianStrikePrefixBonus = DamageMult;
         }
-
-        // 这个前缀不影响非标准的统计, 所以这些工具行不是必要的, 但是对于其它类似的可以遵循此模式
-        //public override IEnumerable<TooltipLine> GetTooltipLines(Item item) {
-        //    yield return new TooltipLine(Mod, "PrefixWeaponAwesome", PowerTooltip.Format(Power)) {
-        //        IsModifier = true, // 颜色为正前缀颜色
-        //    };
-        //    // 这种本地化不能与继承的类共享，需要自己写
-        //    yield return new TooltipLine(Mod, "PrefixWeaponAwesomeDescription", AdditionalTooltip.Value) {
-        //        IsModifier = true,
-        //    };
-        //}
-
-        //public static LocalizedText PowerTooltip { get; private set; }
-
-        // 本地化方法
-        //public LocalizedText AdditionalTooltip => this.GetLocalization(nameof(AdditionalTooltip));
-
-        //public override void SetStaticDefaults() {
-        //    // 使用共享键
-        //    PowerTooltip = Language.GetOrRegister(Mod.GetLocalizationKey($"{LocalizationCategory}.{nameof(PowerTooltip)}"));
-        //    // 注册AdditionalTooltip所必要的代码
-        //    _ = AdditionalTooltip;
-        //}
     }
 
     #region 词条存储1

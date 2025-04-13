@@ -16,7 +16,7 @@ namespace GloryofGuardian.Content.Projectiles
 
         public sealed override void SetDefaults() {
             Projectile.width = 52;
-            Projectile.height = 66;
+            Projectile.height = 32;
             Projectile.tileCollide = true;
 
             Projectile.friendly = true;
@@ -111,7 +111,7 @@ namespace GloryofGuardian.Content.Projectiles
                 float cirrot = (i % 4) * MathHelper.PiOver2;
                 float dustrut = projrot + cirrot;
 
-                Dust dust1 = Dust.NewDustDirect(Projectile.Center + new Vector2(0, -28) + new Vector2(-6, -6)
+                Dust dust1 = Dust.NewDustDirect(Projectile.Center + new Vector2(0, -42) + new Vector2(-6, -6)
                     + new Vector2((float)Math.Cos(dustrut), (float)Math.Sin(dustrut)) * 42f,
                     1, 1, DustID.NorthPole, 1f, 1f, 100, Color.White, 0.8f);
                 dust1.velocity *= 0;
@@ -136,7 +136,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int y = 0; y < maxdropdis; y++) {
                     Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
                     if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 6) * 16);
+                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
                         break;
                     }
                 }
@@ -253,11 +253,11 @@ namespace GloryofGuardian.Content.Projectiles
             projrot += projrotvel;
 
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "CobaltDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, 0);
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -14);
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "CobaltProj").Value;
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(0, -28);
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(0, -42);
 
             Main.EntitySpriteDraw(texture, drawPosition, null, lightColor * (projrotvel * 3 + 0.4f), projrot, texture.Size() * 0.5f, Projectile.scale * 1.2f, SpriteEffects.None, 0);
 

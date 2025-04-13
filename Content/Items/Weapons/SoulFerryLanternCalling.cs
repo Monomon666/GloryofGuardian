@@ -53,11 +53,11 @@ namespace GloryofGuardian.Content.Items.Weapon
 
             if (player.altFunctionUse == 0) {
                 if (player.statLife < 40) {
-                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                    CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "鲜血不足",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            false,
+                            true
                             );
                     return false;
                 }
@@ -65,11 +65,11 @@ namespace GloryofGuardian.Content.Items.Weapon
 
             if (player.altFunctionUse == 0) {
                 if (player.statLife < 40) {
-                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                    CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "你的力量不够凝聚暗影",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            false,
+                            true
                             );
                     return false;
                 }
@@ -93,17 +93,17 @@ namespace GloryofGuardian.Content.Items.Weapon
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (player.altFunctionUse == 0) {//幽行
-                CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "留影",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            false,
+                            true
                             );
-                CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "40",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            false,
+                            true
                             );
 
                 Projectile.NewProjectile(source, position + velocity.SafeNormalize(Vector2.Zero) * 48f, velocity, type, damage, knockback, player.whoAmI);

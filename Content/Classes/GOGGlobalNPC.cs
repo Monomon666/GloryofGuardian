@@ -135,17 +135,17 @@ namespace GloryofGuardian.Content.Class
 
                     if (!npc.boss && npc.life <= npc.lifeMax * 0.15f) {
                         npc.life = 1;
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            "9999",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            Color.Red,
+                            "9999",
+                            false,
+                            false 
                             );
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            "毙除",//这里是你需要展示的文字
-                            true,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            Color.Red,
+                            "毙除",
+                            true,
+                            false 
                             );
                         for (int i = 0; i < 1000; i++) {
                             Projectile p = Main.projectile[i];
@@ -160,17 +160,17 @@ namespace GloryofGuardian.Content.Class
 
                     if (npc.boss && npc.life < npc.lifeMax * 0.05f) {
                         npc.life = 1;
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            npc.lifeMax,//这里是你需要展示的文字
-                            true,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            Color.Red,
+                            npc.lifeMax,
+                            true,
+                            false 
                             );
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            new Color(89, 194, 201),//跳字的颜色
-                            "审判",//这里是你需要展示的文字
-                            true,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            new Color(89, 194, 201),
+                            "审判",
+                            true,
+                            false 
                             );
                         Main.NewText(npc.FullName + "已被圣银审判!", Color.Red);
                         for (int i = 0; i < 1000; i++) {
@@ -187,17 +187,17 @@ namespace GloryofGuardian.Content.Class
                 if (buffcount1 >= 60) {
                     if (npc.boss && npc.life > npc.lifeMax * 0.05f) {
                         npc.life -= Math.Min((int)(npc.life * 0.02f), 100);
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            Math.Min((int)(npc.life * 0.02f), 100),//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            Color.Red,
+                            Math.Min((int)(npc.life * 0.02f), 100),
+                            false,
+                            false 
                             );
-                        CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
-                            "剜除",//这里是你需要展示的文字
-                            true,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                        CombatText.NewText(npc.Hitbox,
+                            Color.Red,
+                            "剜除",
+                            true,
+                            false 
                             );
                         for (int i = 0; i < 1000; i++) {
                             Projectile p = Main.projectile[i];
@@ -275,11 +275,11 @@ namespace GloryofGuardian.Content.Class
                 if (npc.life <= touchdamage) npc.life = 0;
                 else npc.life -= touchdamage;
 
-                CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                                Color.White,//跳字的颜色
-                                touchdamage,//这里是你需要展示的文字
-                                false,//dramatic为true可以使得字体闪烁，
-                                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                CombatText.NewText(npc.Hitbox,
+                                Color.White,
+                                touchdamage,
+                                false,
+                                false 
                                 );
             }
             //南瓜实现反伤
@@ -288,11 +288,11 @@ namespace GloryofGuardian.Content.Class
                 if (npc.life <= touchdamage) npc.life = 0;
                 else npc.life -= touchdamage;
 
-                CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                                Color.White,//跳字的颜色
-                                touchdamage,//这里是你需要展示的文字
-                                false,//dramatic为true可以使得字体闪烁，
-                                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                CombatText.NewText(npc.Hitbox,
+                                Color.White,
+                                touchdamage,
+                                false,
+                                false 
                                 );
 
                 npc.AddBuff(BuffID.Oiled, 300);

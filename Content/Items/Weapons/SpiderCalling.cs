@@ -50,11 +50,11 @@ namespace GloryofGuardian.Content.Items.Weapon
         public override bool CanUseItem(Player player) {
             if (player.altFunctionUse == 0) {
                 if (player.statLife < 100) {
-                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                    CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "鲜血不足",//这里是你需要展示的文字
                             true,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            true
                             );
                     return false;
                 }
@@ -66,11 +66,11 @@ namespace GloryofGuardian.Content.Items.Weapon
 
                 // 如果 SpiderNPC 数量大于等于 4，返回 false
                 if (spiderCount >= 4) {
-                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                            Color.Red,//跳字的颜色
+                    CombatText.NewText(player.Hitbox,
+                            Color.Red,
                             "到达上限",//这里是你需要展示的文字
                             true,//dramatic为true可以使得字体闪烁，
-                            true //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            true
                             );
                     return false;
                 }

@@ -1053,6 +1053,21 @@ Items: {
 			并在目标为boss时再提升10%
 			'''
 	}
+
+	ImmortalBody: {
+		// DisplayName: Immortal Body
+		// Tooltip: ""
+	}
+
+	ImmortalLegs: {
+		// DisplayName: Immortal Legs
+		// Tooltip: ""
+	}
+
+	ImmortalHead: {
+		// DisplayName: Immortal Head
+		// Tooltip: ""
+	}
 }
 
 ArmorSetBonuses: {

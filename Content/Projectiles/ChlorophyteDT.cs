@@ -114,7 +114,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int y = 0; y < maxdropdis; y++) {
                     Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
                     if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 6) * 16);
+                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
                         break;
                     }
                 }

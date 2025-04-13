@@ -126,18 +126,18 @@ namespace GloryofGuardian.Content.Projectiles
                     // 执行A()
                     Owner.statLife += 5;
 
-                    CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                                Color.DarkRed,//跳字的颜色
-                                "摄魂夺魄",//这里是你需要展示的文字
-                                false,//dramatic为true可以使得字体闪烁，
-                                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                    CombatText.NewText(npc.Hitbox,
+                                Color.DarkRed,
+                                "摄魂夺魄",
+                                false,
+                                false 
                                 );
 
-                    CombatText.NewText(npc.Hitbox,//跳字生成的矩形范围
-                                Color.Green,//跳字的颜色
-                                5,//这里是你需要展示的文字
-                                false,//dramatic为true可以使得字体闪烁，
-                                false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                    CombatText.NewText(npc.Hitbox,
+                                Color.Green,
+                                5,
+                                false,
+                                false 
                                 );
 
                     // 从列表中移除死亡的NPC（可选）

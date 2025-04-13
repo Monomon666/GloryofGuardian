@@ -98,11 +98,11 @@ namespace GloryofGuardian.Content.Projectiles
 
                 if (player120 != null && player120.active && Vector2.Distance(Projectile.Center, player120.Center) < 16) {
                     player120.statLife += 20;
-                    CombatText.NewText(player120.Hitbox,//跳字生成的矩形范围
-                            Color.LightGreen,//跳字的颜色
-                            "20",//这里是你需要展示的文字
-                            false,//dramatic为true可以使得字体闪烁，
-                            false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                    CombatText.NewText(player120.Hitbox,
+                            Color.LightGreen,
+                            "20",
+                            false,
+                            false
                             );
                     Projectile.Kill();
                 }

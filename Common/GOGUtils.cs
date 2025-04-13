@@ -58,9 +58,6 @@ namespace GloryofGuardian.Common
         /// <param name="leftCed">是否检查左鼠标键，否则检测右鼠标键</param>
         /// <param name="netCed">是否进行网络同步检查</param>
         /// <returns>如果按下了指定的鼠标键，则返回true，否则返回false</returns>
-        //public static bool PressKey(this Player player, bool leftCed = true, bool netCed = true) {
-        //    return (!netCed || Main.myPlayer == player.whoAmI) && (leftCed ? PlayerInput.Triggers.Current.MouseLeft : PlayerInput.Triggers.Current.MouseRight);
-        //}
 
         /// <summary>
         /// 判定弹幕是否能被物块阻挡
@@ -411,7 +408,6 @@ namespace GloryofGuardian.Common
                 return found ? ret.Type : 0;
             }
 
-            // 默认选择
             int prefix = -1;
 
             // 饰品
@@ -419,10 +415,10 @@ namespace GloryofGuardian.Common
                 int accRerolls = 0;
                 int[][] accessoryReforgeTiers = new int[][]
                 {
-            /* 0 */ new int[] { PrefixID.Hard, PrefixID.Jagged, PrefixID.Brisk, PrefixID.Wild }, //, GetCalPrefix("Quiet") },
-            /* 1 */ new int[] { PrefixID.Guarding, PrefixID.Spiked, PrefixID.Precise, PrefixID.Fleeting, PrefixID.Rash}, //, GetCalPrefix("Cloaked") },
-            /* 2 */ new int[] { PrefixID.Armored, PrefixID.Angry, PrefixID.Hasty2, PrefixID.Intrepid, PrefixID.Arcane}, //, GetCalPrefix("Camouflaged") },
-            /* 3 */ new int[] { PrefixID.Warding, PrefixID.Menacing, PrefixID.Lucky, PrefixID.Quick2, PrefixID.Violent}, //, GetCalPrefix("Silent") },
+                    new int[] { PrefixID.Hard, PrefixID.Jagged, PrefixID.Brisk, PrefixID.Wild }, //, GetCalPrefix("1") },
+                    new int[] { PrefixID.Guarding, PrefixID.Spiked, PrefixID.Precise, PrefixID.Fleeting, PrefixID.Rash}, //, GetCalPrefix("2") },
+                    new int[] { PrefixID.Armored, PrefixID.Angry, PrefixID.Hasty2, PrefixID.Intrepid, PrefixID.Arcane}, //, GetCalPrefix("3") },
+                    new int[] { PrefixID.Warding, PrefixID.Menacing, PrefixID.Lucky, PrefixID.Quick2, PrefixID.Violent}, //, GetCalPrefix("4") },
                 };
 
                 // 尽量避免玩家连续重铸两次相同的前缀
@@ -442,20 +438,13 @@ namespace GloryofGuardian.Common
             else if (item.CountsAsClass<GuardianDamageClass>()) {
                 int[][] GuardianReforgeTiers = new int[][]
                 {
-            /* 0 */ new int[] { GetCalPrefix("Scrapped") , GetCalPrefix("Damaged") , GetCalPrefix("ShortCircuited") ,
-                                GetCalPrefix("Silent") , GetCalPrefix("Blooey") ,
-                                GetCalPrefix("Sensitive") , GetCalPrefix("Burdened") ,
-                                GetCalPrefix("Precise") , GetCalPrefix("Overclocked") , GetCalPrefix("Stainless") ,
-                                GetCalPrefix("Peerless") , GetCalPrefix("Excellent"), GetCalPrefix("Classic") },
-                                
+                    new int[] { GetCalPrefix("Scrapped") , GetCalPrefix("Damaged") , GetCalPrefix("ShortCircuited") ,
+                                    GetCalPrefix("Silent") , GetCalPrefix("Blooey") ,
+                                    GetCalPrefix("Sensitive") , GetCalPrefix("Burdened") ,
+                                    GetCalPrefix("Precise") , GetCalPrefix("Overclocked") , GetCalPrefix("Stainless") ,
+                                    GetCalPrefix("Peerless") , GetCalPrefix("Excellent"), GetCalPrefix("Classic") },
+                    };
 
-            // /* 0 */ new int[] { GetCalPrefix("Scrapped") , GetCalPrefix("Damaged") , GetCalPrefix("ShortCircuited") },
-            // /* 1 */ new int[] { GetCalPrefix("Silent") , GetCalPrefix("Blooey") },
-            // /* 2 */ new int[] { GetCalPrefix("Sensitive") , GetCalPrefix("Burdened") },
-            // /* 3 */ new int[] { GetCalPrefix("Precise") , GetCalPrefix("Overclocked") , GetCalPrefix("Stainless") },
-            // /* 4 */ new int[] { GetCalPrefix("Peerless") , GetCalPrefix("Excellent"), GetCalPrefix("Classic") },
-            // /* 5 */ //
-                };
                 prefix = IteratePrefix(rand, GuardianReforgeTiers, currentPrefix);
             }
 
@@ -470,14 +459,12 @@ namespace GloryofGuardian.Common
                         return checkingTier;
             }
 
-            // 检测到无效前缀则从头开始循环
             return -1;
         }
 
         private static int IteratePrefix(UnifiedRandom rand, int[][] reforgeTiers, int currentPrefix) {
             int currentTier = GetPrefixTier(reforgeTiers, currentPrefix);
 
-            // 稳步上升的重铸
             int newTier = currentTier == reforgeTiers.Length - 1 ? currentTier : currentTier + 1;
             return rand.Next(reforgeTiers[newTier]);
         }

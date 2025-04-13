@@ -18,6 +18,8 @@ namespace GloryofGuardian.Content.Items.Accessories
             Item.rare = -12;
 
             Item.accessory = true;
+
+            
         }
 
         int mode = 0;

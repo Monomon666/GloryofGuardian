@@ -370,6 +370,21 @@ Items: {
 		DisplayName: Reverse Hook Arrow
 		Tooltip: ""
 	}
+
+	ImmortalBody: {
+		DisplayName: Immortal Body
+		Tooltip: ""
+	}
+
+	ImmortalLegs: {
+		DisplayName: Immortal Legs
+		Tooltip: ""
+	}
+
+	ImmortalHead: {
+		DisplayName: Immortal Head
+		Tooltip: ""
+	}
 }
 
 ArmorSetBonuses: {

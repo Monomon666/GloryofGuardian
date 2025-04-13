@@ -94,7 +94,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int y = 0; y < maxdropdis; y++) {
                     Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
                     if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 6) * 16);
+                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
                         break;
                     }
                 }
@@ -181,15 +181,15 @@ namespace GloryofGuardian.Content.Projectiles
 
             //转头
             if (wrotation != tarrot) {
-                if (Math.Abs(wrotation - tarrot) % Math.PI <= rspeed) {//如果方向差小于单次转量则本次旋转将超过目标,取余很重要
-                    wrotation = tarrot;//那么直接让方向与到目标方向防止抖动
-                                       //tarrot = wrotation;
+                if (Math.Abs(wrotation - tarrot) % Math.PI <= rspeed) {
+                    wrotation = tarrot;
+                                       //
                     return;
                 } else {
-                    Vector2 clockwise = (wrotation + rspeed).ToRotationVector2();//这是假设NPC顺时针转动后的单位方向向量
-                    Vector2 anticlockwise = (wrotation - rspeed).ToRotationVector2();//这是假设NPC逆时针转动后的单位方向向量
-                                                                                     //显然，要比较两个向量哪个与目标夹角更近，就是比较他们与目标向量相减后的长度
-                    if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())//如果顺时针的差值更小
+                    Vector2 clockwise = (wrotation + rspeed).ToRotationVector2();
+                    Vector2 anticlockwise = (wrotation - rspeed).ToRotationVector2();
+                                                                                     //
+                    if ((clockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length() <= (anticlockwise - (tarpos - projcen).SafeNormalize(Vector2.Zero)).Length())
                     {
                         wrotation += rspeed;
                     } else {

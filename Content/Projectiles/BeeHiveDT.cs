@@ -82,7 +82,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int y = 0; y < maxdropdis; y++) {
                     Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
                     if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 6) * 16);
+                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
                         break;
                     }
                 }
@@ -146,11 +146,11 @@ namespace GloryofGuardian.Content.Projectiles
                                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Projectile.Center);
                                     player.statLife += 40;
                                     player.AddBuff(ModContent.BuffType<HoneyDebuff>(), 3600 - Acount * 600);
-                                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                                    Color.LightGreen,//跳字的颜色
-                                    "40",//这里是你需要展示的文字
-                                    false,//dramatic为true可以使得字体闪烁，
-                                    false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                                    CombatText.NewText(player.Hitbox,
+                                    Color.LightGreen,//颜色
+                                    "40",
+                                    false,
+                                    false 
                                     );
                                     for (int i = 0; i <= 5; i++) {
                                         Dust dust1 = Dust.NewDustDirect(player.Center, 0, 0, DustID.Honey, 1f, 1f, 100, Color.White, 1.5f);
@@ -185,11 +185,11 @@ namespace GloryofGuardian.Content.Projectiles
                                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, Projectile.Center);
                                     player.statLife += 60;
                                     player.AddBuff(ModContent.BuffType<HoneyDebuff>(), 3600 - Acount * 600);
-                                    CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                                    Color.LightGreen,//跳字的颜色
-                                    "60",//这里是你需要展示的文字
-                                    false,//dramatic为true可以使得字体闪烁，
-                                    false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                                    CombatText.NewText(player.Hitbox,
+                                    Color.LightGreen,//颜色
+                                    "60",
+                                    false,
+                                    false 
                                     );
                                     for (int i = 0; i <= 5; i++) {
                                         Dust dust1 = Dust.NewDustDirect(player.Center, 0, 0, DustID.Honey, 1f, 1f, 100, Color.White, 1.5f);

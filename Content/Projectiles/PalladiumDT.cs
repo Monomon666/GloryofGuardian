@@ -90,7 +90,7 @@ namespace GloryofGuardian.Content.Projectiles
                 for (int y = 0; y < maxdropdis; y++) {
                     Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
                     if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 6) * 16);
+                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
                         break;
                     }
                 }
@@ -131,11 +131,11 @@ namespace GloryofGuardian.Content.Projectiles
                         if (Vector2.Distance(DTcenter + Main.screenPosition, player.Center) <= 1250 * ringscale * 0.62f) {
                             player.statLife += 5;
 
-                            CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                                    Color.LightGreen,//跳字的颜色
-                                    "5",//这里是你需要展示的文字
-                                    false,//dramatic为true可以使得字体闪烁，
-                                    false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                            CombatText.NewText(player.Hitbox,
+                                    Color.LightGreen,
+                                    "5",
+                                    false,
+                                    false 
                                     );
                         }
                     }
@@ -152,11 +152,11 @@ namespace GloryofGuardian.Content.Projectiles
                                 atknum++;
                                 player.statLife += 5;
 
-                                CombatText.NewText(player.Hitbox,//跳字生成的矩形范围
-                                        Color.LightGreen,//跳字的颜色
-                                        "5",//这里是你需要展示的文字
-                                        false,//dramatic为true可以使得字体闪烁，
-                                        false //dot为true可以使得字体略小，跳动方式也不同(原版debuff扣血格式)
+                                CombatText.NewText(player.Hitbox,
+                                        Color.LightGreen,
+                                        "5",
+                                        false,
+                                        false
                                         );
 
                                 count -= 5;
