@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|c:\\users\\acer\\documents\\my games\\terraria\\tmodloader\\modsources\\gloryofguardian\\gloryofguardian.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|solutionrelative:gloryofguardian.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|c:\\users\\acer\\documents\\my games\\terraria\\tmodloader\\modsources\\gloryofguardian\\localization\\zh-hans_mods.gloryofguardian.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|solutionrelative:localization\\zh-hans_mods.gloryofguardian.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
@@ -14,11 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "zh-Hans_Mods.GloryofGuardian.hjson",
               "DocumentMoniker": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
               "RelativeDocumentMoniker": "Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
@@ -28,6 +32,19 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-07-04T12:39:14.154Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GloryofGuardian",
+              "DocumentMoniker": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\GloryofGuardian.csproj",
+              "RelativeDocumentMoniker": "GloryofGuardian.csproj",
+              "ToolTip": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\GloryofGuardian.csproj",
+              "RelativeToolTip": "GloryofGuardian.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-09T11:53:23.848Z",
               "EditorCaption": ""
             },
             {
