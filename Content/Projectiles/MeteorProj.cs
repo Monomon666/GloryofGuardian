@@ -1,103 +1,144 @@
-﻿using GloryofGuardian.Common;
-using System;
+﻿using System;
+using GloryofGuardian.Common;
+using GloryofGuardian.Content.ParentClasses;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace GloryofGuardian.Content.Projectiles
-{
-    public class MeteorProj : GOGProj
-    {
+namespace GloryofGuardian.Content.Projectiles {
+    public class MeteorProj : GOGProj {
         public override string Texture => GOGConstant.nulls;
 
-        public override void SetStaticDefaults() {
-            //残影机制
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 8;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
-        }
-
-        public override void SetDefaults() {
-            //这里的尺寸对应的是碰撞体积
+        public override void SetProperty() {
             Projectile.width = 8;
             Projectile.height = 8;
-            Projectile.friendly = true;
-            Projectile.hostile = false;
-            Projectile.DamageType = GuardianDamageClass.Instance;
-            Projectile.timeLeft = 600;
-            Projectile.ignoreWater = false;
-            Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 20;
-            Projectile.aiStyle = -1;
-            Projectile.penetrate = 2;//穿透数，1为攻击到第一个敌人就消失
-            Projectile.tileCollide = true;
-
-            Projectile.light = 1f;
+            Projectile.penetrate = 1;
 
             Projectile.scale *= 1.5f;
+            Projectile.extraUpdates = 1;
+
+            //wet判定的前提
+            Projectile.ignoreWater = false;
+
+            if (Projectile.ai[0] == 0 || Projectile.ai[0] == 2) Projectile.penetrate = 3;
         }
 
         Player Owner => Main.player[Projectile.owner];
 
-        Vector2 OwnerPos => Owner.Center;
-
-        Vector2 ToMou => Main.MouseWorld - OwnerPos;
-
-        int projtype = 0;
-        Vector2 spawnpos = new Vector2(0, 0);
-        public override void OnSpawn(IEntitySource source) {
-        }
-
-        int count = 0;
+        Vector2 statpos = Vector2.Zero;
         public override void AI() {
-            count++;
-
-            if (Projectile.ai[0] == 1 && count == 2) Projectile.penetrate = 3;
-
-            if (count % 1 == 0) {
-                for (int i = 0; i < 4; i++) {
-                    int num = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
-                    Main.dust[num].velocity *= 0.5f;
-                    Main.dust[num].noGravity = true;
-                }
-            }
-
+            if (count == 1) statpos = Projectile.Center;
+            //火系弹幕遇水消失
             if (Projectile.wet) Projectile.Kill();
-        }
 
-        public override Color? GetAlpha(Color lightColor) {
-            return base.GetAlpha(lightColor);
-        }
+            if (Projectile.ai[0] == 1) Projectile.penetrate = 1;
 
-        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            if (target.HasBuff(BuffID.OnFire3)) {
-                //常态
-                if (Projectile.ai[0] == 0) {
-                    Projectile.damage /= 2;
-                    Projectile.ai[0] = -1;
+            if (Projectile.ai[0] == 0 || Projectile.ai[0] == 2) {
+                if (count % 1 == 0) {
+                    for (int i = 0; i < 4; i++) {
+                        int num = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
+                        Main.dust[num].velocity *= 0.5f;
+                        Main.dust[num].noGravity = true;
+                    }
+                }
+            }
+            if (Projectile.ai[0] == 1) {
+                if (count % 1 == 0) {
+                    for (int i = 0; i < 16; i++) {
+                        int num = Dust.NewDust(Projectile.Center + Projectile.velocity.RotatedBy(count / 4f + MathHelper.Pi * (i % 2)) * 0.8f, 0, 0, DustID.Flare, 0f, 0f, 10, Color.White, 2f);
+                        Main.dust[num].velocity *= 0.5f;
+                        Main.dust[num].velocity += Projectile.velocity / 1f * Math.Min(0.5f, count / 20f);
+                        Main.dust[num].noGravity = true;
+                    }
+
+                    if (Owner.magmaStone) {
+                        for (int i = 0; i < 2; i++) {
+                            int num = Dust.NewDust(Projectile.Center + Projectile.velocity.RotatedBy(count / 4f + MathHelper.Pi * (i % 2)) * 0.8f, 0, 0, DustID.SolarFlare, 0f, 0f, 10, Color.White, 2f);
+                            Main.dust[num].velocity *= 0.5f;
+                            Main.dust[num].velocity += statpos.Toz(Main.dust[num].position) * Math.Min(4f, count / 20f);
+                            Main.dust[num].velocity += Projectile.velocity / 1f * Math.Min(0.5f, count / 20f);
+                            Main.dust[num].noGravity = true;
+                        }
+                    }
                 }
             }
 
-            //常态
-            if (Projectile.ai[0] == 0) {
-                target.AddBuff(BuffID.OnFire, 30);
+            if (Projectile.ai[0] == 2) {
+                Projectile.extraUpdates = 0;
+                Projectile.localNPCHitCooldown = 30;
+                if (count < 30) Projectile.friendly = false;
+                if (count >= 30) Projectile.friendly = true;
+
+                if (Projectile.velocity.Y < 8) Projectile.velocity += new Vector2(0, 0.17f);
             }
-            //强化
+
+            base.AI();
+        }
+
+        bool hadhit = false;
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+            if (Projectile.ai[0] != 2 && target.HasBuff(BuffID.OnFire) && !hadhit) {
+                for (int i = 0; i < 3; i++) {
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), target.Center,
+                        new Vector2(0, -6).RotatedBy(Main.rand.NextFloat(0, MathHelper.Pi * 2) + (MathHelper.Pi * i * 2 / 3f)), ModContent.ProjectileType<MeteorProj>(), Projectile.damage / 2, 8, Owner.whoAmI, 2);
+                }
+
+                hadhit = true;
+            }
+
             if (Projectile.ai[0] == 1) {
-                target.AddBuff(BuffID.OnFire, 180);
+                if (Owner.magmaStone) target.AddBuff(BuffID.OnFire3, 300);
+                else target.AddBuff(BuffID.OnFire, 300);
             }
-            base.OnHitNPC(target, hit, damageDone);
+
+            for (int i = 0; i < 24; i++) {
+                int num = Dust.NewDust(target.Center + new Vector2(-Projectile.width / 2f, -Projectile.height / 2f), Projectile.width, Projectile.height, DustID.Flare, 0f, 0f, 10, Color.White, 3f);
+                Main.dust[num].velocity = new Vector2(0, -3).RotatedBy(Main.rand.NextFloat(-0.7f, 0.7f));
+                Main.dust[num].velocity *= Main.rand.NextFloat(0, 3f);
+                Main.dust[num].noGravity = true;
+            }
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity) {
+            if (Projectile.ai[0] == 2) {
+                //反弹
+                Projectile.penetrate -= 1;//反弹次数
+                if (Projectile.penetrate <= 0) {
+                    Projectile.Kill();
+                }
+                else {
+                    Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
+
+                    SoundEngine.PlaySound(SoundID.Dig, Projectile.position);
+
+                    if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon) {
+                        Projectile.velocity.X = -oldVelocity.X;
+                    }
+
+                    if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon) {
+                        Projectile.velocity.Y = -oldVelocity.Y * 0.5f;
+                    }
+                }
+
+                return false;
+            }
+            else return base.OnTileCollide(oldVelocity);
         }
 
         public override void OnKill(int timeLeft) {
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
-            if (Projectile.ai[0] == -1) {
+            if (Projectile.ai[0] == 1) {
                 //爆炸
                 for (int j = 0; j < 52; j++) {
+                    int num1 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 2f);
+                    Main.dust[num1].noGravity = true;
+                    Main.dust[num1].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(4f, 8f);
+
                     int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.InfernoFork, 0, 0, 0, Color.White, 1f);
                     Main.dust[num2].noGravity = true;
-                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(8f, 9f);
+                    Main.dust[num2].velocity = new Vector2((float)Math.Sin(j * 12 / 100f), (float)Math.Cos(j * 12 / 100f)) * Main.rand.NextFloat(8f, 12f);
                 }
-                SoundEngine.PlaySound(in SoundID.NPCHit3, Projectile.Center);
                 Projectile.position = Projectile.Center;
                 Projectile.width = Projectile.height = 160;
                 Projectile.position.X = Projectile.position.X - Projectile.width / 2;

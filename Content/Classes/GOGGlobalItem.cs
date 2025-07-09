@@ -1,13 +1,10 @@
-﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Items.Weapon;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GloryofGuardian.Common;
 using Terraria.ID;
 using Terraria.Utilities;
 
-namespace GloryofGuardian.Content.Class
-{
-    public class GOGGlobalItem : GlobalItem
-    {
+namespace GloryofGuardian.Content.Class {
+    public class GOGGlobalItem : GlobalItem {
         public override bool InstancePerEntity => true;
 
         internal float GuardianStrikePrefixBonus;
@@ -34,7 +31,7 @@ namespace GloryofGuardian.Content.Class
         #endregion
 
         public override void SetStaticDefaults() {
-            ItemID.Sets.ShimmerTransformToItem[ItemID.EmpressBlade] = ModContent.ItemType<SwordNurturingGourdCalling>();
+            //ItemID.Sets.ShimmerTransformToItem[ItemID.EmpressBlade] = ModContent.ItemType<SwordNurturingGourdCalling>();
             base.SetStaticDefaults();
         }
 
@@ -55,8 +52,9 @@ namespace GloryofGuardian.Content.Class
                     // 从文本中提取暴击率数值
                     if (TryExtractCritChance(critText, out int critChance)) {
                         // 替换“暴击率”为“过载频率”，并保留数值
-                        line.Text = $"{critChance}% 过载频率";
-                    } else {
+                        line.Text = $"{critChance}% 超频率";
+                    }
+                    else {
                         // 如果提取失败，保留原始文本
                         line.Text = critText;
                     }

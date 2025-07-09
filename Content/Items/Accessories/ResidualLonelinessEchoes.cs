@@ -1,10 +1,10 @@
-using GloryofGuardian.Common;
+﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.Classes;
 using Terraria.GameContent.Creative;
 
-namespace GloryofGuardian.Content.Items.Accessories
-{
-    public class ResidualLonelinessEchoes : GOGItem
-    {
+namespace GloryofGuardian.Content.Items.Accessories {
+    public class ResidualLonelinessEchoes : GOGAccessories {
         public override string Texture => GOGConstant.Items + "Accessories/" + Name;
         public override void SetStaticDefaults() {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -18,8 +18,6 @@ namespace GloryofGuardian.Content.Items.Accessories
             Item.rare = -12;
 
             Item.accessory = true;
-
-            
         }
 
         int mode = 0;

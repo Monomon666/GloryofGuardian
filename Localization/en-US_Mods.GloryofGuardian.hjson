@@ -1,78 +1,8 @@
-# This file will automatically update with entries for new content after a build and reload.
+DamageClasses.GuardianDamageClass.DisplayName: Guardian Damage Class
 
 Items: {
-	Calling: {
-		DisplayName: Calling
-		Tooltip:
-			'''
-			Template of an item
-			Replacing this tooltip is duty 
-			It's snowing on Mt.Fuji
-			'''
-	}
-
 	ResidualLonelinessEchoes: {
 		DisplayName: Residual Loneliness Echoes
-		Tooltip: ""
-	}
-
-	WildCalling: {
-		DisplayName: Wild Calling
-		Tooltip: ""
-	}
-
-	AdamantiteCalling: {
-		DisplayName: Adamantite Calling
-		Tooltip: ""
-	}
-
-	BeeHiveCalling: {
-		DisplayName: Bee Hive Calling
-		Tooltip: ""
-	}
-
-	BloodyCalling: {
-		DisplayName: Bloody Calling
-		Tooltip: ""
-	}
-
-	CobaltCalling: {
-		DisplayName: Cobalt Calling
-		Tooltip: ""
-	}
-
-	CorruptCalling: {
-		DisplayName: Corrupt Calling
-		Tooltip: ""
-	}
-
-	GarrisonCalling: {
-		DisplayName: Garrison Calling
-		Tooltip: ""
-	}
-
-	MushRoomCalling: {
-		DisplayName: Mush Room Calling
-		Tooltip: ""
-	}
-
-	PalladiumCalling: {
-		DisplayName: Palladium Calling
-		Tooltip: ""
-	}
-
-	RustyGunCalling: {
-		DisplayName: Rusty Gun Calling
-		Tooltip: ""
-	}
-
-	ShurikenCalling: {
-		DisplayName: Shuriken Calling
-		Tooltip: ""
-	}
-
-	SpiderCalling: {
-		DisplayName: Spider Calling
 		Tooltip: ""
 	}
 
@@ -81,388 +11,82 @@ Items: {
 		Tooltip: ""
 	}
 
-	SlimeCalling: {
-		DisplayName: Slime Calling
+	GOGDummyCalling: {
+		DisplayName: G O G Dummy Calling
 		Tooltip: ""
 	}
 
-	MythrilCalling: {
-		DisplayName: Mythril Calling
+	Wild: {
+		DisplayName: Wild
 		Tooltip: ""
 	}
 
-	OrichalcumCalling: {
-		DisplayName: Orichalcum Calling
+	Garrison: {
+		DisplayName: Garrison
 		Tooltip: ""
 	}
 
-	TitaniumCalling: {
-		DisplayName: Titanium Calling
+	MushRoom: {
+		DisplayName: Mush Room
 		Tooltip: ""
 	}
 
-	PaleClockworkGunCalling: {
-		DisplayName: Pale Clockwork Gun Calling
+	Frost: {
+		DisplayName: Frost
 		Tooltip: ""
 	}
 
-	PaleShotGunCalling: {
-		DisplayName: Pale Shot Gun Calling
+	Bloody: {
+		DisplayName: Bloody
 		Tooltip: ""
 	}
 
-	SirenCalling: {
-		DisplayName: Siren Calling
+	Corrupt: {
+		DisplayName: Corrupt
 		Tooltip: ""
 	}
 
-	PinkSlimeCalling: {
-		DisplayName: Pink Slime Calling
+	Meteor: {
+		DisplayName: Meteor
 		Tooltip: ""
 	}
 
-	NanoGMissileCaling: {
-		DisplayName: Nano G Missile Caling
+	BeeHive: {
+		DisplayName: Bee Hive
 		Tooltip: ""
 	}
 
-	NanoGuider: {
-		DisplayName: Nano Guider
+	RustyGun: {
+		DisplayName: Rusty Gun
 		Tooltip: ""
 	}
 
-	AncientBattleCalling: {
-		DisplayName: Ancient Battle Calling
+	Shuriken: {
+		DisplayName: Shuriken
 		Tooltip: ""
 	}
 
-	ChlorophyteCalling: {
-		DisplayName: Chlorophyte Calling
+	Bloody2: {
+		DisplayName: Bloody2
 		Tooltip: ""
 	}
-
-	MeteorCalling: {
-		DisplayName: Meteor Calling
-		Tooltip: ""
-	}
-
-	SRMeteorCalling: {
-		DisplayName: S R Meteor Calling
-		Tooltip: ""
-	}
-
-	NanoArmorBody: {
-		DisplayName: Nano Armor Body
-		Tooltip: ""
-	}
-
-	NanoArmorLegs: {
-		DisplayName: Nano Armor Legs
-		Tooltip: ""
-	}
-
-	NanoArmorHead: {
-		DisplayName: Nano Armor Head
-		Tooltip: ""
-	}
-
-	MaliceFireGun: {
-		DisplayName: Malice Fire Gun
-		Tooltip: ""
-	}
-
-	NanoWings: {
-		DisplayName: Nano Wings
-		Tooltip: ""
-	}
-
-	NanoBar: {
-		DisplayName: Nano Bar
-		Tooltip: ""
-	}
-
-	FrostCalling: {
-		DisplayName: Frost Calling
-		Tooltip: ""
-	}
-
-	Bloody2Calling: {
-		DisplayName: Bloody2 Calling
-		Tooltip: ""
-	}
-
-	Corrupt2Calling: {
-		DisplayName: Corrupt2 Calling
-		Tooltip: ""
-	}
-
-	HarpyCalling: {
-		DisplayName: Harpy Calling
-		Tooltip: ""
-	}
-
-	PlanteraCalling: {
-		DisplayName: Plantera Calling
-		Tooltip: ""
-	}
-
-	AbyssalEchoCalling: {
-		DisplayName: Abyssal Echo Calling
-		Tooltip: ""
-	}
-
-	SoulBalanceCalling: {
-		DisplayName: Soul lBalance Calling
-		Tooltip: ""
-	}
-
-	FlamingJackCalling: {
-		DisplayName: Flaming Jack Calling
-		Tooltip: ""
-	}
-
-	ShadowFlameScrollCalling: {
-		DisplayName: Shadow Flame Scroll Calling
-		Tooltip: ""
-	}
-
-	DarkCrystalBody: {
-		DisplayName: Dark Crystal Body
-		Tooltip: ""
-	}
-
-	DarkCrystalLegs: {
-		DisplayName: Dark Crystal Legs
-		Tooltip: ""
-	}
-
-	DarkCrystalHead: {
-		DisplayName: Dark Crystal Head
-		Tooltip: ""
-	}
-
-	SoulofAnotherWorld: {
-		DisplayName: Soulof Another World
-		Tooltip: ""
-	}
-
-	SoulDementorBookCalling: {
-		DisplayName: Soul Dementor Book Calling
-		Tooltip: ""
-	}
-
-	SoulFerryLanternCalling: {
-		DisplayName: Soul Ferry Lantern Calling
-		Tooltip: ""
-	}
-
-	SRFrostCalling: {
-		DisplayName: S R Frost Calling
-		Tooltip: ""
-	}
-
-	NanoUAVCalling: {
-		DisplayName: Nano U A V Calling
-		Tooltip: ""
-	}
-
-	UndeadWoodBody: {
-		DisplayName: Undead Wood Body
-		Tooltip: ""
-	}
-
-	UndeadWoodLegs: {
-		DisplayName: Undead Wood Legs
-		Tooltip: ""
-	}
-
-	UndeadWoodHead: {
-		DisplayName: Undead Wood Head
-		Tooltip: ""
-	}
-
-	GoldTrident: {
-		DisplayName: Gold Trident
-		Tooltip: ""
-	}
-
-	LightningRod: {
-		DisplayName: Lightning Rod
-		Tooltip: ""
-	}
-
-	BloomingLife: {
-		DisplayName: Blooming Life
-		Tooltip: ""
-	}
-
-	Candor: {
-		DisplayName: Candor
-		Tooltip: ""
-	}
-
-	Dirge: {
-		DisplayName: Dirge
-		Tooltip: ""
-	}
-
-	Elegy: {
-		DisplayName: Elegy
-		Tooltip: ""
-	}
-
-	GuardianEmblem: {
-		DisplayName: Guardian Emblem
-		Tooltip: ""
-	}
-
-	HellFlare: {
-		DisplayName: Hell Flare
-		Tooltip: ""
-	}
-
-	HolyBond: {
-		DisplayName: Holy Bond
-		Tooltip: ""
-	}
-
-	Resolute: {
-		DisplayName: Resolute
-		Tooltip: ""
-	}
-
-	Syncore: {
-		DisplayName: Syncore
-		Tooltip: ""
-	}
-
-	WildernessSeed: {
-		DisplayName: Wilderness Seed
-		Tooltip: ""
-	}
-
-	FireDragonCalling: {
-		DisplayName: Fire Dragon Calling
-		Tooltip: ""
-	}
-
-	ImmortalLotusCalling: {
-		DisplayName: Silver Bough Calling
-		Tooltip: ""
-	}
-
-	SwordNurturingGourdCalling: {
-		DisplayName: Sword Nurturing Gourd Calling
-		Tooltip: ""
-	}
-
-	ImmortalAltarCalling: {
-		DisplayName: Immortal Altar Calling
-		Tooltip: ""
-	}
-
-	FinalSpiralfCalling: {
-		DisplayName: Final Spiralf Calling
-		Tooltip: ""
-	}
-
-	ReverseHookArrow: {
-		DisplayName: Reverse Hook Arrow
-		Tooltip: ""
-	}
-
-	ImmortalBody: {
-		DisplayName: Immortal Body
-		Tooltip: ""
-	}
-
-	ImmortalLegs: {
-		DisplayName: Immortal Legs
-		Tooltip: ""
-	}
-
-	ImmortalHead: {
-		DisplayName: Immortal Head
-		Tooltip: ""
-	}
-}
-
-ArmorSetBonuses: {
-	UndeadWood.Description: ""
-	DarkCrystal.Description: ""
-	Nano.Description: ""
 }
 
 Prefixes: {
-	PowerTooltip: Mods.GloryofGuardian.Prefixes.PowerTooltip
-
-	Blooey0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Blooey0.AdditionalTooltip
-		DisplayName: Blooey0
-	}
-
-	Burdened0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Burdened0.AdditionalTooltip
-		DisplayName: Burdened0
-	}
-
-	Classic0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Classic0.AdditionalTooltip
-		DisplayName: Classic0
-	}
-
-	Damaged0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Damaged0.AdditionalTooltip
-		DisplayName: Damaged0
-	}
-
-	Excellent0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Excellent0.AdditionalTooltip
-		DisplayName: Excellent0
-	}
-
-	Overclocked0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Overclocked0.AdditionalTooltip
-		DisplayName: Overclocked0
-	}
-
-	Peerless0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Peerless0.AdditionalTooltip
-		DisplayName: Peerless0
-	}
-
-	Precise0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Precise0.AdditionalTooltip
-		DisplayName: Precise0
-	}
-
-	Scrapped0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Scrapped0.AdditionalTooltip
-		DisplayName: Scrapped0
-	}
-
-	Sensitive0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Sensitive0.AdditionalTooltip
-		DisplayName: Sensitive0
-	}
-
-	ShortCircuited0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.ShortCircuited0.AdditionalTooltip
-		DisplayName: Short Circuited0
-	}
-
-	Silent0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Silent0.AdditionalTooltip
-		DisplayName: Silent0
-	}
-
-	Stainless0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Stainless0.AdditionalTooltip
-		DisplayName: Stainless0
-	}
+	Blooey0.DisplayName: Blooey0
+	Burdened0.DisplayName: Burdened0
+	Classic0.DisplayName: Classic0
+	Damaged0.DisplayName: Damaged0
+	Excellent0.DisplayName: Excellent0
+	Overclocked0.DisplayName: Overclocked0
+	Peerless0.DisplayName: Peerless0
+	Precise0.DisplayName: Precise0
+	Scrapped0.DisplayName: Scrapped0
+	Sensitive0.DisplayName: Sensitive0
+	ShortCircuited0.DisplayName: Short Circuited0
+	Silent0.DisplayName: Silent0
+	Stainless0.DisplayName: Stainless0
 }
-
-DamageClasses.GuardianDamageClass.DisplayName: Guardian Damage Class
 
 Buffs: {
 	JavelinDebuff1: {
@@ -470,211 +94,46 @@ Buffs: {
 		Description: Mods.GloryofGuardian.Buffs.JavelinDebuff1.Description
 	}
 
-	HoneyDebuff: {
-		DisplayName: Honey Debuff
-		Description: Mods.GloryofGuardian.Buffs.HoneyDebuff.Description
+	CorruptDebuff: {
+		DisplayName: Corrupt Debuff
+		Description: Mods.GloryofGuardian.Buffs.CorruptDebuff.Description
 	}
 
-	ShadowbladeDebuff: {
-		DisplayName: Shadowblade Debuff
-		Description: Mods.GloryofGuardian.Buffs.ShadowbladeDebuff.Description
-	}
-
-	CobaltDebuff: {
-		DisplayName: Cobalt Debuff
-		Description: Mods.GloryofGuardian.Buffs.CobaltDebuff.Description
-	}
-
-	SirenDebuff: {
-		DisplayName: Siren Debuff
-		Description: Mods.GloryofGuardian.Buffs.SirenDebuff.Description
-	}
-
-	TitaniumShieldBuff: {
-		DisplayName: Titanium Shield Buff
-		Description: Mods.GloryofGuardian.Buffs.TitaniumShieldBuff.Description
-	}
-
-	TitaniumReloadBuff: {
-		DisplayName: Titanium Reload Buff
-		Description: Mods.GloryofGuardian.Buffs.TitaniumReloadBuff.Description
-	}
-
-	NanoMarkDebuff1: {
-		DisplayName: Nano Mark Debuff1
-		Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff1.Description
-	}
-
-	NanoMarkDebuff2: {
-		DisplayName: Nano Mark Debuff2
-		Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff2.Description
-	}
-
-	OnfireMalice: {
-		DisplayName: Onfire Malice
-		Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
-	}
-
-	OnDragonFireDebuff: {
-		DisplayName: On Dragon Fire Debuff
-		Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
-	}
-
-	WitheredDebuff: {
-		DisplayName: Withered Debuff
-		Description: Mods.GloryofGuardian.Buffs.WitheredDebuff.Description
+	HoneyCDbuff: {
+		DisplayName: Honey C Dbuff
+		Description: Mods.GloryofGuardian.Buffs.HoneyCDbuff.Description
 	}
 }
 
 Projectiles: {
+	Proj0.DisplayName: Proj0
 	WildDT.DisplayName: Wild D T
 	WildProj.DisplayName: Wild Proj
 	GarrisonDT.DisplayName: Garrison D T
 	GarrisonProj.DisplayName: Garrison Proj
 	BloodyDT.DisplayName: Bloody D T
 	BloodyProj.DisplayName: Bloody Proj
-	CorruptCloudProj.DisplayName: Corrupt Cloud Proj
 	CorruptDT.DisplayName: Corrupt D T
+	MushRoomDT.DisplayName: Mush Room D T
+	BloodyProj2.DisplayName: Bloody Proj2
+	CorruptCloudProj.DisplayName: Corrupt Cloud Proj
 	CorruptRainProj.DisplayName: Corrupt Rain Proj
-	MushroomDT.DisplayName: Mushroom D T
 	MushRoomProj.DisplayName: Mush Room Proj
 	MushRoomProj2.DisplayName: Mush Room Proj2
-	BeeHiveDT.DisplayName: Bee Hive D T
-	RustyGunProj.DisplayName: Rusty Gun Proj
-	RustyGunDT.DisplayName: Rusty Gun D T
-	ShurikeDT.DisplayName: Shurike D T
-	ShurikenProj.DisplayName: Shuriken Proj
-	ShurikenDT.DisplayName: Shuriken D T
-	SlimeCallProj.DisplayName: Slime Call Proj
-	SlimeProj.DisplayName: Slime Proj
-	SlimeDT.DisplayName: Slime D T
-	MythrilProj.DisplayName: Mythril Proj
-	MythrilDT.DisplayName: Mythril D T
-	MythrilProj2.DisplayName: Mythril Proj2
-	OrichalcumDT.DisplayName: Orichalcum D T
-	PalladiumDT.DisplayName: Palladium D T
-	TitaniumDT.DisplayName: Titanium D T
-	AdamantiteDT.DisplayName: Adamantite D T
-	AdamantiteProj.DisplayName: Adamantite Proj
-	PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
-	PaleShotGunDT.DisplayName: Pale Shot Gun D T
-	CobaltDT.DisplayName: Cobalt D T
-	CobaltProj.DisplayName: Cobalt Proj
-	CobaltProj2.DisplayName: Cobalt Proj2
-	SlimeProj0.DisplayName: Slime Proj0
-	SpiderProj.DisplayName: Spider Proj
-	SpiderProj0.DisplayName: Spider Proj0
-	PinkSlimeCallProj.DisplayName: Pink Slime Call Proj
-	PinkSlimeProj.DisplayName: Pink Slime Proj
-	PinkSlimeProj0.DisplayName: Pink Slime Proj0
-	NanoGuiderProj.DisplayName: Nano Guider Proj
-	NanoGuiderHeld.DisplayName: Nano Guider Held
-	Magic.NanoGuiderProj.DisplayName: Nano Guider Proj
-	NanoGMissileProj.DisplayName: Nano G Missile Proj
-	NanoGMissileDT.DisplayName: Nano G Missile D T
-	AncientBattleProj.DisplayName: Ancient Battle Proj
-	AncientBattleProj2.DisplayName: Ancient Battle Proj2
-	AncientBattleDT.DisplayName: Ancient Battle D T
-	ChlorophyteDT.DisplayName: Chlorophyte D T
-	ChlorophyteProj.DisplayName: Chlorophyte Proj
-	SirenDT.DisplayName: Siren D T
-	SirenProj.DisplayName: Siren Proj
-	MeteorDT.DisplayName: Meteor D T
-	MeteorProj.DisplayName: Meteor Proj
-	SRMeteorDT.DisplayName: S R Meteor D T
-	SRMeteorProj.DisplayName: S R Meteor Proj
-	NightProj.DisplayName: Night Proj
-	NightProj2.DisplayName: Night Proj2
-	NightProj3.DisplayName: Night Proj3
-	StarRay.DisplayName: Star Ray
-	StarRay2.DisplayName: Star Ray2
-	WarningLine.DisplayName: Warning Line
-	WarningLine_2.DisplayName: Warning Line_2
-	WarningLine_3.DisplayName: Warning Line_3
-	NightFireProj.DisplayName: Night Fire Proj
-	WarningLine_0.DisplayName: Warning Line_0
-	MaliceFireGunHeld.DisplayName: Malice Fire Gun Held
-	MaliceFireGunFireProj.DisplayName: Malice Fire Gun Fire Proj
-	MaliceFireGunProj.DisplayName: Malice Fire Gun Proj
-	Frost2DT.DisplayName: Frost2 D T
-	Frost2Proj.DisplayName: Frost2 Proj
 	FrostDT.DisplayName: Frost D T
 	FrostProj.DisplayName: Frost Proj
-	Blood2Proj0.DisplayName: Blood2 Proj0
-	Blood2Proj1.DisplayName: Blood2 Proj1
+	BeeHiveDT.DisplayName: Bee Hive D T
+	MeteorDT.DisplayName: Meteor D T
+	MeteorProj.DisplayName: Meteor Proj
+	RustyGunDT.DisplayName: Rusty Gun D T
+	RustyGunProj.DisplayName: Rusty Gun Proj
+	ShurikenDT.DisplayName: Shuriken D T
+	ShurikenProj.DisplayName: Shuriken Proj
 	Bloody2DT.DisplayName: Bloody2 D T
-	Corrupt2DT.DisplayName: Corrupt2 D T
-	Corrupt2Proj0.DisplayName: Corrupt2 Proj0
-	Corrupt2Proj1.DisplayName: Corrupt2 Proj1
-	HarpyDT.DisplayName: Harpy D T
-	HarpyRainFeatherProj.DisplayName: Harpy Rain Feather Proj
-	HarpyRainProj.DisplayName: Harpy Rain Proj
-	PlanteraDT.DisplayName: Plantera D T
-	PlanteraCallProj.DisplayName: Plantera Call Proj
-	PlanteraProj0.DisplayName: Plantera Proj0
-	PlanteraProj1.DisplayName: Plantera Proj1
-	AbyssalEchoDT.DisplayName: Abyssal Echo D T
-	AbyssalEchoProj.DisplayName: Abyssal Echo Proj
-	AbyssalEchoWarningLine.DisplayName: Abyssal Echo Warning Line
-	FerryLightDT.DisplayName: Ferry Light D T
-	FerryLightProj.DisplayName: Ferry Light Proj
-	FlamingJackProj.DisplayName: Flaming Jack Proj
-	ShadowFlameScrollDT.DisplayName: Shadow Flame Scroll D T
-	FerryLightProj2.DisplayName: Ferry Light Proj2
-	SoulBalanceDT.DisplayName: Soul Balance D T
-	SoulBalanceProj.DisplayName: Soul Balance Proj
-	SoulDementorBookProj.DisplayName: Soul Dementor Book Proj
-	SoulFerryLanternProj.DisplayName: Soul Ferry Lantern Proj
-	SRFrostDT.DisplayName: S R Frost D T
-	SRFrostProj.DisplayName: S R Frost Proj
-	SRFrostProj0.DisplayName: S R Frost Proj0
-	DragonFireDT.DisplayName: Dragon Fire D T
-	DragonFireProj.DisplayName: Dragon Fire Proj
-	NanoUAVDT.DisplayName: Nano U A V D T
-	NanoUAVProj.DisplayName: Nano U A V Proj
-	GelTridentHeld.DisplayName: Gel Trident Held
-	GoldTridentHeld.DisplayName: Gold Trident Held
-	GoldTridentProj.DisplayName: Gold Trident Proj
-	GelTridentPreProj.DisplayName: Gel Trident Pre Proj
-	GelTridentProj.DisplayName: Gel Trident Proj
-	GoldTridentPreProj.DisplayName: Gold Trident Pre Proj
-	LightningRodHeld.DisplayName: Lightning Rod Held
-	LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
-	LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
-	LightningRodProj.DisplayName: Lightning Rod Proj
-	FireDragonDT.DisplayName: Fire Dragon D T
-	FireDragonProj.DisplayName: Fire Dragon Proj
-	SilverBoughDT.DisplayName: Silver Bough D T
-	SilverBoughProj.DisplayName: Silver Bough Proj
-	SilverBoughProj0.DisplayName: Silver Bough Proj0
-	ImmortalLotusDT.DisplayName: Immortal Lotus D T
-	ImmortalLotusProj.DisplayName: Immortal Lotus Proj
-	ImmortalLotusProj0.DisplayName: Immortal Lotus Proj0
-	ImmortalLotusProj2.DisplayName: Immortal Lotus Proj2
-	SwordNurturingGourdDT.DisplayName: Sword Nurturing Gourd D T
-	SwordNurturingGourdProj.DisplayName: Sword Nurturing Gourd Proj
-	SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
-	ImmortalAltarDT.DisplayName: Immortal Altar D T
-	ImmortalAltarProj.DisplayName: Immortal Altar Proj
-	FinalSpiralfDT.DisplayName: Final Spiralf D T
-	FinalSpiralfProj.DisplayName: Final Spiralf Proj
-	FinalSpiralfProj0.DisplayName: Final Spiralf Proj0
-	FinalSpiralf2Proj.DisplayName: Final Spiralf2 Proj
-	FinalSpiralf3Proj.DisplayName: Final Spiralf3 Proj
-	FinalSpiralfLaserBeamProj.DisplayName: Final Spiralf Laser Beam Proj
+	Bloody2Proj1.DisplayName: Bloody2 Proj1
+	Bloody2Proj2.DisplayName: Bloody2 Proj2
+	Bloody2Proj3.DisplayName: Bloody2 Proj3
+	Bloody2Proj4.DisplayName: Bloody2 Proj4
 }
 
-NPCs: {
-	SpiderNPC.DisplayName: Spider N P C
-	NightWatcher.DisplayName: Night Watcher
-	NightLantern.DisplayName: Night Lantern
-	NightLantern2.DisplayName: Night Lantern2
-	NightLantern3.DisplayName: Night Lantern3
-	NightLance.DisplayName: Night Lance
-	NightRainBird.DisplayName: Night Rain Bird
-	NightSlime.DisplayName: Night Slime
-	NightLantern1.DisplayName: Night Lantern1
-	FlamingJackNPC.DisplayName: Flaming Jack N P C
-	FinalSpiralf2DT.DisplayName: Final Spiralf2 D T
-	FinalSpiralf3DT.DisplayName: Final Spiralf3 D T
-}
+NPCs.GOGDummy.DisplayName: G O G Dummy

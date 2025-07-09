@@ -1,225 +1,202 @@
-﻿using GloryofGuardian.Common;
+﻿using System;
+using System.Collections.Generic;
+using GloryofGuardian.Common;
+using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace GloryofGuardian.Content.Projectiles
-{
-    public class Bloody2DT : GOGDT
-    {
-        //不使用贴图,重写绘制
+namespace GloryofGuardian.Content.Projectiles {
+    public class Bloody2DT : GOGDT {
         public override string Texture => GOGConstant.nulls;
-        public override void SetStaticDefaults() {
-        }
 
-        public sealed override void SetDefaults() {
-            Projectile.width = 28;
-            Projectile.height = 32;
-            Projectile.tileCollide = true;
-
-            Projectile.friendly = true;
-            Projectile.DamageType = GuardianDamageClass.Instance;
+        public override void SetProperty() {
+            Projectile.width = 80;
+            Projectile.friendly = false;
             Projectile.penetrate = -1;
-            Projectile.scale *= 1f;
-            Projectile.timeLeft = 36000;
 
-            Projectile.scale *= 1f;
+            OtherHeight = 38;
+
+            count0 = 60;
+
+            exdust = DustID.Crimson;
         }
 
+        int meleecount = 0;
+        int shadowcount = 0;
+        float shadowscale = 0;
         Player Owner => Main.player[Projectile.owner];
-
-        //防止破坏地图道具
-        public override bool? CanCutTiles() {
-            return false;
-        }
-
-        //生成时自由下坠
-        public override void OnSpawn(IEntitySource source) {
-            count0 = 60;//默认发射间隔
-            Projectile.velocity = new Vector2(0, 8);
-            base.OnSpawn(source);
-        }
-
-        int count = 0;
-        int count0 = 0;
-        //重力
-        bool drop = true;
-        //数据读取
-        int Gcount = 0;
-        int lastdamage = 0;
         public override void AI() {
-            count++;
-            Projectile.timeLeft = 2;
-            Projectile.StickToTiles(false, false);//形成判定
-            Drop();
-            Calculate();
-            //索敌与行动
-            NPC target1 = Projectile.Center.InPosClosestNPC(800, true, true);
-            if (target1 != null) {
-                Attack(target1);
+            AttackPos = Projectile.Center + new Vector2(-4, -30);
+            Lighting.AddLight(Projectile.Center, 2f, 0.5f, 0.5f);
+
+            if (mode == 0) {
+                meleecount = 0;
+                shadowcount = 0;
+                shadowscale = 0;
+            }
+            if (mode == 1) {
+                meleecount++;
+                shadowcount++;
+                shadowscale = Math.Min(1f, (shadowcount / 60f * 1.3f) - 0.3f);
             }
 
-            //粒子
-            if (count % 1 == 0) {
-                for (int j = 0; j < 14; j++) {
-                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(-4, -60), 8, 8, DustID.Crimson, 0f, 0f, 10, Color.White, 1f);
-                    Main.dust[num1].noGravity = true;
-                    Main.dust[num1].velocity *= 1f;
+            //逐渐产生粒子,直到产生完全的粒子
+            if (drawcount >= 120) {
+                //包围圈和内部粒子
+                if (drawcount % 1 == 0) {
+                    for (int i = 0; i < 4; i++) {
+                        float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, -180).RotatedBy(angle), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.White, 3f);
+                        Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle + MathHelper.PiOver2);
+                        Main.dust[num].velocity *= 1f;
+                        Main.dust[num].noGravity = true;
+                        Main.dust[num].scale *= Main.rand.NextFloat(0.5f, 1);
+                        if (Main.rand.NextBool(60)) Main.dust[num].noGravity = false;
+                    }
+                }
+                if (drawcount % 1 == 0) {
+                    for (int i = 0; i < 3; i++) {
+                        float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, Main.rand.Next(-180, 0)).RotatedBy(angle), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.White, 1f);
+                        Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle);
+                        Main.dust[num].velocity *= 1f;
+                        Main.dust[num].noGravity = true;
+                    }
                 }
             }
-            if (count % 1 == 0) {
-                for (int j = 0; j < 1; j++) {
-                    int num1 = Dust.NewDust(Projectile.Center + new Vector2(-4, -60), 8, 8, DustID.Ichor, 0f, 0f, 10, Color.White, 1f);
-                    Main.dust[num1].noGravity = true;
-                    Main.dust[num1].velocity *= 0.5f;
+            else if (drawcount < 120) {
+                //包围圈和内部粒子
+                if (drawcount % 1 == 0) {
+                    for (int i = 0; i < (count / 40) + 1; i++) {
+                        float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, drawcount * 1.5f).RotatedBy(angle), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.White, 3f);
+                        Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle + MathHelper.PiOver2);
+                        Main.dust[num].velocity *= 1f;
+                        Main.dust[num].noGravity = true;
+                        Main.dust[num].scale *= Main.rand.NextFloat(0.5f, 1);
+                    }
+                }
+                if (drawcount % 1 == 0) {
+                    for (int i = 0; i < 3; i++) {
+                        float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, Main.rand.Next(-40 - drawcount, 0)).RotatedBy(angle), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.White, 1f);
+                        Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle);
+                        Main.dust[num].velocity *= 1f;
+                        Main.dust[num].noGravity = true;
+                    }
                 }
             }
 
+            if (target0 != null && target0.active) {
+                if (Vector2.Distance(Projectile.Center, target0.Center) < 240) {
+                    mode = 1;
+                    if (meleecount >= 120 && meleecount % 90  == 30) {
+                        Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
+
+                        //在目标点范围内寻找最近的实心物块,并返回它们的集合
+                        List<Vector2> tileCoordsList = TileHelper.FindTilesInRectangle(Projectile.Center, 12, 12, 1, 12, true);
+                        List<Vector2> tileCoordsList2 = TileHelper.FindTilesInRectangle(target0.Center, 3, 3, 0, 8, true);
+
+                        if (tileCoordsList != null && tileCoordsList.Count != 0) {
+                            // 随机确定要返回的元素数量(2~3个)，但不超过列表的总元素数
+                            Random random = new Random();
+                            int countToReturn = Math.Min(random.Next(4, 7), tileCoordsList.Count);
+
+                            for (int i = 0; i < countToReturn; i++) {
+                                int randomIndex = random.Next(tileCoordsList.Count);
+                                // 获取选中的元素,向下偏移一格多
+                                Vector2 selectedTile = tileCoordsList[randomIndex] + new Vector2(0, 16);
+                                // 对选中的元素执行A()方法
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), selectedTile,
+                                selectedTile.Toz(target0.Center)
+                                    , ModContent.ProjectileType<Bloody2Proj2>(), Projectile.damage, 8, Owner.whoAmI);
+                            }
+                        }
+                        if (tileCoordsList2 != null && tileCoordsList2.Count != 0) {
+                            // 随机确定要返回的元素数量(2~3个)，但不超过列表的总元素数
+                            Random random = new Random();
+                            int countToReturn = Math.Min(random.Next(1, 3), tileCoordsList2.Count);
+
+                            for (int i = 0; i < countToReturn; i++) {
+                                int randomIndex = random.Next(tileCoordsList2.Count);
+                                // 获取选中的元素,向下偏移一格多
+                                Vector2 selectedTile = tileCoordsList2[randomIndex] + new Vector2(0, 16);
+                                // 对选中的元素执行A()方法
+                                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), selectedTile,
+                                selectedTile.Toz(target0.Center)
+                                    , ModContent.ProjectileType<Bloody2Proj2>(), Projectile.damage, 8, Owner.whoAmI);
+                            }
+                        }
+                    }
+                }
+                else mode = 0;
+            }
+            else mode = 0;
+
+            //todo 粒子动画
             base.AI();
         }
 
-        /// <summary>
-        /// 坠落
-        /// </summary>
-        void Drop() {
-            Projectile.velocity.Y += 0.2f;
-            if (Projectile.velocity.Y > 8f) {
-                Projectile.velocity.Y = 8f;
-            }
+        protected override List<Projectile> Attack1() {
+            List<Projectile> projlist = new List<Projectile>();
 
-            Vector2 droppos = Projectile.Bottom;
-            if (drop) {
-                int maxdropdis = 5000;
-                for (int y = 0; y < maxdropdis; y++) {
-                    Tile tile0 = TileHelper.GetTile(GOGUtils.WEPosToTilePos(droppos + new Vector2(0, y) * 16));
-                    if (tile0.HasTile) {
-                        Projectile.Bottom = (droppos + new Vector2(0, y - 2) * 16);
-                        break;
-                    }
+            if (mode == 0) {
+                //发射参数计算
+                float dx = target0.Center.X - AttackPos.X;
+                float dy = target0.Center.Y - AttackPos.Y;
+                //设置一个相对标准的下落加速度
+                float G = 0.3f;
+                //设置一个相对标准的初始垂直速度
+                float vy = 16;
+                for (int i = 0; i < 1; i++) {
+                    G *= Main.rand.NextFloat(0.8f, 1.2f);
+                    vy *= Main.rand.NextFloat(0.9f, 1.1f);
+                    vy *= (dy >= 0 ? 0.75f : 1.2f);
+                    float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
+                    Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
+
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos, velfire, ModContent.ProjectileType<Bloody2Proj1>(), lastdamage, 6, Owner.whoAmI, G);
+
+                    projlist.Add(proj1);
                 }
-                drop = false;
             }
+
+            FinishAttack = true;
+            return projlist;
         }
 
-        /// <summary>
-        /// 重新计算和赋值参数
-        /// </summary>
-        void Calculate() {
-            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0]);//攻击间隔因子重新提取
-            //伤害修正
-            int newDamage = Projectile.originalDamage;
-            float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
-            lastdamage = (int)(newDamage * rangedOffset);
-        }
+        protected override List<Projectile> Attack2() {
+            List<Projectile> projlist = new List<Projectile>();
 
-        /// <summary>
-        /// 监测与攻击
-        /// </summary>
-        void Attack(NPC target1) {
-            Vector2 tarpos = target1.Center + new Vector2(0, target1.height / 2);
-            Vector2 projcen = Projectile.Center + new Vector2(0, -60);
+            if (Owner.ownedProjectileCounts[ModContent.ProjectileType<Bloody2Proj3>()] < 2) {
+                for (int i = 0; i < 1; i++) {
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.Center);
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos, new Vector2(0, -2), ModContent.ProjectileType<Bloody2Proj3>(), lastdamage, 6, Owner.whoAmI);
 
-            //发射参数计算
-            float dx = tarpos.X - projcen.X;
-            float dy = tarpos.Y - projcen.Y;
-            //设置一个相对标准的下落加速度
-            float G = 0.3f;
-            //设置一个相对标准的初始垂直速度
-            float vy = 16;
-
-            //发射
-            if (count >= Gcount) {
-                G *= Main.rand.NextFloat(0.8f, 1.2f);
-                vy *= Main.rand.NextFloat(0.9f, 1.1f);
-
-                //普通
-                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 1; i++) {
-                        //对速度进行一些观赏度调整
-                        //vx *=
-                        //vy *=
-                        vy *= (dy >= 0 ? 0.75f : 1.2f);
-
-                        float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
-
-                        Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
-
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<Blood2Proj0>(), lastdamage, 8, Owner.whoAmI, G, 0);
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
-                            }
-                        }
-                    }
+                    projlist.Add(proj1);
                 }
-
-                //过载
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
-                    for (int i = 0; i < 1; i++) {
-                        //对速度进行一些观赏度调整
-                        //vx *=
-                        //vy *=
-                        vy *= (dy >= 0 ? 0.75f : 1.2f);
-
-                        float vx = dx / ((vy + (float)Math.Sqrt(vy * vy + 2 * G * dy)) / G);
-
-                        Vector2 velfire = new Vector2(vx * Main.rand.NextFloat(0.9f, 1.1f), -vy * Main.rand.NextFloat(0.98f, 1.02f));//降低精度
-
-                        Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCHit9, Projectile.Center);
-                        Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), projcen, velfire, ModContent.ProjectileType<Blood2Proj0>(), lastdamage, 8, Owner.whoAmI, G, 1);
-                        if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                            if (proj1.ModProjectile is GOGProj proj2) {
-                                proj2.OrichalcumMarkProj = true;
-                                proj2.OrichalcumMarkProjcount = 300;
-                            }
-                        }
-                    }
-                }
-
-                //计时重置
-                count = Owner.GetModPlayer<GOGModPlayer>().GcountEx;
+            }else {
+                Attack1();
             }
-        }
 
-        public override Color? GetAlpha(Color lightColor) {
-            return Color.White;
-        }
-
-        public override bool TileCollideStyle(ref int width, ref int height, ref bool fallThrough, ref Vector2 hitboxCenterFrac) {
-            fallThrough = false;
-            return base.TileCollideStyle(ref width, ref height, ref fallThrough, ref hitboxCenterFrac);
-        }
-
-        public override bool OnTileCollide(Vector2 oldVelocity) {
-            //Projectile.velocity *= 0;
-            return false;
-        }
-
-
-        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-            return false;
-        }
-
-        public override void OnKill(int timeLeft) {
-            //爆炸粒子
-            for (int j = 0; j < 15; j++) {
-                int num1 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Wraith, 0f, 0f, 10, Color.White, 0.8f);
-                Main.dust[num1].noGravity = true;
-                Main.dust[num1].velocity *= 2f;
-            }
-            for (int j = 0; j < 15; j++) {
-                int num2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.Wraith, 0f, 0f, 10, Color.White, 0.4f);
-                Main.dust[num2].noGravity = true;
-                Main.dust[num2].velocity *= 1f;
-            }
+            FinishAttack = true;
+            return projlist;
         }
 
         public override bool PreDraw(ref Color lightColor) {
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Bloody2DT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -9);
+            Texture2D texture0s = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Bloody2DTShadow").Value;
+            Texture2D texture0bs = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "Bloody2DTBlackShadow").Value;
+
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -18);
+
+            if (mode == 1) {
+                Main.EntitySpriteDraw(texture0bs, drawPosition0, null, lightColor * shadowscale, Projectile.rotation, texture0s.Size() * 0.5f, Projectile.scale * 1.1f, SpriteEffects.None, 0);
+                Main.EntitySpriteDraw(texture0s, drawPosition0, null, new Color(255, 255, 255, 0) * shadowscale, Projectile.rotation, texture0s.Size() * 0.5f, Projectile.scale * 1.1f, SpriteEffects.None, 0);
+            }
+
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
             return false;

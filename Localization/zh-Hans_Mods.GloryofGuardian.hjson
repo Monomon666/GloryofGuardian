@@ -1,1371 +1,268 @@
-# This file will automatically update with entries for new content after a build and reload.
+DamageClasses.GuardianDamageClass.DisplayName: 戍卫伤害
 
 Items: {
-	Calling: {
-		DisplayName: Calling
-		Tooltip: 戍卫召唤武器
-	}
-
 	ResidualLonelinessEchoes: {
 		DisplayName: 孤独残响
 		Tooltip:
 			'''
-			那个人孤独地创造这一切的时候带着它
-			你不该拥有它
-
-			现在的加成:
-
+			那个人孤独地创造这一切时的佩戴的项链
+			获得20个戍卫栏位
 			'''
 	}
 
-	WildCalling: {
+	Shroom: {
+		DisplayName: 漂亮的菌子
+		Tooltip:
+			'''
+			噢~它这么美,怎么会有毒呢
+			你觉得你可以单挑仙人球了
+			获得100%暴击率
+			'''
+	}
+
+	GOGDummyCalling: {
+		DisplayName: 训练假人
+		Tooltip:
+			'''
+			这是一个训练假人!
+			它会自己看向你,并且常态下会被视为追踪目标
+			拥有超大生命值并每帧重置
+			'''
+	}
+
+	Wild: {
 		DisplayName: 荒野
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
+			消耗一个戍卫栏位
 			召唤一个弩箭炮塔
 			自动向范围内最近的敌人发射弩箭
-			过载攻击会发射强化弩箭
-			钉入敌怪并持续造成伤害
-			至多积累六支钉入箭
-			优先攻击boss
+			弩箭能够钉入敌人抑制回复并造成持续伤害
+			[c/FF00A0:超频攻击将发射三支不准确的分散弩箭]
 			右键收回炮塔
 			"茫茫荒野,古老的荣耀被埋葬此地"
 			'''
 	}
 
-	AdamantiteCalling: {
-		DisplayName: 精金要塞
+	Garrison: {
+		DisplayName: 哨弩
 		Tooltip:
 			'''
-			消耗三个炮塔栏位
-			召唤一个精金要塞
-			自动向两侧范围内最近的敌人发射精金子弹
-			过载攻击会转而发射精金弹射弹
-			弹射弹造成75%伤害
-			击中敌人时两次弹射向同侧最近的另一敌人
-			持续攻击将会为顶部宝石充能
-			充能完成后将获得10点穿甲
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个铁弩炮塔
+			自动向范围内最近的敌人发射二连弩箭
+			弩箭能够钉入敌人抑制回复并造成持续伤害
+			[c/FF00A0:超频攻击将造成双倍持续伤害]
 			右键收回炮塔
-			"在潮水般的进攻中,精金要塞依然屹立不倒"
+			"茫茫荒野,古老的荣耀被埋葬此地"
 			'''
 	}
 
-	BeeHiveCalling: {
-		DisplayName: 蜂后秘酿
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个小型蜂巢
-			散布一个甜蜜光环
-			为靠近的玩家提供蜂蜜和生命再生增益
-			在一个较大范围内解除玩家的中毒减益
-			受伤可以吃一口蜂蜜
-			过载攻击会提供1.5倍回复的蜂蜜
-			右键收回炮塔
-			"这道甜蜜的防线守卫着大家的口腹"
-			'''
-	}
-
-	BloodyCalling: {
-		DisplayName: 鲜血喷涌
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个血盆大口
-			自动向范围内最近的敌人喷射血液
-			过载攻击会发射爆炸血块
-			优先攻击boss
-			右键收回炮塔
-			"猩红的血液仍在喷涌"
-			'''
-	}
-
-	CobaltCalling: {
-		DisplayName: 钴蓝旋刃
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一个旋刃炮塔
-			炮塔本体可以造成接触伤害
-			自动向范围内最近的敌人发射一只追踪大型旋刃
-			击中敌人后会滞留并概率释放几只小型旋刃
-			过载攻击会转而释放圆斩旋刃
-			对敌人造成钴蓝咒刃减益
-			该减益将降低敌人20%的防御
-			优先攻击boss
-			boss存活时击中boss前不会进入滞留阶段
-			右键收回炮塔
-			"我们知道它们在哪儿，钴蓝剑会找到它们的心脏"
-			'''
-	}
-
-	CorruptCalling: {
-		DisplayName: 晦暗之雨
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个腐化预兆
-			自动向范围内最近的敌人召唤暗影雨
-			过载攻击会召唤持续更久的暗影云
-			优先攻击boss
-			右键收回炮塔
-			"腐化的病毒仍在传播"
-			'''
-	}
-
-	GarrisonCalling: {
-		DisplayName: 哨卫
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个强化弩箭炮塔
-			自动向范围内最近的敌人发射两支弩箭
-			过载攻击会发射强化弩箭
-			钉入敌怪并持续造成伤害
-			至多积累六支钉入箭
-			优先攻击boss
-			右键收回炮塔
-			"它的屹立证实了荣耀仍在"
-			'''
-	}
-
-	MushRoomCalling: {
+	MushRoom: {
 		DisplayName: 发光孢子
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个发光蘑菇炮塔
-			不停地散布孢子并发射小蘑菇
-			更多的孢子塔可以扩大它们的范围,4个到达上限
-			过载攻击会发射三个蘑菇
+			消耗一个戍卫栏位
+			召唤一丛发光蘑菇
+			召唤孢子粉末充斥附近区域造成间隔和持续伤害
+			[c/FF00A0:超频间隔伤害会使随机敌人身上长出小蘑菇]
 			右键收回炮塔
+			在夜晚提升10%超频率
+			在蘑菇地提升25%超频率(不可叠加)
 			"它日夜不息地散布发光的梦"
 			'''
 	}
 
-	PalladiumCalling: {
-		DisplayName: 钯金再生器
+	Frost: {
+		DisplayName: 冰霜仪仗
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个钯金再生器
-			钯金之心根据攻击速度进行搏动
-			每次搏动回复范围内玩家5生命值
-			过载搏动转而回复20生命值
-			搏动速度受攻速影响
+			消耗一个戍卫栏位
+			召唤一个冰霜守卫
+			向最近的敌人发射冰霜法球
+			如果击中带有<霜冻><霜火>的敌人
+			会爆开并造成范围伤害
+			[c/FF00A0:超频攻击发射冰霜螺旋施加<霜冻>]
 			右键收回炮塔
-			至多存在一个钯金再生器
-			"战胜恐惧,我们坚不可摧"
+			在雪地提升50%弹幕速度
+			"北地的防线如同冻土般坚不可摧"
 			'''
 	}
 
-	RustyGunCalling: {
-		DisplayName: 生锈哨枪
+	Bloody: {
+		DisplayName: 鲜血喷涌
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个轻机枪炮塔
-			自动向范围内最近且高于炮台的敌人
-			发射三发火枪子弹
-			过载攻击会快速发射六发子弹
-
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个血盆大口
+			自动向范围内最近的敌人喷射活跃的血液
+			[c/FF00A0:超频攻击会发射追踪饿鬼]
+			饿鬼咬噬敌人的时候会给主人回复少量生命
 			右键收回炮塔
-			"即便锈迹斑斑,它依然是一堵重火力城墙"
+			"猩红的渴望仍在喷涌"
 			'''
 	}
 
-	ShurikenCalling: {
-		DisplayName: 影刃
+	Corrupt: {
+		DisplayName: 晦暗之雨
 		Tooltip:
 			'''
-			消耗两个炮塔栏位
-			召唤一个手里剑炮塔
-			其拥有双倍索敌范围
-			自动向范围内最近的敌人发射三枚手里剑
-			过载攻击会转而发射五发手里剑
-			手里剑有5%的几率淬毒
-			毒药灌注将会使这个概率提升至20%
-			淬毒的手里剑将对命中的敌人
-			造成5秒[中毒]和[影刃]减益
-			手里剑击中中毒或影刃的敌人将无视其防御力并穿过它
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个腐化祭台
+			召唤腐化云锁定最近的敌人并降下腐化雨
+			如果被锁定的敌人消失则重新锁定
+			[c/FF00A0:超频攻击的云会降下酸液雨]
+			[c/FF00A0:酸液雨会叠加<腐蚀>并降低目标至多10点防御]
+			任何雨水击中都会重置debuff时间
+			[c/af4bff:优先攻击boss]
 			右键收回炮塔
-			"那些忍者依然在阴影中守护着什么"
+			"腐化的阴霾仍在笼罩"
 			'''
 	}
 
-	SpiderCalling: {
-		DisplayName: 织网蛛巢
-		Tooltip:
-			'''
-			消耗100生命值
-			召唤一个拥有400生命值的蜘蛛巢
-			首次受到伤害,以及每次失去25%生命值时,
-			召唤一只毒牙蜘蛛
-			自动发射大量穿透毒牙
-			并在数秒后消失
-
-			蜘蛛巢拥有等同于召唤者100%的防御
-			以及等同的接触伤害
-			不受益于召唤者的其它属性
-
-			毒牙蜘蛛优先攻击boss
-			生命值不足时不能召唤
-			蜘蛛巢最多同时存在四个
-			右键杀死蜘蛛巢
-			"编织者们潜伏在来自过去的恐惧与黑暗中"
-			'''
-	}
-
-	Shroom: {
-		DisplayName: 致幻蘑菇
-		Tooltip:
-			'''
-			你觉得你可以单杀仙人球了
-			减少90%输出
-			获得100%过载率
-			'''
-	}
-
-	SlimeCalling: {
-		DisplayName: 凝胶尖刺
-		Tooltip:
-			'''
-			不消耗炮塔栏位
-			抛出一个史莱姆球
-			撞击到墙壁会反弹
-			撞击到地面会制造一个史莱姆地雷
-			敌人踩到会被减速并受到伤害
-			过载攻击转而更高频率地减速和造成伤害
-			直接撞击到敌人会转而爆为4枚尖刺
-			史莱姆球撞击到史莱姆地雷可能再次弹跳
-			"长出尖刺的史莱姆放弃了融合与进化
-			它们自愿为了未来的凝胶纪元铺垫道路"
-			'''
-	}
-
-	MythrilCalling: {
-		DisplayName: 秘银重弩
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个秘银弩箭塔
-			自动向范围内最近的敌人发射一支穿透弩箭
-			过载攻击转而发射三支穿透弩箭
-			有普通20%,过载33%的概率转而发射一支强力钉入箭
-			钉入敌人并持续造成伤害
-			至多积累三支钉入箭
-
-			三支强化弩箭将毙除低于15%生命值的非boss敌人
-			三支强化弩箭将剜除boss当前2%的当前生命值
-			三支强化弩箭将审判低于5%生命值的boss
-			剜除至少造成100点真实伤害
-
-			优先攻击boss
-			右键收回炮塔
-			"古老的秘银是那个时代的黎明，为刺穿恶魔的心脏而生"
-			'''
-	}
-
-	OrichalcumCalling: {
-		DisplayName: 山铜增幅器
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个山铜增幅器
-			每次振动重新标记范围内最近的一个其它类型的炮台
-			当过载率高于50%时将额外标记一个炮台
-			提升被标记炮台20%的过载率
-			增幅被标记炮台发射的弹幕
-			每秒增幅至多2个经过增幅范围内的戍卫弹幕
-			增幅弹幕将在命中时额外造成10%至少10点真实伤害
-			即使同一炮台被多次增幅效果也不会叠加
-			强化能够延伸至子弹幕
-			右键收回炮塔
-			"增幅力量,击破它们的弱点"
-			'''
-	}
-
-	TitaniumCalling: {
-		DisplayName: 钛金屏障仪
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个钛金屏障仪
-			三次脉冲后标记白色粒子范围内最近的玩家
-			标记状态下的玩家获得钛金屏障
-			拥有钛金屏障的玩家免收下次受到的伤害
-			并给予玩家1.5秒固定无敌帧
-			之后该玩家被施加一个"过度钛质化"debuff
-			在40秒内无法再次获得护盾
-			玩家距离屏障仪过远会有粒子提示
-			在黑色粒子范围时屏障会在5秒后解除
-			超出黑色粒子范围则会立即接触
-
-			该炮台的机能几乎不受常态属性影响
-			屏障将先于其它大部分"闪避"效果触发
-			右键收回炮塔
-			"提升视界,洞察敌人的行动"
-			'''
-	}
-
-	PaleClockworkGunCalling: {
-		DisplayName: 苍白的 链条机枪塔
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个火枪炮塔
-			自动向范围内最近且高于炮台的敌人发射火枪子弹
-			会随着发射逐渐提升攻速,最高提升150%
-			过载攻击会快速发射三发子弹
-			优先攻击boss
-			右键收回炮塔
-			"洗去了锈迹，随那些古代的遗梦一同苏醒"
-			'''
-	}
-
-	PaleShotGunCalling: {
-		DisplayName: 苍白的 爆破霰弹塔
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个霰弹枪炮塔
-			自动向范围内最近且高于炮台的敌人
-			发射一束三发火枪子弹
-			过载攻击会转而减半攻击间隔
-			并造成更多击退
-			优先攻击boss
-			右键收回炮塔
-			"洗去了锈迹，随那些古代的遗梦一同苏醒"
-			'''
-	}
-
-	SirenCalling: {
-		DisplayName: 塞壬呼唤
-		Tooltip:
-			'''
-			消耗3个炮塔栏位
-			召唤一个附魔贝壳
-			按照顺序演奏出不同的音符
-			1/8:垂直和水平发射共四个粉色音符
-			F:发射七个绕炮台旋转的绿色音符
-			G:发射一个能减速敌怪的紫色音符
-			1/4:向敌人方向发射三个黛色音符
-			发射数个追踪青色音符
-
-			过载攻击会导致节奏紊乱,从头开始
-			右键收回炮塔
-			仅能召唤一个
-			"那海妖的歌声仍然在回响,隔绝着大海最深处的威胁"
-			"一日它将成为传奇"
-			'''
-	}
-
-	PinkSlimeCalling: {
-		DisplayName: 粉凝胶尖刺
-		Tooltip:
-			'''
-			不消耗炮塔栏位
-			抛出一个史莱姆球
-			撞击到墙壁会反弹
-			撞击到地面会制造一个史莱姆地雷
-			敌人踩到或8秒后会爆炸并发射5枚史莱姆尖刺
-			过载攻击会转而发射9枚史莱姆尖刺
-			直接撞击到敌人会转而发射8枚弱化的尖刺
-			右键转而发射一个不反弹的史莱姆球
-			史莱姆球撞击到史莱姆地雷均可能再次弹跳
-			"进化之路何等坎坷,即便佼佼者也会陨落
-			但仍有史莱姆走在那条道路上"
-			'''
-	}
-
-	NanoGMissileCaling: {
-		DisplayName: 纳米导弹发射井
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个纳米导弹发射井
-			准备一段时间后部署三枚纳米导弹
-			锁定智导纳米光刃标记的敌怪并发射导弹
-			导弹会在目标存活时追击目标
-
-			过载攻击会连续释放两轮导弹再重新装填
-
-			右键收回炮塔
-			只要敌人被标记,无论多远都会攻击
-			"这些科技曾日夜守护着天空,击退群星的来犯"
-			'''
-	}
-
-	NanoGuider: {
-		DisplayName: 纳米粒子炮
-		Tooltip:
-			'''
-			按住蓄力以发射一束穿透一切的纳米射线
-			穿透解析敌人,并对他们施加标记
-			若敌人已被锁定则重置锁定时间
-			其将被附近的纳米科技炮台锁定
-
-			这种重武器一旦开始蓄力,调转方向将极其困难
-			"你逃不过纳米科技"
-			'''
-	}
-
-	AncientBattleCalling: {
-		DisplayName: 禁戒烈风
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个禁戒封印柱
-			自动向范围内最近的敌人发射沙刃
-			它可以穿透两个个敌人击中第三个
-			过载攻击的沙刃将可以在击中墙面时贴墙前进而非消散
-			每次过载攻击有三分之一概率将点亮一枚符文
-			点亮三枚符文时转而释放一阵沙风暴
-			沙风暴能造成200%伤害
-
-			优先攻击boss
-			右键收回炮塔
-			'''
-	}
-
-	ChlorophyteCalling: {
-		DisplayName: 叶绿新生
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个叶绿炮塔
-			不停地散布叶绿孢子并发射孢子云
-			击中敌人会扩大范围,之后一段时间没有击中会缩小
-			过载攻击会发射三团孢子云
-			孢子无孔不入,能够穿过墙壁攻击敌人
-			右键收回炮塔
-			"这些绿色吸收了光芒,编织着它们发光的梦"
-			'''
-	}
-
-	MeteorCalling: {
+	Meteor: {
 		DisplayName: 奈落之炎
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个奈落之炎炮塔
-			靠近炮塔的敌人会被灼烧
-			使用祭坛自动向范围内最近的敌人发射火球
-			对命中的敌人造成短暂的[着火了]减益
-			命中的敌人若带有[着火了]减益
-			则额外引发一次小范围爆炸,
-			爆炸造成50%弹幕伤害
-
-			过载攻击将转而发射一次攻击间隔更久的三叉火焰
-
-			无法在水下攻击
-
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个狱炎祭台
+			向最近的敌人发射狱炎法球
+			如果击中带有<着火了><狱炎>的敌人
+			会裂变出数个弹跳法球
+			[c/FF00A0:超频攻击发射狱炎螺旋,引发爆炸并施加<着火了>]
+			[c/FF00A0:若佩戴岩浆石则转而施加<狱炎>]
+			在水以外的地方,敌怪靠近祭台将被点燃
 			右键收回炮塔
-			"地狱的黑曜石城和岩浆镇压着远古的恶魔
-			即使已被摧毁前年,奈落之炎仍熊熊燃烧"
+			"地狱中不熄的烈焰呼唤着涤净一切"
 			'''
 	}
 
-	SRMeteorCalling: {
-		DisplayName: 地星之炎
+	BeeHive: {
+		DisplayName: 蜂后秘酿
 		Tooltip:
 			'''
-			消耗三个炮塔栏位
-			召唤一个地星之炎炮塔
-			仅能同时召唤一个
-
-			向附近最近敌人发射一枚抛物线的岩浆石
-			附近每有一个敌人处于[狱火]状态则额外攻击一个敌人
-			至多一次攻击三个敌人
-
-			过载攻击将从天上召唤五个岩浆石攻击最近的一个敌人
-			固定对范围内的boss额外发动一次过载攻击
-
-			各种岩浆石中敌人时都将额外引发一次小范围爆炸,
-			爆炸造成100%弹幕伤害
-			攻击造成[着火了]
-			处于[着火了]的敌人则额外造成[狱火]
-
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个小型蜂巢
+			散布一个大型甜蜜光环
+			为靠近的玩家提供蜂蜜和生命再生增益
+			在一个较大范围内解除玩家的中毒减益
+			靠近提供蜂蜜回复20生命值,一分钟只能吃一次
+			[c/FF00A0:超频蜂蜜回复1.5倍生命值]
 			右键收回炮塔
+			只能存在一个蜂巢
+			"这道甜蜜的防线守卫着大家的口腹"
 			'''
 	}
 
-	NanoArmorBody: {
-		DisplayName: 幻影合金重甲
+	RustyGun: {
+		DisplayName: 生锈哨枪
 		Tooltip:
 			'''
-			戍卫栏位上限增加1
-			最大生命值提升200
-			攻速降低25%
-			'''
-	}
-
-	NanoArmorLegs: {
-		DisplayName: 幻影合金护腿
-		Tooltip:
-			'''
-			戍卫栏位上限增加1
-			戍卫过载率增加12%
-			获得爆发性的起跑速度
-			'''
-	}
-
-	NanoArmorHead: {
-		DisplayName: 幻影合金头盔
-		Tooltip:
-			'''
-			戍卫栏位上限增加1
-			戍卫伤害增加16%
-			增加10点盔甲穿透力
-			'''
-	}
-
-	MaliceFireGun: {
-		DisplayName: 焚除邪炎
-		Tooltip:
-			'''
-			喷出灼热的火焰
-			有较强的击退能力
-			对命中的敌人施加[着火了]减益
-			对带有[着火了]减益的敌人概率施加[狱炎]减益
-			过载攻击对敌人施加[涂油]减益
-			击中[涂油]的目标还将降低它们的速度
-			使用时概率对自己造成[着火了]
-			碰到水会被阻挡
-			'''
-	}
-
-	NanoWings: {
-		DisplayName: 幻影飞行装置
-		Tooltip:
-			'''
-			可飞行和缓慢坠落
-			按向下键可无视平台加速下降
-			“机动技术的结晶”
-			'''
-	}
-
-	NanoBar: {
-		DisplayName: 幻影合金锭
-		Tooltip:
-			'''
-			纳米科技与生命金属结合的产物
-			能够制造高科技装备
-			'''
-	}
-
-	FrostCalling: {
-		DisplayName: 结霜仪仗
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个冰霜守卫
-			自动向范围内最近的敌人抛出雪球
-			对击中的敌人造成[霜冻]减益
-			过载攻击发射雪球炸弹
-			击中敌人时转而造成范围攻击
-
-			召唤者在雪地或附近有冰霜堡垒获得强化
-			守卫头上会飘散雪花
-			获得25%基础过载率
-
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个哨戒机枪
+			向最近的敌人发射子弹
+			因为生锈,有着不稳定的攻击间隔
+			[c/FF00A0:超频攻击转而发射高速精准子弹,能够穿透一次]
+			[c/FF00A0:下次攻击的随机间隔必定最短]
 			右键收回炮塔
+			"即便锈迹斑斑,它依然能用火力压制敌人"
 			'''
 	}
 
-	Bloody2Calling: {
-		DisplayName: 血肉增生
+	Shuriken: {
+		DisplayName: 追魂影刃
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个血肉增生
-			逐渐凝聚一把血肉镰刀并抛出
-			镰刀飞行中和击中时概率喷涌血液
-			过载攻击会召唤一把灵液镰刀
-			转而喷射大量灵液
-
-			优先攻击boss
+			消耗一个戍卫栏位
+			召唤一个手里剑暗器塔
+			索敌范围较大
+			发射弧线穿透并可以返回的手里剑
+			[c/FF00A0:超频攻击转而发射追踪手里剑]
+			击中敌人造成<流血>
 			右键收回炮塔
+			"在阴影中噤默着坚守的刃依然锋利"
 			'''
 	}
 
-	Corrupt2Calling: {
-		DisplayName: 腐化恶疾
+	Bloody2: {
+		DisplayName: 猩红裂殖
 		Tooltip:
 			'''
-			消耗一个炮塔栏位
-			召唤一个腐化恶疾
-			在炮塔周围喷涌腐化孢子
-			过载攻击将转而喷涌咒火柱
-
+			召唤一个血肉苗床
+			生长出血肉异形追击最近的敌人
+			击中后会在附近地面凝聚血肉生长血刺
+			[c/FF00A0:超频攻击转而额外召唤一个亵渎血肉生物]
+			[c/FF00A0:它会向敌人发射灵液弹幕]
+			[c/FF00A0:此生物至多同时存在两个]
+			当敌人靠近时,非超频攻击切换为近战形态
 			右键收回炮塔
+			"红月……生长……繁殖……扩张……"
 			'''
 	}
-
-	HarpyCalling: {
-		DisplayName: 羽妖之遗
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一个鸟妖云
-			悬浮在空中降下雨滴
-			过载攻击转而发射2-3根羽毛
-			羽毛可以钉入敌怪持续造成伤害
-
-			右键收回炮塔
-			"每一朵云彩上都有一只小鸟妖抓住它"
-			'''
-	}
-
-	PlanteraCalling: {
-		DisplayName: 丛林之心
-		Tooltip:
-			'''
-			消耗三个炮塔栏位
-			召唤一个世纪小花
-			在炮塔周围伸出荆棘
-			过载攻击额外发射两个刺球,在落地的地方散播荆棘
-			在丛林中时,荆棘将更加旺盛,蔓延双倍的距离
-			荆棘刺中敌人时将汲取生命力并蔓延
-			散播花粉,对巨大范围内的敌人陷施加[中毒]与[毒液]减益
-
-			右键收回炮塔
-			'''
-	}
-
-	AbyssalEchoCalling: {
-		DisplayName: 深渊回响
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个机械鲨鱼炮
-			锁定敌人并释放机械鲨鱼导弹
-			能够追踪被纳米标记的敌人Todo
-			过载攻击发射一发大型导弹
-
-			优先攻击boss
-			右键收回炮塔
-			'''
-	}
-
-	SoulBalanceCalling: {
-		DisplayName: 判魂天平
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个判魂天平
-			标记并锁定范围内生命低于50%且低于4000的敌怪
-			若敌怪非boss，则在引导4秒后对其审判,50%概率处死
-			若审判结果为处死,则对其附近所有敌怪造成
-
-			过载攻击会使灵魂引爆范围增大
-
-			暂时不能审判boss
-			右键收回炮塔
-			"衡量罪恶"
-			'''
-	}
-
-	FlamingJackCalling: {
-		DisplayName: 火焰杰克南瓜
-		Tooltip:
-			'''
-			消耗一定生命值
-			召唤一个火焰杰克南瓜
-			南瓜在完成充能后收到伤害时会发射跳跃南瓜火焰
-			火焰每3次跳跃会跃向范围内最近的敌人
-			若一段时间内未受伤，南瓜将会主动跃向最近的敌人
-			南瓜击中敌人时造成[涂油]减益
-			南瓜火焰击中敌人时造成[着火了]减益
-
-			南瓜拥有等同于召唤者100%的防御
-			以及等同的接触伤害
-			不受益于召唤者的其它属性
-
-			优先攻击boss
-			右键收回炮塔
-			"永恒的希腊烈火，传递着不灭的希望"
-			'''
-	}
-
-	ShadowFlameScrollCalling: {
-		DisplayName: 暗影卷轴
-		Tooltip:
-			'''
-			消耗一个炮塔栏位
-			召唤一个暗影祭坛
-			卷轴会释放出扭曲的力量扭曲附近所有弹幕的方向
-
-			优先攻击boss
-			右键收回炮塔
-			掉落自暗影焰幻鬼(哥布林术士的召唤物)
-			"为了守护此地,它们不惜向黑暗借取力量"
-			'''
-	}
-
-	DarkCrystalBody: {
-		DisplayName: 黯晶重甲
-		Tooltip:
-			'''
-			最大生命值提升100
-			攻速降低25%
-			'''
-	}
-
-	DarkCrystalLegs: {
-		DisplayName: 黯晶腿铠
-		Tooltip:
-			'''
-			戍卫栏位上限增加1
-			戍卫伤害增加6%
-			戍卫过载率增加6%
-			'''
-	}
-
-	DarkCrystalHead: {
-		DisplayName: 黯晶头盔
-		Tooltip:
-			'''
-			戍卫栏位上限增加1
-			戍卫伤害增加12%
-			增加5点盔甲穿透力
-			'''
-	}
-
-	SoulofAnotherWorld: {
-		DisplayName: 异世之魂
-		Tooltip: 来自另一个世界的一缕魂魄
-	}
-
-	SoulDementorBookCalling: {
-		DisplayName: 摄魂魔典
-		Tooltip:
-			'''
-			消耗40生命值以使用
-			向鼠标位置发射一个旋涡,有距离限制,
-			稍后立即消失并吸引附近敌怪
-			对免疫击退的单位无效
-			'''
-	}
-
-	SoulFerryLanternCalling: {
-		DisplayName: 渡魂提灯
-		Tooltip:
-			'''
-			消耗40生命值以使用
-			分离一个至多存在20秒的虚影
-			持有该武器且:
-			按住右键:视角拉回虚影处
-			按住右键时按下左键:消耗生命值回到虚影的位置
-			按住左键:清除虚影
-			'''
-	}
-
-	SRFrostCalling: {
-		DisplayName: 极寒堡垒
-		Tooltip:
-			'''
-			消耗三个炮塔栏位
-			召唤一个圣诞小屋
-			仅能同时召唤一个
-
-			向附近最近敌人发射一个追踪圣诞星
-			击中敌人将发射圣诞烟花
-			处于圣诞节或位于雪原,且附近有不低于3个冰霜守卫时
-			获得强化,炮塔上降下雪花
-			将能够召唤更多圣诞礼物并获得25%过载率
-			圣诞礼物具有不同的攻击方式
-			伤害均会造成[霜冻]继而造成[霜火]减益
-
-			过载攻击的圣诞星将在完成攻击前
-			吸附在目标上
-
-			优先攻击boss
-			右键收回炮塔
-			"寒霜的堡垒,极地的防线一步也不会后退"
-			'''
-	}
-
-	NanoUAVCalling: {
-		DisplayName: 纳米武装无人机
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一个能够悬浮的纳米武装无人机
-			其能同时攻击左右侧最近的一个敌人
-			当仅有一侧有敌人时,会同时攻击一侧的敌人
-
-			发射电能子弹,击中敌人时使敌人被瞬间麻痹
-			过载攻击发射高能带电子弹
-			高能带电子弹击中敌人产生一束电流
-			电流能够穿过附近的敌人进入地面
-			造成50%伤害
-
-			优先攻击boss
-			对boss的麻痹效能减弱
-			右键收回炮塔
-			"与外星人技术结合的产物,是强大的戍卫科技"
-			'''
-	}
-
-	UndeadWoodBody: {
-		DisplayName: 不朽木藤甲
-		Tooltip: 获得50点最大生命值
-	}
-
-	UndeadWoodLegs: {
-		DisplayName: 不朽木护腿
-		Tooltip: 戍卫伤害增加6%
-	}
-
-	UndeadWoodHead: {
-		DisplayName: 不朽木面具
-		Tooltip: 戍卫栏位上限增加1
-	}
-
-	GoldTrident: {
-		DisplayName: 戍天投枪
-		Tooltip:
-			'''
-			左键蓄力
-			松开左键投掷一杆重型长枪
-			贯穿击中的敌人并将其带至长枪的落点
-			蓄力期间按下右键取消投掷
-			"无人可以突破阵线"
-			'''
-	}
-
-	LightningRod: {
-		DisplayName: 风暴引信
-		Tooltip:
-			'''
-			左键蓄力
-			松开左键投掷一杆风暴长枪
-			握住这把枪会遭到电击和放电
-			扔出后释放雷电攻击敌人
-			过载攻击击中boss将引发过载雷电
-			过载雷电还会附带目标boss当前生命值1%的额外伤害
-			(至多100点)
-			蓄力期间按下右键取消投掷
-			"雷鸣声中,我们的世界坚不可摧"
-			'''
-	}
-
-	BloomingLife: {
-		DisplayName: 生命之赐
-		Tooltip:
-			'''
-			戍卫栏位上限增加1
-			获得持续的[树妖祝福]增益
-			白天时,额外获得[快乐]增益
-			戍卫信物之间不能互相叠加
-			'''
-	}
-
-	Candor: {
-		DisplayName: 无秽之心
-		Tooltip:
-			'''
-			戍卫徽章
-			当生命上限不低于200时
-			将献祭100生命上限
-			以使戍卫栏位上限额外增加1
-			戍卫过载率增加10%
-			戍卫徽章之间不能互相叠加
-			'''
-	}
-
-	Dirge: {
-		DisplayName: 鲜血之契
-		Tooltip:
-			'''
-			戍卫徽章
-			当生命上限不低于200时
-			将献祭100生命上限获得主效果：
-			使戍卫栏位上限额外增加1
-			获得10%戍卫伤害提升
-
-			血腥主题炮塔获得
-			戍卫徽章之间不能互相叠加
-			'''
-	}
-
-	Elegy: {
-		DisplayName: 侵蚀之约
-		Tooltip:
-			'''
-			戍卫徽章
-			当生命上限不低于200时
-			将献祭100生命上限
-			以使戍卫栏位上限额外增加1
-			戍卫过载率增加10%
-			戍卫徽章之间不能互相叠加
-			'''
-	}
-
-	GuardianEmblem: {
-		DisplayName: 戍卫徽章
-		Tooltip: ""
-	}
-
-	HellFlare: {
-		DisplayName: 炼狱战旗
-		Tooltip: ""
-	}
-
-	HolyBond: {
-		DisplayName: 神圣盟誓
-		Tooltip: ""
-	}
-
-	Resolute: {
-		DisplayName: 戍心无悔
-		Tooltip: ""
-	}
-
-	Syncore: {
-		DisplayName: 共振核心
-		Tooltip: ""
-	}
-
-	WildernessSeed: {
-		DisplayName: 旷野之子
-		Tooltip:
-			'''
-			戍卫信物
-			戍卫栏位上限增加1
-			当饰品栏中仅装备了这一个饰品时
-			戍卫栏位上限额外加1
-			只能携带一个戍卫信物
-			"虽是一片荒芜，但你仍守护着这希望的种子"
-			'''
-	}
-
-	FireDragonCalling: {
-		DisplayName: 异世龙焱
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一个幼年翼龙
-			喷射出带油的聚合龙焱
-			对敌人造成
-			[着火了][狱炎][涂油]debuff
-
-			过载攻击额外对敌人造成[龙焱][霜火][咒火]减益
-			[龙焱]并使其在一段时间内持续爆发火焰
-			并能使敌怪每秒失去120生命值
-			且非boss敌怪的移速大幅减缓
-
-			优先攻击boss
-			boss被烧尽前龙焱buff不会解除
-			右键收回炮塔
-			"异世界的龙，用这不息的火焰守护这世界"
-			'''
-	}
-
-	ImmortalLotusCalling: {
-		DisplayName: 不朽莲华
-		Tooltip:
-			'''
-			消耗两个炮塔栏位
-			召唤一枝不朽莲华
-
-			莲华会根据附近的其它莲华的数量进行调谐
-			以在调谐时解锁更多攻击方式
-			六个时到达上限
-
-			过载攻击Todo
-
-			优先攻击boss
-			右键收回炮塔
-			"于家乡的烈火中,它傲然屹立,甘愿化为灰烬"
-			'''
-	}
-
-	SwordNurturingGourdCalling: {
-		DisplayName: 剑葫芦
-		Tooltip:
-			'''
-			消耗四个炮塔栏位
-			召唤一个滋养剑的宝葫芦
-			至多召唤一个
-
-			葫芦中养着一把仙剑
-			会释放追踪虹影剑气攻击最近的敌人
-			过载攻击会释放剑影,剑影会自上而下贯穿敌人
-			击中敌人后触发两种追加攻击之一:
-			若击中地面则会对附近的至多4个敌人发动锁定落剑
-			若没有击中敌人则会释放飞剑发动剑阵
-			若击中的是boss则同时触发两种攻击
-
-			每3秒至多触发一次过载攻击
-
-			诛灭了所有闪亮光辉之源，你得到了这把剑的认可
-			但是它的实力还没有解放
-			优先攻击boss
-			右键收回炮塔
-
-			怎么得到它?你可能需要找到那把剑……
-			'''
-	}
-
-	ImmortalAltarCalling: {
-		DisplayName: 不朽之心
-		Tooltip: 你不该拥有它
-	}
-
-	FinalSpiralfCalling: {
-		DisplayName: 终末堡垒
-		Tooltip:
-			'''
-			消耗八个炮塔栏位
-			召唤一台终末堡垒
-			至多召唤1个
-
-			召唤后
-			终末堡垒会使用高能子弹粉碎附近的敌人
-			每五秒，制造并发射一架终末无人机
-			在进行一段时间的充能后制造两台高血量终末装甲
-			过载:
-			过载率达100%,召唤者在附近,且有boss存活一段时间后:
-			进入蓄能形态,不再使用机枪射击，无人机的制造加快
-			蓄能完成后，左键使用召唤杖发动终末螺旋
-
-			优先攻击boss
-			右键收回炮塔
-			"戍卫科技与魔法的结晶,千年前用鲜血守卫的,如今由它守护"
-			"烈火直破苍穹,大地荡然无存"
-			'''
-	}
-
-	ReverseHookArrow: {
-		DisplayName: 倒钩箭头
-		Tooltip:
-			'''
-			使弩箭类炮塔的攻速和过载概率提升20%
-			并在目标为boss时再提升10%
-			'''
-	}
-
-	ImmortalBody: {
-		// DisplayName: Immortal Body
-		// Tooltip: ""
-	}
-
-	ImmortalLegs: {
-		// DisplayName: Immortal Legs
-		// Tooltip: ""
-	}
-
-	ImmortalHead: {
-		// DisplayName: Immortal Head
-		// Tooltip: ""
-	}
-}
-
-ArmorSetBonuses: {
-	UndeadWood.Description:
-		'''
-		生根:在地面不移动时获得10点防御并免疫击退,
-		但起跑速度大幅降低
-		'''
-	DarkCrystal.Description: 黯晶护盾:受到来源高于40点的伤害时超出部分伤害降低50%
-	Nano.Description:
-		'''
-		纳米自适应:在高于50%生命值时获得15%增伤
-		在低于50%生命值时获得15%伤害减免
-		'''
 }
 
 Prefixes: {
-	PowerTooltip: Mods.GloryofGuardian.Prefixes.PowerTooltip
-
-	Blooey0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Blooey0.AdditionalTooltip
-		DisplayName: 故障的
-	}
-
-	Burdened0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Burdened0.AdditionalTooltip
-		DisplayName: 负荷的
-	}
-
-	Classic0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Classic0.AdditionalTooltip
-		DisplayName: 一流的
-	}
-
-	Damaged0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Damaged0.AdditionalTooltip
-		DisplayName: 毁坏的
-	}
-
-	Excellent0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Excellent0.AdditionalTooltip
-		DisplayName: 卓越的
-	}
-
-	Overclocked0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Overclocked0.AdditionalTooltip
-		DisplayName: 超频的
-	}
-
-	Peerless0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Peerless0.AdditionalTooltip
-		DisplayName: 绝世的
-	}
-
-	Precise0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Precise0.AdditionalTooltip
-		DisplayName: 精密的
-	}
-
-	Scrapped0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Scrapped0.AdditionalTooltip
-		DisplayName: 报废的
-	}
-
-	Sensitive0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Sensitive0.AdditionalTooltip
-		DisplayName: 灵敏的
-	}
-
-	ShortCircuited0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.ShortCircuited0.AdditionalTooltip
-		DisplayName: 短路的
-	}
-
-	Silent0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Silent0.AdditionalTooltip
-		DisplayName: 沉默的
-	}
-
-	Stainless0: {
-		AdditionalTooltip: Mods.GloryofGuardian.Prefixes.Stainless0.AdditionalTooltip
-		DisplayName: 崭新的
-	}
+	Blooey0.DisplayName: 故障的
+	Burdened0.DisplayName: 负荷的
+	Classic0.DisplayName: 一流的
+	Damaged0.DisplayName: 毁坏的
+	Excellent0.DisplayName: 卓越的
+	Overclocked0.DisplayName: 升频的
+	Peerless0.DisplayName: 绝世的
+	Precise0.DisplayName: 精密的
+	Scrapped0.DisplayName: 报废的
+	Sensitive0.DisplayName: 灵敏的
+	ShortCircuited0.DisplayName: 短路的
+	Silent0.DisplayName: 沉默的
+	Stainless0.DisplayName: 崭新的
 }
-
-DamageClasses.GuardianDamageClass.DisplayName: 戍卫伤害
 
 Buffs: {
 	JavelinDebuff1: {
 		DisplayName: 钉入
-		Description: 救命,好痛,快把它拔出来!
+		Description: 弩箭钉入体内,无法再生生命并持续损失生命
 	}
 
-	HoneyDebuff: {
-		DisplayName: 太甜了
-		Description: 你还想吃,但是你需要从甜蜜中缓过来
+	CorruptDebuff: {
+		DisplayName: 腐蚀
+		Description: 护甲被侵蚀,能叠加至多减少10点护甲,且每次沾到任何腐化雨水都会重置持续时间
 	}
 
-	ShadowbladeDebuff: {
-		DisplayName: 影刃
-		Description: 免疫中毒就不用被穿过了?抱歉~
-	}
-
-	CobaltDebuff: {
-		// DisplayName: Cobalt Debuff
-		// Description: Mods.GloryofGuardian.Buffs.CobaltDebuff.Description
-	}
-
-	SirenDebuff: {
-		// DisplayName: Siren Debuff
-		// Description: Mods.GloryofGuardian.Buffs.SirenDebuff.Description
-	}
-
-	TitaniumShieldBuff: {
-		DisplayName: 钛金屏障
-		Description: 你以视界之力洞察了敌人的行动,将以钛质化抵御下一次攻击
-	}
-
-	TitaniumReloadBuff: {
-		DisplayName: 过度钛质化
-		Description: 你需要一些时间缓解过度的钛质化
-	}
-
-	NanoMarkDebuff1: {
-		// DisplayName: Nano Mark Debuff1
-		// Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff1.Description
-	}
-
-	NanoMarkDebuff2: {
-		// DisplayName: Nano Mark Debuff2
-		// Description: Mods.GloryofGuardian.Buffs.NanoMarkDebuff2.Description
-	}
-
-	OnfireMalice: {
-		// DisplayName: Onfire Malice
-		// Description: Mods.GloryofGuardian.Buffs.OnfireMalice.Description
-	}
-
-	OnDragonFireDebuff: {
-		// DisplayName: On Dragon Fire Debuff
-		// Description: Mods.GloryofGuardian.Buffs.OnDragonFireDebuff.Description
-	}
-
-	WitheredDebuff: {
-		// DisplayName: Withered Debuff
-		// Description: Mods.GloryofGuardian.Buffs.WitheredDebuff.Description
+	HoneyCDbuff: {
+		DisplayName: 蜂蜜饱腹
+		Description: 你还想吃,但是你现在吃不下了
 	}
 }
 
 Projectiles: {
-	WildDT.DisplayName: 荒野炮塔
-	WildProj.DisplayName: 荒野箭
-	GarrisonDT.DisplayName: 哨卫炮塔
-	GarrisonProj.DisplayName: 哨卫弩箭
-	BloodyDT.DisplayName: 鲜血炮塔
-	BloodyProj.DisplayName: 血弹
-	CorruptCloudProj.DisplayName: 晦暗云
-	CorruptDT.DisplayName: 晦暗炮塔
-	CorruptRainProj.DisplayName: 晦暗雨
-	MushroomDT.DisplayName: 蘑菇炮塔
-	MushRoomProj.DisplayName: 孢子光环
-	MushRoomProj2.DisplayName: 孢子光环
-	BeeHiveDT.DisplayName: 蜂蜜炮塔
-	// RustyGunProj.DisplayName: Rusty Gun Proj
-	// RustyGunDT.DisplayName: Rusty Gun D T
-	// ShurikeDT.DisplayName: Shurike D T
-	// ShurikenProj.DisplayName: Shuriken Proj
-	// ShurikenDT.DisplayName: Shuriken D T
-	// SlimeCallProj.DisplayName: Slime Call Proj
-	// SlimeProj.DisplayName: Slime Proj
-	// SlimeDT.DisplayName: Slime D T
-	// MythrilProj.DisplayName: Mythril Proj
-	// MythrilDT.DisplayName: Mythril D T
-	// MythrilProj2.DisplayName: Mythril Proj2
-	// OrichalcumDT.DisplayName: Orichalcum D T
-	// PalladiumDT.DisplayName: Palladium D T
-	// TitaniumDT.DisplayName: Titanium D T
-	// AdamantiteDT.DisplayName: Adamantite D T
-	// AdamantiteProj.DisplayName: Adamantite Proj
-	// PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
-	// PaleShotGunDT.DisplayName: Pale Shot Gun D T
-	// CobaltDT.DisplayName: Cobalt D T
-	// CobaltProj.DisplayName: Cobalt Proj
-	// CobaltProj2.DisplayName: Cobalt Proj2
-	// SlimeProj0.DisplayName: Slime Proj0
-	// SpiderProj.DisplayName: Spider Proj
-	// SpiderProj0.DisplayName: Spider Proj0
-	// PinkSlimeCallProj.DisplayName: Pink Slime Call Proj
-	// PinkSlimeProj.DisplayName: Pink Slime Proj
-	// PinkSlimeProj0.DisplayName: Pink Slime Proj0
-	// NanoGuiderProj.DisplayName: Nano Guider Proj
-	// NanoGuiderHeld.DisplayName: Nano Guider Held
-	// Magic.NanoGuiderProj.DisplayName: Nano Guider Proj
-	// NanoGMissileProj.DisplayName: Nano G Missile Proj
-	// NanoGMissileDT.DisplayName: Nano G Missile D T
-	// AncientBattleProj.DisplayName: Ancient Battle Proj
-	// AncientBattleProj2.DisplayName: Ancient Battle Proj2
-	// AncientBattleDT.DisplayName: Ancient Battle D T
-	// ChlorophyteDT.DisplayName: Chlorophyte D T
-	// ChlorophyteProj.DisplayName: Chlorophyte Proj
-	// SirenDT.DisplayName: Siren D T
-	// SirenProj.DisplayName: Siren Proj
-	// MeteorDT.DisplayName: Meteor D T
-	// MeteorProj.DisplayName: Meteor Proj
-	// SRMeteorDT.DisplayName: S R Meteor D T
-	// SRMeteorProj.DisplayName: S R Meteor Proj
-	// NightProj.DisplayName: Night Proj
-	// NightProj2.DisplayName: Night Proj2
-	// NightProj3.DisplayName: Night Proj3
-	// StarRay.DisplayName: Star Ray
-	// StarRay2.DisplayName: Star Ray2
-	// WarningLine.DisplayName: Warning Line
-	// WarningLine_2.DisplayName: Warning Line_2
-	// WarningLine_3.DisplayName: Warning Line_3
-	// NightFireProj.DisplayName: Night Fire Proj
-	// WarningLine_0.DisplayName: Warning Line_0
-	// MaliceFireGunHeld.DisplayName: Malice Fire Gun Held
-	// MaliceFireGunFireProj.DisplayName: Malice Fire Gun Fire Proj
-	// MaliceFireGunProj.DisplayName: Malice Fire Gun Proj
-	// Frost2DT.DisplayName: Frost2 D T
-	// Frost2Proj.DisplayName: Frost2 Proj
+	// Proj0.DisplayName: Proj0
+	// WildDT.DisplayName: Wild D T
+	// WildProj.DisplayName: Wild Proj
+	// GarrisonDT.DisplayName: Garrison D T
+	// GarrisonProj.DisplayName: Garrison Proj
+	// BloodyDT.DisplayName: Bloody D T
+	// BloodyProj.DisplayName: Bloody Proj
+	// CorruptDT.DisplayName: Corrupt D T
+	// MushRoomDT.DisplayName: Mush Room D T
+	// BloodyProj2.DisplayName: Bloody Proj2
+	// CorruptCloudProj.DisplayName: Corrupt Cloud Proj
+	// CorruptRainProj.DisplayName: Corrupt Rain Proj
+	// MushRoomProj.DisplayName: Mush Room Proj
+	// MushRoomProj2.DisplayName: Mush Room Proj2
 	// FrostDT.DisplayName: Frost D T
 	// FrostProj.DisplayName: Frost Proj
-	// Blood2Proj0.DisplayName: Blood2 Proj0
-	// Blood2Proj1.DisplayName: Blood2 Proj1
+	// BeeHiveDT.DisplayName: Bee Hive D T
+	// MeteorDT.DisplayName: Meteor D T
+	// MeteorProj.DisplayName: Meteor Proj
+	// RustyGunDT.DisplayName: Rusty Gun D T
+	// RustyGunProj.DisplayName: Rusty Gun Proj
+	// ShurikenDT.DisplayName: Shuriken D T
+	// ShurikenProj.DisplayName: Shuriken Proj
 	// Bloody2DT.DisplayName: Bloody2 D T
-	// Corrupt2DT.DisplayName: Corrupt2 D T
-	// Corrupt2Proj0.DisplayName: Corrupt2 Proj0
-	// Corrupt2Proj1.DisplayName: Corrupt2 Proj1
-	// HarpyDT.DisplayName: Harpy D T
-	// HarpyRainFeatherProj.DisplayName: Harpy Rain Feather Proj
-	// HarpyRainProj.DisplayName: Harpy Rain Proj
-	// PlanteraDT.DisplayName: Plantera D T
-	// PlanteraCallProj.DisplayName: Plantera Call Proj
-	// PlanteraProj0.DisplayName: Plantera Proj0
-	// PlanteraProj1.DisplayName: Plantera Proj1
-	// AbyssalEchoDT.DisplayName: Abyssal Echo D T
-	// AbyssalEchoProj.DisplayName: Abyssal Echo Proj
-	// AbyssalEchoWarningLine.DisplayName: Abyssal Echo Warning Line
-	// FerryLightDT.DisplayName: Ferry Light D T
-	// FerryLightProj.DisplayName: Ferry Light Proj
-	// FlamingJackProj.DisplayName: Flaming Jack Proj
-	// ShadowFlameScrollDT.DisplayName: Shadow Flame Scroll D T
-	// FerryLightProj2.DisplayName: Ferry Light Proj2
-	// SoulBalanceDT.DisplayName: Soul Balance D T
-	// SoulBalanceProj.DisplayName: Soul Balance Proj
-	// SoulDementorBookProj.DisplayName: Soul Dementor Book Proj
-	// SoulFerryLanternProj.DisplayName: Soul Ferry Lantern Proj
-	// SRFrostDT.DisplayName: S R Frost D T
-	// SRFrostProj.DisplayName: S R Frost Proj
-	// SRFrostProj0.DisplayName: S R Frost Proj0
-	// DragonFireDT.DisplayName: Dragon Fire D T
-	// DragonFireProj.DisplayName: Dragon Fire Proj
-	// NanoUAVDT.DisplayName: Nano U A V D T
-	// NanoUAVProj.DisplayName: Nano U A V Proj
-	// GelTridentHeld.DisplayName: Gel Trident Held
-	// GoldTridentHeld.DisplayName: Gold Trident Held
-	// GoldTridentProj.DisplayName: Gold Trident Proj
-	// GelTridentPreProj.DisplayName: Gel Trident Pre Proj
-	// GelTridentProj.DisplayName: Gel Trident Proj
-	// GoldTridentPreProj.DisplayName: Gold Trident Pre Proj
-	// LightningRodHeld.DisplayName: Lightning Rod Held
-	// LightningRodLightningProj.DisplayName: Lightning Rod Lightning Proj
-	// LightningRodPreProj.DisplayName: Lightning Rod Pre Proj
-	// LightningRodProj.DisplayName: Lightning Rod Proj
-	// FireDragonDT.DisplayName: Fire Dragon D T
-	// FireDragonProj.DisplayName: Fire Dragon Proj
-	// SilverBoughDT.DisplayName: Silver Bough D T
-	// SilverBoughProj.DisplayName: Silver Bough Proj
-	// SilverBoughProj0.DisplayName: Silver Bough Proj0
-	// ImmortalLotusDT.DisplayName: Immortal Lotus D T
-	// ImmortalLotusProj.DisplayName: Immortal Lotus Proj
-	// ImmortalLotusProj0.DisplayName: Immortal Lotus Proj0
-	// ImmortalLotusProj2.DisplayName: Immortal Lotus Proj2
-	// SwordNurturingGourdDT.DisplayName: Sword Nurturing Gourd D T
-	// SwordNurturingGourdProj.DisplayName: Sword Nurturing Gourd Proj
-	// SwordNurturingGourdWarningLine.DisplayName: Sword Nurturing Gourd Warning Line
-	// ImmortalAltarDT.DisplayName: Immortal Altar D T
-	// ImmortalAltarProj.DisplayName: Immortal Altar Proj
-	// FinalSpiralfDT.DisplayName: Final Spiralf D T
-	// FinalSpiralfProj.DisplayName: Final Spiralf Proj
-	// FinalSpiralfProj0.DisplayName: Final Spiralf Proj0
-	// FinalSpiralf2Proj.DisplayName: Final Spiralf2 Proj
-	// FinalSpiralf3Proj.DisplayName: Final Spiralf3 Proj
-	// FinalSpiralfLaserBeamProj.DisplayName: Final Spiralf Laser Beam Proj
+	// Bloody2Proj1.DisplayName: Bloody2 Proj1
+	// Bloody2Proj2.DisplayName: Bloody2 Proj2
+	// Bloody2Proj3.DisplayName: Bloody2 Proj3
+	// Bloody2Proj4.DisplayName: Bloody2 Proj4
 }
 
-NPCs: {
-	SpiderNPC.DisplayName: 蜘蛛茧
-	// NightWatcher.DisplayName: Night Watcher
-	// NightLantern.DisplayName: Night Lantern
-	// NightLantern2.DisplayName: Night Lantern2
-	// NightLantern3.DisplayName: Night Lantern3
-	// NightLance.DisplayName: Night Lance
-	// NightRainBird.DisplayName: Night Rain Bird
-	// NightSlime.DisplayName: Night Slime
-	// NightLantern1.DisplayName: Night Lantern1
-	FlamingJackNPC.DisplayName: 火焰杰克南瓜
-	FinalSpiralf2DT.DisplayName: 终末机甲
-	FinalSpiralf3DT.DisplayName: 终末无人机
-}
+NPCs.GOGDummy.DisplayName: 训练假人

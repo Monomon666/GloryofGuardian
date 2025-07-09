@@ -1,64 +1,39 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
-using Terraria.DataStructures;
 using Terraria.ID;
 
-namespace GloryofGuardian.Content.Projectiles
-{
-    public class RustyGunProj : GOGProj
-    {
-        public override string Texture => GOGConstant.Projectiles + Name;
+namespace GloryofGuardian.Content.Projectiles {
+    public class RustyGunProj : GOGProj {
+        public override string Texture => GOGConstant.nulls;
 
-        public override void SetStaticDefaults() {
-            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
-            ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
-        }
-
-        public override void SetDefaults() {
+        public override void SetProperty() {
             Projectile.width = 2;
             Projectile.height = 2;
-            Projectile.friendly = true;
-            Projectile.hostile = false;
-            Projectile.DamageType = GuardianDamageClass.Instance;
-            Projectile.timeLeft = 1200;
-            //Projectile.light = 1.0f;
-            Projectile.ignoreWater = true;
-            Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 0;
-            Projectile.aiStyle = -1;
             Projectile.penetrate = 1;
-
-            Projectile.extraUpdates = 0;
-            Projectile.light = 1.5f;
-            Projectile.scale *= 1f;
         }
 
         Player Owner => Main.player[Projectile.owner];
-        Vector2 OwnerPos => Owner.Center;
-        Vector2 ToMou => Main.MouseWorld - OwnerPos;
 
-        public override void OnSpawn(IEntitySource source) {
-        }
-
-        int count = 0;
-        int mode = 0;
         public override void AI() {
-            count++;
             Projectile.rotation = Projectile.velocity.ToRotation();
-        }
 
-        public override Color? GetAlpha(Color lightColor) {
-            return Color.White;
+            if (count == 1 && Projectile.ai[0] == 1) Projectile.penetrate += 1;
+
+            base.AI();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             if (Projectile.ai[0] == 1) {
-                target.velocity += Projectile.velocity * 0.05f;
+                target.velocity += Projectile.velocity * 0.05f * target.knockBackResist;
             }
-            if (Projectile.ai[0] == 2) {
-                target.velocity += Projectile.velocity * 0.1f;
-            }
+
             base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override bool OnTileCollide(Vector2 oldVelocity) {
+            return base.OnTileCollide(oldVelocity);
         }
 
         public override void OnKill(int timeLeft) {

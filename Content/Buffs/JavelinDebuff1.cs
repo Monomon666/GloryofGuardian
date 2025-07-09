@@ -1,11 +1,9 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Classes;
 using Terraria.ID;
 
-namespace GloryofGuardian.Content.Buffs
-{
-    //Todo
-    public class JavelinDebuff1 : ModBuff
-    {
+namespace GloryofGuardian.Content.Buffs {
+    public class JavelinDebuff1 : ModBuff {
         public override string Texture => GOGConstant.Buffs + Name;
 
         public override void SetStaticDefaults() {
@@ -19,7 +17,9 @@ namespace GloryofGuardian.Content.Buffs
         }
 
         public override void Update(NPC npc, ref int buffIndex) {
-            npc.GetGlobalNPC<GOGGlobalNPCs>().JavelinDebuffEffect1 = true;
+            //续杯,不自然消失,在弩箭全部消失后去除
+            npc.AddBuff(ModContent.BuffType<JavelinDebuff1>(), 30);
+            npc.GetGlobalNPC<GOGGlobalNPC>().JavelinDebuffEffect1 = true;
             base.Update(npc, ref buffIndex);
         }
     }

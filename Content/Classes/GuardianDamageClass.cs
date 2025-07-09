@@ -1,8 +1,6 @@
-ï»¿//æˆå«ä¼¤å®³ç±»åž‹çš„æ³¨å†Œ
-namespace GloryofGuardian.Content.Class
-{
-    public class GuardianDamageClass : DamageClass
-    {
+//ÊùÎÀÉËº¦ÀàÐÍµÄ×¢²á
+namespace GloryofGuardian.Content.Class {
+    public class GuardianDamageClass : DamageClass {
         internal static GuardianDamageClass Instance;
 
         public override void Load() => Instance = this;

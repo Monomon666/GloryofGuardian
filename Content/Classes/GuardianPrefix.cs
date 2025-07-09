@@ -1,4 +1,6 @@
-﻿namespace GloryofGuardian.Content.Class
+﻿using GloryofGuardian.Content.Class;
+
+namespace GloryofGuardian.Content.Classes
 {
     //以下是武器词条
     public abstract class GaurdianWeaponPrefix : ModPrefix
@@ -28,9 +30,9 @@
         // 前缀修改的变量于此储存
         public override void SetStats(ref float damageMult, ref float knockbackMult, ref float useTimeMult, ref float scaleMult, ref float shootSpeedMult, ref float manaMult, ref int critBonus) {
             //使用预设量的在此处作用
-            damageMult = this.DamageMult;
-            useTimeMult = this.CoolingReduction;
-            critBonus = this.OverloadChance;
+            damageMult = DamageMult;
+            useTimeMult = CoolingReduction;
+            critBonus = OverloadChance;
         }
 
         // 影响物品的稀有度

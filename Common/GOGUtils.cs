@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using GloryofGuardian.Content.Class;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
 using Terraria.ID;
 using Terraria.Utilities;
 
@@ -12,9 +15,101 @@ namespace GloryofGuardian.Common
 
         #endregion
 
+        #region 基础
+        /// <summary>
+        /// 基础的跳字方法
+        /// </summary>
+        public static void WL(this object abc) {
+            Main.NewText(abc);
+        }
+
+        /// <summary>
+        /// 基础的粒子标点
+        /// </summary>
+        public static void Point(this Vector2 pos, int dustid = DustID.Wraith) {
+            for (int j = 0; j < 15; j++) {
+                int num1 = Dust.NewDust(pos, 0, 0, dustid, 0f, 0f, 10, Color.White, 1f);
+                Main.dust[num1].noGravity = true;
+                Main.dust[num1].velocity *= 0f;
+            }
+        }
+
+        /// <summary>
+        /// 更顺应方向感的两点之间向量
+        /// </summary>
+        /// <param name="vr1"></param>
+        /// <param name="vr2"></param>
+        /// <returns></returns>
+        public static Vector2 To(this Vector2 vr1, Vector2 vr2) {
+            return vr2 - vr1;
+        }
+
+        /// <summary>
+        /// 两点之间的单位向量
+        /// </summary>
+        /// <param name="vr1"></param>
+        /// <param name="vr2"></param>
+        /// <returns></returns>
+        public static Vector2 Toz(this Vector2 vr1, Vector2 vr2) {
+            return (vr2 - vr1).SafeNormalize(Vector2.Zero);
+        }
+
+        /// <summary>
+        /// 从任意个字符串中,随机选取一个
+        /// params能够实现接受可变数量的参数
+        /// </summary>
+        /// <param name="strings"></param>
+        /// <returns></returns>
+        public static string RandString(params string[] strings) {
+            if (strings == null || strings.Length == 0) {
+                throw new ArgumentException("至少需要提供一个字符串");
+            }
+
+            Random random = new Random();
+            int randomIndex = random.Next(strings.Length);
+            return strings[randomIndex];
+        }
+
+        public static string Full() {
+            return RandString("我吃饱了", "多谢款待", "嗝~");
+        }
+
+        #endregion
+
         #region 绘制
 
+        /// <summary>
+        /// Shader结构体
+        /// </summary>
+        public static class VertexInfo2Helper {
+            // 预定义的 VertexDeclaration（静态共享）
+            public static readonly VertexDeclaration VertexDeclaration = new VertexDeclaration(new VertexElement[3]
+            {
+        new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
+        new VertexElement(8, VertexElementFormat.Color, VertexElementUsage.Color, 0),
+        new VertexElement(12, VertexElementFormat.Vector3, VertexElementUsage.TextureCoordinate, 0)
+            });
 
+            // 静态工厂方法，快速创建 VertexInfo2
+            public static VertexInfo2 Create(Vector2 position, Vector3 texCoord, Color color) {
+                return new VertexInfo2(position, texCoord, color);
+            }
+        }
+
+        // 原始 VertexInfo2 结构体（保持不变）
+        public struct VertexInfo2 : IVertexType {
+            public Vector2 Position;
+            public Color Color;
+            public Vector3 TexCoord;
+
+            public VertexInfo2(Vector2 position, Vector3 texCoord, Color color) {
+                Position = position;
+                TexCoord = texCoord;
+                Color = color;
+            }
+
+            public VertexDeclaration VertexDeclaration => VertexInfo2Helper.VertexDeclaration;
+        }
 
         #endregion
 
@@ -26,26 +121,6 @@ namespace GloryofGuardian.Common
         public static bool Alives(this Player player) {
             if (player == null) return false;
             return player.active && !player.dead;
-        }
-
-        /// <summary>
-        /// 更顺应方向感的两点之间向量
-        /// </summary>
-        /// <param name="vr1"></param>
-        /// <param name="vr2"></param>
-        /// <returns></returns>
-        //public static Vector2 To(this Vector2 vr1, Vector2 vr2) {
-        //    return vr2 - vr1;
-        //}
-
-        /// <summary>
-        /// 两点之间的单位向量
-        /// </summary>
-        /// <param name="vr1"></param>
-        /// <param name="vr2"></param>
-        /// <returns></returns>
-        public static Vector2 Toz(this Vector2 vr1, Vector2 vr2) {
-            return (vr2 - vr1).SafeNormalize(Vector2.Zero);
         }
 
         #endregion
@@ -156,7 +231,8 @@ namespace GloryofGuardian.Common
                         closestTarget = Main.npc[index2];
                     }
                 }
-            } else {
+            }
+            else {
                 for (int index = 0; index < Main.npc.Length; index++) {
                     if (Main.npc[index].CanBeChasedBy()) {
                         float extraDistance = (Main.npc[index].width / 2) + (Main.npc[index].height / 2);

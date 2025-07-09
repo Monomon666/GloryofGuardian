@@ -1,10 +1,10 @@
 ﻿using GloryofGuardian.Common;
+using GloryofGuardian.Content.Classes;
 using Terraria.GameContent.Creative;
+using Terraria.ModLoader;
 
-namespace GloryofGuardian.Content.Items.Accessories
-{
-    public class Shroom : GOGItem
-    {
+namespace GloryofGuardian.Content.Items.Accessories {
+    public class Shroom : GOGAccessories {
         public override string Texture => GOGConstant.Items + "Accessories/" + Name;
         public override void SetStaticDefaults() {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;
@@ -13,7 +13,7 @@ namespace GloryofGuardian.Content.Items.Accessories
         public override void SetDefaults() {
             Item.width = 22;
             Item.height = 24;
-            Item.maxStack = 999;
+            Item.maxStack = 1;
             Item.value = 10000;
             Item.rare = -12;
 
@@ -22,7 +22,6 @@ namespace GloryofGuardian.Content.Items.Accessories
 
         int mode = 0;
         public override void UpdateAccessory(Player player, bool hideVisual) {
-            //player.GetModPlayer<GOGModPlayer>().Shroom = true;
             player.GetCritChance<GenericDamageClass>() = 100;
 
             base.UpdateAccessory(player, hideVisual);

@@ -1,4 +1,6 @@
-﻿using Terraria.ObjectData;
+﻿using System.Collections.Generic;
+using Terraria.ID;
+using Terraria.ObjectData;
 
 namespace GloryofGuardian.Common
 {
@@ -52,6 +54,14 @@ namespace GloryofGuardian.Common
         }
 
         /// <summary>
+        /// 获取一个物块目标，输入世界物块坐标，自动考虑收界情况
+        /// </summary>
+        public static Tile GetTile(Vector2 pos) {
+            pos = PTransgressionTile(pos);
+            return Main.tile[(int)pos.X, (int)pos.Y];
+        }
+
+        /// <summary>
         /// 检测方块的一个矩形区域内是否有实心物块
         /// </summary>
         /// <param name="tileVr">方块坐标</param>
@@ -59,25 +69,48 @@ namespace GloryofGuardian.Common
         /// <param name="DetectionR">矩形右</param>
         /// <param name="DetectionD">矩形上</param>
         /// <param name="DetectionS">矩形下</param>
-        public static bool TileRectangleDetection(Vector2 tileVr, int DetectionL, int DetectionR, int DetectionD, int DetectionS) {
+        public static bool TileRectangleDetection(Vector2 tileVr0, int DetectionL, int DetectionR, int DetectionD, int DetectionS) {
             Vector2 newTileVr;
+            Vector2 tileVr = new Vector2((int)(tileVr0.X / 16), (int)(tileVr0.Y / 16));
             for (int x = 0; x < DetectionR - DetectionL; x++) {
                 for (int y = 0; y < DetectionS - DetectionD; y++) {
                     newTileVr = PTransgressionTile(new Vector2(tileVr.X + x, tileVr.Y + y));
                     if (Main.tile[(int)newTileVr.X, (int)newTileVr.Y].HasSolidTile()) {
-                        return false;
+                        return true;
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         /// <summary>
-        /// 获取一个物块目标，输入世界物块坐标，自动考虑收界情况
+        /// 返回一个方形区域内的实心物块集合
         /// </summary>
-        public static Tile GetTile(Vector2 pos) {
-            pos = PTransgressionTile(pos);
-            return Main.tile[(int)pos.X, (int)pos.Y];
+        /// <param name="tileVr">方块坐标(中心!)</param>
+        /// <param name="DetectionL">矩形左</param>
+        /// <param name="DetectionR">矩形右</param>
+        /// <param name="DetectionD">矩形上</param>
+        /// <param name="DetectionS">矩形下</param>
+        /// <param name="surface">为true则在每一竖向格子上只寻找最靠上的物块</param>
+        /// <returns></returns>
+        public static List<Vector2> FindTilesInRectangle(Vector2 tileVr0, int DetectionL, int DetectionR, int DetectionD, int DetectionS, bool surface = false) {
+            List<Vector2> tileCoordsList = new List<Vector2>();
+            Vector2 tileVr = new Vector2((int)(tileVr0.X / 16), (int)(tileVr0.Y / 16));
+            Vector2 newTileVr;
+            int a = 0;
+            for (int x = -DetectionL; x < DetectionR; x++) {
+                for (int y = -DetectionD; y < DetectionS ; y++) {
+                    newTileVr = PTransgressionTile(new Vector2(tileVr.X + x, tileVr.Y + y));
+                    Vector2 tileCenter = tileVr * 16 + new Vector2(x * 16, y * 16);
+                    //tileCenter.Point();//观察点位
+                    if (Main.tile[(int)newTileVr.X, (int)newTileVr.Y].HasSolidTile()) {
+                        tileCoordsList.Add(tileCenter);
+                        if (surface) break;
+                    }
+                }
+            }
+
+            return tileCoordsList;
         }
     }
 }
