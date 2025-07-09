@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardianold2\\",
+  "WorkspaceRootPath": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|c:\\users\\acer\\documents\\my games\\terraria\\tmodloader\\modsources\\gloryofguardianold2\\localization\\zh-hans_mods.gloryofguardian.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|c:\\users\\acer\\documents\\my games\\terraria\\tmodloader\\modsources\\gloryofguardian\\localization\\zh-hans_mods.gloryofguardian.hjson||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{9892DBAD-FF86-492D-8538-80157164FCA1}|GloryofGuardian.csproj|solutionrelative:localization\\zh-hans_mods.gloryofguardian.hjson||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "zh-Hans_Mods.GloryofGuardian.hjson",
-              "DocumentMoniker": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardianold2\\Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
+              "DocumentMoniker": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
               "RelativeDocumentMoniker": "Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
-              "ToolTip": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardianold2\\Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
+              "ToolTip": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
               "RelativeToolTip": "Localization\\zh-Hans_Mods.GloryofGuardian.hjson",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-07-04T12:39:14.154Z",
               "IsPinned": true,
