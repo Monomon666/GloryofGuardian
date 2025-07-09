@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "p4uXPikpqZo=",
+  "dgSpecHash": "EB06WLkxjS0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardianold2\\GloryofGuardian.csproj",
+  "projectFilePath": "C:\\Users\\ACER\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\GloryofGuardian\\GloryofGuardian.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
   ],

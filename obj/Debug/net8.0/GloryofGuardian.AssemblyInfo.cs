@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GloryofGuardian")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+083f64a2b476ddf2283b6eddb2137c812862914f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6238adda06b0fd5bbe96ecd8f3c39f19c2ef6d15")]
 [assembly: System.Reflection.AssemblyProductAttribute("GloryofGuardian")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GloryofGuardian")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
