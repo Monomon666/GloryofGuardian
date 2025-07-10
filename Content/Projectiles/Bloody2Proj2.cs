@@ -45,6 +45,23 @@ namespace GloryofGuardian.Content.Projectiles {
 
             if (count < 15) {
                 for (int i = 0; i < 4; i++) {
+                    int num = Dust.NewDust(Projectile.Center, 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 1f);
+                    int num1 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 1.2f);
+                    int num2 = Dust.NewDust(Projectile.Center, 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Black, 1f);
+                    //Main.dust[num].velocity = Main.dust[num1].velocity = Main.dust[num2].velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f)) * 4f;
+                    Main.dust[num].position += Projectile.velocity.RotatedBy(MathHelper.PiOver2) * Main.rand.NextFloat(-24, 24);
+
+                    Main.dust[num].velocity *= 2f;
+                    Main.dust[num].noGravity = true;
+                    Main.dust[num1].velocity *= 1f;
+                    Main.dust[num1].noGravity = true;
+                    Main.dust[num2].velocity *= 1.2f;
+                    Main.dust[num2].noGravity = true;
+                }
+            }
+
+            if (count < 15) {
+                for (int i = 0; i < 4; i++) {
                     int num  = Dust.NewDust(Projectile.Center + Projectile.velocity * Main.rand.NextFloat(60), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 1f);
                     int num1 = Dust.NewDust(Projectile.Center + Projectile.velocity * Main.rand.NextFloat(120), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 1.2f);
                     int num2 = Dust.NewDust(Projectile.Center + Projectile.velocity * Main.rand.NextFloat(180), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Black, 1f);

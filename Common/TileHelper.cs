@@ -110,7 +110,8 @@ namespace GloryofGuardian.Common
                 }
             }
 
-            return tileCoordsList;
+            if (tileCoordsList.Count == 0) return null;
+            else return tileCoordsList;
         }
     }
 }

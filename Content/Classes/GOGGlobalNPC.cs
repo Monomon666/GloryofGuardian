@@ -14,6 +14,8 @@ namespace GloryofGuardian.Content.Classes {
         //腐蚀buff
         public bool CorruptDebuffEffect;
         public int CorruptDebuffCount;
+        //腐化苗床buff
+        public bool CorruptSeedbedDebuff;
 
         //buff重设
         public override void ResetEffects(NPC npc) {

@@ -70,6 +70,11 @@ Items: {
 		DisplayName: Bloody2
 		Tooltip: ""
 	}
+
+	Corrupt2: {
+		DisplayName: Corrupt2
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -103,6 +108,11 @@ Buffs: {
 		DisplayName: Honey C Dbuff
 		Description: Mods.GloryofGuardian.Buffs.HoneyCDbuff.Description
 	}
+
+	CorruptSeedbedDebuff: {
+		DisplayName: Corrupt Seedbed Debuff
+		Description: Mods.GloryofGuardian.Buffs.CorruptSeedbedDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -134,6 +144,7 @@ Projectiles: {
 	Bloody2Proj2.DisplayName: Bloody2 Proj2
 	Bloody2Proj3.DisplayName: Bloody2 Proj3
 	Bloody2Proj4.DisplayName: Bloody2 Proj4
+	Corrupt2DT.DisplayName: Corrupt2 D T
 }
 
 NPCs.GOGDummy.DisplayName: G O G Dummy

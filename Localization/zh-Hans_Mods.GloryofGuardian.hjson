@@ -194,10 +194,15 @@ Items: {
 			[c/FF00A0:超频攻击转而额外召唤一个亵渎血肉生物]
 			[c/FF00A0:它会向敌人发射灵液弹幕]
 			[c/FF00A0:此生物至多同时存在两个]
-			当敌人靠近时,非超频攻击切换为近战形态
+			当附近有实体物块且敌人靠近时,非超频攻击切换为近战形态
 			右键收回炮塔
-			"红月……生长……繁殖……扩张……"
+			"红月……血雾……扩张……"
 			'''
+	}
+
+	Corrupt2: {
+		// DisplayName: Corrupt2
+		// Tooltip: ""
 	}
 }
 
@@ -232,6 +237,11 @@ Buffs: {
 		DisplayName: 蜂蜜饱腹
 		Description: 你还想吃,但是你现在吃不下了
 	}
+
+	CorruptSeedbedDebuff: {
+		// DisplayName: Corrupt Seedbed Debuff
+		// Description: Mods.GloryofGuardian.Buffs.CorruptSeedbedDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -263,6 +273,7 @@ Projectiles: {
 	// Bloody2Proj2.DisplayName: Bloody2 Proj2
 	// Bloody2Proj3.DisplayName: Bloody2 Proj3
 	// Bloody2Proj4.DisplayName: Bloody2 Proj4
+	// Corrupt2DT.DisplayName: Corrupt2 D T
 }
 
 NPCs.GOGDummy.DisplayName: 训练假人
