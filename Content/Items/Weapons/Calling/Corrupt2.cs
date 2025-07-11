@@ -11,7 +11,7 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
 
         protected override int ProjSlot => 1;
 
-        protected override int ProjlNumLimit => -1;
+        protected override int ProjlNumLimit => 1;
 
         public override void SetProperty() {
             Item.damage = 40;

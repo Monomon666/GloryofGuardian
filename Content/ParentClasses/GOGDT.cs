@@ -106,7 +106,6 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         protected int lastdamage = 0;
 
-        protected bool findboss = false;
         /// <summary>
         /// 预先设定的第一索敌目标
         /// </summary>
@@ -115,7 +114,15 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 索敌距离
         /// </summary>
         /// <returns></returns>
-        protected int Attackrange = 800;
+        protected int Attackrange = 1200;
+        /// <summary>
+        /// 是否忽略物块索敌
+        /// </summary>
+        protected bool ignoretile = false;
+        /// <summary>
+        /// 是否优先攻击boss
+        /// </summary>
+        protected bool findboss = false;
 
         //额外属性
         /// <summary>
@@ -144,7 +151,7 @@ namespace GloryofGuardian.Content.ParentClasses {
             if (Drop) DTDrop();//坠落
             Calculate();//攻击间隔和伤害的重新计算
             //索敌与行动
-            target0 = AttackPos.InPosClosestNPC(Attackrange, false, findboss);
+            target0 = AttackPos.InPosClosestNPC(Attackrange, ignoretile, findboss);
 
             if (target0 != null) {
                 if (CanTurn) {

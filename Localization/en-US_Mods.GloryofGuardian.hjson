@@ -145,6 +145,8 @@ Projectiles: {
 	Bloody2Proj3.DisplayName: Bloody2 Proj3
 	Bloody2Proj4.DisplayName: Bloody2 Proj4
 	Corrupt2DT.DisplayName: Corrupt2 D T
+	Corrupt2ParaProj.DisplayName: Corrupt2 Para Proj
+	Corrupt2RainProj.DisplayName: Corrupt2 Rain Proj
 }
 
 NPCs.GOGDummy.DisplayName: G O G Dummy

@@ -1,5 +1,7 @@
-﻿using GloryofGuardian.Common;
+﻿using System;
+using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
+using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Projectiles;
 using Terraria.ID;
 
@@ -82,6 +84,7 @@ namespace GloryofGuardian.Content.Classes {
         }
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref NPC.HitModifiers modifiers) {
+            //腐化1减抗
             if (CorruptDebuffEffect) {
                 //特殊射弹叠加减抗,普通及特殊射弹都重置buff时长
                 if (projectile.type == ModContent.ProjectileType<CorruptRainProj>()) {
@@ -99,6 +102,20 @@ namespace GloryofGuardian.Content.Classes {
 
                 if (projectile.type == ModContent.ProjectileType<CorruptRainProj>()) {
                     npc.AddBuff(ModContent.BuffType<CorruptDebuff>(), 300);
+                }
+            }
+
+            //腐化2附伤
+            if (CorruptSeedbedDebuff) {
+                if (projectile.DamageType == GuardianDamageClass.Instance) {
+                    int buffdamage = Math.Min(projectile.damage, 10);
+                    npc.life -= buffdamage;
+                        CombatText.NewText(npc.Hitbox,
+                                new Color(3, 239, 2),
+                                -buffdamage,
+                                true,
+                                false
+                                );
                 }
             }
         }

@@ -102,7 +102,7 @@ namespace GloryofGuardian.Common
                 for (int y = -DetectionD; y < DetectionS ; y++) {
                     newTileVr = PTransgressionTile(new Vector2(tileVr.X + x, tileVr.Y + y));
                     Vector2 tileCenter = tileVr * 16 + new Vector2(x * 16, y * 16);
-                    //tileCenter.Point();//观察点位
+                    tileCenter.Point();//观察点位
                     if (Main.tile[(int)newTileVr.X, (int)newTileVr.Y].HasSolidTile()) {
                         tileCoordsList.Add(tileCenter);
                         if (surface) break;

@@ -201,8 +201,20 @@ Items: {
 	}
 
 	Corrupt2: {
-		// DisplayName: Corrupt2
-		// Tooltip: ""
+		DisplayName: 腐化巢穴
+		Tooltip:
+			'''
+			召唤一个腐化苗床
+			干扰附近的环境,降下大范围的腐化之雨
+			腐化之雨淋到敌人后,会造成少量伤害并施加<腐坏>
+			[c/FF00A0:超频攻击转而降下诅咒之雨]
+			[c/FF00A0:诅咒之雨会腐坏并引燃一片区域]
+			<腐坏>将会提升敌人受到的所有戍卫伤害
+			靠近炮塔会被被诅咒引燃
+			右键收回炮塔,收回后它带来的雨就会停止
+			只能存在一个腐化苗床
+			"饥饿……吞食……繁殖……"
+			'''
 	}
 }
 
@@ -274,6 +286,8 @@ Projectiles: {
 	// Bloody2Proj3.DisplayName: Bloody2 Proj3
 	// Bloody2Proj4.DisplayName: Bloody2 Proj4
 	// Corrupt2DT.DisplayName: Corrupt2 D T
+	// Corrupt2ParaProj.DisplayName: Corrupt2 Para Proj
+	// Corrupt2RainProj.DisplayName: Corrupt2 Rain Proj
 }
 
 NPCs.GOGDummy.DisplayName: 训练假人
