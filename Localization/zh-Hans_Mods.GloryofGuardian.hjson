@@ -251,8 +251,8 @@ Buffs: {
 	}
 
 	CorruptSeedbedDebuff: {
-		// DisplayName: Corrupt Seedbed Debuff
-		// Description: Mods.GloryofGuardian.Buffs.CorruptSeedbedDebuff.Description
+		DisplayName: 腐坏
+		Description: 腐化的力量在抢夺你的生命,你受到的所有戍卫伤害提升
 	}
 }
 
