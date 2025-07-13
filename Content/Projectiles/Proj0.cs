@@ -8,6 +8,7 @@ namespace GloryofGuardian.Content.Projectiles {
         public override void SetProperty() {
             base.SetProperty();
         }
+        Player Owner => Main.player[Projectile.owner];
 
         public override void AI() {
             base.AI();

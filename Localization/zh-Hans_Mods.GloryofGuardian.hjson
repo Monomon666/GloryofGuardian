@@ -216,6 +216,35 @@ Items: {
 			"饥饿……吞食……繁殖……"
 			'''
 	}
+
+	Ancient: {
+		DisplayName: 远古风暴
+		Tooltip:
+			'''
+			消耗一个炮塔栏位
+			召唤一个禁戒封印柱
+			自动向范围内最近的敌人发射追踪沙刃
+			沙刃能够沿着物块前进,穿过敌人后会迅速消散
+			[c/FF00A0:超频攻击转而释放一阵沙风暴]
+			过载攻击的沙刃将可以在击中墙面时贴墙前进而非消散
+			右键收回炮塔
+			'''
+	}
+
+	Harpy: {
+		// DisplayName: Harpy
+		// Tooltip: ""
+	}
+
+	PaleClockworkGun: {
+		// DisplayName: Pale Clockwork Gun
+		// Tooltip: ""
+	}
+
+	PaleShotGun: {
+		// DisplayName: Pale Shot Gun
+		// Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -288,6 +317,9 @@ Projectiles: {
 	// Corrupt2DT.DisplayName: Corrupt2 D T
 	// Corrupt2ParaProj.DisplayName: Corrupt2 Para Proj
 	// Corrupt2RainProj.DisplayName: Corrupt2 Rain Proj
+	// AncienProj.DisplayName: Ancien Proj
+	// AncienProj2.DisplayName: Ancien Proj2
+	// AncientDT.DisplayName: Ancient D T
 }
 
 NPCs.GOGDummy.DisplayName: 训练假人

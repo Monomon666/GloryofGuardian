@@ -75,6 +75,26 @@ Items: {
 		DisplayName: Corrupt2
 		Tooltip: ""
 	}
+
+	Ancient: {
+		DisplayName: Ancient
+		Tooltip: ""
+	}
+
+	Harpy: {
+		DisplayName: Harpy
+		Tooltip: ""
+	}
+
+	PaleClockworkGun: {
+		DisplayName: Pale Clockwork Gun
+		Tooltip: ""
+	}
+
+	PaleShotGun: {
+		DisplayName: Pale Shot Gun
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -147,6 +167,9 @@ Projectiles: {
 	Corrupt2DT.DisplayName: Corrupt2 D T
 	Corrupt2ParaProj.DisplayName: Corrupt2 Para Proj
 	Corrupt2RainProj.DisplayName: Corrupt2 Rain Proj
+	AncienProj.DisplayName: Ancien Proj
+	AncienProj2.DisplayName: Ancien Proj2
+	AncientDT.DisplayName: Ancient D T
 }
 
 NPCs.GOGDummy.DisplayName: G O G Dummy
