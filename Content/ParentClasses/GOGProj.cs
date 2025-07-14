@@ -89,9 +89,18 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 启用boss优先
         /// </summary>
         protected bool bossfirst = false;
+
+        /// <summary>
+        /// 记录弹幕的出现位置
+        /// </summary>
+        public Vector2 startpos = new Vector2(0, 0);
         public override bool PreAI() {
             count++;
             drawcount++;
+            //第一帧
+            if (drawcount == 1) {
+                startpos = Projectile.Center;
+            }
             //索敌与行动
             if (target0 == null || !target0.active) target0 = Projectile.Center.InPosClosestNPC(Attackrange, throughtile, bossfirst);
             target01 = Projectile.Center.InPosClosestNPC(Attackrange, throughtile, bossfirst);

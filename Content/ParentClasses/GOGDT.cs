@@ -138,6 +138,23 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         protected int mode = 0;
 
+
+        /// <summary>
+        /// 一旦开始过载,则完成整套超频攻击
+        /// </summary>
+        public bool overclock = false;
+        /// <summary>
+        /// 当次计数器归零时,完成超频
+        /// </summary>
+        public int overclockcount = 0;
+        /// <summary>
+        /// 拥有持续过载攻击的 过载攻击间隔
+        /// </summary>
+        public int overclockinterval = 0;
+        /// <summary>
+        /// 拥有持续过载攻击的 最终过载攻击间隔
+        /// </summary>
+        public int Goverclockinterval = 0;
         //使用preai可以在不使用base的情况下进行预设
         public override bool PreAI() {
             count++;
@@ -279,6 +296,7 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         void Calculate() {
             Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * otheratkspeed);//攻击间隔因子重新提取
+            Goverclockinterval = (int)(overclockinterval * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * otheratkspeed);//攻击间隔因子重新提取
             //伤害修正
             int newDamage = Projectile.originalDamage;
             float rangedOffset = Owner.GetTotalDamage(GuardianDamageClass.Instance).ApplyTo(100) / 100f;
@@ -334,38 +352,45 @@ namespace GloryofGuardian.Content.ParentClasses {
         void Attack0(NPC target1) {
             //发射
             if (count >= Gcount) {
-                //普通攻击
-                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
-                    List<Projectile> ProjList = Attack1();
+                List<Projectile> ProjList = [];
+                //万一忘了在具体子类里重置,重置一下
+                if (overclockcount == 0) overclock = false;
 
-                    //foreach (Projectile proj1 in ProjList) {
-                    //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                    //        if (proj1.ModProjectile is GOGProj proj2) {
-                    //            //山铜炮塔的强化效果
-                    //            proj2.OrichalcumMarkProj = true;
-                    //            proj2.OrichalcumMarkProjcount = 300;
-                    //        }
-                    //    }
-                    //}
+                if (overclock) ProjList = AttackOverclock();
+                else {
+                    //普通攻击
+                    if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
+                        ProjList = Attack1();
 
-                    ProjList.Clear();
-                }
+                        //foreach (Projectile proj1 in ProjList) {
+                        //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                        //        if (proj1.ModProjectile is GOGProj proj2) {
+                        //            //山铜炮塔的强化效果
+                        //            proj2.OrichalcumMarkProj = true;
+                        //            proj2.OrichalcumMarkProjcount = 300;
+                        //        }
+                        //    }
+                        //}
 
-                //过载攻击
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
-                    List<Projectile> ProjList = Attack2();
+                        ProjList.Clear();
+                    }
 
-                    //foreach (Projectile proj1 in ProjList) {
-                    //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                    //        if (proj1.ModProjectile is GOGProj proj2) {
-                    //            //山铜炮塔的强化效果
-                    //            proj2.OrichalcumMarkProj = true;
-                    //            proj2.OrichalcumMarkProjcount = 300;
-                    //        }
-                    //    }
-                    //}
+                    //过载攻击
+                    if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
+                        ProjList = Attack2();
 
-                    if (ProjList != null) ProjList.Clear();
+                        //foreach (Projectile proj1 in ProjList) {
+                        //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
+                        //        if (proj1.ModProjectile is GOGProj proj2) {
+                        //            //山铜炮塔的强化效果
+                        //            proj2.OrichalcumMarkProj = true;
+                        //            proj2.OrichalcumMarkProjcount = 300;
+                        //        }
+                        //    }
+                        //}
+
+                        if (ProjList != null) ProjList.Clear();
+                    }
                 }
 
                 //计时重置,通过更改这个值来重置攻击
@@ -398,6 +423,16 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 注意令FinishAttack为true来结束
         /// </summary>
         protected virtual List<Projectile> Attack2() {
+            return null;
+        }
+
+        /// <summary>
+        /// 在此补充过载攻击逻辑
+        /// 一整套的超频攻击,完成后跳出
+        /// 使用overclock开关
+        /// 注意令FinishAttack为true来结束
+        /// </summary>
+        protected virtual List<Projectile> AttackOverclock() {
             return null;
         }
 

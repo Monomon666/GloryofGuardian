@@ -5,6 +5,7 @@ using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Terraria.ID;
+using System.Linq;
 
 namespace GloryofGuardian.Content.Projectiles {
     public class HarpyDT : GOGDT {
@@ -14,18 +15,23 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.width = 64;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
+            Projectile.light = 1.5f;
+
+            Projectile.scale *= 1.4f;
 
             OtherHeight = 34;
 
-            count0 = 9;
-
+            count0 = 20;
+            overclockinterval = 6;
+            
             exdust = DustID.Cloud;
             Drop = false;
         }
 
         Player Owner => Main.player[Projectile.owner];
-
         public override void AI() {
+            Lighting.AddLight(Projectile.Center, 2.5f, 2.5f, 2.5f);
+
             AttackPos = Projectile.Center + new Vector2(-2, 0);
             Projectile.Center += new Vector2(0, (float)Math.Sin(drawcount / 30f) * 0.5f);
 
@@ -40,49 +46,69 @@ namespace GloryofGuardian.Content.Projectiles {
         protected override List<Projectile> Attack1() {
             List<Projectile> projlist = new List<Projectile>();
 
-            for (int i = 0; i < 1; i++) {
-                //Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.Center);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
-                    AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0), new Vector2(0, 12).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)).RotatedBy(-Main.windSpeedCurrent / 4f), ModContent.ProjectileType<HarpyProj>(), lastdamage, 6, Owner.whoAmI);
+            if (Main.rand.NextBool(4)) {
+                for (int i = 0; i < 1; i++) {
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
+                        AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0), new Vector2(0, 24).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)).RotatedBy(-Main.windSpeedCurrent / 4f), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
 
-                projlist.Add(proj1);
+                    projlist.Add(proj1);
+                }
+            }else {
+                for (int i = 0; i < 1; i++) {
+                    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
+                        AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0), new Vector2(0, 12).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)).RotatedBy(-Main.windSpeedCurrent / 4f), ModContent.ProjectileType<HarpyProj>(), lastdamage, 6, Owner.whoAmI);
+
+                    projlist.Add(proj1);
+                }
             }
 
             FinishAttack = true;
             return projlist;
         }
 
+        List<int> numberList = [];
         protected override List<Projectile> Attack2() {
             List<Projectile> projlist = new List<Projectile>();
 
-            for (int i = 0; i < 1; i++) {
-               //Vector2 vel = new Vector2(0, -16);
-               //
-               //for (int j = 0; j < 25; j++) {
-               //    int num = Dust.NewDust(AttackPos + new Vector2(0, 16), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 1.5f);
-               //    int num1 = Dust.NewDust(AttackPos + new Vector2(0, 16), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Red, 0.6f);
-               //    int num2 = Dust.NewDust(AttackPos + new Vector2(0, 16), 0, 0, DustID.Crimson, 0f, 0f, 50, Color.Black, 1f);
-               //
-               //    if (Main.rand.NextBool(2)) Main.dust[num].velocity += Main.dust[num1].velocity = Main.dust[num2].velocity
-               //        = new Vector2(0, -2).RotatedBy(MathHelper.PiOver4 * 0.8f) * 1.5f;
-               //    else Main.dust[num].velocity += Main.dust[num1].velocity = Main.dust[num2].velocity
-               //        = new Vector2(0, -2).RotatedBy(-MathHelper.PiOver4 * 0.8f) * 1.5f;
-               //
-               //    Main.dust[num].velocity *= 2f;
-               //    Main.dust[num].noGravity = true;
-               //    Main.dust[num1].velocity *= 1f;
-               //    Main.dust[num1].noGravity = false;
-               //    Main.dust[num2].velocity *= 1.2f;
-               //    Main.dust[num2].noGravity = true;
-               //}
-               //
-               //Terraria.Audio.SoundEngine.PlaySound(SoundID.NPCDeath13, Projectile.Center);
-               //Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos + new Vector2(0, 16), vel, ModContent.ProjectileType<BloodyProj2>(), lastdamage, 8, Owner.whoAmI);
-               //
-               //projlist.Add(proj1);
+            overclock = true;
+            overclockcount = 9;
+            count -= Goverclockinterval;
+
+            for (int i = 1; i <= 9; i++) {
+                numberList.Add(i);
             }
 
-            FinishAttack = true;
+            // 使用Random打乱顺序
+            Random random = new Random();
+            for (int i = numberList.Count - 1; i > 0; i--) {
+                int j = random.Next(0, i + 1); // 随机索引
+                                               // 交换元素
+                int temp = numberList[i];
+                numberList[i] = numberList[j];
+                numberList[j] = temp;
+            }
+
+            return projlist;
+        }
+
+        protected override List<Projectile> AttackOverclock() {
+            List<Projectile> projlist = new List<Projectile>();
+
+            {
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
+                AttackPos + new Vector2(0, -12), new Vector2(0, 24).RotatedBy(MathHelper.PiOver2 / 9f * (5 - numberList[overclockcount - 1])), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
+
+                projlist.Add(proj1);
+            }
+
+            if (overclockcount > 0) {
+                overclockcount -= 1;
+                count -= Goverclockinterval;
+            }
+            if (overclockcount == 0) {
+                overclock = false;
+                FinishAttack = true;
+            }
             return projlist;
         }
 

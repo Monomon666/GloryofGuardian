@@ -2,6 +2,7 @@
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.ParentClasses;
 using GloryofGuardian.Content.Projectiles;
 using Terraria.ID;
 
@@ -47,11 +48,11 @@ namespace GloryofGuardian.Content.Classes {
                 // 钉入伤害计算
                 int JavelinCount = 0;
 
-                //荒野 //哨弩
+                //荒野 //哨弩 //羽毛
                 for (int i = 0; i < 1000; i++) {
                     Projectile p = Main.projectile[i];
                     if (p.active
-                        && p.ai[0] == 1f
+                        && p.ModProjectile is GOGProj javelinproj && javelinproj.pmode == 1
                         && p.ai[1] == npc.whoAmI) {
                         if (p.type == ModContent.ProjectileType<WildProj>()) {
                             JavelinCount += 2;
@@ -59,6 +60,9 @@ namespace GloryofGuardian.Content.Classes {
                         else if (p.type == ModContent.ProjectileType<GarrisonProj>()) {
                             if (p.ai[2] == 0) JavelinCount += 3;
                             if (p.ai[2] == 1) JavelinCount += 6;
+                        }
+                        else if (p.type == ModContent.ProjectileType<HarpyProj>()) {
+                            JavelinCount += 2;
                         }
                     }
                 }

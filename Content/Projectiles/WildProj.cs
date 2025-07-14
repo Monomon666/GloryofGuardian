@@ -121,6 +121,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
             IsStickingToTarget = true; // 击中目标确认
+            pmode = 1;
             TargetWhoAmI = target.whoAmI; // 目标索引输入
             ToTargetpos = Projectile.Center - target.Center; //相对位置输入
             Projectile.velocity *= 0.01f; // 镶入
