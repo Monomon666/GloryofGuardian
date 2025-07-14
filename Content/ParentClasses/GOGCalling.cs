@@ -2,6 +2,8 @@
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Classes;
 using GloryofGuardian.Content.NPCs.Special;
+using Microsoft.Xna.Framework.Audio;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
 using Terraria.ID;
@@ -40,6 +42,11 @@ namespace GloryofGuardian.Content.WeaponClasses {
         /// </summary>
         protected bool RightClear = true;
 
+        /// <summary>
+        /// 使用音效
+        /// </summary>
+        protected SoundStyle usesound = SoundID.DD2_DefenseTowerSpawn;
+
         public override void SetStaticDefaults() {
             CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 1;//旅行模式下研究数目
             ItemID.Sets.GamepadWholeScreenUseRange[Item.type] = true;//手柄状态自由移动
@@ -52,7 +59,7 @@ namespace GloryofGuardian.Content.WeaponClasses {
             Item.useTime = 12;
             Item.useAnimation = 12;
             Item.useStyle = ItemUseStyleID.Shoot;
-            Item.UseSound = SoundID.DD2_DefenseTowerSpawn;//哨兵召唤声音
+            Item.UseSound = usesound;//哨兵召唤声音
             Item.autoReuse = false;
 
             Item.shoot = ProjType;
@@ -116,7 +123,7 @@ namespace GloryofGuardian.Content.WeaponClasses {
 
                 //左键
                 if (player.altFunctionUse == 0) {
-                    Item.UseSound = SoundID.DD2_DefenseTowerSpawn;
+                    Item.UseSound = usesound;
                     int wid = 3;
                     int hig = 5;
                     Vector2 offset = new Vector2(wid, hig) / -2 * 16;

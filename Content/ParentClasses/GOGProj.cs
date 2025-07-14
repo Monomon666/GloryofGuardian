@@ -55,6 +55,10 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 默认状态机
         /// </summary>
         protected int mode = 0;
+        /// <summary>
+        /// 供全局读取的mode
+        /// </summary>
+        public int pmode = 0;
 
         /// <summary>
         /// 绘制计时器,不重置

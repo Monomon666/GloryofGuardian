@@ -170,6 +170,9 @@ Projectiles: {
 	AncienProj.DisplayName: Ancien Proj
 	AncienProj2.DisplayName: Ancien Proj2
 	AncientDT.DisplayName: Ancient D T
+	HarpyDT.DisplayName: Harpy D T
+	HarpyProj.DisplayName: Harpy Proj
+	HarpyProj2.DisplayName: Harpy Proj2
 }
 
 NPCs.GOGDummy.DisplayName: G O G Dummy

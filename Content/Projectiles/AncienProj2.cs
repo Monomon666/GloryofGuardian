@@ -209,12 +209,12 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override bool OnTileCollide(Vector2 oldVelocity) {
             if (Math.Abs(Projectile.velocity.X - oldVelocity.X) > float.Epsilon) {
-
+                Projectile.Center += new Vector2(0, -32);
+                Projectile.velocity.X = oldVelocity.X;
             }
 
             if (Math.Abs(Projectile.velocity.Y - oldVelocity.Y) > float.Epsilon) {
-                Projectile.Center += new Vector2(0, -16);
-                Projectile.Center += new Vector2(Projectile.ai[1] * -4, 0);
+                Projectile.Center += new Vector2(0, -32);
                 Projectile.velocity.Y = oldVelocity.Y;
             }
             return false;

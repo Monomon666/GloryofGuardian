@@ -7,7 +7,7 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
     public class Harpy : GOGCalling {
         public override string Texture => GOGConstant.Weapons + Name;
 
-        protected override int ProjType => ModContent.ProjectileType<BloodyDT>();
+        protected override int ProjType => ModContent.ProjectileType<HarpyDT>();
 
         protected override int ProjSlot => 1;
 
@@ -20,6 +20,8 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
             Item.knockBack = 0;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = ItemRarityID.LightPurple;
+
+            usesound = SoundID.Item66;
         }
 
         public override void AddRecipes() {

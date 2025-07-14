@@ -26,7 +26,7 @@ namespace GloryofGuardian.Common
         /// <summary>
         /// 基础的粒子标点
         /// </summary>
-        public static void Point(this Vector2 pos, int dustid = DustID.Wraith) {
+        public static void Point(this Vector2 pos, int dustid = DustID.Wraith) { 
             for (int j = 0; j < 15; j++) {
                 int num1 = Dust.NewDust(pos, 0, 0, dustid, 0f, 0f, 10, Color.White, 1f);
                 Main.dust[num1].noGravity = true;

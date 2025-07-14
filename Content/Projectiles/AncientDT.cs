@@ -1,6 +1,5 @@
-﻿using GloryofGuardian.Common;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
+using GloryofGuardian.Common;
 using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
@@ -15,11 +14,11 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.friendly = false;
             Projectile.penetrate = -1;
 
-            OtherHeight = 34;
+            OtherHeight = 64;
 
             count0 = 60;
 
-            exdust = DustID.Crimson;
+            exdust = DustID.Sand;
         }
 
         Player Owner => Main.player[Projectile.owner];
@@ -36,7 +35,7 @@ namespace GloryofGuardian.Content.Projectiles {
             List<Projectile> projlist = new List<Projectile>();
 
             for (int i = 0; i < 1; i++) {
-                Vector2 velfire = (target0.Center -AttackPos).SafeNormalize(Vector2.Zero);
+                Vector2 velfire = (target0.Center - AttackPos).SafeNormalize(Vector2.Zero);
 
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item60, Projectile.Center);
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos, velfire, ModContent.ProjectileType<AncienProj>(), lastdamage, 6, Owner.whoAmI);
