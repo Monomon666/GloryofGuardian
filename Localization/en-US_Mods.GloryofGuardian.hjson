@@ -173,6 +173,9 @@ Projectiles: {
 	HarpyDT.DisplayName: Harpy D T
 	HarpyProj.DisplayName: Harpy Proj
 	HarpyProj2.DisplayName: Harpy Proj2
+	PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
+	PaleGunProj.DisplayName: Pale Gun Proj
+	PaleShotGunDT.DisplayName: Pale Shot Gun D T
 }
 
 NPCs.GOGDummy.DisplayName: G O G Dummy

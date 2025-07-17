@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Classes;
@@ -124,6 +125,15 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         protected bool findboss = false;
 
+        /// <summary>
+        /// 筛除列表,筛除因各种原因被忽略的npc
+        /// </summary>
+        protected List<int> ignorenpc = [];
+        /// <summary>
+        /// 过近筛除:小于这个距离的target0被忽略
+        /// </summary>
+        protected int closeignoredistance = 0;
+
         //额外属性
         /// <summary>
         /// 额外的超频率,加算,100为100%
@@ -168,7 +178,16 @@ namespace GloryofGuardian.Content.ParentClasses {
             if (Drop) DTDrop();//坠落
             Calculate();//攻击间隔和伤害的重新计算
             //索敌与行动
-            target0 = AttackPos.InPosClosestNPC(Attackrange, ignoretile, findboss);
+            
+            //筛除列表重置
+            ignorenpc.Clear();
+
+            //过近筛除
+            for (int i = 0; i < Main.maxNPCs; i++) {
+                //筛除判断
+            }
+
+            target0 = AttackPos.InPosClosestNPC(Attackrange, closeignoredistance, ignoretile, findboss);
 
             if (target0 != null) {
                 if (CanTurn) {

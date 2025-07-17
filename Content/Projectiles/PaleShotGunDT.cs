@@ -7,11 +7,11 @@ using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles {
-    public class RustyGunDT : GOGDT {
+    public class PaleShotGunDT : GOGDT {
         public override string Texture => GOGConstant.nulls;
 
         public override void SetProperty() {
-            Projectile.width = 60;
+            Projectile.width = 80;
             Projectile.friendly = true;
             Projectile.usesLocalNPCImmunity = true;
             Projectile.localNPCHitCooldown = 15;
@@ -58,7 +58,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
                 wrotation = wrotation + bias;
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(bias) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 8, Owner.whoAmI);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(bias) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI);
                 Recoil = 8;
 
                 projlist.Add(proj1);
@@ -76,8 +76,8 @@ namespace GloryofGuardian.Content.Projectiles {
                 Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
 
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
-                
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
+
                 for (int j = 0; j < 24; j++) {
                     int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, DustID.Flare, 0f, 0f, 10, Color.White, 1.5f);
                     Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
@@ -100,7 +100,22 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
-            return base.Colliding(projHitbox, targetHitbox);
+            bool collBool = false;
+            float point = 0f;
+
+            Vector2 startPos = Projectile.position + new Vector2(Projectile.width / 2, Projectile.height);
+            Vector2 endPos = Projectile.position + new Vector2(Projectile.width / 2, -32);
+
+            collBool = Collision.CheckAABBvLineCollision(
+                targetHitbox.TopLeft(),
+                targetHitbox.Size(),
+                startPos,
+                endPos,
+                Projectile.width,
+                ref point
+                );
+
+            return collBool;
         }
 
         public override bool PreDraw(ref Color lightColor) {
@@ -108,11 +123,11 @@ namespace GloryofGuardian.Content.Projectiles {
             SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
             Vector2 cen = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? new Vector2(-8, 0) : new Vector2(-16, 0);
 
-            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT").Value;
+            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleGunDT").Value;
             Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -12);
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT2").Value;
+            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleShotGunDT2").Value;
             Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -40);
             //枪管后坐力机制,开枪后枪管在4帧内后移,8帧后弹回
             Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));

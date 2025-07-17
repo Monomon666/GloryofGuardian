@@ -102,8 +102,8 @@ namespace GloryofGuardian.Content.ParentClasses {
                 startpos = Projectile.Center;
             }
             //索敌与行动
-            if (target0 == null || !target0.active) target0 = Projectile.Center.InPosClosestNPC(Attackrange, throughtile, bossfirst);
-            target01 = Projectile.Center.InPosClosestNPC(Attackrange, throughtile, bossfirst);
+            if (target0 == null || !target0.active) target0 = Projectile.Center.InPosClosestNPC(Attackrange, 0, throughtile, bossfirst);
+            target01 = Projectile.Center.InPosClosestNPC(Attackrange, 0, throughtile, bossfirst);
 
             return base.PreAI();
         }

@@ -250,13 +250,37 @@ Items: {
 	}
 
 	PaleClockworkGun: {
-		// DisplayName: Pale Clockwork Gun
-		// Tooltip: ""
+		DisplayName: 苍白链条机枪
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一挺重型机枪
+			向最近的敌人快速发射苍白子弹
+			普通苍白子弹不能穿透敌人
+			[c/FF00A0:超频攻击转而发射苍白贯穿弹]
+			[c/FF00A0:穿透敌人并破坏施加<火力压制>]
+			处于<火力压制>状态下的敌人会在被击中时大幅减速
+			对免疫击退的敌人无效
+			右键收回炮塔
+			"我们的火力足以压制它们"
+			'''
 	}
 
 	PaleShotGun: {
-		// DisplayName: Pale Shot Gun
-		// Tooltip: ""
+		DisplayName: 苍白霰弹机枪
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一挺霰弹机枪
+			向最近的敌人发射苍白霰弹
+			苍白霰弹能够穿透敌人,但伤害会随距离衰减
+			[c/FF00A0:超频攻击转而发射苍白爆破弹]
+			[c/FF00A0:爆破弹将根据发射时敌人的位置]
+			[c/FF00A0:在靠近敌人时爆破成一束苍白霰弹]
+			若短时间内被多发霰弹击中,后续的霰弹会无视敌人的防御
+			右键收回炮塔
+			"没有铁甲能够阻挡它们"
+			'''
 	}
 }
 
@@ -336,6 +360,9 @@ Projectiles: {
 	// HarpyDT.DisplayName: Harpy D T
 	// HarpyProj.DisplayName: Harpy Proj
 	// HarpyProj2.DisplayName: Harpy Proj2
+	// PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
+	// PaleGunProj.DisplayName: Pale Gun Proj
+	// PaleShotGunDT.DisplayName: Pale Shot Gun D T
 }
 
 NPCs.GOGDummy.DisplayName: 训练假人

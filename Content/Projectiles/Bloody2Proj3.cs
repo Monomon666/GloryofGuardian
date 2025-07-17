@@ -32,7 +32,7 @@ namespace GloryofGuardian.Content.Projectiles {
         NPC target1 = null;
         //mode -1 待机 0 运作 1 特殊攻击
         public override void AI() {
-            if (target1 == null || !target1.active) target1 = Projectile.Center.InPosClosestNPC(800, true, false, ignore);
+            if (target1 == null || !target1.active) target1 = Projectile.Center.InPosClosestNPC(800, 0, true, false, ignore);
 
             Projectile.velocity.Y *= 0f;
             Projectile.Center += new Vector2(0, (float)Math.Sin(drawcount / 10f));

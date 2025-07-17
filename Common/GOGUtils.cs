@@ -20,7 +20,8 @@ namespace GloryofGuardian.Common
         /// 基础的跳字方法
         /// </summary>
         public static void WL(this object abc) {
-            Main.NewText(abc);
+            if(abc != null) Main.NewText(abc);
+            else Main.NewText("错误");
         }
 
         /// <summary>
@@ -198,15 +199,16 @@ namespace GloryofGuardian.Common
 
         #region 索敌
         /// <summary>
-        /// 寻找距离指定位置最近的NPC
+        /// 寻找指定距离范围内位置最近的NPC
         /// </summary>
         /// <param name="origin">开始搜索的位置</param>
+        /// <param name="minDistanceToCheck">搜索NPC的最小距离</param>
         /// <param name="maxDistanceToCheck">搜索NPC的最大距离</param>
         /// <param name="ignoreTiles">在检查障碍物时是否忽略物块</param>
         /// <param name="bossPriority">是否优先选择Boss</param>
-        /// <param name="ignore">是否忽略给出目标</param>//弹射用
+        /// <param name="ignore">是否忽略给出目标</param>
         /// <returns>距离最近的NPC。</returns>
-        public static NPC InPosClosestNPC(this Vector2 origin, float maxDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, List<int> ignore = null) {
+        public static NPC InPosClosestNPC(this Vector2 origin, float maxDistanceToCheck, float minDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, List<int> ignore = null) {
             NPC closestTarget = null;
             float distance = maxDistanceToCheck;
             if (bossPriority) {
@@ -215,7 +217,10 @@ namespace GloryofGuardian.Common
                     if ((bossFound && !Main.npc[index2].boss && Main.npc[index2].type != NPCID.WallofFleshEye) || !Main.npc[index2].CanBeChasedBy()) {
                         continue;
                     }
-                    if (ignore != null && ignore.Contains(Main.npc[index2].whoAmI)) {
+                    if (ignore != null && ignore.Contains(Main.npc[index2].whoAmI)) {//忽略组
+                        continue;
+                    }
+                    if (minDistanceToCheck != 0 && Vector2.Distance(origin, Main.npc[index2].Center) < minDistanceToCheck) {//近距离忽略
                         continue;
                     }
                     float extraDistance2 = (Main.npc[index2].width / 2) + (Main.npc[index2].height / 2);
@@ -237,6 +242,12 @@ namespace GloryofGuardian.Common
                     if (Main.npc[index].CanBeChasedBy()) {
                         float extraDistance = (Main.npc[index].width / 2) + (Main.npc[index].height / 2);
                         bool canHit = true;
+                        if (ignore != null && ignore.Contains(Main.npc[index].whoAmI)) {//忽略组
+                            continue;
+                        }
+                        if (minDistanceToCheck != 0 && Vector2.Distance(origin, Main.npc[index].Center) < minDistanceToCheck) {//近距离忽略
+                            continue;
+                        }
                         if (extraDistance < distance && !ignoreTiles) {
                             canHit = Collision.CanHit(origin, 1, 1, Main.npc[index].Center, 1, 1);
                         }

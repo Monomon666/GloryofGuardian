@@ -7,7 +7,7 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
     public class PaleShotGun : GOGCalling {
         public override string Texture => GOGConstant.Weapons + Name;
 
-        protected override int ProjType => ModContent.ProjectileType<BloodyDT>();
+        protected override int ProjType => ModContent.ProjectileType<PaleShotGunDT>();
 
         protected override int ProjSlot => 1;
 

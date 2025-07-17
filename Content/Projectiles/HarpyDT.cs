@@ -96,7 +96,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
             {
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
-                AttackPos + new Vector2(0, -12), new Vector2(0, 24).RotatedBy(MathHelper.PiOver2 / 9f * (5 - numberList[overclockcount - 1])), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
+                AttackPos + new Vector2(0, -12), new Vector2(0, 18).RotatedBy(MathHelper.PiOver2 / 9f * (5 - numberList[overclockcount - 1])), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
 
                 projlist.Add(proj1);
             }

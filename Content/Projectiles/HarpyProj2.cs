@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
@@ -55,6 +56,9 @@ namespace GloryofGuardian.Content.Projectiles {
         void ai1() {
             // 旋转
             Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+
+            //if (drawcount < 10) drawcount += Main.rand.Next(10, 40);
+            //Projectile.velocity = Projectile.velocity.RotatedBy(Math.Sin(drawcount / 2f) / 6f);
         }
 
         //钉墙

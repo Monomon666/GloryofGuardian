@@ -47,7 +47,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (!startspeed) Projectile.ChasingBehavior(chasingpos, 4, 48);
             }
             else {
-                target1 = Projectile.Center.InPosClosestNPC(400, false, true);
+                target1 = Projectile.Center.InPosClosestNPC(400, 0, false, true);
             }
 
             if (Projectile.ai[1] == 0) {
