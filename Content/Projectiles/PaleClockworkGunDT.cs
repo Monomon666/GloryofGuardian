@@ -22,7 +22,7 @@ namespace GloryofGuardian.Content.Projectiles {
             OtherHeight = 34;
 
             count0 = 24;
-            exdust = 0;
+            exdust = DustID.GemDiamond;
 
             TurnCenter = new Vector2(-4, -44);
 
@@ -53,18 +53,25 @@ namespace GloryofGuardian.Content.Projectiles {
         protected override List<Projectile> Attack1() {
             List<Projectile> projlist = new List<Projectile>();
 
-            //for (int i = 0; i < 1; i++) {
-            //    float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
-            //    Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
-            //    float bias = Main.rand.NextFloat(-0.1f, 0.1f);
-            //
-            //    wrotation = wrotation + bias;
-            //    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-            //    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(bias) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI);
-            //    Recoil = 8;
-            //
-            //    projlist.Add(proj1);
-            //}
+            for (int i = 0; i < 1; i++) {
+                float vel = Main.rand.NextFloat(0.9f, 1.15f) * 24f;
+                Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.06f, 0.06f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 0);
+
+                for (int j = 0; j < 4; j++) {
+                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
+                    Main.dust[num].velocity *= Main.rand.NextFloat(1f, 6f);
+                    Main.dust[num].noGravity = true;
+                }
+
+                Recoil = 8;
+                crit = true;
+
+                projlist.Add(proj1);
+            }
 
             FinishAttack = true;
             return projlist;
@@ -73,25 +80,25 @@ namespace GloryofGuardian.Content.Projectiles {
         protected override List<Projectile> Attack2() {
             List<Projectile> projlist = new List<Projectile>();
 
-            //for (int i = 0; i < 1; i++) {
-            //    float vel = Main.rand.NextFloat(0.9f, 1.15f) * 36f;
-            //    Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
-            //
-            //    Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
-            //    Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
-            //
-            //    for (int j = 0; j < 4; j++) {
-            //        int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
-            //        Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
-            //        Main.dust[num].velocity *= Main.rand.NextFloat(1f, 6f);
-            //        Main.dust[num].noGravity = true;
-            //    }
-            //
-            //    Recoil = 8;
-            //    crit = true;
-            //
-            //    projlist.Add(proj1);
-            //}
+            for (int i = 0; i < 1; i++) {
+                float vel = Main.rand.NextFloat(0.9f, 1.15f) * 12f;
+                Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
+            
+                Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
+            
+                for (int j = 0; j < 4; j++) {
+                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
+                    Main.dust[num].velocity *= Main.rand.NextFloat(1f, 4f);
+                    Main.dust[num].noGravity = true;
+                }
+            
+                Recoil = 8;
+                crit = true;
+            
+                projlist.Add(proj1);
+            }
 
             FinishAttack = true;
             return projlist;
@@ -126,11 +133,11 @@ namespace GloryofGuardian.Content.Projectiles {
             Vector2 cen = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? new Vector2(-8, 0) : new Vector2(-16, 0);
 
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleGunDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -16);
-            Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -17);
 
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PaleClockworkGunDT2").Value;
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -44);
+
+            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -45);
             //枪管后坐力机制,开枪后枪管在4帧内后移,8帧后弹回
             Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
             Vector2 Recoilfix = Vector2.Zero;
@@ -138,12 +145,19 @@ namespace GloryofGuardian.Content.Projectiles {
             if (Recoil > 6) Recoilfix = (9 - Recoil) * -nowvel * 1;//最大后移8
             if (Recoil > 0 && Recoil <= 6) Recoilfix = (Recoil / 6f) * -nowvel * 2 * 1;
 
+            Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+            Main.EntitySpriteDraw(texture0, drawPosition0, null, new Color(255, 255, 255, 200), Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+
             Main.EntitySpriteDraw(texture, drawPosition + Recoilfix, null, lightColor, wrotation, texture.Size() * 0.5f + cen, Projectile.scale, spriteEffects, 0);
+            Main.EntitySpriteDraw(texture, drawPosition + Recoilfix, null, new Color(255, 255, 255, 150), wrotation, texture.Size() * 0.5f + cen, Projectile.scale, spriteEffects, 0);
 
 
-            Texture2D texturess = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusProj01").Value;
+
+
+
 
             //Todo,RT2D学习实例
+            Texture2D texturess = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusProj01").Value;
 
             ////固定
             //AdDraw(

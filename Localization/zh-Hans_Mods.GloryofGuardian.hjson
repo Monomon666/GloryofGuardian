@@ -164,6 +164,8 @@ Items: {
 			因为生锈,有着不稳定的攻击间隔
 			[c/FF00A0:超频攻击转而发射高速精准子弹,能够穿透一次]
 			[c/FF00A0:下次攻击的随机间隔必定最短]
+			炮台的带刺护板可以伤害到近距离的敌人
+			无法射击离炮台过近的敌人
 			右键收回炮塔
 			"即便锈迹斑斑,它依然能用火力压制敌人"
 			'''
@@ -261,6 +263,8 @@ Items: {
 			[c/FF00A0:穿透敌人并破坏施加<火力压制>]
 			处于<火力压制>状态下的敌人会在被击中时大幅减速
 			对免疫击退的敌人无效
+			炮台的带刺护板可以伤害到近距离的敌人
+			无法射击离炮台过近的敌人
 			右键收回炮塔
 			"我们的火力足以压制它们"
 			'''
@@ -272,12 +276,13 @@ Items: {
 			'''
 			消耗一个戍卫栏位
 			召唤一挺霰弹机枪
-			向最近的敌人发射苍白霰弹
-			苍白霰弹能够穿透敌人,但伤害会随距离衰减
+			向最近的敌人发射四枚苍白霰弹
+			苍白霰弹能够穿透敌人,但伤害会随时间缩减
 			[c/FF00A0:超频攻击转而发射苍白爆破弹]
 			[c/FF00A0:爆破弹将根据发射时敌人的位置]
-			[c/FF00A0:在靠近敌人时爆破成一束苍白霰弹]
-			若短时间内被多发霰弹击中,后续的霰弹会无视敌人的防御
+			[c/FF00A0:在靠近敌人时爆破成六枚苍白霰弹]
+			炮台的带刺护板可以伤害到近距离的敌人
+			无法射击离炮台过近的敌人
 			右键收回炮塔
 			"没有铁甲能够阻挡它们"
 			'''
@@ -320,49 +325,54 @@ Buffs: {
 		DisplayName: 腐坏
 		Description: 腐化的力量在抢夺你的生命,你受到的所有戍卫伤害提升
 	}
+
+	PaleSuppressed: {
+		DisplayName: 苍白压制
+		Description: 枪林弹雨之下,你寸步难行
+	}
 }
 
 Projectiles: {
 	// Proj0.DisplayName: Proj0
 	// WildDT.DisplayName: Wild D T
-	// WildProj.DisplayName: Wild Proj
+	WildProj.DisplayName: 木质弩箭
 	// GarrisonDT.DisplayName: Garrison D T
-	// GarrisonProj.DisplayName: Garrison Proj
+	GarrisonProj.DisplayName: 金属弩箭
 	// BloodyDT.DisplayName: Bloody D T
-	// BloodyProj.DisplayName: Bloody Proj
+	BloodyProj.DisplayName: 血污
 	// CorruptDT.DisplayName: Corrupt D T
-	// MushRoomDT.DisplayName: Mush Room D T
-	// BloodyProj2.DisplayName: Bloody Proj2
-	// CorruptCloudProj.DisplayName: Corrupt Cloud Proj
-	// CorruptRainProj.DisplayName: Corrupt Rain Proj
-	// MushRoomProj.DisplayName: Mush Room Proj
-	// MushRoomProj2.DisplayName: Mush Room Proj2
+	MushRoomDT.DisplayName: 孢子
+	BloodyProj2.DisplayName: 血污
+	//CorruptCloudProj.DisplayName: Corrupt Cloud Proj
+	CorruptRainProj.DisplayName: 腐化之雨
+	MushRoomProj.DisplayName: 孢子
+	MushRoomProj2.DisplayName: 孢子
 	// FrostDT.DisplayName: Frost D T
-	// FrostProj.DisplayName: Frost Proj
+	FrostProj.DisplayName: 冰霜
 	// BeeHiveDT.DisplayName: Bee Hive D T
 	// MeteorDT.DisplayName: Meteor D T
-	// MeteorProj.DisplayName: Meteor Proj
-	// RustyGunDT.DisplayName: Rusty Gun D T
-	// RustyGunProj.DisplayName: Rusty Gun Proj
+	MeteorProj.DisplayName: 火焰
+	RustyGunDT.DisplayName: 生锈刺装甲
+	RustyGunProj.DisplayName: 生锈子弹
 	// ShurikenDT.DisplayName: Shuriken D T
-	// ShurikenProj.DisplayName: Shuriken Proj
+	ShurikenProj.DisplayName: 手里剑
 	// Bloody2DT.DisplayName: Bloody2 D T
-	// Bloody2Proj1.DisplayName: Bloody2 Proj1
-	// Bloody2Proj2.DisplayName: Bloody2 Proj2
-	// Bloody2Proj3.DisplayName: Bloody2 Proj3
-	// Bloody2Proj4.DisplayName: Bloody2 Proj4
+	Bloody2Proj1.DisplayName: 血肉异形
+	Bloody2Proj2.DisplayName: 硬血尖刺
+	Bloody2Proj3.DisplayName: 血肉子嗣
+	Bloody2Proj4.DisplayName: 灵液
 	// Corrupt2DT.DisplayName: Corrupt2 D T
-	// Corrupt2ParaProj.DisplayName: Corrupt2 Para Proj
-	// Corrupt2RainProj.DisplayName: Corrupt2 Rain Proj
-	// AncienProj.DisplayName: Ancien Proj
-	// AncienProj2.DisplayName: Ancien Proj2
+	Corrupt2ParaProj.DisplayName: 腐化之力
+	Corrupt2RainProj.DisplayName: 腐化之雨
+	AncienProj.DisplayName: 远古旋风
+	AncienProj2.DisplayName: 远古风暴
 	// AncientDT.DisplayName: Ancient D T
 	// HarpyDT.DisplayName: Harpy D T
-	// HarpyProj.DisplayName: Harpy Proj
-	// HarpyProj2.DisplayName: Harpy Proj2
-	// PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
-	// PaleGunProj.DisplayName: Pale Gun Proj
-	// PaleShotGunDT.DisplayName: Pale Shot Gun D T
+	HarpyProj.DisplayName: 鸟妖羽毛
+	HarpyProj2.DisplayName: 金色羽毛
+	PaleClockworkGunDT.DisplayName: 苍白尖刺装甲
+	PaleGunProj.DisplayName: 苍白子弹
+	PaleShotGunDT.DisplayName: 苍白尖刺装甲
 }
 
 NPCs.GOGDummy.DisplayName: 训练假人

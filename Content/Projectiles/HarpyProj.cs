@@ -64,7 +64,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 Projectile.ai[1] = target.whoAmI;//标记正确的受debuff的目标
                 Projectile.friendly = false;
 
-                target.AddBuff(ModContent.BuffType<JavelinDebuff1>(), 60);
+                target.AddBuff(ModContent.BuffType<JavelinDebuff>(), 60);
             }
             base.OnHitNPC(target, hit, damageDone);
         }

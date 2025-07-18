@@ -159,7 +159,7 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.damage = 0; // 移出伤害，之后通过debuff造成伤害
 
             // 添加debuff，该buff将会打开gnpc中的开关并造成伤害
-            target.AddBuff(ModContent.BuffType<JavelinDebuff1>(), 30);
+            target.AddBuff(ModContent.BuffType<JavelinDebuff>(), 30);
 
             // 启用该方法以设定一个上限，防止敌怪被扎了过多的弹幕
             // 使用该方法需要在ai槽中正确地填入(ai0为1,ai1为npc的index),想使用最好还是自己另写一个

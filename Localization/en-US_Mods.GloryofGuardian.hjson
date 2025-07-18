@@ -133,6 +133,11 @@ Buffs: {
 		DisplayName: Corrupt Seedbed Debuff
 		Description: Mods.GloryofGuardian.Buffs.CorruptSeedbedDebuff.Description
 	}
+
+	PaleSuppressed: {
+		DisplayName: Pale Suppressed
+		Description: Mods.GloryofGuardian.Buffs.PaleSuppressed.Description
+	}
 }
 
 Projectiles: {
