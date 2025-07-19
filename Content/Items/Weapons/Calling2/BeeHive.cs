@@ -1,15 +1,15 @@
 ﻿using GloryofGuardian.Common;
-using GloryofGuardian.Content.Projectiles;
+using GloryofGuardian.Content.NPCs.GuardNPCs;
 using GloryofGuardian.Content.WeaponClasses;
 using Terraria.ID;
 
-namespace GloryofGuardian.Content.Items.Weapons.Calling {
+namespace GloryofGuardian.Content.Items.Weapons.Calling2 {
     public class BeeHive : GOGCalling {
         public override string Texture => GOGConstant.Weapons + Name;
 
-        protected override int ProjType => ModContent.ProjectileType<BeeHiveDT>();
+        protected override int ProjType => 1;
 
-        protected override int ProjSlot => 1;
+        protected override int ProjSlot => 0;
 
         protected override int ProjlNumLimit => 1;
 
@@ -24,6 +24,9 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
             //独一炮塔召唤速度减缓
             Item.useTime = 60;
             Item.useAnimation = 60;
+
+            ProjOrNpc = false;
+            NPCType = ModContent.NPCType<BeeHiveDTN>();
         }
 
         public override void AddRecipes() {

@@ -141,15 +141,15 @@ Items: {
 		DisplayName: 蜂后秘酿
 		Tooltip:
 			'''
-			消耗一个戍卫栏位
-			召唤一个小型蜂巢
+			不消耗戍卫栏位
+			召唤至多一个小型蜂巢
 			散布一个大型甜蜜光环
 			为靠近的玩家提供蜂蜜和生命再生增益
 			在一个较大范围内解除玩家的中毒减益
-			靠近提供蜂蜜回复20生命值,一分钟只能吃一次
+			靠近提供蜂蜜回复40生命值,60秒只能吃一次
 			[c/FF00A0:超频蜂蜜回复1.5倍生命值]
-			右键收回炮塔
-			只能存在一个蜂巢
+			右键收回
+			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
 			"这道甜蜜的防线守卫着大家的口腹"
 			'''
 	}
@@ -235,7 +235,7 @@ Items: {
 	}
 
 	Harpy: {
-		DisplayName: 羽妖之遗
+		DisplayName: 攀云之爪
 		Tooltip:
 			'''
 			消耗一个炮塔栏位
@@ -287,6 +287,24 @@ Items: {
 			"没有铁甲能够阻挡它们"
 			'''
 	}
+
+	ShadowFlameScroll: {
+		DisplayName: 影炎卷轴
+		Tooltip:
+			'''
+			不消耗戍卫栏位
+			召唤至多一个暗影炎卷轴
+			散布一个暗影炎光环
+			为靠近的我方弹幕附着暗影炎增益
+			为靠近的敌人和敌方弹幕暂时附着暗影炎减益
+			该减益还会使敌方弹幕在范围内大幅减速
+			[c/FF00A0:卷轴很好地控制了影炎的力量,不会超频]
+			右键收回
+			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
+			[c/FF0000:附着暗影炎的弹幕只能对卷轴造成10%伤害]
+			"来自异乡黑色的火焰如今也守护它新的家园"
+			'''
+	}
 }
 
 Prefixes: {
@@ -311,6 +329,11 @@ Buffs: {
 		Description: 弩箭钉入体内,无法再生生命并持续损失生命
 	}
 
+	JavelinDebuff: {
+		// DisplayName: Javelin Debuff
+		// Description: Mods.GloryofGuardian.Buffs.JavelinDebuff.Description
+	}
+
 	CorruptDebuff: {
 		DisplayName: 腐蚀
 		Description: 护甲被侵蚀,能叠加至多减少10点护甲,且每次沾到任何腐化雨水都会重置持续时间
@@ -330,6 +353,11 @@ Buffs: {
 		DisplayName: 苍白压制
 		Description: 枪林弹雨之下,你寸步难行
 	}
+
+	PaleSuppressedDebuff: {
+		// DisplayName: Pale Suppressed Debuff
+		// Description: Mods.GloryofGuardian.Buffs.PaleSuppressedDebuff.Description
+	}
 }
 
 Projectiles: {
@@ -343,7 +371,7 @@ Projectiles: {
 	// CorruptDT.DisplayName: Corrupt D T
 	MushRoomDT.DisplayName: 孢子
 	BloodyProj2.DisplayName: 血污
-	//CorruptCloudProj.DisplayName: Corrupt Cloud Proj
+	// CorruptCloudProj.DisplayName: Corrupt Cloud Proj
 	CorruptRainProj.DisplayName: 腐化之雨
 	MushRoomProj.DisplayName: 孢子
 	MushRoomProj2.DisplayName: 孢子
@@ -375,4 +403,8 @@ Projectiles: {
 	PaleShotGunDT.DisplayName: 苍白尖刺装甲
 }
 
-NPCs.GOGDummy.DisplayName: 训练假人
+NPCs: {
+	GOGDummy.DisplayName: 训练假人
+	BeeHiveDTN.DisplayName: 甜蜜蜂巢
+	// ShadowFlameScrollDTN.DisplayName: Shadow Flame Scroll D T N
+}

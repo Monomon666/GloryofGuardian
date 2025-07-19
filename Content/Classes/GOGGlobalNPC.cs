@@ -2,6 +2,7 @@
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.NPCs.GuardNPCs;
 using GloryofGuardian.Content.ParentClasses;
 using GloryofGuardian.Content.Projectiles;
 using Terraria;
@@ -159,6 +160,12 @@ namespace GloryofGuardian.Content.Classes {
                     Main.dust[num].velocity *= Main.rand.NextFloat(3f, 4f);
                     Main.dust[num].noGravity = true;
                 }
+            }
+
+            //暗影炎伤害削减
+            if (npc.type == ModContent.NPCType<ShadowFlameScrollDTN>()) {
+                GOGGlobalProj globalProj = projectile.GetGlobalProjectile<GOGGlobalProj>();
+                if (globalProj.ShadowFire) modifiers.FinalDamage *= 0.1f;
             }
         }
     }

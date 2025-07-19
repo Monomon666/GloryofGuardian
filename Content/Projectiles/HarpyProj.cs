@@ -16,7 +16,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
             Projectile.alpha = 255;
 
-            Projectile.scale *= 0.8f;
+            Projectile.scale *= 0.6f;
 
             base.SetProperty();
         }
@@ -28,7 +28,7 @@ namespace GloryofGuardian.Content.Projectiles {
             if (Projectile.alpha <= 0) Projectile.alpha = 0;
             else if (Projectile.alpha > 0) Projectile.alpha -= 15;
             // 旋转
-            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+            Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2 + 0.05f;
 
             if (mode == 0) ai1();
             if (mode == 1) ai2();

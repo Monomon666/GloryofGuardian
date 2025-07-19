@@ -19,7 +19,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
             Projectile.alpha = 255;
 
-            Projectile.scale *= 0.8f;
+            Projectile.scale *= 0.6f;
 
             base.SetProperty();
         }

@@ -95,6 +95,11 @@ Items: {
 		DisplayName: Pale Shot Gun
 		Tooltip: ""
 	}
+
+	ShadowFlameScroll: {
+		DisplayName: Shadow Flame Scroll
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -119,6 +124,11 @@ Buffs: {
 		Description: Mods.GloryofGuardian.Buffs.JavelinDebuff1.Description
 	}
 
+	JavelinDebuff: {
+		DisplayName: Javelin Debuff
+		Description: Mods.GloryofGuardian.Buffs.JavelinDebuff.Description
+	}
+
 	CorruptDebuff: {
 		DisplayName: Corrupt Debuff
 		Description: Mods.GloryofGuardian.Buffs.CorruptDebuff.Description
@@ -137,6 +147,11 @@ Buffs: {
 	PaleSuppressed: {
 		DisplayName: Pale Suppressed
 		Description: Mods.GloryofGuardian.Buffs.PaleSuppressed.Description
+	}
+
+	PaleSuppressedDebuff: {
+		DisplayName: Pale Suppressed Debuff
+		Description: Mods.GloryofGuardian.Buffs.PaleSuppressedDebuff.Description
 	}
 }
 
@@ -183,4 +198,8 @@ Projectiles: {
 	PaleShotGunDT.DisplayName: Pale Shot Gun D T
 }
 
-NPCs.GOGDummy.DisplayName: G O G Dummy
+NPCs: {
+	GOGDummy.DisplayName: G O G Dummy
+	BeeHiveDTN.DisplayName: Bee Hive D T N
+	ShadowFlameScrollDTN.DisplayName: Shadow Flame Scroll D T N
+}

@@ -1,8 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Classes;
-using GloryofGuardian.Content.NPCs.Special;
-using Microsoft.Xna.Framework.Audio;
+using GloryofGuardian.Content.ParentClasses;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent.Creative;
@@ -34,13 +33,22 @@ namespace GloryofGuardian.Content.WeaponClasses {
         protected abstract int ProjSlot { get; }
         /// <summary>
         /// 该类炮塔的数量上限,-1为无限制
+        /// npc也使用这个
         /// </summary>
         protected abstract int ProjlNumLimit { get; }
-
         /// <summary>
         /// 右键的行为模式为收回该类炮塔,默认为true
         /// </summary>
         protected bool RightClear = true;
+
+        /// <summary>
+        /// npc生命值倍率,默认为1
+        /// </summary>
+        protected float NPCLifeRate = 1;
+        /// <summary>
+        /// npc额外防御力,默认值等同于玩家防御力
+        /// </summary>
+        protected int NPCexDefense = 0;
 
         /// <summary>
         /// 使用音效
@@ -153,8 +161,26 @@ namespace GloryofGuardian.Content.WeaponClasses {
                 }
 
                 return base.CanUseItem(player);
-            } else {
+            }
+            //npc类
+            else {
                 //左键
+                if (player.altFunctionUse == 0) {
+                    // 检测世界中存活的 NPC 数量
+                    int spiderCount = CountNPCs();
+
+                    // 如果 SpiderNPC 数量大于等于，返回 false
+                    if (spiderCount >= ProjlNumLimit && ProjlNumLimit != -1) {
+                        CombatText.NewText(player.Hitbox,
+                                Color.Red,
+                                "到达上限",//这里是你需要展示的文字
+                                true,//dramatic为true可以使得字体闪烁，
+                                true
+                                );
+                        return false;
+                    }
+                }
+
                 if (player.altFunctionUse == 0) {
                     int type = NPCType;
                     if (player.whoAmI == Main.myPlayer) {
@@ -162,7 +188,10 @@ namespace GloryofGuardian.Content.WeaponClasses {
                         int y = (int)Main.MouseWorld.Y - 20;
 
                         if (Main.netMode == NetmodeID.SinglePlayer) {
-                            NPC.NewNPC(new EntitySource_ItemUse(player, Item), x, y, NPCType);
+                            int npc = NPC.NewNPC(new EntitySource_ItemUse(player, Item), x, y, NPCType);
+                            Main.npc[npc].life = (int)(Main.npc[npc].lifeMax * NPCLifeRate);//npc生命值倍率
+                            Main.npc[npc].defense = player.statDefense + NPCexDefense;//npc额外防御力
+                            if (Main.npc[npc].ModNPC is GOGGuardNPC npc0) npc0.OwnerWhoAmI = player.whoAmI;
                         }
                         else {
                             NetMessage.SendData(MessageID.SpawnBossUseLicenseStartEvent, number: player.whoAmI, number2: type);//发包，用来联机同步
@@ -188,10 +217,26 @@ namespace GloryofGuardian.Content.WeaponClasses {
             }
         }
 
+        //npc数量检测
+        public int CountNPCs() {
+            int count = 0;
+
+            for (int i = 0; i < Main.maxNPCs; i++) {
+                NPC npc = Main.npc[i];
+
+                // 检查 NPC 是否存活且类型为 NPCType
+                if (npc.active && npc.type == NPCType) {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
         //Shoot函数，召唤炮塔
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback) {
             if (!ProjOrNpc) return false;
-            
+
             if (player.altFunctionUse == 0) {
                 int p = Projectile.NewProjectile(source, Main.MouseWorld, Vector2.Zero, type, damage, knockback, player.whoAmI, PrefixCD(Item), PrefixCrit(Item));
                 if (Main.projectile.IndexInRange(p))

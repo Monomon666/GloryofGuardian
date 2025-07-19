@@ -13,6 +13,7 @@
         public const string Weapons = Items + "Weapons/";
         public const string Armors = Items + "Armors/";
         public const string NPCs = Asset + "NPCs/";
+        public const string GuardNPCs = NPCs + "GuardNPCs/";
         public const string Projectiles = Asset + "Projectiles/";
         public const string Sounds = Asset + "Sounds/";
         public const string Tiles = Asset + "Tiles/";

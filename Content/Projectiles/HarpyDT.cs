@@ -12,7 +12,7 @@ namespace GloryofGuardian.Content.Projectiles {
         public override string Texture => GOGConstant.nulls;
 
         public override void SetProperty() {
-            Projectile.width = 64;
+            Projectile.width = 82;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
             Projectile.light = 1.5f;
@@ -33,7 +33,8 @@ namespace GloryofGuardian.Content.Projectiles {
             Lighting.AddLight(Projectile.Center, 2.5f, 2.5f, 2.5f);
 
             AttackPos = Projectile.Center + new Vector2(-2, 0);
-            Projectile.Center += new Vector2(0, (float)Math.Sin(drawcount / 30f) * 0.5f);
+            Projectile.Center += new Vector2(0, (float)Math.Sin(drawcount / 30f) * 0.3f);
+            Projectile.Center += new Vector2((float)Math.Sin(drawcount / 120f) * 0.2f, 0);
 
             if (!Main.raining) {
                 //Todo

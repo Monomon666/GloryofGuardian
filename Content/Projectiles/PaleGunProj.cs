@@ -43,6 +43,13 @@ namespace GloryofGuardian.Content.Projectiles {
 
             if (Projectile.ai[0] == 2) {
                 if (count <= 30 && count % 5 == 0) Projectile.damage = (int)(Projectile.damage * 0.8f);
+
+                for (int j = 0; j < 1; j++) {
+                    int num = Dust.NewDust(Projectile.Center, 0, 0, DustID.GemDiamond, 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num].velocity = Projectile.velocity.SafeNormalize(Vector2.Zero);
+                    Main.dust[num].velocity *= Main.rand.NextFloat(4f, 12f);
+                    Main.dust[num].noGravity = true;
+                }
             }
 
             if (Projectile.ai[0] == 3) {
@@ -55,6 +62,13 @@ namespace GloryofGuardian.Content.Projectiles {
                     }
 
                     Projectile.Kill();
+                }
+
+                for (int j = 0; j < 4; j++) {
+                    int num = Dust.NewDust(Projectile.Center, 0, 0, DustID.GemDiamond, 0f, 0f, 10, Color.White, 1f);
+                    Main.dust[num].velocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.1f, 0.1f));
+                    Main.dust[num].velocity *= Main.rand.NextFloat(4f, 12f);
+                    Main.dust[num].noGravity = true;
                 }
             }
 
@@ -76,6 +90,8 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity) {
+            Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
+
             return base.OnTileCollide(oldVelocity);
         }
 

@@ -15,8 +15,8 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
 
         public override void SetProperty() {
             Item.damage = 20;
-            Item.width = 56;
-            Item.height = 56;
+            Item.width = 72;
+            Item.height = 66;
             Item.knockBack = 0;
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = ItemRarityID.LightPurple;

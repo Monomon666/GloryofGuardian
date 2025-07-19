@@ -1,7 +1,6 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.NPCs.Special;
 using GloryofGuardian.Content.WeaponClasses;
-using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Items {

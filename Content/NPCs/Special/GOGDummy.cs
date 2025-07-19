@@ -47,14 +47,5 @@ namespace GloryofGuardian.Content.NPCs.Special {
         public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone) {
             base.OnHitByProjectile(projectile, hit, damageDone);
         }
-
-        public override float SpawnChance(NPCSpawnInfo spawnInfo) {
-            return 0;
-        }
-
-        public override bool CheckDead() {
-
-            return false;
-        }
     }
 }
