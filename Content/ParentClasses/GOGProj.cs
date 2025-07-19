@@ -45,7 +45,7 @@ namespace GloryofGuardian.Content.ParentClasses {
             //Projectile.penetrate = 
         }
 
-        Player Owner => Main.player[Projectile.owner];
+        public Player Owner => Main.player[Projectile.owner];
 
         /// <summary>
         /// 默认计时器

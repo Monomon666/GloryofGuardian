@@ -100,6 +100,46 @@ Items: {
 		DisplayName: Shadow Flame Scroll
 		Tooltip: ""
 	}
+
+	NanoBar: {
+		DisplayName: Nano Bar
+		Tooltip: ""
+	}
+
+	SoulofAnotherWorld: {
+		DisplayName: Soulof Another World
+		Tooltip: ""
+	}
+
+	Adamantite: {
+		DisplayName: Adamantite
+		Tooltip: ""
+	}
+
+	Cobalt: {
+		DisplayName: Cobalt
+		Tooltip: ""
+	}
+
+	Mythril: {
+		DisplayName: Mythril
+		Tooltip: ""
+	}
+
+	Orichalcum: {
+		DisplayName: Orichalcum
+		Tooltip: ""
+	}
+
+	Palladium: {
+		DisplayName: Palladium
+		Tooltip: ""
+	}
+
+	Titanium: {
+		DisplayName: Titanium
+		Tooltip: ""
+	}
 }
 
 Prefixes: {
@@ -196,10 +236,20 @@ Projectiles: {
 	PaleClockworkGunDT.DisplayName: Pale Clockwork Gun D T
 	PaleGunProj.DisplayName: Pale Gun Proj
 	PaleShotGunDT.DisplayName: Pale Shot Gun D T
+	AdamantiteDT.DisplayName: Adamantite D T
+	CobaltDT.DisplayName: Cobalt D T
+	MythrilDT.DisplayName: Mythril D T
+	AdamantiteProj.DisplayName: Adamantite Proj
+	CobaltProj.DisplayName: Cobalt Proj
+	MythrilProj.DisplayName: Mythril Proj
+	MythrilProj2.DisplayName: Mythril Proj2
 }
 
 NPCs: {
 	GOGDummy.DisplayName: G O G Dummy
 	BeeHiveDTN.DisplayName: Bee Hive D T N
 	ShadowFlameScrollDTN.DisplayName: Shadow Flame Scroll D T N
+	OrichalcumDTN.DisplayName: Orichalcum D T N
+	PalladiumDTN.DisplayName: Palladium D T N
+	TitaniumDTN.DisplayName: Titanium D T N
 }

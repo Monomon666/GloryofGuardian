@@ -72,8 +72,6 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
         }
 
         protected override void Attack1() {
-            List<Projectile> projlist = new List<Projectile>();
-
             foreach (Player player in Main.ActivePlayers) {
                 if (Vector2.Distance(NPC.Center, player.Center) <= 120) {
                     if (player.statLife < player.statLifeMax2) {
@@ -85,57 +83,6 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
                             CombatText.NewText(player.Hitbox,
                             Color.LightGreen,//颜色
                             "40",
-                            false,
-                            false
-                            );
-                            for (int i = 0; i <= 5; i++) {
-                                Dust dust1 = Dust.NewDustDirect(player.Center, 0, 0, DustID.Honey, 1f, 1f, 100, Color.White, 1.5f);
-                                dust1.velocity *= 2;
-                                dust1.noGravity = true;
-                            }
-                        }
-                    }
-                }
-                if (Vector2.Distance(NPC.Center, player.Center) <= 1200
-                    && drawcount >= 240) {
-                    player.AddBuff(BuffID.Honey, 300);
-                    player.AddBuff(BuffID.Regeneration, 300);
-                    if (player.HasBuff(BuffID.Poisoned)) {
-                        player.ClearBuff(BuffID.Poisoned);
-                        for (int i = 0; i <= 5; i++) {
-                            Dust dust1 = Dust.NewDustDirect(player.Center, 0, 0, DustID.Honey, 1f, 1f, 100, Color.White, 1.5f);
-                            dust1.velocity *= 10;
-                            dust1.noGravity = true;
-                        }
-                    }
-                }
-            }
-
-            NPC.life += 2;
-            CombatText.NewText(NPC.Hitbox,
-                            Color.LightGreen,//颜色
-                            "2",
-                            false,
-                            false
-                            );
-
-            FinishAttack = true;
-        }
-
-        protected override void Attack2() {
-            List<Projectile> projlist = new List<Projectile>();
-
-            foreach (Player player in Main.ActivePlayers) {
-                if (Vector2.Distance(NPC.Center, player.Center) <= 120) {
-                    if (player.statLife < player.statLifeMax2) {
-
-                        if (!player.HasBuff<HoneyCDbuff>()) {
-                            Terraria.Audio.SoundEngine.PlaySound(SoundID.Item4, NPC.Center);
-                            player.statLife += 60;
-                            player.AddBuff(ModContent.BuffType<HoneyCDbuff>(), 3600);
-                            CombatText.NewText(player.Hitbox,
-                            Color.LightGreen,//颜色
-                            "60",
                             false,
                             false
                             );

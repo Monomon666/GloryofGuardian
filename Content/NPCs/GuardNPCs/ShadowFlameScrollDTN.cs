@@ -109,8 +109,8 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
             Main.EntitySpriteDraw(texture0, drawPosition0, null, Color.White, NPC.rotation, texture0.Size() * 0.5f, NPC.scale, SpriteEffects.None, 0);
             Main.EntitySpriteDraw(texture2, drawPosition1, null, Color.White, NPC.rotation, texture2.Size() * 0.5f, NPC.scale, SpriteEffects.None, 0);
 
-            Texture2D textures = ModContent.Request<Texture2D>(GOGConstant.GuardNPCs + "GradientRing3000").Value;
-            Texture2D textures2 = ModContent.Request<Texture2D>(GOGConstant.GuardNPCs + "GradientRing3000P").Value;
+            Texture2D textures = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "GradientRing3000").Value;
+            Texture2D textures2 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "GradientRing3000P").Value;
 
             Main.spriteBatch.End();
             Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);

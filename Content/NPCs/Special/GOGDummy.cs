@@ -35,7 +35,8 @@ namespace GloryofGuardian.Content.NPCs.Special {
         public static int owner = 0;
 
         public override void AI() {
-            NPC.life = NPC.lifeMax;
+            NPC.boss = true;
+            NPC.life = (int)(NPC.lifeMax / 3f);
 
             base.AI();
         }

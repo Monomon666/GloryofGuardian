@@ -141,13 +141,13 @@ Items: {
 		DisplayName: 蜂后秘酿
 		Tooltip:
 			'''
-			不消耗戍卫栏位
+			[c/FF0000:核心]
+			消耗一个核心栏位
 			召唤至多一个小型蜂巢
 			散布一个大型甜蜜光环
 			为靠近的玩家提供蜂蜜和生命再生增益
 			在一个较大范围内解除玩家的中毒减益
 			靠近提供蜂蜜回复40生命值,60秒只能吃一次
-			[c/FF00A0:超频蜂蜜回复1.5倍生命值]
 			右键收回
 			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
 			"这道甜蜜的防线守卫着大家的口腹"
@@ -240,10 +240,10 @@ Items: {
 			'''
 			消耗一个炮塔栏位
 			召唤一个鸟妖云
-			悬浮在空中,向下方发射羽毛
+			悬浮在空中,向下方发射羽刃
 			羽毛可以钉入敌怪持续造成伤害
 			普通攻击有25%的概率普通超频一次
-			[c/FF00A0:超频状态转而迅速发射九根金色羽毛]
+			[c/FF00A0:超频状态转而迅速发射九根金色羽刃]
 			[c/FF00A0:金色羽毛能够穿透敌人并随机偏折]
 			[c/FF00A0:稍后收回并对路径上的敌人造成伤害]
 			右键收回炮塔
@@ -292,17 +292,127 @@ Items: {
 		DisplayName: 影炎卷轴
 		Tooltip:
 			'''
-			不消耗戍卫栏位
+			[c/FF0000:核心]
+			消耗一个核心栏位
 			召唤至多一个暗影炎卷轴
 			散布一个暗影炎光环
 			为靠近的我方弹幕附着暗影炎增益
 			为靠近的敌人和敌方弹幕暂时附着暗影炎减益
 			该减益还会使敌方弹幕在范围内大幅减速
-			[c/FF00A0:卷轴很好地控制了影炎的力量,不会超频]
 			右键收回
 			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
 			[c/FF0000:附着暗影炎的弹幕只能对卷轴造成10%伤害]
 			"来自异乡黑色的火焰如今也守护它新的家园"
+			'''
+	}
+
+	NanoBar: {
+		DisplayName: 纳米合金锭
+		Tooltip: Todo
+	}
+
+	SoulofAnotherWorld: {
+		DisplayName: 异世之魂
+		Tooltip:
+			'''
+			来自异世界的灵魂
+			解放远古矿石中的力量
+			'''
+	}
+
+	Adamantite: {
+		DisplayName: 精金要塞
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤精金的战斗要塞
+			装备两根精金炮管
+			能够同时向两侧的敌人发射精金粉碎弹
+			[c/FF00A0:超频攻击发射数枚精金导弹]
+			炮台的带刺护板可以伤害和弹开近距离的敌人
+			右键收回炮塔
+			"古代金属打造的强大要塞,拥有强大的戍卫能力"
+			'''
+	}
+
+	Cobalt: {
+		DisplayName: 钴蓝旋刃
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一个钴蓝旋刃
+			向最近的敌人快速发射旋刃切割敌人
+			[c/FF00A0:超频攻击转而发射追魂旋刃]
+			[c/FF00A0:其有一定的追踪能力]
+			右键收回炮塔
+			"我们的火力足以压制它们"
+			'''
+	}
+
+	Mythril: {
+		DisplayName: 秘银尖锋
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一架秘银圣弩
+			向最近的敌人发射超速附魔秘银弩箭
+			弩箭会钉入敌人并有概率随机释放一种附魔
+			[c/FF00A0:超频攻击转而发射一支强大的猎魔箭]
+			[c/FF00A0:目标为boss且血量大于50%时额外造成目标最大生命值1%的伤害,至多1000]
+			[c/FF00A0:目标为boss且血量小于50%时转而造成三倍基础伤害]
+			优先攻击boss
+			右键收回炮塔
+			"圣银的箭头,即使最邪恶的怨灵也将不复存在"
+			'''
+	}
+
+	Orichalcum: {
+		DisplayName: 奥钢增幅器
+		Tooltip:
+			'''
+			[c/FF0000:核心]
+			消耗一个核心栏位
+			召唤一个奥钢增幅器
+			散布一个奥钢光环
+			强化经过其范围内的所有戍卫弹幕
+			为它们提供速度和额外的附加伤害
+			并使它们能够额外穿透一次
+			额外穿透对部分弹幕如爆炸型可能不起作用
+			右键收回
+			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
+			"奥哈利钢的能量提升了破坏的力量"
+			'''
+	}
+
+	Palladium: {
+		DisplayName: 钯金再生反应堆
+		Tooltip:
+			'''
+			[c/FF0000:核心]
+			消耗一个核心栏位
+			召唤至多一个钯金再生反应堆
+			散布一个再生区域
+			为大范围的友方单位提供大量增益
+			并周期性为靠近的友方单位回复生命
+			右键收回
+			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
+			"钯金中温暖的粒子给予我们力量"
+			'''
+	}
+
+	Titanium: {
+		DisplayName: 钛金核心
+		Tooltip:
+			'''
+			[c/FF0000:核心]
+			消耗一个核心栏位
+			召唤至多一个钛金核心
+			核心存在时,大范围内的玩家将获得多种增益
+			并且缩短附近戍卫炮塔的攻击间隔
+			且其它核心的防御能力获得提升
+			右键收回
+			[c/FF0000:拥有1000生命值和与召唤者相等的防御力]
+			"纯白金属中的力量喷涌而出"
 			'''
 	}
 }
@@ -401,10 +511,20 @@ Projectiles: {
 	PaleClockworkGunDT.DisplayName: 苍白尖刺装甲
 	PaleGunProj.DisplayName: 苍白子弹
 	PaleShotGunDT.DisplayName: 苍白尖刺装甲
+	// AdamantiteDT.DisplayName: Adamantite D T
+	// CobaltDT.DisplayName: Cobalt D T
+	// MythrilDT.DisplayName: Mythril D T
+	// AdamantiteProj.DisplayName: Adamantite Proj
+	// CobaltProj.DisplayName: Cobalt Proj
+	// MythrilProj.DisplayName: Mythril Proj
+	// MythrilProj2.DisplayName: Mythril Proj2
 }
 
 NPCs: {
 	GOGDummy.DisplayName: 训练假人
 	BeeHiveDTN.DisplayName: 甜蜜蜂巢
 	// ShadowFlameScrollDTN.DisplayName: Shadow Flame Scroll D T N
+	// OrichalcumDTN.DisplayName: Orichalcum D T N
+	// PalladiumDTN.DisplayName: Palladium D T N
+	// TitaniumDTN.DisplayName: Titanium D T N
 }

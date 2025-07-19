@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.ParentClasses;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,7 +7,7 @@ using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Projectiles {
-    public class RustyGunDT : GOGDT {
+    public class AdamantiteDT : GOGDT {
         public override string Texture => GOGConstant.nulls;
 
         public override void SetProperty() {
@@ -77,7 +77,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<RustyGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
-                
+
                 for (int j = 0; j < 24; j++) {
                     int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, DustID.Flare, 0f, 0f, 10, Color.White, 1.5f);
                     Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
@@ -104,55 +104,29 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override bool PreDraw(ref Color lightColor) {
-            //不同朝向时翻转贴图
-            SpriteEffects spriteEffects = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? SpriteEffects.FlipVertically : SpriteEffects.None;
-            Vector2 cen = ((wrotation % (2 * Math.PI)) > (Math.PI / 2) || (wrotation % (2 * Math.PI)) < -(Math.PI / 2)) ? new Vector2(-8, 0) : new Vector2(-16, 0);
+            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AdamantiteDT").Value;
+            Texture2D texture1 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AdamantiteDT2").Value;
+            Texture2D texture2 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AdamantiteDT3").Value;
+            Texture2D texture3 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AdamantiteDT4").Value;
 
-            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -12);
-            Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
-
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunDT2").Value;
-            Vector2 drawPosition = Projectile.Center - Main.screenPosition + new Vector2(-4, -40);
-            //枪管后坐力机制,开枪后枪管在4帧内后移,8帧后弹回
-            Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
-            Vector2 Recoilfix = Vector2.Zero;
-            if (Recoil == 0) Recoilfix = Vector2.Zero;
-            if (Recoil > 6) Recoilfix = (9 - Recoil) * -nowvel * 1;//最大后移8
-            if (Recoil > 0 && Recoil <= 6) Recoilfix = (Recoil / 6f) * -nowvel * 2 * 1;
-
-            Main.EntitySpriteDraw(texture, drawPosition + Recoilfix, null, lightColor, wrotation, texture.Size() * 0.5f + cen, Projectile.scale, spriteEffects, 0);
-
-
+            Texture2D texture333 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "AdamantiteProj").Value;
             return false;
         }
     }
 
-    public class RustyGunProj : GOGProj {
+    public class AdamantiteProj : GOGProj {
         public override string Texture => GOGConstant.nulls;
 
         public override void SetProperty() {
-            Projectile.width = 2;
-            Projectile.height = 2;
-            Projectile.localNPCHitCooldown = 0;
-            Projectile.penetrate = 1;
+            base.SetProperty();
         }
-
         Player Owner => Main.player[Projectile.owner];
 
         public override void AI() {
-            Projectile.rotation = Projectile.velocity.ToRotation();
-
-            if (count == 1 && Projectile.ai[0] == 1) Projectile.penetrate += 1;
-
             base.AI();
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
-            if (Projectile.ai[0] == 1) {
-                target.velocity += Projectile.velocity * 0.05f * target.knockBackResist;
-            }
-
             base.OnHitNPC(target, hit, damageDone);
         }
 
@@ -161,24 +135,11 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override void OnKill(int timeLeft) {
-            if (Projectile.timeLeft > 10) Terraria.Audio.SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
+            base.OnKill(timeLeft);
         }
 
         public override bool PreDraw(ref Color lightColor) {
-            Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "RustyGunProj").Value;
-
-            Main.EntitySpriteDraw(
-                    texture,
-                    Projectile.Center - Main.screenPosition,
-                    null,
-                    lightColor,
-                    Projectile.rotation,
-                    texture.Size() / 2,
-                    Projectile.scale,
-                    SpriteEffects.None,
-                    0);
-
-            return false;
+            return base.PreDraw(ref lightColor);
         }
     }
 }

@@ -36,6 +36,7 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         public int OwnerWhoAmI = -1;
         public Player Owner = null;
+        public int OwnerCrit = 0;
 
         public override void SetStaticDefaults() {
             //Main.npcFrameCount[NPC.type] = 1;
@@ -71,6 +72,7 @@ namespace GloryofGuardian.Content.ParentClasses {
             }
             else Owner = Main.player[NPC.FindClosestPlayer()];
 
+            if (OwnerCrit == 0 && Owner != null) OwnerCrit = (int)Owner.GetCritChance<GenericDamageClass>();
             DTDrop();
             Attack0();
 
@@ -112,14 +114,7 @@ namespace GloryofGuardian.Content.ParentClasses {
             if (count >= Gcount) {
                 //万一忘了在具体子类里重置,重置一下
                 //普通攻击
-                if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>()) {
-                    Attack1();
-                }
-
-                //过载攻击
-                if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>()) {
-                    Attack2();
-                }
+                Attack1();
 
                 if (FinishAttack) {
                     count = 0;

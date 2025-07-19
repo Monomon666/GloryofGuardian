@@ -1,4 +1,6 @@
-﻿using GloryofGuardian.Content.Class;
+﻿using System;
+using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.Projectiles;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Classes {
@@ -50,6 +52,18 @@ namespace GloryofGuardian.Content.Classes {
             }
             //暗影炎印记
             if (ShadowFire) target.AddBuff(BuffID.ShadowFlame, 180);
+            //秘银弩箭三倍伤害
+            if(projectile.type == ModContent.ProjectileType<MythrilProj>() && projectile.ai[2] == 0)
+            if (target.boss && target.life <= target.lifeMax * 0.5f) {
+                modifiers.FinalDamage *= 3;
+
+                    CombatText.NewText(target.Hitbox,
+                                    Color.White,
+                                    "×3",
+                                    true,
+                                    false
+                                    );
+                }
         }
 
         public override void ModifyHitPlayer(Projectile projectile, Player target, ref Player.HurtModifiers modifiers) {
