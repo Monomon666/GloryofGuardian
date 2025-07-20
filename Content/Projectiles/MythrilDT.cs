@@ -271,7 +271,7 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override void OnKill(int timeLeft) {
-            if (IsStickingToTarget && Main.rand.NextBool(3)) {
+            if (IsStickingToTarget && Main.rand.NextBool(2)) {
                 if (Projectile.ai[2] == 0) Projectile.ai[2] = Main.rand.Next(2) + 1;
 
                 if (!hitboss) {
@@ -291,12 +291,12 @@ namespace GloryofGuardian.Content.Projectiles {
 
             SoundEngine.PlaySound(SoundID.Dig, Projectile.Center);
             //基本爆炸粒子
-            for (int i = 0; i < 4; i++) {
-                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, DustID.Mythril, 0f, 0f, 50, Color.White, 0.8f);
-                Main.dust[num].velocity *= 1f;
+            for (int i = 0; i < 40; i++) {
+                int num = Dust.NewDust(Projectile.Center + Projectile.velocity.SafeNormalize(Vector2.Zero) * Main.rand.NextFloat(-62, 0), 0, 0, DustID.UltraBrightTorch, 0f, 0f, 50, Color.White, 0.8f);
+                Main.dust[num].velocity = Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-1f, 1f)) * Main.rand.NextFloat(-1f, 4f);
+                Main.dust[num].noGravity = true;
                 if (Main.rand.NextBool(2)) {
-                    Main.dust[num].scale = 0.5f;
-                    Main.dust[num].noGravity = true;
+                    Main.dust[num].scale = 1f;
                     Main.dust[num].fadeIn = 1f + Main.rand.Next(10) * 0.1f;
                 }
             }
@@ -420,10 +420,14 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override bool PreDraw(ref Color lightColor) {
             Texture2D texture = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "MythrilMagic").Value;
+            Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "MythrilMagicBlackShadow").Value;
 
             Color color0 = lightColor;
             if (Projectile.ai[0] == 1) color0 = new Color(255, 36, 36, 0);
             if (Projectile.ai[0] == 2) color0 = new Color(90, 190, 200, 0);
+            Main.EntitySpriteDraw(texture0, Projectile.Center - Main.screenPosition, null, new Color(255, 255, 255, 200), Projectile.rotation + (drawcount / 20f), texture0.Size() / 2,
+                (float)(Projectile.scale * Math.Sin(count / 90f * MathHelper.Pi)), SpriteEffects.None, 0);
+
             Main.EntitySpriteDraw(texture, Projectile.Center - Main.screenPosition, null, color0, Projectile.rotation + (drawcount / 20f), texture.Size() / 2,
                 (float)(Projectile.scale * Math.Sin(count / 90f * MathHelper.Pi)), SpriteEffects.None, 0);
 

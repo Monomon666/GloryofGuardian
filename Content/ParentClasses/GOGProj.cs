@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using Microsoft.Xna.Framework.Graphics;
@@ -89,6 +90,10 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 启用boss优先
         /// </summary>
         protected bool bossfirst = false;
+        /// <summary>
+        /// 忽略列表
+        /// </summary>
+        protected List<int> ignorenpc = [];
 
         /// <summary>
         /// 记录弹幕的出现位置
