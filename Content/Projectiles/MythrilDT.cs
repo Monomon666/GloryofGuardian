@@ -389,7 +389,7 @@ namespace GloryofGuardian.Content.Projectiles {
             }
 
             if (boss != null && boss.active) {
-                boss = Projectile.Center.InPosClosestNPC(48, 0, true, true);
+                //boss = Projectile.Center.InPosClosestNPC(48, 0, true, true);
                 Projectile.Center = boss.Center + totar;
             }
 

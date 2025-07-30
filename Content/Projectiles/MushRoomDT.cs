@@ -19,7 +19,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
             OtherHeight = 32;
 
-            count0 = 60;
+            count0 = 40;
 
             findboss = true;
             exdust = DustID.MushroomSpray;

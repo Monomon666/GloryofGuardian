@@ -100,6 +100,21 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
             base.OnHitByProjectile(projectile, hit, damageDone);
         }
 
+        public override void OnKill() {
+            //爆炸粒子
+            for (int j = 0; j < 15; j++) {
+                int num1 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Honey, 0f, 0f, 10, Color.White, 0.8f);
+                Main.dust[num1].noGravity = true;
+                Main.dust[num1].velocity *= 2f;
+            }
+            for (int j = 0; j < 15; j++) {
+                int num2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, DustID.Honey, 0f, 0f, 10, Color.White, 0.4f);
+                Main.dust[num2].noGravity = true;
+                Main.dust[num2].velocity *= 1f;
+            }
+            base.OnKill();
+        }
+
         float ringscale = 0;
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.GuardNPCs + "ShadowFlameScrollDTN").Value;

@@ -9,7 +9,6 @@ namespace GloryofGuardian.Content.Classes {
 
         //变量
         #region 变量存储
-
         /// <summary>
         /// 固有炮塔栏位
         /// </summary>

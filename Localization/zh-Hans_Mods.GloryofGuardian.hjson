@@ -150,6 +150,7 @@ Items: {
 			靠近提供蜂蜜回复40生命值,60秒只能吃一次
 			右键收回
 			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
+			[c/FF0000:能够缓慢自我修复]
 			"这道甜蜜的防线守卫着大家的口腹"
 			'''
 	}
@@ -288,6 +289,23 @@ Items: {
 			'''
 	}
 
+	PaleCannon: {
+		DisplayName: 苍白爆破重炮
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一架苍白重炮
+			向最近的敌人发射爆破炮弹
+			击中敌人或物块时爆发苍白能量
+			[c/FF00A0:超频攻击转而发射高爆炮弹]
+			[c/FF00A0:拥有更大的爆炸范围和破坏力]
+			炮台的带刺护板可以伤害到近距离的敌人
+			无法射击离炮台过近的敌人
+			右键收回炮塔
+			"没有铁甲能够阻挡它们"
+			'''
+	}
+
 	ShadowFlameScroll: {
 		DisplayName: 影炎卷轴
 		Tooltip:
@@ -327,8 +345,8 @@ Items: {
 			消耗一个戍卫栏位
 			召唤精金的战斗要塞
 			装备两根精金炮管
-			能够同时向两侧的敌人发射精金粉碎弹
-			[c/FF00A0:超频攻击发射数枚精金导弹]
+			能够同时向两侧的敌人发射精金子弹
+			[c/FF00A0:激活超频后,概率发射数枚精金导弹]
 			炮台的带刺护板可以伤害和弹开近距离的敌人
 			右键收回炮塔
 			"古代金属打造的强大要塞,拥有强大的戍卫能力"
@@ -341,7 +359,7 @@ Items: {
 			'''
 			消耗一个戍卫栏位
 			召唤一个钴蓝旋刃
-			向最近的三个敌人发射弹射旋刃
+			向最近的三个敌人发射追踪的弹射旋刃
 			[c/FF00A0:超频攻击转而发射大型旋刃]
 			[c/FF00A0:大型旋刃也会发射弹射旋刃]
 			右键收回炮塔
@@ -375,8 +393,7 @@ Items: {
 			召唤一个奥钢增幅器
 			散布一个奥钢光环
 			强化经过其范围内的所有戍卫弹幕
-			为它们提供速度和额外的附加伤害
-			并使它们能够额外穿透一次
+			增加速度和穿透数量,并使其命中时产生小范围爆炸
 			额外穿透对部分弹幕如爆炸型可能不起作用
 			右键收回
 			[c/FF0000:拥有400生命值和与召唤者相等的防御力]
@@ -407,12 +424,47 @@ Items: {
 			[c/FF0000:核心]
 			消耗一个核心栏位
 			召唤至多一个钛金核心
-			核心存在时,大范围内的玩家将获得多种增益
-			并且缩短附近戍卫炮塔的攻击间隔
-			且其它核心的防御能力获得提升
+			核心存在时,超大范围内的玩家将获得多种战斗增益
+			并且缩短附近戍卫炮塔20%的攻击间隔
+
 			右键收回
-			[c/FF0000:拥有1000生命值和与召唤者相等的防御力]
+			[c/FF0000:拥有1000生命值和与召唤者双倍的防御力]
 			"纯白金属中的力量喷涌而出"
+			'''
+	}
+
+	Chlorophyte: {
+		DisplayName: 叶绿新生
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一丛叶绿
+			不停地散布叶绿孢子并发射孢子云
+			击中敌人会扩大范围,之后一段时间没有击中会缩小
+			孢子无孔不入,能够穿过墙壁攻击敌人
+			[c/FF00A0:超频攻击发射数团孢子云]
+			优先攻击boss
+			右键收回炮塔
+			"这些绿色吸收了光芒,编织着它们发光的梦"
+			'''
+	}
+
+	Plantera: {
+		DisplayName: 丛林之心
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤一棵世纪小花
+			在炮塔附近蔓延致命的藤蔓,缠绕敌人并生长荆棘
+			向最近的敌人发射花瓣
+			[c/FF00A0:超频攻击转而发射蔓延荆棘的花种]
+			[c/FF00A0:如果超频率达到100%,则能够发射刺球并操控它们弹跳攻击]
+			[c/FF00A0:如果超频率达到100%,则能够发射刺球并操控它们弹跳攻击]
+			散播花粉,对巨大范围内的敌人陷施加[中毒]与[毒液]减益
+
+			优先攻击boss
+			右键收回炮塔
+			"大南方植物,丛林的心脏,丛生蔓延,散播无尽的生命力"
 			'''
 	}
 }
@@ -518,6 +570,15 @@ Projectiles: {
 	// CobaltProj.DisplayName: Cobalt Proj
 	// MythrilProj.DisplayName: Mythril Proj
 	// MythrilProj2.DisplayName: Mythril Proj2
+	// PaleCannonDT.DisplayName: Pale Cannon D T
+	// PaleCannonProj.DisplayName: Pale Cannon Proj
+	// OrichalcumProj.DisplayName: Orichalcum Proj
+	// ChlorophyteDT.DisplayName: Chlorophyte D T
+	// ChlorophyteProj.DisplayName: Chlorophyte Proj
+	// PlanteraCallProj.DisplayName: Plantera Call Proj
+	// PlanteraDT.DisplayName: Plantera D T
+	// PlanteraProj.DisplayName: Plantera Proj
+	// PlanteraProj0.DisplayName: Plantera Proj0
 }
 
 NPCs: {

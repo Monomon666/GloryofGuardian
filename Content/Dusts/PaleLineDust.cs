@@ -3,7 +3,7 @@ using GloryofGuardian.Common;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GloryofGuardian.Content.Dusts {
-    public class PaleDust : ModDust {
+    public class PaleLineDust : ModDust {
         public override string Texture => GOGConstant.nulls;
 
         Vector2 dustscale = Vector2.Zero;
@@ -15,7 +15,7 @@ namespace GloryofGuardian.Content.Dusts {
             dust.position += dust.velocity;
             dust.rotation = dust.velocity.ToRotation();
             dust.velocity *= 0.92f;
-            if (dust.velocity.Length() < 0.6f) dust.active = false;
+            if (dust.velocity.Length() < 0.1f) dust.active = false;
 
             return false;
         }
@@ -30,6 +30,7 @@ namespace GloryofGuardian.Content.Dusts {
             Vector2 dustscale2 = new Vector2(stretchFactor, 0.6f);//粗细
 
             Color drawColor = new Color(255, 255, 255, 255);
+            drawColor = dust.color;
             Main.EntitySpriteDraw(texture, dust.position - Main.screenPosition, null, 
                 drawColor * ((255 - dust.alpha) / 255f)
                 , dust.rotation, texture.Size() / 2,

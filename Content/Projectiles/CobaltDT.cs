@@ -218,13 +218,9 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (mode == 2) {
                     if (targetnext != null && targetnext.active) {
                         Projectile.velocity = Projectile.Center.Toz(targetnext.Center) * Main.rand.NextFloat(8, 12);
-                        mode = 3;
                     }
-                }
-
-                if (mode == 3) {
                     if (targetnext == null || !targetnext.active) {
-                        mode = 2;
+
                     }
                 }
             }
@@ -233,7 +229,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (drawcount > 180) Projectile.Kill();
                 Projectile.width = Projectile.height = 96;
 
-                if(!ignorenpc.Contains((int)Projectile.ai[2])) ignorenpc.Add((int)Projectile.ai[2]);
+                if (!ignorenpc.Contains((int)Projectile.ai[2])) ignorenpc.Add((int)Projectile.ai[2]);
 
                 if (firenum > 0 && target0 != null && target0.active && drawcount % 30 == 0) {
                     Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
@@ -243,6 +239,13 @@ namespace GloryofGuardian.Content.Projectiles {
 
                 if (mode == 0) {
                     Projectile.rotation += 0.2f;
+
+                    if (target0 != null && target0.active) {
+                        Projectile.velocity = Projectile.Center.Toz(target0.Center) * Projectile.velocity.Length();
+                    }
+                    if (target0 == null || !target0.active) {
+
+                    }
 
                     //粒子效果
                     for (int i = 0; i <= 32; i++) {
@@ -259,6 +262,13 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (mode == 1) {
                     Projectile.rotation += 0.3f;
                     Projectile.velocity *= 0.8f;
+
+                    if (target0 != null && target0.active) {
+                        Projectile.velocity = Projectile.Center.Toz(target0.Center) * 8f;
+                    }
+                    if (target0 == null || !target0.active) {
+                        Projectile.velocity *= 0; ;
+                    }
 
                     if (Projectile.ai[0] == 0) {
                         if (drawcount % 40 == 0 && Main.rand.NextBool(2)) {

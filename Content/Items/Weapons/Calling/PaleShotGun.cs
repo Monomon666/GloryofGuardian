@@ -21,12 +21,5 @@ namespace GloryofGuardian.Content.Items.Weapons.Calling {
             Item.value = Item.buyPrice(platinum: 1, silver: 0, gold: 0, copper: 0);
             Item.rare = ItemRarityID.LightRed;
         }
-
-        public override void AddRecipes() {
-            Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.DirtBlock, 10);
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.Register();
-        }
     }
 }

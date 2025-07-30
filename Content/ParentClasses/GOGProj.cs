@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.NPCs.GuardNPCs;
 using Microsoft.Xna.Framework.Graphics;
+using Terraria.DataStructures;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.ParentClasses {
@@ -11,6 +13,12 @@ namespace GloryofGuardian.Content.ParentClasses {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 6;
             ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
         }
+
+        /// <summary>
+        /// 山铜强化
+        /// </summary>
+        public bool OrichalcumMark = false;
+        public int oricount = 0;
 
         public override void SetDefaults() {
             Projectile.width = 2;
@@ -110,11 +118,44 @@ namespace GloryofGuardian.Content.ParentClasses {
             if (target0 == null || !target0.active) target0 = Projectile.Center.InPosClosestNPC(Attackrange, 0, throughtile, bossfirst);
             target01 = Projectile.Center.InPosClosestNPC(Attackrange, 0, throughtile, bossfirst);
 
+            if (OrichalcumMark) {
+                if (oricount > 0) oricount--;
+                for (int i = 0; i <= 1 && Projectile.width > 2 && Projectile.height > 2; i++) {
+                    Dust dust1 = Dust.NewDustDirect(Projectile.position, Projectile.width, Projectile.height, DustID.TeleportationPotion, 1f, 1f, 100, new Color(239, 113, 248), 1.2f);
+                    dust1.velocity = Projectile.velocity;
+                    dust1.noGravity = true;
+                }
+                for (int i = 0; i <= 1 && Projectile.width <= 2 && Projectile.height <= 2; i++) {
+                    Dust dust1 = Dust.NewDustDirect(Projectile.position + new Vector2(-2, -2), 2, 2, DustID.TeleportationPotion, 1f, 1f, 100, new Color(239, 113, 248), 1.2f);
+                    dust1.velocity = Projectile.velocity;
+                    dust1.noGravity = true;
+                }
+                for (int i = 0; i <= 1 && Projectile.width <= 2 && Projectile.height <= 2; i++) {
+                    Dust dust1 = Dust.NewDustDirect(Projectile.position + new Vector2(-2, -2), 2, 2, DustID.TeleportationPotion, 1f, 1f, 100, new Color(183, 0, 174), 1.2f);
+                    dust1.velocity = Projectile.velocity;
+                    dust1.noGravity = true;
+                }
+            }
+
             return base.PreAI();
         }
 
         public override Color? GetAlpha(Color lightColor) {
             return Color.White;
+        }
+
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+            if (OrichalcumMark && oricount == 0) {
+                oricount = 30;
+                Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), Projectile.Center, Vector2.Zero, ModContent.ProjectileType<OrichalcumProj>(), Projectile.damage / 10, 8, Owner.whoAmI);
+            }
+
+            base.OnHitNPC(target, hit, damageDone);
+        }
+
+        public override void OnKill(int timeLeft) {
+
+            base.OnKill(timeLeft);
         }
 
         /// <summary>

@@ -2,10 +2,13 @@
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Buffs;
 using GloryofGuardian.Content.Class;
+using GloryofGuardian.Content.Items.Weapons.Calling;
+using GloryofGuardian.Content.Items.Weapons.Calling2;
 using GloryofGuardian.Content.NPCs.GuardNPCs;
 using GloryofGuardian.Content.ParentClasses;
 using GloryofGuardian.Content.Projectiles;
 using Terraria;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.Classes {
@@ -167,6 +170,25 @@ namespace GloryofGuardian.Content.Classes {
                 GOGGlobalProj globalProj = projectile.GetGlobalProjectile<GOGGlobalProj>();
                 if (globalProj.ShadowFire) modifiers.FinalDamage *= 0.1f;
             }
+        }
+
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot) {
+            //暗影焰幻鬼掉落暗影卷轴
+            if (npc.netID == NPCID.ShadowFlameApparition) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<ShadowFlameScroll>(), 10, 1));
+            }
+
+            //大宝箱怪掉落苍白系列武器
+            if (npc.netID == 473) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PaleClockworkGun>(), 5, 1));
+            }
+            if (npc.netID == 474) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PaleShotGun>(), 5, 1));
+            }
+            if (npc.netID == 475) {
+                npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<PaleCannon>(), 5, 1));
+            }
+            base.ModifyNPCLoot(npc, npcLoot);
         }
     }
 }

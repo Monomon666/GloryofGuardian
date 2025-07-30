@@ -72,7 +72,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 }
 
                 for (int j = 0; j < 4; j++) {
-                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleLineDust>(), 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
                     Main.dust[num].velocity *= Main.rand.NextFloat(1f, 6f);
                     Main.dust[num].noGravity = true;
@@ -101,7 +101,7 @@ namespace GloryofGuardian.Content.Projectiles {
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 3, Vector2.Distance(AttackPos, target0.Center));
 
                     for (int j = 0; j < 4; j++) {
-                        int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                        int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleLineDust>(), 0f, 0f, 10, Color.White, 1f);
                         Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
                         Main.dust[num].velocity *= Main.rand.NextFloat(1f, 4f);
                         Main.dust[num].noGravity = true;

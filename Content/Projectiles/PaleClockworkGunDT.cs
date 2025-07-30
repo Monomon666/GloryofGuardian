@@ -62,7 +62,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.06f, 0.06f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 0);
 
                 for (int j = 0; j < 4; j++) {
-                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleLineDust>(), 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
                     Main.dust[num].velocity *= Main.rand.NextFloat(1f, 6f);
                     Main.dust[num].noGravity = true;
@@ -84,20 +84,20 @@ namespace GloryofGuardian.Content.Projectiles {
             for (int i = 0; i < 1; i++) {
                 float vel = Main.rand.NextFloat(0.9f, 1.15f) * 12f;
                 Vector2 nowvel = new Vector2((float)Math.Cos(wrotation), (float)Math.Sin(wrotation));
-            
+
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item11, Projectile.Center);
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 32f, nowvel.RotatedBy(Main.rand.NextFloat(-0.02f, 0.02f)) * vel, ModContent.ProjectileType<PaleGunProj>(), lastdamage, 8, Owner.whoAmI, 1);
-            
+
                 for (int j = 0; j < 4; j++) {
-                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    int num = Dust.NewDust(AttackPos2 + new Vector2(0, -4) + nowvel * 46f, 0, 0, ModContent.DustType<PaleLineDust>(), 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num].velocity = nowvel.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
                     Main.dust[num].velocity *= Main.rand.NextFloat(1f, 4f);
                     Main.dust[num].noGravity = true;
                 }
-            
+
                 Recoil = 8;
                 crit = true;
-            
+
                 projlist.Add(proj1);
             }
 
@@ -151,25 +151,6 @@ namespace GloryofGuardian.Content.Projectiles {
 
             Main.EntitySpriteDraw(texture, drawPosition + Recoilfix, null, lightColor, wrotation, texture.Size() * 0.5f + cen, Projectile.scale, spriteEffects, 0);
             Main.EntitySpriteDraw(texture, drawPosition + Recoilfix, null, new Color(255, 255, 255, 150), wrotation, texture.Size() * 0.5f + cen, Projectile.scale, spriteEffects, 0);
-
-
-
-
-
-
-            //Todo,RT2D学习实例
-            Texture2D texturess = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "ImmortalLotusProj01").Value;
-
-            ////固定
-            //AdDraw(
-            //    () => Main.EntitySpriteDraw(texturess, Projectile.Center - Main.screenPosition, null, new Color(255, 255, 255, 255), drawcount / 60f * 1f, texturess.Size() * 0.5f, 1f, spriteEffects, 0)
-            //    );
-            //
-            ////跟随玩家
-            //AdDraw(
-            //    () => Main.EntitySpriteDraw(texturess, Owner.Center - Main.screenPosition, null, new Color(255, 255, 255, 255), drawcount / 60f * 1f, texturess.Size() * 0.5f, 0.4f, spriteEffects, 0)
-            //    );
-
 
             return false;
         }
@@ -264,7 +245,7 @@ namespace GloryofGuardian.Content.Projectiles {
         public override void OnKill(int timeLeft) {
             if (Projectile.ai[0] != 3) {
                 for (int j = 0; j < 4; j++) {
-                    int num = Dust.NewDust(Projectile.Center, 0, 0, ModContent.DustType<PaleDust>(), 0f, 0f, 10, Color.White, 1f);
+                    int num = Dust.NewDust(Projectile.Center, 0, 0, ModContent.DustType<PaleLineDust>(), 0f, 0f, 10, Color.White, 1f);
                     Main.dust[num].velocity = -Projectile.velocity.SafeNormalize(Vector2.Zero).RotatedBy(Main.rand.NextFloat(-1f, 1f));
                     Main.dust[num].velocity *= Main.rand.NextFloat(3f, 4f);
                     Main.dust[num].noGravity = true;

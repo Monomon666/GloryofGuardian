@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Classes;
@@ -140,6 +139,11 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// </summary>
         protected int othercrit = 0;
         /// <summary>
+        /// 钛金攻击距离缩短
+        /// </summary>
+        public bool titanstkspeed = false;
+        public int titancount = 0;
+        /// <summary>
         /// 额外的攻击间隔缩减,乘算,1为100%
         /// </summary>
         protected float otheratkspeed = 1;
@@ -172,13 +176,12 @@ namespace GloryofGuardian.Content.ParentClasses {
             Projectile.timeLeft = 2;
 
             Rank();
-            Orichalcum();
 
             Projectile.StickToTiles(false, false);//形成判定
             if (Drop) DTDrop();//坠落
             Calculate();//攻击间隔和伤害的重新计算
-            //索敌与行动
-            
+                        //索敌与行动
+
             //筛除列表重置
             ignorenpc.Clear();
 
@@ -199,6 +202,11 @@ namespace GloryofGuardian.Content.ParentClasses {
             }
 
             if (Projectile.damage == 0) Attack0(null);
+
+            if (titanstkspeed) {
+                if (titancount > 0) titancount--;
+                if (titancount == 0) titanstkspeed = false;
+            }
 
             return base.PreAI();
         }
@@ -268,24 +276,6 @@ namespace GloryofGuardian.Content.ParentClasses {
             }
         }
 
-        /// <summary>
-        /// 山铜印记强化
-        /// </summary>
-        void Orichalcum() {
-            ////山铜印记强化
-            //if (OrichalcumMarkDT2 == false) OrichalcumMarkDT = false;
-            //if (OrichalcumMarkDT2 == true) OrichalcumMarkDT2 = false;
-            //
-            //if (OrichalcumMarkDT) {
-            //    if (OrichalcumMarkCrit) {
-            //        OrichalcumMarkCrit = true;
-            //        Projectile.CritChance += 20;
-            //    }
-            //}
-            //
-            //if (OrichalcumMarkDT && OrichalcumMarkCrit) Projectile.CritChance -= 20;
-        }
-
         public bool HasDropped = false;
         /// <summary>
         /// 坠落
@@ -314,7 +304,8 @@ namespace GloryofGuardian.Content.ParentClasses {
         /// 重新计算和赋值参数
         /// </summary>
         void Calculate() {
-            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * otheratkspeed);//攻击间隔因子重新提取
+            Gcount = (int)(count0 * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * otheratkspeed
+                * (titanstkspeed ? 0.8f: 1f));//攻击间隔因子重新提取
             Goverclockinterval = (int)(overclockinterval * Owner.GetModPlayer<GOGModPlayer>().GcountR * Projectile.ai[0] * otheratkspeed);//攻击间隔因子重新提取
             //伤害修正
             int newDamage = Projectile.originalDamage;
@@ -381,32 +372,12 @@ namespace GloryofGuardian.Content.ParentClasses {
                     if (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
                         ProjList = Attack1();
 
-                        //foreach (Projectile proj1 in ProjList) {
-                        //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                        //        if (proj1.ModProjectile is GOGProj proj2) {
-                        //            //山铜炮塔的强化效果
-                        //            proj2.OrichalcumMarkProj = true;
-                        //            proj2.OrichalcumMarkProjcount = 300;
-                        //        }
-                        //    }
-                        //}
-
                         ProjList.Clear();
                     }
 
                     //过载攻击
                     if (Main.rand.Next(100) < Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1] + othercrit) {
                         ProjList = Attack2();
-
-                        //foreach (Projectile proj1 in ProjList) {
-                        //    if (proj1 != null && Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                        //        if (proj1.ModProjectile is GOGProj proj2) {
-                        //            //山铜炮塔的强化效果
-                        //            proj2.OrichalcumMarkProj = true;
-                        //            proj2.OrichalcumMarkProjcount = 300;
-                        //        }
-                        //    }
-                        //}
 
                         if (ProjList != null) ProjList.Clear();
                     }

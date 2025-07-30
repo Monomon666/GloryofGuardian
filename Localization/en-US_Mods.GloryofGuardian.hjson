@@ -96,6 +96,11 @@ Items: {
 		Tooltip: ""
 	}
 
+	PaleCannon: {
+		DisplayName: Pale Cannon
+		Tooltip: ""
+	}
+
 	ShadowFlameScroll: {
 		DisplayName: Shadow Flame Scroll
 		Tooltip: ""
@@ -138,6 +143,16 @@ Items: {
 
 	Titanium: {
 		DisplayName: Titanium
+		Tooltip: ""
+	}
+
+	Chlorophyte: {
+		DisplayName: Chlorophyte
+		Tooltip: ""
+	}
+
+	Plantera: {
+		DisplayName: Plantera
 		Tooltip: ""
 	}
 }
@@ -243,6 +258,15 @@ Projectiles: {
 	CobaltProj.DisplayName: Cobalt Proj
 	MythrilProj.DisplayName: Mythril Proj
 	MythrilProj2.DisplayName: Mythril Proj2
+	PaleCannonDT.DisplayName: Pale Cannon D T
+	PaleCannonProj.DisplayName: Pale Cannon Proj
+	OrichalcumProj.DisplayName: Orichalcum Proj
+	ChlorophyteDT.DisplayName: Chlorophyte D T
+	ChlorophyteProj.DisplayName: Chlorophyte Proj
+	PlanteraCallProj.DisplayName: Plantera Call Proj
+	PlanteraDT.DisplayName: Plantera D T
+	PlanteraProj.DisplayName: Plantera Proj
+	PlanteraProj0.DisplayName: Plantera Proj0
 }
 
 NPCs: {

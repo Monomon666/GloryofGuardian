@@ -112,6 +112,29 @@ namespace GloryofGuardian.Common
             public VertexDeclaration VertexDeclaration => VertexInfo2Helper.VertexDeclaration;
         }
 
+        //光源绘制拓展方法
+        public static void CircleLS(this Player player, SpriteBatch sb, float scale) {
+            Texture2D tex = ModContent.Request<Texture2D>("GloryofGuardian/Assets/Effects/CircleLS").Value;//别把声明放到遍历里面，不然每循环一次都声明一次
+
+            if (player != null && player.active && !player.dead)//如果符合条件就绘制
+            {
+                sb.Draw(tex, player.Center - Main.screenPosition, null, Color.White, 0, tex.Size() / 2, scale, SpriteEffects.None, 0);
+            }
+        }
+
+        /// <summary>
+        /// 预包装好的叠加绘制画布转换
+        /// </summary>
+        public static void AdDraw(Action codeBlock) {
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.AnisotropicWrap, DepthStencilState.None, RasterizerState.CullNone, null, Main.GameViewMatrix.ZoomMatrix);
+
+            codeBlock();
+
+            Main.spriteBatch.End();
+            Main.spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, Main.DefaultSamplerState, DepthStencilState.None, Main.Rasterizer, null, Main.GameViewMatrix.TransformationMatrix);
+        }
+
         #endregion
 
         #region 方法
@@ -266,12 +289,13 @@ namespace GloryofGuardian.Common
         /// </summary>
         /// <param name="origin">开始搜索的位置</param>
         /// <param name="maxDistanceToCheck">搜索NPC的最大距离</param>
+        /// <param name="minDistanceToCheck">搜索NPC的最小距离</param>
         /// <param name="ignoreTiles">在检查障碍物时是否忽略物块</param>
         /// <param name="bossPriority">是否优先选择Boss</param>
         /// <param name="direction">从哪个方向搜索,-1为右,1为左</param>
         /// <param name="ignore">是否忽略给出目标</param>//弹射用
         /// <returns>距离最近的NPC。</returns>
-        public static NPC InDirClosestNPC(this Vector2 origin, float maxDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, int direction = 0, List<int> ignore = null) {
+        public static NPC InDirClosestNPC(this Vector2 origin, float maxDistanceToCheck, float minDistanceToCheck, bool ignoreTiles = true, bool bossPriority = false, int direction = 0, List<int> ignore = null) {
             NPC closestTarget = null;
             float distance = maxDistanceToCheck;
             if (bossPriority) {
@@ -285,6 +309,9 @@ namespace GloryofGuardian.Common
                         continue;
                     }
                     if (ignore != null && ignore.Contains(Main.npc[index2].whoAmI)) {
+                        continue;
+                    }
+                    if (minDistanceToCheck != 0 && Vector2.Distance(origin, Main.npc[index2].Center) < minDistanceToCheck) {//近距离忽略
                         continue;
                     }
                     float extraDistance2 = (Main.npc[index2].width / 2) + (Main.npc[index2].height / 2);
@@ -305,6 +332,9 @@ namespace GloryofGuardian.Common
                     if (Main.npc[index].CanBeChasedBy()) {
                         float extraDistance = (Main.npc[index].width / 2) + (Main.npc[index].height / 2);
                         bool canHit = true;
+                        if (minDistanceToCheck != 0 && Vector2.Distance(origin, Main.npc[index].Center) < minDistanceToCheck) {//近距离忽略
+                            continue;
+                        }
                         if (extraDistance < distance && !ignoreTiles) {
                             canHit = Collision.CanHit(origin, 1, 1, Main.npc[index].Center, 1, 1);
                         }

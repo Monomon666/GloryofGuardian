@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using GloryofGuardian.Common;
-using GloryofGuardian.Content.Class;
-using GloryofGuardian.Content.Classes;
-using Terraria;
+﻿using GloryofGuardian.Common;
 using Terraria.ID;
 
 namespace GloryofGuardian.Content.ParentClasses {
     public abstract class GOGGuardNPC : ModNPC {
+        //状态
+        public bool Titan = false;
+        public int Titancount = 0;
+
         //预设变量
         /// <summary>
         /// 行为计时器
@@ -75,6 +75,13 @@ namespace GloryofGuardian.Content.ParentClasses {
             if (OwnerCrit == 0 && Owner != null) OwnerCrit = (int)Owner.GetCritChance<GenericDamageClass>();
             DTDrop();
             Attack0();
+
+            if (Titan) {
+                if(Titancount > 0) Titancount--;
+                if (Titancount == 0) Titan = false;
+
+                
+            }
 
             base.AI();
         }
@@ -165,8 +172,8 @@ namespace GloryofGuardian.Content.ParentClasses {
                 Main.dust[num1].velocity *= 2f;
             }
             for (int j = 0; j < 15; j++) {
-                int num2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustid, 0f, 0f, 10, Color.White,0.8f);
-            Main.dust[num2].noGravity = true;
+                int num2 = Dust.NewDust(NPC.position, NPC.width, NPC.height, dustid, 0f, 0f, 10, Color.White, 0.8f);
+                Main.dust[num2].noGravity = true;
                 Main.dust[num2].velocity *= 1f;
             }
         }

@@ -68,6 +68,8 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
                 dust1.noGravity = true;
             }
 
+            Gcount = count0;
+
             base.AI();
         }
 
@@ -109,13 +111,15 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
                 }
             }
 
-            NPC.life += 2;
-            CombatText.NewText(NPC.Hitbox,
-                            Color.LightGreen,//颜色
-                            "2",
-                            false,
-                            false
-                            );
+            if (NPC.life < NPC.lifeMax) {
+                NPC.life += 2;
+                CombatText.NewText(NPC.Hitbox,
+                                Color.LightGreen,//颜色
+                                "2",
+                                false,
+                                false
+                                );
+            }
 
             FinishAttack = true;
         }
@@ -126,6 +130,10 @@ namespace GloryofGuardian.Content.NPCs.GuardNPCs {
 
         public override void OnHitByProjectile(Projectile projectile, NPC.HitInfo hit, int damageDone) {
             base.OnHitByProjectile(projectile, hit, damageDone);
+        }
+
+        public override void OnKill() {
+            base.OnKill();
         }
 
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) {

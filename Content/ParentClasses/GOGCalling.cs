@@ -1,6 +1,7 @@
 ﻿using GloryofGuardian.Common;
 using GloryofGuardian.Content.Class;
 using GloryofGuardian.Content.Classes;
+using GloryofGuardian.Content.NPCs.GuardNPCs;
 using GloryofGuardian.Content.ParentClasses;
 using Terraria.Audio;
 using Terraria.DataStructures;
@@ -191,6 +192,7 @@ namespace GloryofGuardian.Content.WeaponClasses {
                             int npc = NPC.NewNPC(new EntitySource_ItemUse(player, Item), x, y, NPCType);
                             Main.npc[npc].life = (int)(Main.npc[npc].lifeMax * NPCLifeRate);//npc生命值倍率
                             Main.npc[npc].defense = player.statDefense + NPCexDefense;//npc额外防御力
+                            if (Main.npc[npc].type == ModContent.NPCType<TitaniumDTN>()) Main.npc[npc].defense *= 2;
                             if (Main.npc[npc].ModNPC is GOGGuardNPC npc0) npc0.OwnerWhoAmI = player.whoAmI;
                         }
                         else {
