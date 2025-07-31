@@ -54,7 +54,7 @@ namespace GloryofGuardian.Content.Classes {
             if (ShadowFire) target.AddBuff(BuffID.ShadowFlame, 180);
             //秘银弩箭三倍伤害
             if(projectile.type == ModContent.ProjectileType<MythrilProj>() && projectile.ai[2] == 0)
-            if (target.boss && target.life <= target.lifeMax * 0.5f) {
+            if (target.boss && target.life <= target.lifeMax / 3) {
                 modifiers.FinalDamage *= 3;
 
                     CombatText.NewText(target.Hitbox,

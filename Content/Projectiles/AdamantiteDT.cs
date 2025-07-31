@@ -207,13 +207,6 @@ namespace GloryofGuardian.Content.Projectiles {
 
                     int projmod = Main.rand.NextBool(3) ? 1 : 0;
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos + nowvel * 64f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * 8f, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 2, Owner.whoAmI, 0, projmod);
-                    //if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                    //    if (proj1.ModProjectile is GOGProj proj2) {
-                    //        proj2.OrichalcumMarkProj = true;
-                    //        proj2.OrichalcumMarkProjcount = 300;
-                    //    }
-                    //}
-
                 }
 
                 //计时重置,通过更改这个值来重置攻击,枪械不受ex缩减影响
@@ -235,12 +228,6 @@ namespace GloryofGuardian.Content.Projectiles {
                     int projmod = Main.rand.NextBool(3) ? 1 : 0;
                     //普通
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos2 + nowvel * 64f, nowvel.RotatedBy(Main.rand.NextFloat(-0.01f, 0.01f)) * 8f, ModContent.ProjectileType<AdamantiteProj>(), lastdamage, 2, Owner.whoAmI, 0, projmod);
-                    //if (Projectile.ModProjectile is GOGDT proj0 && proj0.OrichalcumMarkDT) {
-                    //    if (proj1.ModProjectile is GOGProj proj2) {
-                    //        proj2.OrichalcumMarkProj = true;
-                    //        proj2.OrichalcumMarkProjcount = 300;
-                    //    }
-                    //}
                 }
 
                 //计时重置,通过更改这个值来重置攻击,枪械不受ex缩减影响

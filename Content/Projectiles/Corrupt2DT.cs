@@ -86,7 +86,7 @@ namespace GloryofGuardian.Content.Projectiles {
             //近战
             for (int i = 0; i < Main.maxNPCs; i++) {
                 NPC tarnext = Main.npc[i];
-                if (tarnext != null && tarnext.active) {
+                if (tarnext != null && tarnext.active && !tarnext.friendly) {
                     if (Vector2.Distance(Projectile.Center, tarnext.Center) < 180) {
                         tarnext.AddBuff(BuffID.CursedInferno, 60);
                         if(tarnext.knockBackResist > 0) tarnext.velocity *= 0.8f;
@@ -136,7 +136,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (tarlist.Count >=
                     (m == 1 ? 3 : 5)
                     ) break;
-                if (tar != null && tar.active) {
+                if (tar != null && tar.active && !tar.friendly) {
                     if (Vector2.Distance(Projectile.Center, tar.Center) < 1900) {
                         tarlist.Add(tar);
                     }

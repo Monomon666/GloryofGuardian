@@ -14,12 +14,12 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.width = 42;
             Projectile.friendly = true;//本炮塔具有碰撞伤害
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 60;
+            Projectile.localNPCHitCooldown = 20;
             Projectile.penetrate = -1;
 
             OtherHeight = 32;
 
-            count0 = 40;
+            count0 = 20;
 
             findboss = true;
             exdust = DustID.MushroomSpray;
@@ -27,7 +27,10 @@ namespace GloryofGuardian.Content.Projectiles {
 
         Player Owner => Main.player[Projectile.owner];
 
+        int count1 = 0;
         public override void AI() {
+            count1++;
+
             //环境加成
             if (!Main.dayTime) Projectile.ai[1] = 10;
             othercrit = Owner.ZoneGlowshroom ? 25 : 0;
@@ -35,7 +38,7 @@ namespace GloryofGuardian.Content.Projectiles {
             if (!Main.dayTime || Owner.ZoneGlowshroom) {
                 Lighting.AddLight(Projectile.Center, 1.5f, 1.5f, 1.5f);
 
-                if (count % 1 == 0) {
+                if (drawcount % 1 == 0) {
                     for (int i = 0; i < 1; i++) {
                         float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
                         int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, -16).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 2f);
@@ -47,9 +50,9 @@ namespace GloryofGuardian.Content.Projectiles {
             }
 
             //逐渐产生粒子,直到产生完全的粒子
-            if (count >= 120) {
+            if (drawcount >= 120) {
                 //包围圈和内部粒子
-                if (count % 1 == 0) {
+                if (drawcount % 1 == 0) {
                     for (int i = 0; i < 4; i++) {
                         float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
                         int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, -160).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 3f);
@@ -59,7 +62,7 @@ namespace GloryofGuardian.Content.Projectiles {
                         Main.dust[num].scale *= Main.rand.NextFloat(0.5f, 1);
                     }
                 }
-                if (count % 1 == 0) {
+                if (drawcount % 1 == 0) {
                     for (int i = 0; i < 3; i++) {
                         float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
                         int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, Main.rand.Next(-160, 0)).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 1f);
@@ -69,22 +72,23 @@ namespace GloryofGuardian.Content.Projectiles {
                     }
                 }
             }
-            else if (count < 120) {
+
+            else if (drawcount < 120) {
                 //包围圈和内部粒子
-                if (count % 1 == 0) {
-                    for (int i = 0; i < (count / 40) + 1; i++) {
+                if (drawcount % 1 == 0) {
+                    for (int i = 0; i < (drawcount / 40) + 1; i++) {
                         float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
-                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, 20 - count * 1.5f).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 3f);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, 20 - drawcount * 1.5f).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 3f);
                         Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle + MathHelper.PiOver2);
                         Main.dust[num].velocity *= 1f;
                         Main.dust[num].noGravity = true;
                         Main.dust[num].scale *= Main.rand.NextFloat(0.5f, 1);
                     }
                 }
-                if (count % 1 == 0) {
+                if (drawcount % 1 == 0) {
                     for (int i = 0; i < 3; i++) {
                         float angle = Main.rand.NextFloat(0, MathHelper.Pi * 2);
-                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, Main.rand.Next(-40 - count, 0)).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 1f);
+                        int num = Dust.NewDust(Projectile.Center + new Vector2(-6, -16) + new Vector2(0, Main.rand.Next(-40 - drawcount, 0)).RotatedBy(angle), 0, 0, DustID.MushroomTorch, 0f, 0f, 50, Color.White, 1f);
                         Main.dust[num].velocity = new Vector2(0, -1.5f).RotatedBy(angle);
                         Main.dust[num].velocity *= 1f;
                         Main.dust[num].noGravity = true;
@@ -94,28 +98,6 @@ namespace GloryofGuardian.Content.Projectiles {
 
             //额外的持续攻击
             {
-                int range = 0;
-                if (count < 120) range = 44 + count;
-                if (count >= 120) range = 164;
-
-                // 遍历并选取 NPC
-                if (count % 10 == 0) {
-                    int dotdamage = (Main.rand.Next(100) >= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) ? 1 : 2;
-                    for (int i = 0; i < Main.maxNPCs; i++) {
-                        NPC target = Main.npc[i];
-                        if (target != null && target.active) {
-                            if (Vector2.Distance(Projectile.Center + new Vector2(-6, -16), Main.npc[i].Center) < range) {
-                                target.life -= dotdamage;
-                                CombatText.NewText(target.Hitbox,
-                                Color.Orange,
-                                dotdamage,
-                                false,
-                                true
-                                );
-                            }
-                        }
-                    }
-                }
             }
 
             AttackPos = Projectile.Center + new Vector2(-4, -30);
@@ -127,6 +109,9 @@ namespace GloryofGuardian.Content.Projectiles {
         //判定并非一整次攻击,而是
         protected override List<Projectile> Attack1() {
             List<Projectile> projlist = new List<Projectile>();
+
+            FinishAttack = true;
+
             return projlist;
         }
 
@@ -140,7 +125,7 @@ namespace GloryofGuardian.Content.Projectiles {
                 if (count % 10 == 0) {
                     for (int i = 0; i < Main.maxNPCs; i++) {
                         NPC target = Main.npc[i];
-                        if (target != null && target.active) {
+                        if (target != null && target.active && !target.friendly) {
                             if (Vector2.Distance(Projectile.Center + new Vector2(-6, -16), Main.npc[i].Center) < 164) {
                                 mushroomnpc.Add(target);
                             }
@@ -156,7 +141,10 @@ namespace GloryofGuardian.Content.Projectiles {
                         }
                     }
                 }
+
+                FinishAttack = true;
             }
+
             return null;
         }
 
@@ -171,8 +159,8 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) {
             if (
-                (count < 120 && GOGUtils.CircularHitboxCollision(Projectile.Center + new Vector2(-6, -16), 44 + count, targetHitbox))
-                || (count >= 120 && GOGUtils.CircularHitboxCollision(Projectile.Center + new Vector2(-6, -16), 164, targetHitbox))
+                (drawcount < 120 && GOGUtils.CircularHitboxCollision(Projectile.Center + new Vector2(-6, -16), 44 + count, targetHitbox))
+                || (drawcount >= 120 && GOGUtils.CircularHitboxCollision(Projectile.Center + new Vector2(-6, -16), 164, targetHitbox))
                 ){
                 return true;
             }

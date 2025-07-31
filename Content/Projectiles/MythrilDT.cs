@@ -235,7 +235,7 @@ namespace GloryofGuardian.Content.Projectiles {
             if (Projectile.ai[2] == 2) target.AddBuff(BuffID.Frostburn2, 180);
 
             if (Projectile.ai[2] == 0 && target.boss) {
-                if (target.life > target.lifeMax / 2) {
+                if (target.life > 2 * target.lifeMax / 3) {
                     target.life -= Math.Min(target.lifeMax / 100, 1000);
 
                     CombatText.NewText(target.Hitbox,
@@ -245,8 +245,8 @@ namespace GloryofGuardian.Content.Projectiles {
                                 false
                                 );
                 }
-                if (target.life <= target.lifeMax / 2) {
-
+                if (target.life <= 2 * target.lifeMax / 3) {
+                    //移步gproj
                 }
             }
 

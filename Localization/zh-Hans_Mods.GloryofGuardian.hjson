@@ -376,8 +376,8 @@ Items: {
 			向最近的敌人发射超速附魔秘银弩箭
 			弩箭会钉入敌人并有概率随机释放一种附魔
 			[c/FF00A0:超频攻击转而发射一支强大的猎魔箭]
-			[c/FF00A0:目标为boss且血量大于50%时额外造成目标最大生命值1%的伤害,至多1000]
-			[c/FF00A0:目标为boss且血量小于50%时转而造成三倍基础伤害]
+			[c/FF00A0:目标为boss且血量大于66%时额外造成目标最大生命值1%的伤害,至多1000]
+			[c/FF00A0:目标为boss且血量小于33%时转而造成三倍基础伤害]
 			优先攻击boss
 			右键收回炮塔
 			"圣银的箭头,即使最邪恶的怨灵也将不复存在"
@@ -456,10 +456,10 @@ Items: {
 			消耗一个戍卫栏位
 			召唤一棵世纪小花
 			在炮塔附近蔓延致命的藤蔓,缠绕敌人并生长荆棘
-			向最近的敌人发射花瓣
-			[c/FF00A0:超频攻击转而发射蔓延荆棘的花种]
-			[c/FF00A0:如果超频率达到100%,则能够发射刺球并操控它们弹跳攻击]
-			[c/FF00A0:如果超频率达到100%,则能够发射刺球并操控它们弹跳攻击]
+			发射追踪花瓣
+			[c/FF00A0:超频攻击发射刺球并操控它弹跳攻击]
+			[c/FF00A0:如果超频率达到100%,则刺球上限提升到两个]
+			[c/FF00A0:刺球能够蔓延荆棘]
 			散播花粉,对巨大范围内的敌人陷施加[中毒]与[毒液]减益
 
 			优先攻击boss
@@ -579,6 +579,8 @@ Projectiles: {
 	// PlanteraDT.DisplayName: Plantera D T
 	// PlanteraProj.DisplayName: Plantera Proj
 	// PlanteraProj0.DisplayName: Plantera Proj0
+	// PlanteraSeedProj.DisplayName: Plantera Seed Proj
+	// PlanteraProj2.DisplayName: Plantera Proj2
 }
 
 NPCs: {

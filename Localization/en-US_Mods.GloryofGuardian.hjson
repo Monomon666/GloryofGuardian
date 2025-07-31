@@ -267,6 +267,8 @@ Projectiles: {
 	PlanteraDT.DisplayName: Plantera D T
 	PlanteraProj.DisplayName: Plantera Proj
 	PlanteraProj0.DisplayName: Plantera Proj0
+	PlanteraSeedProj.DisplayName: Plantera Seed Proj
+	PlanteraProj2.DisplayName: Plantera Proj2
 }
 
 NPCs: {

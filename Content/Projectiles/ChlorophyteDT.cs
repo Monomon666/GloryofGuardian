@@ -13,7 +13,7 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.width = 64;
             Projectile.friendly = true;//本炮塔具有碰撞伤害
             Projectile.usesLocalNPCImmunity = true;
-            Projectile.localNPCHitCooldown = 20;
+            Projectile.localNPCHitCooldown = 15;
             Projectile.penetrate = -1;
 
             OtherHeight = 34;
@@ -91,15 +91,15 @@ namespace GloryofGuardian.Content.Projectiles {
             //额外的持续攻击
             {
                 int range = 0;
-                if (drawcount < 120) range = 44 + drawcount;
-                if (drawcount >= 120) range = 164;
+                if (drawcount < 170) range = 80 + drawcount;
+                if (drawcount >= 170) range = 250;
 
                 // 遍历并选取 NPC
                 if (drawcount % 60 == 0) {
                     if (Main.rand.Next(100) <= Owner.GetCritChance<GenericDamageClass>() + (int)Projectile.ai[1]) {
                         for (int i = 0; i < Main.maxNPCs; i++) {
                             NPC target = Main.npc[i];
-                            if (target != null && target.active) {
+                            if (target != null && target.active && !target.friendly) {
                                 if (Vector2.Distance(Projectile.Center + new Vector2(-6, -16), Main.npc[i].Center) < range) {
                                     target.life -= Projectile.damage;
                                     CombatText.NewText(target.Hitbox,
@@ -169,10 +169,29 @@ namespace GloryofGuardian.Content.Projectiles {
         }
         Player Owner => Main.player[Projectile.owner];
 
+        Vector2 totar = Vector2.Zero;
         public override void AI() {
             if (Projectile.alpha > 210) Projectile.Kill();
             if (count >= 60) Projectile.alpha += 1;
             if(count == 1) Projectile.rotation += Main.rand.NextFloat(MathHelper.Pi * 2);
+
+            if (Projectile.ai[0] == 1) {
+                if(drawcount == 1) Projectile.scale *= 0.5f;
+                Projectile.localNPCHitCooldown = 60;
+                Projectile.knockBack = 0.5f;
+
+                NPC npc = Main.npc[(int)Projectile.ai[1]];
+                if(npc != null && npc.active && totar == Vector2.Zero) {
+                    totar = npc.Center.To(Projectile.Center);
+                }
+                if (npc != null && npc.active && totar != Vector2.Zero) {
+                    Projectile.Center = npc.Center + totar;
+                }
+
+                if (npc == null && !npc.active) {
+                    totar = Vector2.Zero;
+                }
+            }
 
             //帧图
             Projectile.frameCounter++;
@@ -182,6 +201,7 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) {
+            if (Main.npc[(int)Projectile.ai[1]] == null || !Main.npc[(int)Projectile.ai[1]].active) Projectile.ai[1] = target.whoAmI;
             base.OnHitNPC(target, hit, damageDone);
         }
 
