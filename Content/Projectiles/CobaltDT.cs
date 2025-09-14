@@ -130,7 +130,7 @@ namespace GloryofGuardian.Content.Projectiles {
             for (int i = 0; i < 1; i++) {
                 Terraria.Audio.SoundEngine.PlaySound(SoundID.Item39, Projectile.Center);
                 Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile), AttackPos, AttackPos.Toz(target0.Center) * 16f, ModContent.ProjectileType<CobaltProj>(), lastdamage, 2, Owner.whoAmI, 1, target0.whoAmI);
-
+                proj1.tileCollide = false;
                 projlist.Add(proj1);
             }
 
@@ -330,7 +330,7 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity) {
-            return base.OnTileCollide(oldVelocity);
+            return false;
         }
 
         public override void OnKill(int timeLeft) {

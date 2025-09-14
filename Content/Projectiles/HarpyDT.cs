@@ -31,10 +31,13 @@ namespace GloryofGuardian.Content.Projectiles {
         }
 
         Player Owner => Main.player[Projectile.owner];
+        Vector2 AttackPos2 = Vector2.Zero;
         public override void AI() {
             Lighting.AddLight(Projectile.Center, 2.5f, 2.5f, 2.5f);
 
             AttackPos = Projectile.Center + new Vector2(-2, 0);
+            AttackPos2 = AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0);
+
             Projectile.Center += new Vector2(0, (float)Math.Sin(drawcount / 30f) * 0.3f);
             Projectile.Center += new Vector2((float)Math.Sin(drawcount / 120f) * 0.2f, 0);
 
@@ -52,14 +55,14 @@ namespace GloryofGuardian.Content.Projectiles {
             if (Main.rand.NextBool(4)) {
                 for (int i = 0; i < 1; i++) {
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
-                        AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0), new Vector2(0, 24).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)).RotatedBy(-Main.windSpeedCurrent / 4f), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
+                        AttackPos2, (AttackPos2.Toz(target0.Center) * 24).RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)).RotatedBy(-Main.windSpeedCurrent / 8f), ModContent.ProjectileType<HarpyProj2>(), lastdamage, 6, Owner.whoAmI, Goverclockinterval, 0, overclockcount);
 
                     projlist.Add(proj1);
                 }
             }else {
                 for (int i = 0; i < 1; i++) {
                     Projectile proj1 = Projectile.NewProjectileDirect(new EntitySource_Parent(Projectile),
-                        AttackPos + new Vector2(Main.rand.NextFloat(-8, 8), 0), new Vector2(0, 12).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f)).RotatedBy(-Main.windSpeedCurrent / 4f), ModContent.ProjectileType<HarpyProj>(), lastdamage, 6, Owner.whoAmI);
+                        AttackPos2, (AttackPos2.Toz(target0.Center) * 24).RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)).RotatedBy(-Main.windSpeedCurrent / 8f), ModContent.ProjectileType<HarpyProj>(), lastdamage, 6, Owner.whoAmI);
 
                     projlist.Add(proj1);
                 }

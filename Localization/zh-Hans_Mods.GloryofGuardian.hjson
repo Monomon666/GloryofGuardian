@@ -457,14 +457,47 @@ Items: {
 			召唤一棵世纪小花
 			在炮塔附近蔓延致命的藤蔓,缠绕敌人并生长荆棘
 			发射追踪花瓣
-			[c/FF00A0:超频攻击发射刺球并操控它弹跳攻击]
-			[c/FF00A0:如果超频率达到100%,则刺球上限提升到两个]
-			[c/FF00A0:刺球能够蔓延荆棘]
+			[c/FF00A0:超频攻击发射至多两个刺球并操控它弹跳攻击]
+			[c/FF00A0:如果超频率达到100%,刺球能够蔓延荆棘]
 			散播花粉,对巨大范围内的敌人陷施加[中毒]与[毒液]减益
 
 			优先攻击boss
 			右键收回炮塔
 			"大南方植物,丛林的心脏,丛生蔓延,散播无尽的生命力"
+			'''
+	}
+
+	Maid: {
+		DisplayName: Maid01
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤魔法步枪哨塔
+			向最近的敌人发射魔弹
+			[c/FF00A0:超频攻击将发射追魂魔弹]
+			[c/FF00A0:如果超频率超过100%,魔弹可能会分裂]
+
+			在<狂热>状态下,有概率额外发射1-2颗魔弹
+
+			优先攻击boss
+			右键收回炮塔
+			""
+			'''
+	}
+
+	Frimaire: {
+		DisplayName: Frimaire
+		Tooltip:
+			'''
+			消耗一个戍卫栏位
+			召唤霜月小屋
+			向最近的敌人发射魔法星星
+			[c/FF00A0:超频攻击将发射大颗星星,并召唤礼物盒]
+			[c/FF00A0:如果超频率超过100%,附近的冰霜守卫炮塔将全部被强化]
+			在雪地将大幅提升魔法星星的速度
+
+			优先攻击boss
+			右键收回炮塔
 			'''
 	}
 }
@@ -581,6 +614,16 @@ Projectiles: {
 	// PlanteraProj0.DisplayName: Plantera Proj0
 	// PlanteraSeedProj.DisplayName: Plantera Seed Proj
 	// PlanteraProj2.DisplayName: Plantera Proj2
+	// Proj0Laser.DisplayName: Proj0 Laser
+	// Proj0Laser2.DisplayName: Proj0 Laser2
+	// MaidDT.DisplayName: Maid D T
+	// MaidLaserProj.DisplayName: Maid Laser Proj
+	// MaidLaserProj0.DisplayName: Maid Laser Proj0
+	// MaidProj.DisplayName: Maid Proj
+	// MaidProj0.DisplayName: Maid Proj0
+	// FrimaireDT.DisplayName: Frimaire D T
+	// FrimaireProj.DisplayName: Frimaire Proj
+	// FrimaireProj2.DisplayName: Frimaire Proj2
 }
 
 NPCs: {

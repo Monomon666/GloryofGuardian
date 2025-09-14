@@ -86,9 +86,9 @@ namespace GloryofGuardian.Common
             // 预定义的 VertexDeclaration（静态共享）
             public static readonly VertexDeclaration VertexDeclaration = new VertexDeclaration(new VertexElement[3]
             {
-        new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
-        new VertexElement(8, VertexElementFormat.Color, VertexElementUsage.Color, 0),
-        new VertexElement(12, VertexElementFormat.Vector3, VertexElementUsage.TextureCoordinate, 0)
+                new VertexElement(0, VertexElementFormat.Vector2, VertexElementUsage.Position, 0),
+                new VertexElement(8, VertexElementFormat.Color, VertexElementUsage.Color, 0),
+                new VertexElement(12, VertexElementFormat.Vector3, VertexElementUsage.TextureCoordinate, 0)
             });
 
             // 静态工厂方法，快速创建 VertexInfo2

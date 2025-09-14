@@ -18,6 +18,7 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.width = 64;
             Projectile.friendly = false;
             Projectile.penetrate = -1;
+            Projectile.scale *= 1.4f;
 
             OtherHeight = 80;
 
@@ -122,7 +123,7 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override bool PreDraw(ref Color lightColor) {
             Texture2D texture0 = ModContent.Request<Texture2D>(GOGConstant.Projectiles + "PlanteraDT").Value;
-            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -38);
+            Vector2 drawPosition0 = Projectile.Center - Main.screenPosition + new Vector2(0, -34);
 
             Main.EntitySpriteDraw(texture0, drawPosition0, null, lightColor, Projectile.rotation, texture0.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
@@ -593,6 +594,7 @@ namespace GloryofGuardian.Content.Projectiles {
         }
     }
 
+    //花瓣弹幕
     public class PlanteraSeedProj : GOGProj {
         public override string Texture => GOGConstant.nulls;
 
@@ -606,7 +608,7 @@ namespace GloryofGuardian.Content.Projectiles {
             Projectile.extraUpdates = 1;
             base.SetProperty();
 
-            Projectile.scale *= 0.8f;
+            Projectile.scale *= 1.2f;
 
             base.SetProperty();
         }
@@ -614,6 +616,8 @@ namespace GloryofGuardian.Content.Projectiles {
 
         public override void AI() {
             Projectile.rotation = Projectile.velocity.ToRotation();
+
+            Lighting.AddLight(Projectile.Center, 1, 1, 1);
 
             if (Projectile.ai[0] == 0) {
                 if ((Projectile.ai[1] == 0 || Projectile.ai[1] == 0.5f) && hadhit) {
@@ -701,7 +705,7 @@ namespace GloryofGuardian.Content.Projectiles {
                     0);
 
                 Texture2D texture3 = ModContent.Request<Texture2D>(GOGConstant.Effects + "Extra_197").Value;
-
+                
                 //////////////////拖尾
                 {
                     //切回原画布
